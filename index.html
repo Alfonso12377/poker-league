@@ -74,7 +74,16 @@
     td:last-child {
         font-weight: bold;
     }
+    
+th[onclick] {
+    cursor: pointer;
+    user-select: none;
+}
 
+th[onclick]:hover {
+    background: #444;
+}
+    
     @media (max-width: 800px) {
 
         body {
