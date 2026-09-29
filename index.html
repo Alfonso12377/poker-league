@@ -427,274 +427,30 @@ th[onclick]:hover {
     <button class="torna-menu" onclick="mostraMenu()">
         ← Torna al menu
     </button>
-        
-        <h2>Classifica generale</h2>
 
-    <table>
+    <h2>Classifica generale</h2>
 
-<thead>
-    <tr>
-        <th>Pos.</th>
-        <th onclick="ordinaTabella(1, 'testo')">Giocatore ↕</th>
-        <th onclick="ordinaTabella(2, 'numero')">Partecipazioni ↕</th>
-        <th onclick="ordinaTabella(3, 'numero')">Vittorie ↕</th>
-        <th onclick="ordinaTabella(4, 'numero')">Pos. medio ↕</th>
-        <th onclick="ordinaTabella(5, 'numero')">Win Rate ↕</th>
-        <th onclick="ordinaTabella(6, 'numero')">Profitto/Perdita ↕</th>
-    </tr>
-</thead>
+    <table id="tabella-classifica">
 
-        <tbody>
-
+        <thead>
             <tr>
-                <td>1°</td>
-                <td>Umberto Romano</td>
-                <td>4</td>
-                <td>1</td>
-                <td>14,30</td>
-                <td>25,0%</td>
-                <td>+230 €</td>
+                <th>Pos.</th>
+                <th onclick="ordinaTabella(1, 'testo')">Giocatore ↕</th>
+                <th onclick="ordinaTabella(2, 'numero')">Partecipazioni ↕</th>
+                <th onclick="ordinaTabella(3, 'numero')">Vittorie ↕</th>
+                <th onclick="ordinaTabella(4, 'numero')">Pos. medio ↕</th>
+                <th onclick="ordinaTabella(5, 'numero')">Win Rate ↕</th>
+                <th onclick="ordinaTabella(6, 'numero')">Profitto/Perdita ↕</th>
             </tr>
+        </thead>
 
-            <tr>
-                <td>2°</td>
-                <td>Alfonso Annunziata</td>
-                <td>13</td>
-                <td>6</td>
-                <td>19,69</td>
-                <td>46,2%</td>
-                <td>+640 €</td>
-            </tr>
-
-            <tr>
-                <td>3°</td>
-                <td>Emanuele E.A./Arcangelo</td>
-                <td>1</td>
-                <td>0</td>
-                <td>25,00</td>
-                <td>0,0%</td>
-                <td>-40 €</td>
-            </tr>
-
-            <tr>
-                <td>4°</td>
-                <td>Emanuele Nicolo'</td>
-                <td>15</td>
-                <td>4</td>
-                <td>34,83</td>
-                <td>26,7%</td>
-                <td>+190 €</td>
-            </tr>
-
-            <tr>
-                <td>5°</td>
-                <td>Diego Cavaliere</td>
-                <td>16</td>
-                <td>1</td>
-                <td>41,46</td>
-                <td>6,3%</td>
-                <td>-20 €</td>
-            </tr>
-
-            <tr>
-                <td>6°</td>
-                <td>Fabrizio D'alessandro</td>
-                <td>8</td>
-                <td>0</td>
-                <td>45,51</td>
-                <td>0,0%</td>
-                <td>0 €</td>
-            </tr>
-
-            <tr>
-                <td>7°</td>
-                <td>Daniele Di Domenico</td>
-                <td>2</td>
-                <td>0</td>
-                <td>45,78</td>
-                <td>0,0%</td>
-                <td>-50 €</td>
-            </tr>
-
-            <tr>
-                <td>8°</td>
-                <td>Domenico Correale</td>
-                <td>10</td>
-                <td>0</td>
-                <td>46,51</td>
-                <td>0,0%</td>
-                <td>-45 €</td>
-            </tr>
-
-            <tr>
-                <td>9°</td>
-                <td>Carlo Sepe</td>
-                <td>13</td>
-                <td>0</td>
-                <td>46,71</td>
-                <td>0,0%</td>
-                <td>+5 €</td>
-            </tr>
-
-            <tr>
-                <td>10°</td>
-                <td>Daniel Prisco</td>
-                <td>10</td>
-                <td>1</td>
-                <td>47,54</td>
-                <td>10,0%</td>
-                <td>+50 €</td>
-            </tr>
-
-            <tr>
-                <td>11°</td>
-                <td>Raffaele Iervolino</td>
-                <td>6</td>
-                <td>1</td>
-                <td>49,59</td>
-                <td>16,7%</td>
-                <td>-10 €</td>
-            </tr>
-
-            <tr>
-                <td>12°</td>
-                <td>Sabato Tarantino</td>
-                <td>1</td>
-                <td>0</td>
-                <td>50,00</td>
-                <td>0,0%</td>
-                <td>-20 €</td>
-            </tr>
-
-            <tr>
-                <td>13°</td>
-                <td>Emanuele Del Pesce</td>
-                <td>4</td>
-                <td>0</td>
-                <td>53,13</td>
-                <td>0,0%</td>
-                <td>-60 €</td>
-            </tr>
-
-            <tr>
-                <td>14°</td>
-                <td>Francesco Prisco (junior)</td>
-                <td>14</td>
-                <td>0</td>
-                <td>54,79</td>
-                <td>0,0%</td>
-                <td>-245 €</td>
-            </tr>
-
-            <tr>
-                <td>15°</td>
-                <td>Vincenzo Correale</td>
-                <td>1</td>
-                <td>0</td>
-                <td>57,14</td>
-                <td>0,0%</td>
-                <td>-10 €</td>
-            </tr>
-
-            <tr>
-                <td>16°</td>
-                <td>Michele Annunziata</td>
-                <td>9</td>
-                <td>1</td>
-                <td>62,52</td>
-                <td>11,1%</td>
-                <td>+30 €</td>
-            </tr>
-
-            <tr>
-                <td>17°</td>
-                <td>Matteo Annunziata</td>
-                <td>10</td>
-                <td>1</td>
-                <td>63,24</td>
-                <td>10,0%</td>
-                <td>-80 €</td>
-            </tr>
-
-            <tr>
-                <td>18°</td>
-                <td>Francesco Prisco (senior)</td>
-                <td>3</td>
-                <td>0</td>
-                <td>64,15</td>
-                <td>0,0%</td>
-                <td>-40 €</td>
-            </tr>
-
-            <tr>
-                <td>19°</td>
-                <td>Paolo Giugliano</td>
-                <td>5</td>
-                <td>0</td>
-                <td>66,90</td>
-                <td>0,0%</td>
-                <td>-75 €</td>
-            </tr>
-
-            <tr>
-                <td>20°</td>
-                <td>Errico Romano</td>
-                <td>11</td>
-                <td>1</td>
-                <td>68,46</td>
-                <td>9,1%</td>
-                <td>-160 €</td>
-            </tr>
-
-            <tr>
-                <td>21°</td>
-                <td>Francesco Ambrosio</td>
-                <td>4</td>
-                <td>0</td>
-                <td>70,83</td>
-                <td>0,0%</td>
-                <td>-100 €</td>
-            </tr>
-
-            <tr>
-                <td>22°</td>
-                <td>Felice Carbone</td>
-                <td>10</td>
-                <td>0</td>
-                <td>72,76</td>
-                <td>0,0%</td>
-                <td>-160 €</td>
-            </tr>
-
-            <tr>
-                <td>23°</td>
-                <td>Tommaso Ammendola</td>
-                <td>2</td>
-                <td>0</td>
-                <td>83,33</td>
-                <td>0,0%</td>
-                <td>-20 €</td>
-            </tr>
-
-            <tr>
-                <td>24°</td>
-                <td>Salvatore D'alessandro</td>
-                <td>1</td>
-                <td>0</td>
-                <td>85,71</td>
-                <td>0,0%</td>
-                <td>-10 €</td>
-            </tr>
-
-        </tbody>
+        <tbody id="classifica-corpo"></tbody>
 
     </table>
 
-        </div>
-
 </div>
 
-    <div id="palmares">
+<div id="palmares">
 
     <button class="torna-menu" onclick="mostraMenu()">
         ← Torna al menu
@@ -734,99 +490,1728 @@ th[onclick]:hover {
 
     <h2>Tornei</h2>
 
-    <div class="tornei-lista">
-
-        <button class="torneo-card" onclick="mostraTorneo(1)">
-            <strong>Torneo 1</strong>
-            <span>Vincitore: da definire</span>
-        </button>
-
-        <button class="torneo-card" onclick="mostraTorneo(2)">
-            <strong>Torneo 2</strong>
-            <span>Vincitore: da definire</span>
-        </button>
-
-        <button class="torneo-card" onclick="mostraTorneo(3)">
-            <strong>Torneo 3</strong>
-            <span>Vincitore: da definire</span>
-        </button>
-
-        <button class="torneo-card" onclick="mostraTorneo(4)">
-            <strong>Torneo 4</strong>
-            <span>Vincitore: da definire</span>
-        </button>
-
-        <button class="torneo-card" onclick="mostraTorneo(5)">
-            <strong>Torneo 5</strong>
-            <span>Vincitore: da definire</span>
-        </button>
-
-        <button class="torneo-card" onclick="mostraTorneo(6)">
-            <strong>Torneo 6</strong>
-            <span>Vincitore: da definire</span>
-        </button>
-
-        <button class="torneo-card" onclick="mostraTorneo(7)">
-            <strong>Torneo 7</strong>
-            <span>Vincitore: da definire</span>
-        </button>
-
-        <button class="torneo-card" onclick="mostraTorneo(8)">
-            <strong>Torneo 8</strong>
-            <span>Vincitore: da definire</span>
-        </button>
-
-        <button class="torneo-card" onclick="mostraTorneo(9)">
-            <strong>Torneo 9</strong>
-            <span>Vincitore: da definire</span>
-        </button>
-
-        <button class="torneo-card" onclick="mostraTorneo(10)">
-            <strong>Torneo 10</strong>
-            <span>Vincitore: da definire</span>
-        </button>
-
-        <button class="torneo-card" onclick="mostraTorneo(11)">
-            <strong>Torneo 11</strong>
-            <span>Vincitore: da definire</span>
-        </button>
-
-        <button class="torneo-card" onclick="mostraTorneo(12)">
-            <strong>Torneo 12</strong>
-            <span>Vincitore: da definire</span>
-        </button>
-
-        <button class="torneo-card" onclick="mostraTorneo(13)">
-            <strong>Torneo 13</strong>
-            <span>Vincitore: da definire</span>
-        </button>
-
-        <button class="torneo-card" onclick="mostraTorneo(14)">
-            <strong>Torneo 14</strong>
-            <span>Vincitore: da definire</span>
-        </button>
-
-        <button class="torneo-card" onclick="mostraTorneo(15)">
-            <strong>Torneo 15</strong>
-            <span>Vincitore: da definire</span>
-        </button>
-
-        <button class="torneo-card" onclick="mostraTorneo(16)">
-            <strong>Torneo 16</strong>
-            <span>Vincitore: da definire</span>
-        </button>
-
-        <button class="torneo-card" onclick="mostraTorneo(17)">
-            <strong>Torneo 17</strong>
-            <span>Vincitore: da definire</span>
-        </button>
-
-    </div>
+    <div class="tornei-lista" id="tornei-lista"></div>
 
 </div>
 
 <div id="tornei-dettagli"></div>
 <script>
+
+    const datiTornei = [
+    {
+        "n": 1,
+        "date": "22/04/2026",
+        "venue": "CASA ANNUNZIATA",
+        "players": [
+            {
+                "pos": "1°",
+                "name": "Alfonso Annunziata",
+                "entry": 10,
+                "rebu": 10,
+                "addon": null,
+                "prize": 70,
+                "profit": 50
+            },
+            {
+                "pos": "2°",
+                "name": "Carlo Sepe",
+                "entry": 10,
+                "rebu": null,
+                "addon": null,
+                "prize": 60,
+                "profit": 50
+            },
+            {
+                "pos": "3°",
+                "name": "Diego Cavaliere",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "4°",
+                "name": "Francesco Prisco (junior)",
+                "entry": 10,
+                "rebu": null,
+                "addon": null,
+                "prize": 0,
+                "profit": -10
+            },
+            {
+                "pos": "5°",
+                "name": "Fabrizio D'alessandro",
+                "entry": 10,
+                "rebu": null,
+                "addon": null,
+                "prize": 0,
+                "profit": -10
+            },
+            {
+                "pos": "6°",
+                "name": "Emanuele Nicolo'",
+                "entry": 10,
+                "rebu": 10,
+                "addon": null,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "7°",
+                "name": "Tommaso Ammendola",
+                "entry": 10,
+                "rebu": null,
+                "addon": null,
+                "prize": 0,
+                "profit": -10
+            },
+            {
+                "pos": "8°",
+                "name": "Domenico Correale",
+                "entry": 10,
+                "rebu": null,
+                "addon": null,
+                "prize": 0,
+                "profit": -10
+            },
+            {
+                "pos": "9°",
+                "name": "Francesco Prisco (senior)",
+                "entry": 10,
+                "rebu": null,
+                "addon": null,
+                "prize": 0,
+                "profit": -10
+            },
+            {
+                "pos": "10°",
+                "name": "Michele Annunziata",
+                "entry": 10,
+                "rebu": null,
+                "addon": null,
+                "prize": 0,
+                "profit": -10
+            }
+        ]
+    },
+    {
+        "n": 2,
+        "date": "01/05/2026",
+        "venue": "VILLA ROMANO",
+        "players": [
+            {
+                "pos": "1°",
+                "name": "Matteo Annunziata",
+                "entry": 10,
+                "rebu": null,
+                "addon": null,
+                "prize": 90,
+                "profit": 80
+            },
+            {
+                "pos": "2°",
+                "name": "Alfonso Annunziata",
+                "entry": 10,
+                "rebu": null,
+                "addon": null,
+                "prize": 60,
+                "profit": 50
+            },
+            {
+                "pos": "3°",
+                "name": "Emanuele Del Pesce",
+                "entry": 10,
+                "rebu": null,
+                "addon": null,
+                "prize": 20,
+                "profit": 10
+            },
+            {
+                "pos": "4°",
+                "name": "Daniel Prisco",
+                "entry": 10,
+                "rebu": 10,
+                "addon": 10,
+                "prize": 0,
+                "profit": -30
+            },
+            {
+                "pos": "5°",
+                "name": "Francesco Prisco (junior)",
+                "entry": 10,
+                "rebu": null,
+                "addon": 20,
+                "prize": 0,
+                "profit": -30
+            },
+            {
+                "pos": "6°",
+                "name": "Diego Cavaliere",
+                "entry": 10,
+                "rebu": 10,
+                "addon": 10,
+                "prize": 0,
+                "profit": -30
+            },
+            {
+                "pos": "7°",
+                "name": "Errico Romano",
+                "entry": 10,
+                "rebu": 10,
+                "addon": 10,
+                "prize": 0,
+                "profit": -30
+            },
+            {
+                "pos": "8°",
+                "name": "Carlo Sepe",
+                "entry": 10,
+                "rebu": null,
+                "addon": null,
+                "prize": 0,
+                "profit": -10
+            },
+            {
+                "pos": "9°",
+                "name": "Felice Carbone",
+                "entry": 10,
+                "rebu": null,
+                "addon": null,
+                "prize": 0,
+                "profit": -10
+            }
+        ]
+    },
+    {
+        "n": 3,
+        "date": "14/05/2026",
+        "venue": "TAVERNA CORREALE",
+        "players": [
+            {
+                "pos": "1°",
+                "name": "Emanuele Nicolo'",
+                "entry": 10,
+                "rebu": null,
+                "addon": null,
+                "prize": 90,
+                "profit": 80
+            },
+            {
+                "pos": "2°",
+                "name": "Alfonso Annunziata",
+                "entry": 10,
+                "rebu": 10,
+                "addon": null,
+                "prize": 40,
+                "profit": 20
+            },
+            {
+                "pos": "3°",
+                "name": "Francesco Prisco (senior)",
+                "entry": 10,
+                "rebu": 10,
+                "addon": null,
+                "prize": 20,
+                "profit": 0
+            },
+            {
+                "pos": "4°",
+                "name": "Diego Cavaliere",
+                "entry": 10,
+                "rebu": 20,
+                "addon": 10,
+                "prize": 0,
+                "profit": -40
+            },
+            {
+                "pos": "5°",
+                "name": "Francesco Prisco (junior)",
+                "entry": 10,
+                "rebu": null,
+                "addon": null,
+                "prize": 0,
+                "profit": -10
+            },
+            {
+                "pos": "6°",
+                "name": "Errico Romano",
+                "entry": 10,
+                "rebu": 10,
+                "addon": null,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "7°",
+                "name": "Domenico Correale",
+                "entry": 10,
+                "rebu": 10,
+                "addon": null,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "8°",
+                "name": "Felice Carbone",
+                "entry": 10,
+                "rebu": null,
+                "addon": null,
+                "prize": 0,
+                "profit": -10
+            }
+        ]
+    },
+    {
+        "n": 4,
+        "date": "15/05/2026",
+        "venue": "TAVERNA CORREALE",
+        "players": [
+            {
+                "pos": "1°",
+                "name": "Michele Annunziata",
+                "entry": 10,
+                "rebu": null,
+                "addon": null,
+                "prize": 70,
+                "profit": 60
+            },
+            {
+                "pos": "2°",
+                "name": "Alfonso Annunziata",
+                "entry": 10,
+                "rebu": 10,
+                "addon": null,
+                "prize": 60,
+                "profit": 40
+            },
+            {
+                "pos": "3°",
+                "name": "Diego Cavaliere",
+                "entry": 10,
+                "rebu": null,
+                "addon": null,
+                "prize": 0,
+                "profit": -10
+            },
+            {
+                "pos": "4°",
+                "name": "Emanuele Nicolo'",
+                "entry": 10,
+                "rebu": 10,
+                "addon": null,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "5°",
+                "name": "Vincenzo Correale",
+                "entry": 10,
+                "rebu": null,
+                "addon": null,
+                "prize": 0,
+                "profit": -10
+            },
+            {
+                "pos": "6°",
+                "name": "Domenico Correale",
+                "entry": 10,
+                "rebu": 10,
+                "addon": null,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "7°",
+                "name": "Francesco Prisco (junior)",
+                "entry": 10,
+                "rebu": 10,
+                "addon": null,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "8°",
+                "name": "Matteo Annunziata",
+                "entry": 10,
+                "rebu": 10,
+                "addon": null,
+                "prize": 0,
+                "profit": -20
+            }
+        ]
+    },
+    {
+        "n": 5,
+        "date": "21/05/2026",
+        "venue": "VILLA ROMANO",
+        "players": [
+            {
+                "pos": "1°",
+                "name": "Diego Cavaliere",
+                "entry": 10,
+                "rebu": 10,
+                "addon": null,
+                "prize": 90,
+                "profit": 70
+            },
+            {
+                "pos": "2°",
+                "name": "Carlo Sepe",
+                "entry": 10,
+                "rebu": 10,
+                "addon": null,
+                "prize": 70,
+                "profit": 50
+            },
+            {
+                "pos": "3°",
+                "name": "Domenico Correale",
+                "entry": 10,
+                "rebu": null,
+                "addon": null,
+                "prize": 10,
+                "profit": 0
+            },
+            {
+                "pos": "4°",
+                "name": "Fabrizio D'alessandro",
+                "entry": 10,
+                "rebu": null,
+                "addon": null,
+                "prize": 10,
+                "profit": 0
+            },
+            {
+                "pos": "5°",
+                "name": "Alfonso Annunziata",
+                "entry": 10,
+                "rebu": null,
+                "addon": null,
+                "prize": 0,
+                "profit": -10
+            },
+            {
+                "pos": "6°",
+                "name": "Emanuele Del Pesce",
+                "entry": 10,
+                "rebu": 20,
+                "addon": null,
+                "prize": 0,
+                "profit": -30
+            },
+            {
+                "pos": "7°",
+                "name": "Errico Romano",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "8°",
+                "name": "Emanuele Nicolo'",
+                "entry": 10,
+                "rebu": 40,
+                "addon": null,
+                "prize": 0,
+                "profit": -50
+            },
+            {
+                "pos": "9°",
+                "name": "Matteo Annunziata",
+                "entry": 10,
+                "rebu": null,
+                "addon": null,
+                "prize": 0,
+                "profit": -10
+            }
+        ]
+    },
+    {
+        "n": 6,
+        "date": "28/05/2026",
+        "venue": "VILLA ROMANO",
+        "players": [
+            {
+                "pos": "1°",
+                "name": "Alfonso Annunziata",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 160,
+                "profit": 140
+            },
+            {
+                "pos": "2°",
+                "name": "Daniel Prisco",
+                "entry": 10,
+                "rebu": 10,
+                "addon": 10,
+                "prize": 130,
+                "profit": 100
+            },
+            {
+                "pos": "3°",
+                "name": "Domenico Correale",
+                "entry": 10,
+                "rebu": 10,
+                "addon": null,
+                "prize": 30,
+                "profit": 10
+            },
+            {
+                "pos": "4°",
+                "name": "Emanuele E.A./Arcangelo",
+                "entry": 10,
+                "rebu": 20,
+                "addon": 10,
+                "prize": 0,
+                "profit": -40
+            },
+            {
+                "pos": "5°",
+                "name": "Fabrizio D'alessandro",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "6°",
+                "name": "Francesco Prisco (junior)",
+                "entry": 10,
+                "rebu": 10,
+                "addon": 20,
+                "prize": 0,
+                "profit": -40
+            },
+            {
+                "pos": "7°",
+                "name": "Sabato Tarantino",
+                "entry": 10,
+                "rebu": 10,
+                "addon": null,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "8°",
+                "name": "Diego Cavaliere",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "9°",
+                "name": "Matteo Annunziata",
+                "entry": 10,
+                "rebu": 20,
+                "addon": null,
+                "prize": 0,
+                "profit": -30
+            },
+            {
+                "pos": "10°",
+                "name": "Carlo Sepe",
+                "entry": 10,
+                "rebu": 20,
+                "addon": null,
+                "prize": 0,
+                "profit": -30
+            },
+            {
+                "pos": "11°",
+                "name": "Michele Annunziata",
+                "entry": 10,
+                "rebu": 10,
+                "addon": null,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "12°",
+                "name": "Errico Romano",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "13°",
+                "name": "Tommaso Ammendola",
+                "entry": 10,
+                "rebu": null,
+                "addon": null,
+                "prize": 0,
+                "profit": -10
+            }
+        ]
+    },
+    {
+        "n": 7,
+        "date": "04/06/2026",
+        "venue": "VILLA ROMANO",
+        "players": [
+            {
+                "pos": "1°",
+                "name": "Alfonso Annunziata",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 160,
+                "profit": 140
+            },
+            {
+                "pos": "2°",
+                "name": "Domenico Correale",
+                "entry": 10,
+                "rebu": null,
+                "addon": null,
+                "prize": 80,
+                "profit": 70
+            },
+            {
+                "pos": "3°",
+                "name": "Fabrizio D'alessandro",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 70,
+                "profit": 50
+            },
+            {
+                "pos": "4°",
+                "name": "Emanuele Del Pesce",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "5°",
+                "name": "Emanuele Nicolo'",
+                "entry": 10,
+                "rebu": 10,
+                "addon": 10,
+                "prize": 0,
+                "profit": -30
+            },
+            {
+                "pos": "6°",
+                "name": "Felice Carbone",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "7°",
+                "name": "Errico Romano",
+                "entry": 10,
+                "rebu": 10,
+                "addon": 10,
+                "prize": 0,
+                "profit": -30
+            },
+            {
+                "pos": "8°",
+                "name": "Michele Annunziata",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "9°",
+                "name": "Daniel Prisco",
+                "entry": 10,
+                "rebu": 20,
+                "addon": null,
+                "prize": 0,
+                "profit": -30
+            },
+            {
+                "pos": "10°",
+                "name": "Francesco Prisco (senior)",
+                "entry": 10,
+                "rebu": 20,
+                "addon": null,
+                "prize": 0,
+                "profit": -30
+            },
+            {
+                "pos": "11°",
+                "name": "Diego Cavaliere",
+                "entry": 10,
+                "rebu": 20,
+                "addon": 10,
+                "prize": 0,
+                "profit": -40
+            },
+            {
+                "pos": "12°",
+                "name": "Carlo Sepe",
+                "entry": 10,
+                "rebu": 10,
+                "addon": null,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "13°",
+                "name": "Francesco Prisco (junior)",
+                "entry": 10,
+                "rebu": 10,
+                "addon": null,
+                "prize": 0,
+                "profit": -20
+            }
+        ]
+    },
+    {
+        "n": 8,
+        "date": "12/06/2026",
+        "venue": "CASA ANNUNZIATA",
+        "players": [
+            {
+                "pos": "1°",
+                "name": "Alfonso Annunziata",
+                "entry": 15,
+                "rebu": null,
+                "addon": null,
+                "prize": 125,
+                "profit": 110
+            },
+            {
+                "pos": "2°",
+                "name": "Michele Annunziata",
+                "entry": 15,
+                "rebu": null,
+                "addon": 15,
+                "prize": 100,
+                "profit": 70
+            },
+            {
+                "pos": "3°",
+                "name": "Francesco Prisco (junior)",
+                "entry": 15,
+                "rebu": 15,
+                "addon": 15,
+                "prize": 30,
+                "profit": -15
+            },
+            {
+                "pos": "4°",
+                "name": "Carlo Sepe",
+                "entry": 15,
+                "rebu": null,
+                "addon": null,
+                "prize": 0,
+                "profit": -15
+            },
+            {
+                "pos": "5°",
+                "name": "Domenico Correale",
+                "entry": 15,
+                "rebu": null,
+                "addon": null,
+                "prize": 0,
+                "profit": -15
+            },
+            {
+                "pos": "6°",
+                "name": "Emanuele Nicolo'",
+                "entry": 15,
+                "rebu": null,
+                "addon": 15,
+                "prize": 0,
+                "profit": -30
+            },
+            {
+                "pos": "7°",
+                "name": "Paolo Giugliano",
+                "entry": 15,
+                "rebu": null,
+                "addon": null,
+                "prize": 0,
+                "profit": -15
+            },
+            {
+                "pos": "8°",
+                "name": "Matteo Annunziata",
+                "entry": 15,
+                "rebu": null,
+                "addon": 15,
+                "prize": 0,
+                "profit": -30
+            },
+            {
+                "pos": "9°",
+                "name": "Felice Carbone",
+                "entry": 15,
+                "rebu": 15,
+                "addon": null,
+                "prize": 0,
+                "profit": -30
+            },
+            {
+                "pos": "10°",
+                "name": "Errico Romano",
+                "entry": 15,
+                "rebu": 15,
+                "addon": null,
+                "prize": 0,
+                "profit": -30
+            }
+        ]
+    },
+    {
+        "n": 9,
+        "date": "17/06/2026",
+        "venue": "CASA ANNUNZIATA",
+        "players": [
+            {
+                "pos": "1°",
+                "name": "Alfonso Annunziata",
+                "entry": 10,
+                "rebu": null,
+                "addon": null,
+                "prize": 100,
+                "profit": 90
+            },
+            {
+                "pos": "2°",
+                "name": "Matteo Annunziata",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 40,
+                "profit": 20
+            },
+            {
+                "pos": "3°",
+                "name": "Diego Cavaliere",
+                "entry": 10,
+                "rebu": 10,
+                "addon": null,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "4°",
+                "name": "Emanuele Nicolo'",
+                "entry": 10,
+                "rebu": null,
+                "addon": null,
+                "prize": 0,
+                "profit": -10
+            },
+            {
+                "pos": "5°",
+                "name": "Paolo Giugliano",
+                "entry": 10,
+                "rebu": null,
+                "addon": null,
+                "prize": 0,
+                "profit": -10
+            },
+            {
+                "pos": "6°",
+                "name": "Felice Carbone",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "7°",
+                "name": "Errico Romano",
+                "entry": 10,
+                "rebu": 10,
+                "addon": 10,
+                "prize": 0,
+                "profit": -30
+            },
+            {
+                "pos": "8°",
+                "name": "Michele Annunziata",
+                "entry": 10,
+                "rebu": 10,
+                "addon": null,
+                "prize": 0,
+                "profit": -20
+            }
+        ]
+    },
+    {
+        "n": 10,
+        "date": "18/06/2026",
+        "venue": "TAVERNA CORREALE",
+        "players": [
+            {
+                "pos": "1°",
+                "name": "Alfonso Annunziata",
+                "entry": 10,
+                "rebu": 10,
+                "addon": 10,
+                "prize": 80,
+                "profit": 50
+            },
+            {
+                "pos": "2°",
+                "name": "Emanuele Nicolo'",
+                "entry": 10,
+                "rebu": null,
+                "addon": null,
+                "prize": 70,
+                "profit": 60
+            },
+            {
+                "pos": "3°",
+                "name": "Daniel Prisco",
+                "entry": 10,
+                "rebu": null,
+                "addon": null,
+                "prize": 10,
+                "profit": 0
+            },
+            {
+                "pos": "4°",
+                "name": "Carlo Sepe",
+                "entry": 10,
+                "rebu": 10,
+                "addon": null,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "5°",
+                "name": "Domenico Correale",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "6°",
+                "name": "Michele Annunziata",
+                "entry": 10,
+                "rebu": null,
+                "addon": null,
+                "prize": 0,
+                "profit": -10
+            },
+            {
+                "pos": "7°",
+                "name": "Francesco Prisco (junior)",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "8°",
+                "name": "Diego Cavaliere",
+                "entry": 10,
+                "rebu": 10,
+                "addon": 10,
+                "prize": 0,
+                "profit": -30
+            },
+            {
+                "pos": "9°",
+                "name": "Fabrizio D'alessandro",
+                "entry": 10,
+                "rebu": null,
+                "addon": null,
+                "prize": 0,
+                "profit": -10
+            }
+        ]
+    },
+    {
+        "n": 11,
+        "date": "01/07/2026",
+        "venue": "DIMORA PRISCO",
+        "players": [
+            {
+                "pos": "1°",
+                "name": "Emanuele Nicolo'",
+                "entry": 10,
+                "rebu": 10,
+                "addon": 10,
+                "prize": 90,
+                "profit": 60
+            },
+            {
+                "pos": "2°",
+                "name": "Diego Cavaliere",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 60,
+                "profit": 40
+            },
+            {
+                "pos": "3°",
+                "name": "Francesco Prisco (junior)",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 20,
+                "profit": 0
+            },
+            {
+                "pos": "4°",
+                "name": "Felice Carbone",
+                "entry": 10,
+                "rebu": null,
+                "addon": null,
+                "prize": 0,
+                "profit": -10
+            },
+            {
+                "pos": "5°",
+                "name": "Paolo Giugliano",
+                "entry": 10,
+                "rebu": 10,
+                "addon": null,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "6°",
+                "name": "Carlo Sepe",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "7°",
+                "name": "Raffaele Iervolino",
+                "entry": 10,
+                "rebu": 10,
+                "addon": 10,
+                "prize": 0,
+                "profit": -30
+            },
+            {
+                "pos": "8°",
+                "name": "Daniel Prisco",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 0,
+                "profit": -20
+            }
+        ]
+    },
+    {
+        "n": 12,
+        "date": "09/07/2026",
+        "venue": "CASA ANNUNZIATA",
+        "players": [
+            {
+                "pos": "1°",
+                "name": "Emanuele Nicolo'",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 100,
+                "profit": 80
+            },
+            {
+                "pos": "2°",
+                "name": "Diego Cavaliere",
+                "entry": 10,
+                "rebu": 10,
+                "addon": 10,
+                "prize": 60,
+                "profit": 30
+            },
+            {
+                "pos": "3°",
+                "name": "Francesco Prisco (junior)",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 20,
+                "profit": 0
+            },
+            {
+                "pos": "4°",
+                "name": "Fabrizio D'alessandro",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "5°",
+                "name": "Raffaele Iervolino",
+                "entry": 10,
+                "rebu": 10,
+                "addon": 10,
+                "prize": 0,
+                "profit": -30
+            },
+            {
+                "pos": "6°",
+                "name": "Daniel Prisco",
+                "entry": 10,
+                "rebu": 10,
+                "addon": 10,
+                "prize": 0,
+                "profit": -30
+            },
+            {
+                "pos": "7°",
+                "name": "Alfonso Annunziata",
+                "entry": 10,
+                "rebu": 10,
+                "addon": null,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "8°",
+                "name": "Carlo Sepe",
+                "entry": 10,
+                "rebu": null,
+                "addon": null,
+                "prize": 0,
+                "profit": -10
+            }
+        ]
+    },
+    {
+        "n": 13,
+        "date": "23/07/2026",
+        "venue": "VILLA ROMANO",
+        "players": [
+            {
+                "pos": "1°",
+                "name": "Daniel Prisco",
+                "entry": 10,
+                "rebu": 10,
+                "addon": 10,
+                "prize": 140,
+                "profit": 110
+            },
+            {
+                "pos": "2°",
+                "name": "Carlo Sepe",
+                "entry": 10,
+                "rebu": null,
+                "addon": null,
+                "prize": 80,
+                "profit": 70
+            },
+            {
+                "pos": "3°",
+                "name": "Emanuele Nicolo'",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 20,
+                "profit": 0
+            },
+            {
+                "pos": "4°",
+                "name": "Daniele Di Domenico",
+                "entry": 10,
+                "rebu": 10,
+                "addon": 10,
+                "prize": 0,
+                "profit": -30
+            },
+            {
+                "pos": "5°",
+                "name": "Umberto Romano",
+                "entry": 10,
+                "rebu": 10,
+                "addon": 10,
+                "prize": 0,
+                "profit": -30
+            },
+            {
+                "pos": "6°",
+                "name": "Diego Cavaliere",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "7°",
+                "name": "Michele Annunziata",
+                "entry": 10,
+                "rebu": null,
+                "addon": null,
+                "prize": 0,
+                "profit": -10
+            },
+            {
+                "pos": "8°",
+                "name": "Matteo Annunziata",
+                "entry": 10,
+                "rebu": null,
+                "addon": null,
+                "prize": 0,
+                "profit": -10
+            },
+            {
+                "pos": "9°",
+                "name": "Francesco Prisco (junior)",
+                "entry": 10,
+                "rebu": null,
+                "addon": null,
+                "prize": 0,
+                "profit": -10
+            },
+            {
+                "pos": "10°",
+                "name": "Raffaele Iervolino",
+                "entry": 10,
+                "rebu": 10,
+                "addon": 10,
+                "prize": 0,
+                "profit": -30
+            },
+            {
+                "pos": "11°",
+                "name": "Errico Romano",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "12°",
+                "name": "Francesco Ambrosio",
+                "entry": 10,
+                "rebu": 10,
+                "addon": null,
+                "prize": 0,
+                "profit": -20
+            }
+        ]
+    },
+    {
+        "n": 14,
+        "date": "30/07/2026",
+        "venue": "VILLA ROMANO",
+        "players": [
+            {
+                "pos": "1°",
+                "name": "Umberto Romano",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 160,
+                "profit": 140
+            },
+            {
+                "pos": "2°",
+                "name": "Diego Cavaliere",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 70,
+                "profit": 50
+            },
+            {
+                "pos": "3°",
+                "name": "Emanuele Nicolo'",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 20,
+                "profit": 0
+            },
+            {
+                "pos": "4°",
+                "name": "Raffaele Iervolino",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "5°",
+                "name": "Carlo Sepe",
+                "entry": 10,
+                "rebu": 10,
+                "addon": null,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "6°",
+                "name": "Francesco Ambrosio",
+                "entry": 10,
+                "rebu": 10,
+                "addon": 10,
+                "prize": 0,
+                "profit": -30
+            },
+            {
+                "pos": "7°",
+                "name": "Matteo Annunziata",
+                "entry": 10,
+                "rebu": 10,
+                "addon": 10,
+                "prize": 0,
+                "profit": -30
+            },
+            {
+                "pos": "8°",
+                "name": "Daniel Prisco",
+                "entry": 10,
+                "rebu": null,
+                "addon": null,
+                "prize": 0,
+                "profit": -10
+            },
+            {
+                "pos": "9°",
+                "name": "Errico Romano",
+                "entry": 10,
+                "rebu": 20,
+                "addon": 10,
+                "prize": 0,
+                "profit": -40
+            },
+            {
+                "pos": "10°",
+                "name": "Francesco Prisco (junior)",
+                "entry": 10,
+                "rebu": 20,
+                "addon": null,
+                "prize": 0,
+                "profit": -30
+            },
+            {
+                "pos": "11°",
+                "name": "Felice Carbone",
+                "entry": 10,
+                "rebu": null,
+                "addon": null,
+                "prize": 0,
+                "profit": -10
+            }
+        ]
+    },
+    {
+        "n": 15,
+        "date": "10/09/2026",
+        "venue": "VILLA ROMANO",
+        "players": [
+            {
+                "pos": "1°",
+                "name": "Errico Romano",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 120,
+                "profit": 100
+            },
+            {
+                "pos": "2°",
+                "name": "Umberto Romano",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 50,
+                "profit": 30
+            },
+            {
+                "pos": "3°",
+                "name": "Francesco Prisco (junior)",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "4°",
+                "name": "Alfonso Annunziata",
+                "entry": 10,
+                "rebu": null,
+                "addon": null,
+                "prize": 0,
+                "profit": -10
+            },
+            {
+                "pos": "5°",
+                "name": "Domenico Correale",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "6°",
+                "name": "Felice Carbone",
+                "entry": 10,
+                "rebu": 10,
+                "addon": null,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "7°",
+                "name": "Paolo Giugliano",
+                "entry": 10,
+                "rebu": 10,
+                "addon": null,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "8°",
+                "name": "Emanuele Nicolo'",
+                "entry": 10,
+                "rebu": 10,
+                "addon": null,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "9°",
+                "name": "Diego Cavaliere",
+                "entry": 10,
+                "rebu": 10,
+                "addon": null,
+                "prize": 0,
+                "profit": -20
+            }
+        ]
+    },
+    {
+        "n": 16,
+        "date": "17/09/2026",
+        "venue": "VILLA ROMANO",
+        "players": [
+            {
+                "pos": "1°",
+                "name": "Raffaele Iervolino",
+                "entry": 10,
+                "rebu": 10,
+                "addon": 10,
+                "prize": 150,
+                "profit": 120
+            },
+            {
+                "pos": "2°",
+                "name": "Umberto Romano",
+                "entry": 10,
+                "rebu": 10,
+                "addon": 10,
+                "prize": 120,
+                "profit": 90
+            },
+            {
+                "pos": "3°",
+                "name": "Carlo Sepe",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 30,
+                "profit": 10
+            },
+            {
+                "pos": "4°",
+                "name": "Daniel Prisco",
+                "entry": 10,
+                "rebu": null,
+                "addon": null,
+                "prize": 0,
+                "profit": -10
+            },
+            {
+                "pos": "5°",
+                "name": "Errico Romano",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "6°",
+                "name": "Alfonso Annunziata",
+                "entry": 10,
+                "rebu": null,
+                "addon": null,
+                "prize": 0,
+                "profit": -10
+            },
+            {
+                "pos": "7°",
+                "name": "Matteo Annunziata",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "8°",
+                "name": "Diego Cavaliere",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "9°",
+                "name": "Emanuele Nicolo'",
+                "entry": 10,
+                "rebu": 20,
+                "addon": 10,
+                "prize": 0,
+                "profit": -40
+            },
+            {
+                "pos": "10°",
+                "name": "Fabrizio D'alessandro",
+                "entry": 10,
+                "rebu": 10,
+                "addon": 10,
+                "prize": 0,
+                "profit": -30
+            },
+            {
+                "pos": "11°",
+                "name": "Francesco Ambrosio",
+                "entry": 10,
+                "rebu": 10,
+                "addon": 10,
+                "prize": 0,
+                "profit": -30
+            },
+            {
+                "pos": "12°",
+                "name": "Felice Carbone",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "13°",
+                "name": "Emanuele Del Pesce",
+                "entry": 10,
+                "rebu": 10,
+                "addon": null,
+                "prize": 0,
+                "profit": -20
+            }
+        ]
+    },
+    {
+        "n": 17,
+        "date": "24/09/2026",
+        "venue": "TAVERNA CORREALE",
+        "players": [
+            {
+                "pos": "1°",
+                "name": "Emanuele Nicolo'",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 150,
+                "profit": 130
+            },
+            {
+                "pos": "2°",
+                "name": "Diego Cavaliere",
+                "entry": 10,
+                "rebu": 10,
+                "addon": 10,
+                "prize": 90,
+                "profit": 60
+            },
+            {
+                "pos": "3°",
+                "name": "Fabrizio D'alessandro",
+                "entry": 10,
+                "rebu": null,
+                "addon": null,
+                "prize": 50,
+                "profit": 40
+            },
+            {
+                "pos": "4°",
+                "name": "Carlo Sepe",
+                "entry": 10,
+                "rebu": 20,
+                "addon": null,
+                "prize": 0,
+                "profit": -30
+            },
+            {
+                "pos": "5°",
+                "name": "Felice Carbone",
+                "entry": 10,
+                "rebu": null,
+                "addon": null,
+                "prize": 0,
+                "profit": -10
+            },
+            {
+                "pos": "6°",
+                "name": "Domenico Correale",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "7°",
+                "name": "Raffaele Iervolino",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "8°",
+                "name": "Francesco Ambrosio",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "9°",
+                "name": "Francesco Prisco (junior)",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "10°",
+                "name": "Daniele Di Domenico",
+                "entry": 10,
+                "rebu": 10,
+                "addon": null,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "11°",
+                "name": "Daniel Prisco",
+                "entry": 10,
+                "rebu": 10,
+                "addon": 10,
+                "prize": 0,
+                "profit": -30
+            },
+            {
+                "pos": "12°",
+                "name": "Paolo Giugliano",
+                "entry": 10,
+                "rebu": null,
+                "addon": null,
+                "prize": 0,
+                "profit": -10
+            },
+            {
+                "pos": "13°",
+                "name": "Salvatore D'alessandro",
+                "entry": 10,
+                "rebu": null,
+                "addon": null,
+                "prize": 0,
+                "profit": -10
+            },
+            {
+                "pos": "14°",
+                "name": "Michele Annunziata",
+                "entry": 10,
+                "rebu": null,
+                "addon": null,
+                "prize": 0,
+                "profit": -10
+            },
+            {
+                "pos": "15°",
+                "name": "Matteo Annunziata",
+                "entry": 10,
+                "rebu": 10,
+                "addon": 10,
+                "prize": 0,
+                "profit": -30
+            }
+        ]
+    },
+    {
+        "n": 18,
+        "date": "",
+        "venue": "presso",
+        "players": []
+    }
+];
+
+    function formattaEuro(valore) {
+        if (valore === null || valore === undefined || valore === "") {
+            return "—";
+        }
+
+        const numero = Number(valore);
+        const segno = numero > 0 ? "+" : "";
+
+        return segno + numero.toFixed(2).replace(".", ",") + " €";
+    }
+
+    function formattaEuroIntero(valore) {
+        if (valore === null || valore === undefined || valore === "") {
+            return "—";
+        }
+
+        const numero = Number(valore);
+        const segno = numero > 0 ? "+" : "";
+
+        return segno + numero.toFixed(0).replace(".", ",") + " €";
+    }
+
+    function formattaNumero(valore) {
+        return Number(valore).toFixed(2).replace(".", ",");
+    }
+
+    function formattaPercentuale(valore) {
+        return (Number(valore) * 100).toFixed(1).replace(".", ",") + "%";
+    }
+
 
     function controllaPassword() {
 
@@ -839,6 +2224,9 @@ th[onclick]:hover {
 
             document.getElementById("sito").style.display = "block";
 
+            generaClassifica();
+            generaTornei();
+
         } else {
 
             document.getElementById("errore").style.display = "block";
@@ -847,14 +2235,171 @@ th[onclick]:hover {
     }
 
 
+    function calcolaStatistiche() {
+
+        const statistiche = {};
+
+        datiTornei.forEach(function(torneo) {
+
+            torneo.players.forEach(function(giocatore) {
+
+                if (!statistiche[giocatore.name]) {
+
+                    statistiche[giocatore.name] = {
+                        nome: giocatore.name,
+                        partecipazioni: 0,
+                        vittorie: 0,
+                        posizioniNormalizzate: [],
+                        profitto: 0
+                    };
+
+                }
+
+                const stats = statistiche[giocatore.name];
+
+                const posizione =
+                    parseInt(giocatore.pos, 10);
+
+                const partecipanti =
+                    torneo.players.length;
+
+                stats.partecipazioni++;
+
+                if (posizione === 1) {
+                    stats.vittorie++;
+                }
+
+                if (partecipanti > 1) {
+                    const posizioneNormalizzata =
+                        ((posizione - 1) / (partecipanti - 1)) * 100;
+
+                    stats.posizioniNormalizzate.push(
+                        posizioneNormalizzata
+                    );
+                } else {
+                    stats.posizioniNormalizzate.push(0);
+                }
+
+                stats.profitto += Number(giocatore.profit) || 0;
+
+            });
+
+        });
+
+        return Object.values(statistiche).map(function(stats) {
+
+            const sommaPosizioni =
+                stats.posizioniNormalizzate.reduce(
+                    function(totale, valore) {
+                        return totale + valore;
+                    },
+                    0
+                );
+
+            const posizioneMedia =
+                stats.posizioniNormalizzate.length > 0
+                    ? sommaPosizioni / stats.posizioniNormalizzate.length
+                    : 0;
+
+            const winRate =
+                stats.partecipazioni > 0
+                    ? stats.vittorie / stats.partecipazioni
+                    : 0;
+
+            return {
+                ...stats,
+                posizioneMedia: posizioneMedia,
+                winRate: winRate
+            };
+
+        });
+
+    }
+
+
+    function generaClassifica() {
+
+        const corpo =
+            document.getElementById("classifica-corpo");
+
+        if (!corpo) {
+            return;
+        }
+
+        let classifica =
+            calcolaStatistiche();
+
+        classifica.sort(function(a, b) {
+            return a.posizioneMedia - b.posizioneMedia;
+        });
+
+        corpo.innerHTML = classifica.map(function(giocatore, indice) {
+
+            return `
+                <tr>
+                    <td>${indice + 1}°</td>
+                    <td>${giocatore.nome}</td>
+                    <td>${giocatore.partecipazioni}</td>
+                    <td>${giocatore.vittorie}</td>
+                    <td>${formattaNumero(giocatore.posizioneMedia)}</td>
+                    <td>${formattaPercentuale(giocatore.winRate)}</td>
+                    <td>${formattaEuroIntero(giocatore.profitto)}</td>
+                </tr>
+            `;
+
+        }).join("");
+
+    }
+
+
+    function generaTornei() {
+
+        const contenitore =
+            document.getElementById("tornei-lista");
+
+        if (!contenitore) {
+            return;
+        }
+
+        contenitore.innerHTML = datiTornei.map(function(torneo) {
+
+            const vincitore =
+                torneo.players.length > 0
+                    ? torneo.players[0].name
+                    : "Da disputare";
+
+            const data =
+                torneo.date
+                    ? torneo.date
+                    : "Data da definire";
+
+            return `
+                <button class="torneo-card" onclick="mostraTorneo(${torneo.n})">
+                    <strong>Torneo ${torneo.n}</strong>
+                    <span>Vincitore: ${vincitore}</span>
+                    <span>${data}</span>
+                </button>
+            `;
+
+        }).join("");
+
+    }
+
+
     function ordinaTabella(colonna, tipo) {
 
-        const tabella = document.querySelector("table");
-        const corpo = tabella.querySelector("tbody");
+        const tabella =
+            document.getElementById("tabella-classifica");
 
-        const righe = Array.from(
-            corpo.querySelectorAll("tr")
-        );
+        if (!tabella) {
+            return;
+        }
+
+        const corpo =
+            tabella.querySelector("tbody");
+
+        const righe =
+            Array.from(corpo.querySelectorAll("tr"));
 
         const ordineAttuale =
             tabella.getAttribute("data-ordine") || "asc";
@@ -864,16 +2409,12 @@ th[onclick]:hover {
 
         let ordine = "asc";
 
-
         if (
             ultimaColonna == colonna &&
             ordineAttuale === "asc"
         ) {
-
             ordine = "desc";
-
         }
-
 
         righe.sort(function(a, b) {
 
@@ -882,7 +2423,6 @@ th[onclick]:hover {
 
             let valoreB =
                 b.cells[colonna].textContent.trim();
-
 
             if (tipo === "numero") {
 
@@ -910,149 +2450,205 @@ th[onclick]:hover {
 
             }
 
-
             if (valoreA < valoreB) {
-
                 return ordine === "asc" ? -1 : 1;
-
             }
-
 
             if (valoreA > valoreB) {
-
                 return ordine === "asc" ? 1 : -1;
-
             }
-
 
             return 0;
 
         });
 
-
-        righe.forEach(function(riga, indice) {
-
-            riga.cells[0].textContent =
-                (indice + 1) + "°";
-
+        righe.forEach(function(riga) {
             corpo.appendChild(riga);
-
         });
 
-
-        tabella.setAttribute(
-            "data-ordine",
-            ordine
-        );
-
-        tabella.setAttribute(
-            "data-colonna",
-            colonna
-        );
+        tabella.setAttribute("data-ordine", ordine);
+        tabella.setAttribute("data-colonna", colonna);
 
     }
-function mostraSezione(sezione) {
-
-    document.querySelector(".menu").style.display = "none";
-
-    document.getElementById("classifica").style.display = "none";
-    document.getElementById("palmares").style.display = "none";
-    document.getElementById("tornei").style.display = "none";
-
-    document.getElementById(sezione).style.display = "block";
-}
 
 
-function mostraMenu() {
+    function mostraSezione(sezione) {
 
-    document.getElementById("classifica").style.display = "none";
-    document.getElementById("palmares").style.display = "none";
-    document.getElementById("tornei").style.display = "none";
+        document.getElementById("menu").style.display = "none";
+        document.getElementById("classifica").style.display = "none";
+        document.getElementById("palmares").style.display = "none";
+        document.getElementById("tornei").style.display = "none";
+        document.getElementById("tornei-dettagli").style.display = "none";
 
-    document.querySelector(".menu").style.display = "grid";
-}
-function mostraTorneo(numero) {
+        document.getElementById(sezione).style.display = "block";
 
-    document.querySelector(".menu").style.display = "none";
+        if (sezione === "classifica") {
+            generaClassifica();
+        }
 
-    document.getElementById("tornei").style.display = "none";
-    document.getElementById("classifica").style.display = "none";
-    document.getElementById("palmares").style.display = "none";
+        if (sezione === "tornei") {
+            generaTornei();
+        }
 
-    const contenitore = document.getElementById("tornei-dettagli");
-
-    contenitore.innerHTML = `
-
-        <button class="torna-menu" onclick="mostraTornei()">
-            ← Torna ai tornei
-        </button>
-
-        <h2>Torneo ${numero}</h2>
-
-        <div class="torneo-info">
-
-            <div>
-                <strong>Data</strong>
-                <span>Da definire</span>
-            </div>
-
-            <div>
-                <strong>Partecipanti</strong>
-                <span>Da definire</span>
-            </div>
-
-            <div>
-                <strong>Vincitore</strong>
-                <span>Da definire</span>
-            </div>
-
-        </div>
-
-        <h2>Classifica torneo</h2>
-
-        <table>
-
-            <thead>
-                <tr>
-                    <th>Pos.</th>
-                    <th>Giocatore</th>
-                </tr>
-            </thead>
-
-            <tbody>
-
-                <tr>
-                    <td>1°</td>
-                    <td>Giocatore 1</td>
-                </tr>
-
-                <tr>
-                    <td>2°</td>
-                    <td>Giocatore 2</td>
-                </tr>
-
-                <tr>
-                    <td>3°</td>
-                    <td>Giocatore 3</td>
-                </tr>
-
-            </tbody>
-
-        </table>
-
-    `;
-
-    contenitore.style.display = "block";
-}
+    }
 
 
-function mostraTornei() {
+    function mostraMenu() {
 
-    document.getElementById("tornei-dettagli").style.display = "none";
+        document.getElementById("classifica").style.display = "none";
+        document.getElementById("palmares").style.display = "none";
+        document.getElementById("tornei").style.display = "none";
+        document.getElementById("tornei-dettagli").style.display = "none";
 
-    document.getElementById("tornei").style.display = "block";
-}
-    
+        document.getElementById("menu").style.display = "flex";
+
+    }
+
+
+    function mostraTorneo(numero) {
+
+        const torneo =
+            datiTornei.find(function(t) {
+                return t.n === numero;
+            });
+
+        if (!torneo) {
+            return;
+        }
+
+        document.getElementById("menu").style.display = "none";
+        document.getElementById("tornei").style.display = "none";
+        document.getElementById("classifica").style.display = "none";
+        document.getElementById("palmares").style.display = "none";
+
+        const dettagli =
+            document.getElementById("tornei-dettagli");
+
+        if (torneo.players.length === 0) {
+
+            dettagli.innerHTML = `
+                <button class="torna-menu" onclick="mostraTornei()">
+                    ← Torna ai tornei
+                </button>
+
+                <h2>Torneo ${torneo.n}</h2>
+
+                <div class="torneo-info">
+                    <div>
+                        <strong>Data</strong>
+                        <span>${torneo.date || "Da definire"}</span>
+                    </div>
+
+                    <div>
+                        <strong>Luogo</strong>
+                        <span>${torneo.venue || "Da definire"}</span>
+                    </div>
+
+                    <div>
+                        <strong>Partecipanti</strong>
+                        <span>Da definire</span>
+                    </div>
+
+                    <div>
+                        <strong>Vincitore</strong>
+                        <span>Da definire</span>
+                    </div>
+                </div>
+
+                <h3>Classifica torneo</h3>
+
+                <p>I dati del Torneo ${torneo.n} non sono ancora disponibili.</p>
+            `;
+
+        } else {
+
+            const righe =
+                torneo.players.map(function(giocatore) {
+
+                    return `
+                        <tr>
+                            <td>${giocatore.pos}</td>
+                            <td>${giocatore.name}</td>
+                            <td>${giocatore.entry ?? "—"} €</td>
+                            <td>${giocatore.rebu ?? "—"} €</td>
+                            <td>${giocatore.addon ?? "—"} €</td>
+                            <td>${giocatore.prize ?? 0} €</td>
+                            <td>${formattaEuro(giocatore.profit)}</td>
+                        </tr>
+                    `;
+
+                }).join("");
+
+            dettagli.innerHTML = `
+                <button class="torna-menu" onclick="mostraTornei()">
+                    ← Torna ai tornei
+                </button>
+
+                <h2>Torneo ${torneo.n}</h2>
+
+                <div class="torneo-info">
+                    <div>
+                        <strong>Data</strong>
+                        <span>${torneo.date}</span>
+                    </div>
+
+                    <div>
+                        <strong>Luogo</strong>
+                        <span>${torneo.venue}</span>
+                    </div>
+
+                    <div>
+                        <strong>Partecipanti</strong>
+                        <span>${torneo.players.length}</span>
+                    </div>
+
+                    <div>
+                        <strong>Vincitore</strong>
+                        <span>${torneo.players[0].name}</span>
+                    </div>
+                </div>
+
+                <h3>Classifica torneo</h3>
+
+                <table class="tabella-torneo">
+                    <thead>
+                        <tr>
+                            <th>Pos.</th>
+                            <th>Giocatore</th>
+                            <th>Ingresso</th>
+                            <th>Re-buy</th>
+                            <th>Add-on</th>
+                            <th>Premi</th>
+                            <th>Profitto/Perdita</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        ${righe}
+                    </tbody>
+                </table>
+            `;
+
+        }
+
+        dettagli.style.display = "block";
+
+    }
+
+
+    function mostraTornei() {
+
+        document.getElementById("tornei-dettagli").style.display = "none";
+        document.getElementById("classifica").style.display = "none";
+        document.getElementById("palmares").style.display = "none";
+        document.getElementById("menu").style.display = "none";
+
+        document.getElementById("tornei").style.display = "block";
+
+        generaTornei();
+
+    }
+
 </script>
 </body>
 
