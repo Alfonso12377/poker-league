@@ -7,50 +7,91 @@
 
     <title>Poker League</title>
 
-    <style>
+<style>
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background: #111;
+        color: white;
+        margin: 0;
+        padding: 30px 20px;
+    }
+
+    #sito {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        background: #222;
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    th {
+        background: #333;
+        padding: 15px 10px;
+        text-align: center;
+    }
+
+    td {
+        padding: 12px 10px;
+        text-align: center;
+        border-top: 1px solid #444;
+    }
+
+    tr:hover {
+        background: #2d2d2d;
+    }
+
+    th:first-child,
+    td:first-child {
+        font-weight: bold;
+    }
+
+    td:nth-child(2) {
+        text-align: left;
+        font-weight: bold;
+    }
+
+    td:last-child {
+        font-weight: bold;
+    }
+
+    @media (max-width: 800px) {
+
         body {
-            font-family: Arial, sans-serif;
-            background: #111;
-            color: white;
-            text-align: center;
-            margin: 0;
-            padding: 50px 20px;
+            padding: 20px 10px;
         }
 
-        .box {
-            max-width: 400px;
-            margin: 100px auto;
-            padding: 40px;
-            background: #222;
-            border-radius: 15px;
+        table {
+            font-size: 13px;
         }
 
-        input {
-            padding: 12px;
-            width: 80%;
-            margin: 15px 0;
-            border-radius: 8px;
-            border: none;
-            font-size: 16px;
+        th,
+        td {
+            padding: 9px 5px;
         }
 
-        button {
-            padding: 12px 25px;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
-        }
+    }
 
-        #errore {
-            color: #ff5555;
-            display: none;
-        }
-
-        #sito {
-            display: none;
-        }
-    </style>
+</style>
 </head>
 
 <body>
