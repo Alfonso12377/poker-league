@@ -150,6 +150,19 @@
     transform: translateY(-3px);
 }
 
+    .torneo-card strong {
+    display: block;
+    font-size: 17px;
+    margin-bottom: 8px;
+}
+
+.torneo-card span {
+    display: block;
+    font-size: 12px;
+    color: #aaa;
+    font-weight: normal;
+}
+
     .menu {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -710,7 +723,8 @@ th[onclick]:hover {
     <div class="tornei-lista">
 
 <button class="torneo-card" onclick="mostraTorneo(1)">
-    Torneo 1
+    <strong>Torneo 1</strong>
+    <span>Vincitore: da definire</span>
 </button>
         <button class="torneo-card">Torneo 2</button>
         <button class="torneo-card">Torneo 3</button>
