@@ -404,28 +404,133 @@ th[onclick]:hover {
 </div>
 
 
-    <script>
+<script>
 
-        function controllaPassword() {
+    function controllaPassword() {
 
-            const passwordInserita =
-                document.getElementById("password").value;
+        const passwordInserita =
+            document.getElementById("password").value;
 
-            if (passwordInserita === "aura") {
+        if (passwordInserita === "aura") {
 
-                document.getElementById("login").style.display = "none";
+            document.getElementById("login").style.display = "none";
 
-                document.getElementById("sito").style.display = "block";
+            document.getElementById("sito").style.display = "block";
+
+        } else {
+
+            document.getElementById("errore").style.display = "block";
+
+        }
+    }
+
+
+    function ordinaTabella(colonna, tipo) {
+
+        const tabella = document.querySelector("table");
+        const corpo = tabella.querySelector("tbody");
+
+        const righe = Array.from(
+            corpo.querySelectorAll("tr")
+        );
+
+        const ordineAttuale =
+            tabella.getAttribute("data-ordine") || "asc";
+
+        const ultimaColonna =
+            tabella.getAttribute("data-colonna");
+
+        let ordine = "asc";
+
+
+        if (
+            ultimaColonna == colonna &&
+            ordineAttuale === "asc"
+        ) {
+
+            ordine = "desc";
+
+        }
+
+
+        righe.sort(function(a, b) {
+
+            let valoreA =
+                a.cells[colonna].textContent.trim();
+
+            let valoreB =
+                b.cells[colonna].textContent.trim();
+
+
+            if (tipo === "numero") {
+
+                valoreA = valoreA
+                    .replace("€", "")
+                    .replace("%", "")
+                    .replace("+", "")
+                    .replace(",", ".")
+                    .trim();
+
+                valoreB = valoreB
+                    .replace("€", "")
+                    .replace("%", "")
+                    .replace("+", "")
+                    .replace(",", ".")
+                    .trim();
+
+                valoreA = parseFloat(valoreA);
+                valoreB = parseFloat(valoreB);
 
             } else {
 
-                document.getElementById("errore").style.display = "block";
+                valoreA = valoreA.toLowerCase();
+                valoreB = valoreB.toLowerCase();
 
             }
-        }
 
-    </script>
 
+            if (valoreA < valoreB) {
+
+                return ordine === "asc" ? -1 : 1;
+
+            }
+
+
+            if (valoreA > valoreB) {
+
+                return ordine === "asc" ? 1 : -1;
+
+            }
+
+
+            return 0;
+
+        });
+
+
+        righe.forEach(function(riga, indice) {
+
+            riga.cells[0].textContent =
+                (indice + 1) + "°";
+
+            corpo.appendChild(riga);
+
+        });
+
+
+        tabella.setAttribute(
+            "data-ordine",
+            ordine
+        );
+
+        tabella.setAttribute(
+            "data-colonna",
+            colonna
+        );
+
+    }
+
+</script>
 </body>
 
 </html>
