@@ -2462,9 +2462,14 @@ th[onclick]:hover {
 
         });
 
-        righe.forEach(function(riga) {
-            corpo.appendChild(riga);
-        });
+righe.forEach(function(riga, indice) {
+
+    riga.cells[0].textContent =
+        (indice + 1) + "°";
+
+    corpo.appendChild(riga);
+
+});
 
         tabella.setAttribute("data-ordine", ordine);
         tabella.setAttribute("data-colonna", colonna);
@@ -2500,7 +2505,7 @@ th[onclick]:hover {
         document.getElementById("tornei").style.display = "none";
         document.getElementById("tornei-dettagli").style.display = "none";
 
-        document.getElementById("menu").style.display = "flex";
+        document.getElementById("menu").style.display = "grid";
 
     }
 
