@@ -94,6 +94,9 @@
     #tornei {
     display: none;
 }
+    #torneo-1 {
+    display: none;
+}
 
     .tornei-lista {
     display: grid;
@@ -697,7 +700,64 @@ th[onclick]:hover {
     </div>
 
 </div>
+<div id="torneo-1">
 
+    <button class="torna-menu" onclick="mostraTornei()">
+        ← Torna ai tornei
+    </button>
+
+    <h2>Torneo 1</h2>
+
+    <div class="torneo-info">
+
+        <div>
+            <strong>Data</strong>
+            <span>Da definire</span>
+        </div>
+
+        <div>
+            <strong>Partecipanti</strong>
+            <span>Da definire</span>
+        </div>
+
+        <div>
+            <strong>Vincitore</strong>
+            <span>Da definire</span>
+        </div>
+
+    </div>
+
+    <h2>Classifica torneo</h2>
+
+    <table>
+
+        <thead>
+            <tr>
+                <th>Pos.</th>
+                <th>Giocatore</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>1°</td>
+                <td>Giocatore 1</td>
+            </tr>
+
+            <tr>
+                <td>2°</td>
+                <td>Giocatore 2</td>
+            </tr>
+
+            <tr>
+                <td>3°</td>
+                <td>Giocatore 3</td>
+            </tr>
+        </tbody>
+
+    </table>
+
+</div>
 <script>
 
     function controllaPassword() {
@@ -842,6 +902,25 @@ function mostraMenu() {
     document.getElementById("tornei").style.display = "none";
 
     document.querySelector(".menu").style.display = "grid";
+}
+    function mostraTorneo(numero) {
+
+    document.querySelector(".menu").style.display = "none";
+
+    document.getElementById("tornei").style.display = "none";
+    document.getElementById("classifica").style.display = "none";
+    document.getElementById("palmares").style.display = "none";
+    document.getElementById("torneo-1").style.display = "none";
+
+    document.getElementById("torneo-" + numero).style.display = "block";
+}
+
+
+function mostraTornei() {
+
+    document.getElementById("torneo-1").style.display = "none";
+
+    document.getElementById("tornei").style.display = "block";
 }
     
 </script>
