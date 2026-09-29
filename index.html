@@ -205,11 +205,12 @@ th[onclick]:hover {
 
         <p>Sito riservato agli amici della lega</p>
 
-        <input
-            type="password"
-            id="password"
-            placeholder="Inserisci la password"
-        >
+<input
+    type="password"
+    id="password"
+    placeholder="Inserisci la password"
+    onkeydown="if (event.key === 'Enter') controllaPassword()"
+>
 
         <br>
 
