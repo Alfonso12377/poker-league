@@ -83,6 +83,10 @@
     display: none;
 }
 
+    #classifica {
+    display: none;
+}
+
     .menu {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -114,6 +118,20 @@
     background: linear-gradient(145deg, #333, #252525);
     transform: translateY(-4px);
     box-shadow: 0 10px 22px rgba(0, 0, 0, 0.35);
+}
+
+    .torna-menu {
+    background: transparent;
+    border: none;
+    color: #aaa;
+    font-size: 14px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    padding: 5px 0;
+}
+
+.torna-menu:hover {
+    color: white;
 }
 
     .menu button:nth-child(1) {
@@ -288,10 +306,10 @@ th[onclick]:hover {
 
     <div class="menu">
 
-    <button>
-        ♥
-        <span>Classifica</span>
-    </button>
+<button onclick="mostraSezione('classifica')">
+    ♥
+    <span>Classifica</span>
+</button>
 
     <button>
         ♦
@@ -310,7 +328,13 @@ th[onclick]:hover {
 
 </div>
 
-    <h2>Classifica generale</h2>
+    <div id="classifica">
+
+    <button class="torna-menu" onclick="mostraMenu()">
+        ← Torna al menu
+    </button>
+        
+        <h2>Classifica generale</h2>
 
     <table>
 
@@ -572,6 +596,8 @@ th[onclick]:hover {
 
     </table>
 
+        </div>
+
 </div>
 
 
@@ -700,7 +726,21 @@ th[onclick]:hover {
         );
 
     }
+function mostraSezione(sezione) {
 
+    document.querySelector(".menu").style.display = "none";
+
+    document.getElementById("classifica").style.display = "block";
+}
+
+
+function mostraMenu() {
+
+    document.getElementById("classifica").style.display = "none";
+
+    document.querySelector(".menu").style.display = "grid";
+}
+    
 </script>
 </body>
 
