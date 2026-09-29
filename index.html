@@ -175,22 +175,28 @@ th[onclick]:hover {
     background: #444;
 }
     
-    @media (max-width: 800px) {
+@media (max-width: 800px) {
 
-        body {
-            padding: 20px 10px;
-        }
-
-        table {
-            font-size: 13px;
-        }
-
-        th,
-        td {
-            padding: 9px 5px;
-        }
-
+    body {
+        padding: 20px 10px;
     }
+
+    table {
+        font-size: 12px;
+        min-width: 850px;
+    }
+
+    th,
+    td {
+        padding: 9px 5px;
+        white-space: nowrap;
+    }
+
+    #sito {
+        overflow-x: auto;
+    }
+
+}
 
 </style>
 </head>
