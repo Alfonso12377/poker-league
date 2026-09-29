@@ -87,6 +87,10 @@
     display: none;
 }
 
+    #palmares {
+    display: none;
+}
+
     .menu {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -311,10 +315,10 @@ th[onclick]:hover {
     <span>Classifica</span>
 </button>
 
-    <button>
-        ♦
-        <span>Palmarès</span>
-    </button>
+<button onclick="mostraSezione('palmares')">
+    ♦
+    <span>Palmarès</span>
+</button>
 
     <button>
         ♣
@@ -600,6 +604,38 @@ th[onclick]:hover {
 
 </div>
 
+    <div id="palmares">
+
+    <button class="torna-menu" onclick="mostraMenu()">
+        ← Torna al menu
+    </button>
+
+    <h2>Palmarès</h2>
+
+    <div class="palmares-contenuto">
+
+        <div class="palmares-card">
+            <div class="palmares-seme">♥</div>
+            <h3>Vittorie</h3>
+            <p>Qui raccoglieremo i vincitori della lega.</p>
+        </div>
+
+        <div class="palmares-card">
+            <div class="palmares-seme">♦</div>
+            <h3>Podi</h3>
+            <p>Qui raccoglieremo i migliori piazzamenti.</p>
+        </div>
+
+        <div class="palmares-card">
+            <div class="palmares-seme">♣</div>
+            <h3>Record</h3>
+            <p>Qui raccoglieremo i principali record della lega.</p>
+        </div>
+
+    </div>
+
+</div>
+
 
 <script>
 
@@ -730,7 +766,10 @@ function mostraSezione(sezione) {
 
     document.querySelector(".menu").style.display = "none";
 
-    document.getElementById("classifica").style.display = "block";
+    document.getElementById("classifica").style.display = "none";
+    document.getElementById("palmares").style.display = "none";
+
+    document.getElementById(sezione).style.display = "block";
 }
 
 
