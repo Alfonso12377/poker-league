@@ -1,18 +1,122 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Poker League</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #111;
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 50px 20px;
+        }
+
+        .box {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 40px;
+            background: #222;
+            border-radius: 15px;
+        }
+
+        input {
+            padding: 12px;
+            width: 80%;
+            margin: 15px 0;
+            border-radius: 8px;
+            border: none;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #errore {
+            color: #ff5555;
+            display: none;
+        }
+
+        #sito {
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
 
-    <h1>♠️ Poker League</h1>
+    <!-- SCHERMATA PASSWORD -->
 
-    <h2>Classifica generale</h2>
+    <div class="box" id="login">
 
-    <p>Il nostro sito è online!</p>
+        <h1>♠️ Poker League</h1>
+
+        <p>Sito riservato agli amici della lega</p>
+
+        <input
+            type="password"
+            id="password"
+            placeholder="Inserisci la password"
+        >
+
+        <br>
+
+        <button onclick="controllaPassword()">
+            ENTRA
+        </button>
+
+        <p id="errore">
+            ❌ Password errata
+        </p>
+
+    </div>
+
+
+    <!-- SITO -->
+
+    <div id="sito">
+
+        <h1>♠️ Poker League</h1>
+
+        <h2>Benvenuto nella Poker League!</h2>
+
+        <p>La classifica arriverà qui.</p>
+
+    </div>
+
+
+    <script>
+
+        function controllaPassword() {
+
+            const passwordInserita =
+                document.getElementById("password").value;
+
+            if (passwordInserita === "aura") {
+
+                document.getElementById("login").style.display = "none";
+
+                document.getElementById("sito").style.display = "block";
+
+            } else {
+
+                document.getElementById("errore").style.display = "block";
+
+            }
+        }
+
+    </script>
 
 </body>
+
 </html>
