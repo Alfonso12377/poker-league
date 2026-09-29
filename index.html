@@ -97,6 +97,34 @@
     #torneo-1 {
     display: none;
 }
+    .torneo-info {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin: 25px 0 35px 0;
+}
+
+.torneo-info div {
+    background: linear-gradient(145deg, #292929, #202020);
+    border: 1px solid #3d3d3d;
+    border-radius: 12px;
+    padding: 18px;
+    text-align: center;
+}
+
+.torneo-info strong {
+    display: block;
+    font-size: 13px;
+    color: #aaa;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.torneo-info span {
+    font-size: 17px;
+    font-weight: bold;
+}
 
     .tornei-lista {
     display: grid;
@@ -281,6 +309,10 @@ th[onclick]:hover {
 
     body {
         padding: 20px 10px;
+            .torneo-info {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
     }
 
     table {
