@@ -91,6 +91,10 @@
     display: none;
 }
 
+    #tornei {
+    display: none;
+}
+
     .menu {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -320,10 +324,10 @@ th[onclick]:hover {
     <span>Palmarès</span>
 </button>
 
-    <button>
-        ♣
-        <span>Tornei</span>
-    </button>
+<button onclick="mostraSezione('tornei')">
+    ♣
+    <span>Tornei</span>
+</button>
 
     <button>
         ♠
@@ -636,6 +640,37 @@ th[onclick]:hover {
 
 </div>
 
+    <div id="tornei">
+
+    <button class="torna-menu" onclick="mostraMenu()">
+        ← Torna al menu
+    </button>
+
+    <h2>Tornei</h2>
+
+    <div class="tornei-lista">
+
+        <button class="torneo-card">Torneo 1</button>
+        <button class="torneo-card">Torneo 2</button>
+        <button class="torneo-card">Torneo 3</button>
+        <button class="torneo-card">Torneo 4</button>
+        <button class="torneo-card">Torneo 5</button>
+        <button class="torneo-card">Torneo 6</button>
+        <button class="torneo-card">Torneo 7</button>
+        <button class="torneo-card">Torneo 8</button>
+        <button class="torneo-card">Torneo 9</button>
+        <button class="torneo-card">Torneo 10</button>
+        <button class="torneo-card">Torneo 11</button>
+        <button class="torneo-card">Torneo 12</button>
+        <button class="torneo-card">Torneo 13</button>
+        <button class="torneo-card">Torneo 14</button>
+        <button class="torneo-card">Torneo 15</button>
+        <button class="torneo-card">Torneo 16</button>
+        <button class="torneo-card">Torneo 17</button>
+
+    </div>
+
+</div>
 
 <script>
 
@@ -768,6 +803,7 @@ function mostraSezione(sezione) {
 
     document.getElementById("classifica").style.display = "none";
     document.getElementById("palmares").style.display = "none";
+    document.getElementById("tornei").style.display = "none";
 
     document.getElementById(sezione).style.display = "block";
 }
@@ -777,6 +813,7 @@ function mostraMenu() {
 
     document.getElementById("classifica").style.display = "none";
     document.getElementById("palmares").style.display = "none";
+    document.getElementById("tornei").style.display = "none";
 
     document.querySelector(".menu").style.display = "grid";
 }
