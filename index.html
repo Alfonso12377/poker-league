@@ -160,6 +160,27 @@ aspect-ratio: 5 / 7;
     transform: translateY(-3px);
 }
 
+.torneo-card strong {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 72px;
+    font-weight: 900;
+    color: #111;
+    text-shadow:
+        0 0 3px #fff,
+        0 0 8px rgba(255, 255, 255, 0.9);
+    z-index: 2;
+}
+
+.torneo-card span {
+    position: absolute;
+    font-size: 18px;
+    font-weight: bold;
+    z-index: 2;
+}
+
     .torneo-card strong {
     display: block;
     font-size: 17px;
@@ -173,19 +194,27 @@ aspect-ratio: 5 / 7;
     font-weight: normal;
 }
 
-    .torneo-card strong {
-    display: block;
-    font-size: 17px;
-    margin-bottom: 8px;
+    .torneo-card::before {
+    content: "♠";
+    position: absolute;
+    top: 10px;
+    left: 14px;
+    font-size: 28px;
+    font-weight: bold;
+    z-index: 1;
 }
 
-.torneo-card span {
-    display: block;
-    font-size: 12px;
-    color: #aaa;
-    font-weight: normal;
+.torneo-card::after {
+    content: "♠";
+    position: absolute;
+    bottom: 10px;
+    right: 14px;
+    font-size: 28px;
+    font-weight: bold;
+    transform: rotate(180deg);
+    z-index: 1;
 }
-
+    
     .menu {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -2393,8 +2422,6 @@ th[onclick]:hover {
 return `
     <button class="torneo-card" onclick="mostraTorneo(${torneo.n})">
         <strong>${torneo.n}</strong>
-        <span>🏆 ${vincitore}</span>
-        <span>${data}</span>
     </button>
 `;
 
