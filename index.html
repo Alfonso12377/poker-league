@@ -42,18 +42,6 @@
         overflow: hidden;
     }
 
-    .box::before {
-        content: "♠  ♥  ♦  ♣";
-        position: absolute;
-        top: 10px;
-        left: 0;
-        right: 0;
-        color: rgba(255,255,255,0.07);
-        font-family: Georgia, "Times New Roman", serif;
-        font-size: 30px;
-        letter-spacing: 8px;
-        pointer-events: none;
-    }
 
 .login-semi {
     position: relative;
@@ -3143,12 +3131,10 @@ const curiositaGiocatori = {
     "Emanuele E.A./Arcangelo": [
         "I cosiddetti “Ragazzi”. Gli unici a giocare in coppia: una sola partecipazione è bastata per renderli difficili da scardinare, piazzandoli a quota 25,00 di posizionamento medio."
     ],
-    "Emanuele Nicolo'": [
-        function(g) {
-            return `🎯 ${g.partecipazioni} partecipazioni e ${g.vittorie} vittorie.`;
-        },
-        "🃏 Prende 10 volte AA a partita, però, se parli con lui, è sempre sfortunato."
-    ],
+"Emanuele Nicolo'": [
+    "🏆 È l'unico, oltre ad Alfonso, ad aver vinto più di un torneo.",
+    "🃏 Prende 10 volte AA a partita, però, se parli con lui, è sempre sfortunato."
+],
     "Diego Cavaliere": [
         function(g, classifica) {
             const massimo = Math.max.apply(null, classifica.map(function(x) { return x.partecipazioni; }));
