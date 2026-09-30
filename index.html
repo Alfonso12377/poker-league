@@ -2373,13 +2373,13 @@ th[onclick]:hover {
                     ? torneo.date
                     : "Data da definire";
 
-            return `
-                <button class="torneo-card" onclick="mostraTorneo(${torneo.n})">
-                    <strong>Torneo ${torneo.n}</strong>
-                    <span>Vincitore: ${vincitore}</span>
-                    <span>${data}</span>
-                </button>
-            `;
+return `
+    <button class="torneo-card" onclick="mostraTorneo(${torneo.n})">
+        <strong>${torneo.n}</strong>
+        <span>🏆 ${vincitore}</span>
+        <span>${data}</span>
+    </button>
+`;
 
         }).join("");
 
@@ -2590,6 +2590,10 @@ righe.forEach(function(riga, indice) {
                 </button>
 
                 <h2>Torneo ${torneo.n}</h2>
+
+                <div class="vincitore-torneo">
+    🏆 ${torneo.players[0].name}
+</div>
 
                 <div class="torneo-info">
                     <div>
