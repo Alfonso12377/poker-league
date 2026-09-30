@@ -676,6 +676,31 @@ td:nth-child(2) {
 #tabella-palmares td:nth-child(6) {
     width: 16%;
 }
+
+    /* Evidenziazione medaglie Palmarès */
+#tabella-palmares td:nth-child(3),
+#tabella-palmares td:nth-child(4),
+#tabella-palmares td:nth-child(5) {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#tabella-palmares td:nth-child(6) {
+    font-size: 17px;
+    font-weight: bold;
+}
+    /* Nome giocatore nel Palmarès */
+#tabella-palmares .nome-giocatore-link {
+    transition: opacity 0.15s ease;
+}
+
+#tabella-palmares .nome-giocatore-link:hover {
+    opacity: 0.75;
+    text-decoration: underline;
+}
+    #tabella-palmares .nome-giocatore-link {
+    cursor: pointer;
+}
     
 th[onclick] {
     cursor: pointer;
