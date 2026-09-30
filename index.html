@@ -99,98 +99,7 @@
     #palmares {
     display: none;
 }
-    .palmares-lista {
-    display: grid;
-    gap: 12px;
-    margin-top: 30px;
-}
 
-.palmares-riga {
-    display: grid;
-    grid-template-columns: 60px minmax(180px, 1fr) repeat(4, 100px);
-    align-items: center;
-    gap: 12px;
-    background: linear-gradient(145deg, #292929, #202020);
-    border: 1px solid #3d3d3d;
-    border-radius: 14px;
-    padding: 15px 18px;
-    color: white;
-    cursor: pointer;
-    text-align: left;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.22);
-    transition: 0.2s;
-}
-
-.palmares-riga:hover {
-    transform: translateY(-2px);
-    background: linear-gradient(145deg, #333, #252525);
-}
-
-.palmares-posizione {
-    font-size: 20px;
-    font-weight: bold;
-    text-align: center;
-}
-
-.palmares-nome {
-    font-size: 17px;
-    font-weight: bold;
-}
-
-.palmares-medaglia {
-    text-align: center;
-    font-weight: bold;
-}
-
-.palmares-medaglia.oro {
-    color: #d4af37;
-}
-
-.palmares-medaglia.argento {
-    color: #c0c0c0;
-}
-
-.palmares-medaglia.bronzo {
-    color: #cd7f32;
-}
-
-.palmares-totale {
-    text-align: center;
-    font-weight: bold;
-}
-
-.palmares-intestazione {
-    display: grid;
-    grid-template-columns: 60px minmax(180px, 1fr) repeat(4, 100px);
-    gap: 12px;
-    padding: 0 18px 8px 18px;
-    color: #aaa;
-    font-size: 11px;
-    font-weight: bold;
-    text-transform: uppercase;
-    text-align: center;
-}
-
-.palmares-intestazione div:nth-child(2) {
-    text-align: left;
-}
-
-@media (max-width: 700px) {
-    .palmares-riga,
-    .palmares-intestazione {
-        grid-template-columns: 40px minmax(130px, 1fr) repeat(4, 65px);
-        gap: 6px;
-    }
-
-    .palmares-nome {
-        font-size: 14px;
-    }
-
-    .palmares-medaglia,
-    .palmares-totale {
-        font-size: 12px;
-    }
-}
 
     #tornei {
     display: none;
@@ -886,16 +795,22 @@ th[onclick]:hover {
 
     <h2>Palmarès</h2>
 
-    <div class="palmares-intestazione">
-        <div>Pos.</div>
-        <div>Giocatore</div>
-        <div>🥇 Oro</div>
-        <div>🥈 Argento</div>
-        <div>🥉 Bronzo</div>
-        <div>Totale</div>
-    </div>
+    <table id="tabella-palmares">
 
-    <div class="palmares-lista" id="palmares-lista"></div>
+        <thead>
+            <tr>
+                <th>Pos.</th>
+                <th onclick="ordinaPalmares(1, 'testo')">Giocatore ↕</th>
+                <th onclick="ordinaPalmares(2, 'numero')">🥇 Oro ↕</th>
+                <th onclick="ordinaPalmares(3, 'numero')">🥈 Argento ↕</th>
+                <th onclick="ordinaPalmares(4, 'numero')">🥉 Bronzo ↕</th>
+                <th onclick="ordinaPalmares(5, 'numero')">Totale ↕</th>
+            </tr>
+        </thead>
+
+        <tbody id="palmares-corpo"></tbody>
+
+    </table>
 
 </div>
 
@@ -2817,24 +2732,26 @@ th[onclick]:hover {
 
 function generaPalmares() {
 
-    const lista = document.getElementById("palmares-lista");
+    const corpo =
+        document.getElementById("palmares-corpo");
 
-    if (!lista) {
+    if (!corpo) {
         return;
     }
 
-    let palmares = calcolaPalmares();
+    let palmares =
+        calcolaPalmares();
 
     palmares.sort(function(a, b) {
 
-        const medaglieA =
+        const totaleA =
             a.oro + a.argento + a.bronzo;
 
-        const medaglieB =
+        const totaleB =
             b.oro + b.argento + b.bronzo;
 
-        if (medaglieA !== medaglieB) {
-            return medaglieB - medaglieA;
+        if (totaleA !== totaleB) {
+            return totaleB - totaleA;
         }
 
         if (a.oro !== b.oro) {
@@ -2853,47 +2770,42 @@ function generaPalmares() {
 
     });
 
-    lista.innerHTML = palmares.map(function(giocatore, indice) {
+    corpo.innerHTML =
+        palmares.map(function(giocatore, indice) {
 
-        const totale =
-            giocatore.oro +
-            giocatore.argento +
-            giocatore.bronzo;
+            const totale =
+                giocatore.oro +
+                giocatore.argento +
+                giocatore.bronzo;
 
-        return `
-            <button
-                class="palmares-riga"
-                onclick='apriPopupGiocatore(${nomePerOnclick(giocatore.nome)})'
-            >
+            return `
+                <tr>
 
-                <div class="palmares-posizione">
-                    ${indice + 1}°
-                </div>
+                    <td>
+                        ${indice + 1}°
+                    </td>
 
-                <div class="palmares-nome">
-                    ${giocatore.nome}
-                </div>
+                    <td>
+                        <button
+                            class="nome-giocatore-link"
+                            onclick='apriPopupGiocatore(${nomePerOnclick(giocatore.nome)})'
+                        >
+                            ${giocatore.nome}
+                        </button>
+                    </td>
 
-                <div class="palmares-medaglia oro">
-                    ${giocatore.oro}
-                </div>
+                    <td>${giocatore.oro}</td>
 
-                <div class="palmares-medaglia argento">
-                    ${giocatore.argento}
-                </div>
+                    <td>${giocatore.argento}</td>
 
-                <div class="palmares-medaglia bronzo">
-                    ${giocatore.bronzo}
-                </div>
+                    <td>${giocatore.bronzo}</td>
 
-                <div class="palmares-totale">
-                    ${totale}
-                </div>
+                    <td>${totale}</td>
 
-            </button>
-        `;
+                </tr>
+            `;
 
-    }).join("");
+        }).join("");
 
 }
 
@@ -3287,6 +3199,94 @@ righe.forEach(function(riga, indice) {
         tabella.setAttribute("data-colonna", colonna);
 
     }
+    function ordinaPalmares(colonna, tipo) {
+
+    const tabella =
+        document.getElementById("tabella-palmares");
+
+    if (!tabella) {
+        return;
+    }
+
+    const corpo =
+        tabella.querySelector("tbody");
+
+    const righe =
+        Array.from(corpo.querySelectorAll("tr"));
+
+    const ordineAttuale =
+        tabella.getAttribute("data-ordine") || "asc";
+
+    const ultimaColonna =
+        tabella.getAttribute("data-colonna");
+
+    let ordine = "asc";
+
+    if (
+        ultimaColonna == colonna &&
+        ordineAttuale === "asc"
+    ) {
+        ordine = "desc";
+    }
+
+    righe.sort(function(a, b) {
+
+        let valoreA =
+            a.cells[colonna].textContent.trim();
+
+        let valoreB =
+            b.cells[colonna].textContent.trim();
+
+        if (tipo === "numero") {
+
+            valoreA =
+                parseFloat(valoreA);
+
+            valoreB =
+                parseFloat(valoreB);
+
+        } else {
+
+            valoreA =
+                valoreA.toLowerCase();
+
+            valoreB =
+                valoreB.toLowerCase();
+
+        }
+
+        if (valoreA < valoreB) {
+            return ordine === "asc" ? -1 : 1;
+        }
+
+        if (valoreA > valoreB) {
+            return ordine === "asc" ? 1 : -1;
+        }
+
+        return 0;
+
+    });
+
+    righe.forEach(function(riga, indice) {
+
+        riga.cells[0].textContent =
+            (indice + 1) + "°";
+
+        corpo.appendChild(riga);
+
+    });
+
+    tabella.setAttribute(
+        "data-ordine",
+        ordine
+    );
+
+    tabella.setAttribute(
+        "data-colonna",
+        colonna
+    );
+
+}
 
 
     function preparaDissolvenza() {
