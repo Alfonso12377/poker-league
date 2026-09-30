@@ -15,7 +15,15 @@
 
     body {
         font-family: Arial, sans-serif;
-        background: #111;
+        /* Telo verde da poker: più chiaro, con una texture morbida */
+        background-color: #66a873;
+        background-image:
+            radial-gradient(circle at 20% 15%, rgba(255,255,255,0.07) 0 1px, transparent 1.5px),
+            radial-gradient(circle at 80% 70%, rgba(0,0,0,0.06) 0 1px, transparent 1.5px),
+            radial-gradient(ellipse at center, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 52%),
+            radial-gradient(ellipse at center, rgba(0,0,0,0) 45%, rgba(0,0,0,0.13) 100%);
+        background-size: 7px 7px, 11px 11px, 100% 100%, 100% 100%;
+        background-attachment: fixed;
         color: white;
         margin: 0;
         padding: 30px 20px;
@@ -79,6 +87,7 @@
 
 #sito {
     max-width: 1200px;
+    min-height: calc(100vh - 60px);
     margin: 0 auto;
     display: none;
 }
@@ -292,30 +301,51 @@
 }
 
 .menu button {
+    min-height: 160px;
     padding: 18px 15px;
-    border: 1px solid #3d3d3d;
+    border: 1px solid rgba(255, 255, 255, 0.18);
     border-radius: 14px;
-    background: linear-gradient(145deg, #292929, #202020);
+    background: rgba(0, 0, 0, 0.22);
     color: white;
     cursor: pointer;
     font-size: 48px;
     font-weight: bold;
     transition: 0.2s;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(2px);
 }
 
 .menu button span {
     display: block;
-    margin-top: 8px;
+    margin-top: 10px;
     font-size: 15px;
     letter-spacing: 0.3px;
 }
 
 .menu button:hover {
-    background: linear-gradient(145deg, #333, #252525);
+    background: rgba(0, 0, 0, 0.32);
     transform: translateY(-4px);
     box-shadow: 0 10px 22px rgba(0, 0, 0, 0.35);
 }
+
+.menu-copag-suit {
+    display: block;
+    height: 72px;
+    width: 72px;
+    object-fit: contain;
+    margin: 0 auto;
+}
+
+.menu button:nth-child(1),
+.menu button:nth-child(2) {
+    color: #ff6b6b;
+}
+
+.menu button:nth-child(3),
+.menu button:nth-child(4) {
+    color: #111;
+}
+
 
 
 .torna-menu {
@@ -332,22 +362,212 @@
     color: white;
 }
 
-    .menu button:nth-child(1) {
-    color: #ff6b6b;
-}
+    /* Colori delle scritte del menu principale */
+    .menu button:nth-child(1),
+    .menu button:nth-child(2) {
+        color: #ff6b6b;
+    }
 
-.menu button:nth-child(2) {
-    color: #ff6b6b;
-}
-
-.menu button:nth-child(3) {
-    color: #f0f0f0;
-}
-
-.menu button:nth-child(4) {
-    color: #f0f0f0;
-}
+    .menu button:nth-child(3),
+    .menu button:nth-child(4) {
+        color: #111;
+    }
     
+    #giocatori {
+        display: none;
+    }
+
+    /* Piccola dissolvenza tra le schermate */
+    #menu, #classifica, #palmares, #tornei, #giocatori, #tornei-dettagli {
+        transition: opacity 0.18s ease;
+    }
+
+    .schermata-fade-out {
+        opacity: 0 !important;
+    }
+
+    .schermata-fade-in {
+        opacity: 0;
+    }
+
+    .giocatori-lista {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin-top: 30px;
+    }
+
+    .giocatore-card {
+        background: linear-gradient(145deg, #292929, #202020);
+        border: 1px solid #3d3d3d;
+        border-radius: 14px;
+        padding: 22px 18px;
+        color: white;
+        cursor: pointer;
+        text-align: left;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+        transition: 0.2s;
+    }
+
+    .giocatore-card:hover {
+        transform: translateY(-4px);
+        background: linear-gradient(145deg, #333, #252525);
+        box-shadow: 0 10px 22px rgba(0,0,0,0.35);
+    }
+
+    .giocatore-card h3 {
+        margin: 0 0 14px 0;
+        font-size: 20px;
+    }
+
+    .giocatore-statistiche {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+
+    .giocatore-statistiche div {
+        background: #181818;
+        border-radius: 8px;
+        padding: 9px;
+    }
+
+    .giocatore-statistiche strong {
+        display: block;
+        color: #999;
+        font-size: 11px;
+        text-transform: uppercase;
+        margin-bottom: 3px;
+    }
+
+    .giocatore-statistiche span {
+        font-weight: bold;
+        font-size: 15px;
+    }
+
+    .giocatore-dettaglio {
+        max-width: 850px;
+        margin: 25px auto 0 auto;
+        background: linear-gradient(145deg, #292929, #202020);
+        border: 1px solid #3d3d3d;
+        border-radius: 16px;
+        padding: 28px;
+    }
+
+    .giocatore-dettaglio h3 {
+        text-align: center;
+        margin: 0 0 24px 0;
+        font-size: 28px;
+    }
+
+    .giocatore-curiosita {
+        margin-top: 25px;
+    }
+
+    .giocatore-curiosita h4 {
+        margin: 0 0 12px 0;
+        font-size: 17px;
+    }
+
+    .curiosita-item {
+        background: #181818;
+        border-left: 3px solid #777;
+        border-radius: 8px;
+        padding: 13px 15px;
+        margin-bottom: 9px;
+        line-height: 1.5;
+    }
+
+    .popup-giocatore {
+        position: fixed;
+        inset: 0;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.68);
+        z-index: 9999;
+    }
+
+    .popup-giocatore-box {
+        width: min(420px, 100%);
+        background: linear-gradient(145deg, #292929, #202020);
+        border: 1px solid #4a4a4a;
+        border-radius: 16px;
+        padding: 26px;
+        box-shadow: 0 18px 45px rgba(0,0,0,0.55);
+        text-align: center;
+    }
+
+    .popup-giocatore-box h3 {
+        margin: 0 0 20px 0;
+        font-size: 23px;
+    }
+
+    .popup-giocatore-box button {
+        width: 100%;
+        padding: 12px 14px;
+        border-radius: 10px;
+        border: 1px solid #4a4a4a;
+        background: #181818;
+        color: white;
+        cursor: pointer;
+        font-size: 15px;
+        font-weight: 700;
+        margin-top: 9px;
+    }
+
+    .popup-giocatore-box button:hover {
+        background: #303030;
+    }
+
+    .popup-giocatore-box .popup-chiudi {
+        background: transparent;
+        color: #aaa;
+    }
+
+    .popup-giocatore-box .popup-chiudi:hover {
+        background: #181818;
+        color: white;
+    }
+
+    .nome-giocatore-link {
+        border: 0;
+        background: none;
+        color: inherit;
+        cursor: pointer;
+        padding: 0;
+        font: inherit;
+        font-weight: 700;
+        text-align: left;
+    }
+
+    .nome-giocatore-link:hover {
+        text-decoration: underline;
+    }
+
+    .torneo-info {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    @media (max-width: 850px) {
+        .giocatori-lista {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        .torneo-info {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 600px) {
+        .giocatori-lista {
+            grid-template-columns: 1fr;
+        }
+        .torneo-info {
+            grid-template-columns: 1fr;
+        }
+    }
+
     h1 {
         text-align: center;
         margin-bottom: 10px;
@@ -517,24 +737,24 @@ th[onclick]:hover {
     <div class="menu" id="menu">
 
 <button onclick="mostraSezione('classifica')">
-    ♥
+    <img class="menu-copag-suit" id="menu-suit-classifica" alt="">
     <span>Classifica</span>
 </button>
 
 <button onclick="mostraSezione('palmares')">
-    ♦
+    <img class="menu-copag-suit" id="menu-suit-palmares" alt="">
     <span>Palmarès</span>
 </button>
 
 <button onclick="mostraSezione('tornei')">
-    ♣
+    <img class="menu-copag-suit" id="menu-suit-tornei" alt="">
     <span>Tornei</span>
 </button>
 
-    <button>
-        ♠
-        <span>Giocatori</span>
-    </button>
+<button onclick="mostraSezione('giocatori')">
+    <img class="menu-copag-suit" id="menu-suit-giocatori" alt="">
+    <span>Giocatori</span>
+</button>
 
 </div>
 
@@ -610,7 +830,29 @@ th[onclick]:hover {
 
 </div>
 
+<div id="giocatori">
+
+    <button class="torna-menu" onclick="mostraMenu()">
+        ← Torna al menu
+    </button>
+
+    <h2>Giocatori</h2>
+
+    <div class="giocatori-lista" id="giocatori-lista"></div>
+    <div id="giocatore-dettaglio"></div>
+
+</div>
+
 <div id="tornei-dettagli"></div>
+
+<div id="popup-giocatore" class="popup-giocatore" onclick="chiudiPopupGiocatore(event)">
+    <div class="popup-giocatore-box" onclick="event.stopPropagation()">
+        <h3 id="popup-giocatore-nome"></h3>
+        <button id="popup-giocatore-scheda">Vai alla scheda giocatore</button>
+        <button class="popup-chiudi" onclick="chiudiPopupGiocatore()">Chiudi</button>
+    </div>
+</div>
+
 <script>
 
     const datiTornei = [
@@ -2329,6 +2571,22 @@ th[onclick]:hover {
     }
 
 
+    function aggiornaSemiMenu() {
+        const mappa = [
+            ["menu-suit-classifica", "♥", "red"],
+            ["menu-suit-palmares", "♦", "red"],
+            ["menu-suit-tornei", "♣", "black"],
+            ["menu-suit-giocatori", "♠", "black"]
+        ];
+
+        mappa.forEach(function(voce) {
+            const img = document.getElementById(voce[0]);
+            if (img && copagGlyphs[voce[2]] && copagGlyphs[voce[2]][voce[1]]) {
+                img.src = copagGlyphs[voce[2]][voce[1]];
+            }
+        });
+    }
+
     function controllaPassword() {
 
         const passwordInserita =
@@ -2340,6 +2598,7 @@ th[onclick]:hover {
 
             document.getElementById("sito").style.display = "block";
 
+            aggiornaSemiMenu();
             generaClassifica();
             generaTornei();
 
@@ -2454,7 +2713,11 @@ th[onclick]:hover {
             return `
                 <tr>
                     <td>${indice + 1}°</td>
-                    <td>${giocatore.nome}</td>
+                    <td>
+                        <button class="nome-giocatore-link" onclick='apriPopupGiocatore(${nomePerOnclick(giocatore.nome)})'>
+                            ${giocatore.nome}
+                        </button>
+                    </td>
                     <td>${giocatore.partecipazioni}</td>
                     <td>${giocatore.vittorie}</td>
                     <td>${formattaNumero(giocatore.posizioneMedia)}</td>
@@ -2492,6 +2755,201 @@ function generaNumeroCentrale(numero, rosso) {
     }).join("");
 }
     
+const curiositaGiocatori = {
+    "Umberto Romano": [
+        "Veni, vidi, vici. È arrivato e ha dominato, riportando in alto il nome della famiglia Romano, che dopo le imprese di Errico sembrava ormai avviata verso la disgrazia."
+    ],
+    "Alfonso Annunziata": [
+        function(g) {
+            return `🏆 ${g.vittorie} vittorie in ${g.partecipazioni} partecipazioni.`;
+        },
+        function(g, classifica) {
+            const massimoProfitto = Math.max.apply(null, classifica.map(function(x) { return x.profitto; }));
+            if (g.profitto === massimoProfitto) {
+                return `💰 È attualmente il giocatore con il maggior profitto della League: ${formattaEuroIntero(g.profitto)}.`;
+            }
+            return `💰 Ha attualmente un profitto complessivo di ${formattaEuroIntero(g.profitto)}.`;
+        },
+        function(g) {
+            return `🔥 Ha vinto il ${formattaPercentuale(g.winRate)} dei tornei a cui ha partecipato.`;
+        },
+        "👑 Detiene il record di cinque tornei consecutivi vinti."
+    ],
+    "Emanuele E.A./Arcangelo": [
+        "I cosiddetti “Ragazzi”. Gli unici a giocare in coppia: una sola partecipazione è bastata per renderli difficili da scardinare, piazzandoli a quota 25,00 di posizionamento medio."
+    ],
+    "Emanuele Nicolo'": [
+        function(g) {
+            return `🎯 ${g.partecipazioni} partecipazioni e ${g.vittorie} vittorie.`;
+        },
+        "🃏 Prende 10 volte AA a partita, però, se parli con lui, è sempre sfortunato."
+    ],
+    "Diego Cavaliere": [
+        function(g, classifica) {
+            const massimo = Math.max.apply(null, classifica.map(function(x) { return x.partecipazioni; }));
+            if (g.partecipazioni === massimo) {
+                return `🎩 Il Senatore. È il giocatore più presente della League, con ben ${g.partecipazioni} partecipazioni.`;
+            }
+            return `🎩 Il Senatore. È già arrivato a quota ${g.partecipazioni} partecipazioni.`;
+        },
+        function(g) {
+            const bilancio = formattaEuroIntero(g.profitto);
+            if (g.profitto < 0) {
+                return `🏅 Ha collezionato tantissime medaglie, ma nonostante questo il suo bilancio è ancora in negativo (${bilancio}). Questo, però, per lui non è un problema, anzi... ma non siete ancora pronti per questo discorso.`;
+            }
+            return `🏅 Ha collezionato tantissime medaglie e il suo bilancio attuale è ${bilancio}. Questo, però, per lui non è un problema, anzi... ma non siete ancora pronti per questo discorso.`;
+        }
+    ],
+    "Fabrizio D'alessandro": [],
+    "Daniele Di Domenico": [],
+    "Domenico Correale": [
+        "⚔️ L'acerrimo nemico di Diego. Si gioca a casa sua e vorrebbe andare a dormire presto, ma non solo si finisce sempre tardi: è anche uno dei primi a uscire. E, dato che si gioca a casa sua, è costretto a rimanere lì a guardare gli altri giocare e finire: non può andarsene."
+    ],
+    "Carlo Sepe": [
+        "🎓 L'allievo che supererà il maestro... forse. Il più giovane della League, è quello che dà filo da torcere a tutti, anche se deve ancora migliorare un po'.",
+        "⚠️ Ricordiamo a tutti che ha “solato” un poker per andare alla festa per i 25 anni di matrimonio degli zii della fidanzata con cui stava da appena un mese."
+    ],
+    "Daniel Prisco": [
+        "🎬 Non esiste mano che non valga la pena giocare. Daniel vuole esserci sempre: ogni mano può essere quella giusta."
+    ],
+    "Raffaele Iervolino": [],
+    "Sabato Tarantino": [],
+    "Emanuele Del Pesce": [
+        "⚠️ Se Emanuele ha una coppia di 9 in mano, è il momento di scappare."
+    ],
+    "Francesco Prisco (junior)": [
+        function(g) {
+            return `🎯 ${g.partecipazioni} partecipazioni senza ancora una vittoria.`;
+        },
+        "🔥 THE CLUTCHER. È quello che arriva anche quando, in teoria, non dovrebbe esserci. Fa salti mortali pur di non mancare al tavolo, tra moglie, figlio e mille impegni.",
+        function(g, classifica) {
+            const minimoProfitto = Math.min.apply(null, classifica.map(function(x) { return x.profitto; }));
+            if (g.profitto === minimoProfitto) {
+                return `💸 È attualmente il giocatore più in negativo della League, con ${formattaEuroIntero(g.profitto)}. Non vincerà mai un euro.`;
+            }
+            return `💸 Il suo bilancio attuale è ${formattaEuroIntero(g.profitto)}. Non vincerà mai un euro.`;
+        }
+    ],
+    "Vincenzo Correale": [],
+    "Michele Annunziata": [],
+    "Matteo Annunziata": [],
+    "Francesco Prisco (senior)": [],
+    "Paolo Giugliano": [],
+    "Errico Romano": [
+        "☠️ La rovina della famiglia Romano. Mentre Umberto è arrivato per riportare il nome Romano ai vertici, Errico sembra aver fatto di tutto per trascinarlo nuovamente verso la disgrazia.",
+        function(g) {
+            return `🎭 Una vittoria c'è stata, ma il bilancio complessivo resta di ${formattaEuroIntero(g.profitto)}.`;
+        }
+    ],
+    "Francesco Ambrosio": [],
+    "Felice Carbone": [
+        "🃏 Se continua ad andare a tutte le mani, vincere qualcosa potrebbe rimanere un sogno."
+    ],
+    "Tommaso Ammendola": [],
+    "Salvatore D'alessandro": []
+};
+
+function nomePerOnclick(nome) {
+    return JSON.stringify(nome).replace(/'/g, "\\u0027");
+}
+
+function apriPopupGiocatore(nome) {
+    const popup = document.getElementById("popup-giocatore");
+    const titolo = document.getElementById("popup-giocatore-nome");
+    const pulsante = document.getElementById("popup-giocatore-scheda");
+
+    if (!popup || !titolo || !pulsante) return;
+
+    titolo.textContent = nome;
+    pulsante.onclick = function() {
+        chiudiPopupGiocatore();
+        mostraSezione("giocatori");
+        setTimeout(function() {
+            mostraGiocatore(nome);
+        }, 210);
+    };
+
+    popup.style.display = "flex";
+}
+
+function chiudiPopupGiocatore(event) {
+    if (event && event.target !== event.currentTarget) {
+        return;
+    }
+
+    const popup = document.getElementById("popup-giocatore");
+    if (popup) {
+        popup.style.display = "none";
+    }
+}
+
+function generaGiocatori() {
+    const lista = document.getElementById("giocatori-lista");
+    const dettaglio = document.getElementById("giocatore-dettaglio");
+    if (!lista) return;
+
+    // Ogni ingresso nella sezione Giocatori ripristina sempre la lista.
+    // Evita che, tornando al menu dalla scheda di un giocatore, la lista
+    // resti nascosta al successivo ingresso.
+    lista.style.display = "grid";
+    if (dettaglio) dettaglio.innerHTML = "";
+    const classifica = calcolaStatistiche();
+    classifica.sort(function(a, b) { return a.nome.localeCompare(b.nome); });
+
+    lista.innerHTML = classifica.map(function(g) {
+        return `
+            <button class="giocatore-card" onclick='mostraGiocatore(${nomePerOnclick(g.nome)})'>
+                <h3>${g.nome}</h3>
+            </button>
+        `;
+    }).join("");
+}
+
+function mostraGiocatore(nome) {
+    const lista = document.getElementById("giocatori-lista");
+    const dettaglio = document.getElementById("giocatore-dettaglio");
+    const classifica = calcolaStatistiche();
+    const g = classifica.find(function(x) { return x.nome === nome; });
+    if (!g || !dettaglio) return;
+
+    const curiosita = curiositaGiocatori[nome] || [];
+
+    if (lista) {
+        lista.style.display = "none";
+    }
+
+    dettaglio.innerHTML = `
+        <button class="torna-menu" onclick="tornaListaGiocatori()">← Torna ai giocatori</button>
+        <div class="giocatore-dettaglio">
+            <h3>${g.nome}</h3>
+            <div class="giocatore-statistiche">
+                <div><strong>Partecipazioni</strong><span>${g.partecipazioni}</span></div>
+                <div><strong>Vittorie</strong><span>${g.vittorie}</span></div>
+                <div><strong>Pos. media</strong><span>${formattaNumero(g.posizioneMedia)}</span></div>
+                <div><strong>Win rate</strong><span>${formattaPercentuale(g.winRate)}</span></div>
+                <div><strong>Profitto/Perdita</strong><span>${formattaEuroIntero(g.profitto)}</span></div>
+            </div>
+
+            ${curiosita.length ? `
+                <div class="giocatore-curiosita">
+                    <h4>💡 Curiosità</h4>
+                    ${curiosita.map(function(c) {
+                        const testo = typeof c === "function"
+                            ? c(g, classifica)
+                            : c;
+                        return `<div class="curiosita-item">${testo}</div>`;
+                    }).join("")}
+                </div>
+            ` : ""}
+        </div>
+    `;
+}
+
+function tornaListaGiocatori() {
+    document.getElementById("giocatori-lista").style.display = "grid";
+    document.getElementById("giocatore-dettaglio").innerHTML = "";
+}
+
 function generaTornei() {
     const contenitore = document.getElementById("tornei-lista");
     if (!contenitore) return;
@@ -2625,38 +3083,93 @@ righe.forEach(function(riga, indice) {
     }
 
 
-    function mostraSezione(sezione) {
+    function preparaDissolvenza() {
+        const elementi = [
+            "menu",
+            "classifica",
+            "palmares",
+            "tornei",
+            "giocatori",
+            "tornei-dettagli"
+        ];
 
-        document.getElementById("menu").style.display = "none";
-        document.getElementById("classifica").style.display = "none";
-        document.getElementById("palmares").style.display = "none";
-        document.getElementById("tornei").style.display = "none";
-        document.getElementById("tornei-dettagli").style.display = "none";
-
-        document.getElementById(sezione).style.display = "block";
-
-        if (sezione === "classifica") {
-            generaClassifica();
-        }
-
-        if (sezione === "tornei") {
-            generaTornei();
-        }
-
+        elementi.forEach(function(id) {
+            const el = document.getElementById(id);
+            if (el && el.style.display !== "none") {
+                el.classList.add("schermata-fade-out");
+            }
+        });
     }
 
+    function mostraSezione(sezione) {
+        preparaDissolvenza();
+
+        setTimeout(function() {
+            document.getElementById("menu").style.display = "none";
+            document.getElementById("classifica").style.display = "none";
+            document.getElementById("palmares").style.display = "none";
+            document.getElementById("tornei").style.display = "none";
+            document.getElementById("giocatori").style.display = "none";
+            document.getElementById("tornei-dettagli").style.display = "none";
+
+            const destinazione = document.getElementById(sezione);
+            destinazione.classList.remove("schermata-fade-out");
+            destinazione.classList.add("schermata-fade-in");
+            destinazione.style.display = "block";
+
+            requestAnimationFrame(function() {
+                requestAnimationFrame(function() {
+                    destinazione.classList.remove("schermata-fade-in");
+                });
+            });
+
+            if (sezione === "classifica") {
+                generaClassifica();
+            }
+
+            if (sezione === "tornei") {
+                generaTornei();
+            }
+
+            if (sezione === "giocatori") {
+                generaGiocatori();
+            }
+        }, 180);
+    }
 
     function mostraMenu() {
+        preparaDissolvenza();
 
-        document.getElementById("classifica").style.display = "none";
-        document.getElementById("palmares").style.display = "none";
-        document.getElementById("tornei").style.display = "none";
-        document.getElementById("tornei-dettagli").style.display = "none";
+        setTimeout(function() {
+            document.getElementById("classifica").style.display = "none";
+            document.getElementById("palmares").style.display = "none";
+            document.getElementById("tornei").style.display = "none";
+            document.getElementById("giocatori").style.display = "none";
+            document.getElementById("tornei-dettagli").style.display = "none";
 
-        document.getElementById("menu").style.display = "grid";
+            const listaGiocatori = document.getElementById("giocatori-lista");
+            const dettaglioGiocatore = document.getElementById("giocatore-dettaglio");
+            if (listaGiocatori) {
+                listaGiocatori.style.display = "grid";
+            }
+            if (dettaglioGiocatore) {
+                dettaglioGiocatore.innerHTML = "";
+            }
 
+            chiudiPopupGiocatore();
+
+            const menu = document.getElementById("menu");
+            menu.classList.remove("schermata-fade-out");
+            menu.classList.add("schermata-fade-in");
+            menu.style.display = "grid";
+
+            requestAnimationFrame(function() {
+                requestAnimationFrame(function() {
+                    menu.classList.remove("schermata-fade-in");
+                });
+            });
+        }, 180);
     }
-
 
     function mostraTorneo(numero) {
 
@@ -2668,6 +3181,10 @@ righe.forEach(function(riga, indice) {
         if (!torneo) {
             return;
         }
+
+        const premiTotali = torneo.players.reduce(function(totale, giocatore) {
+            return totale + (Number(giocatore.prize) || 0);
+        }, 0);
 
         document.getElementById("menu").style.display = "none";
         document.getElementById("tornei").style.display = "none";
@@ -2706,6 +3223,11 @@ righe.forEach(function(riga, indice) {
                         <strong>Vincitore</strong>
                         <span>Da definire</span>
                     </div>
+
+                    <div>
+                        <strong>Premi totali</strong>
+                        <span>Da definire</span>
+                    </div>
                 </div>
 
                 <h3>Classifica torneo</h3>
@@ -2721,7 +3243,11 @@ righe.forEach(function(riga, indice) {
                     return `
                         <tr>
                             <td>${giocatore.pos}</td>
-                            <td>${giocatore.name}</td>
+                            <td>
+                                <button class="nome-giocatore-link" onclick='apriPopupGiocatore(${nomePerOnclick(giocatore.name)})'>
+                                    ${giocatore.name}
+                                </button>
+                            </td>
                             <td>${giocatore.entry ?? "—"} €</td>
                             <td>${giocatore.rebu ?? "—"} €</td>
                             <td>${giocatore.addon ?? "—"} €</td>
@@ -2760,6 +3286,11 @@ righe.forEach(function(riga, indice) {
         <span>${torneo.date}</span>
     </div>
 
+    <div>
+        <strong>💰</strong>
+        <span>${premiTotali} €</span>
+    </div>
+
 </div>
                 <h3>Classifica torneo</h3>
 
@@ -2784,7 +3315,18 @@ righe.forEach(function(riga, indice) {
 
         }
 
+        // Mostra sempre la schermata del torneo e ripristina l'opacità
+        // nel caso la dissolvenza precedente abbia lasciato uno stato visivo.
+        dettagli.classList.remove("schermata-fade-out", "schermata-fade-in");
+        dettagli.style.opacity = "1";
         dettagli.style.display = "block";
+
+        requestAnimationFrame(function() {
+            dettagli.classList.add("schermata-fade-in");
+            requestAnimationFrame(function() {
+                dettagli.classList.remove("schermata-fade-in");
+            });
+        });
 
     }
 
