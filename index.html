@@ -143,6 +143,7 @@ border: 2px solid #c8c8c8;
     color: #111;
     cursor: pointer;
     overflow: hidden;
+    padding: 0;
 box-shadow:
     0 8px 18px rgba(0, 0, 0, 0.35),
     inset 0 0 0 3px rgba(255, 255, 255, 0.8),
@@ -158,81 +159,77 @@ box-shadow:
 }
 
 
-.torneo-card strong {
-    .torneo-card.seme-1 strong,
-.torneo-card.seme-2 strong {
-    color: #d40000;
-}
+.torneo-card .carta-angolo {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 100px;
+    font-size: 34px;
+    font-weight: bold;
+    line-height: 0.9;
+    z-index: 3;
+}
+
+.torneo-card .carta-angolo-alto {
+    top: 13px;
+    left: 15px;
+    text-align: center;
+}
+
+.torneo-card .carta-angolo-basso {
+    bottom: 13px;
+    right: 15px;
+    text-align: center;
+    transform: rotate(180deg);
+}
+
+.torneo-card .carta-angolo .valore {
+    display: block;
+    font-size: 38px;
+    line-height: 0.9;
+}
+
+.torneo-card .carta-angolo .seme {
+    display: block;
+    font-size: 36px;
+    line-height: 0.9;
+    margin-top: 4px;
+}
+
+.torneo-card .carta-centro {
+    position: absolute;
+    top: 18%;
+    left: 23%;
+    width: 54%;
+    height: 64%;
+    border: 2px solid #2d5fa7;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.torneo-card .carta-centro .etichetta-torneo {
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    color: #222;
+}
+
+.torneo-card .carta-centro .numero-torneo {
+    font-size: 70px;
     font-weight: 900;
+    line-height: 1;
     color: #111;
     text-shadow:
         0 0 3px #fff,
-        0 0 8px rgba(255, 255, 255, 0.95);
-    z-index: 2;
-}
-.torneo-card span {
-    position: absolute;
-    font-size: 18px;
-    font-weight: bold;
-    z-index: 2;
+        0 0 8px rgba(255, 255, 255, 0.9);
 }
 
-    .torneo-card strong {
-    display: block;
-    font-size: 17px;
-    margin-bottom: 8px;
-}
-
-.torneo-card span {
-    display: block;
-    font-size: 12px;
-    color: #aaa;
-    font-weight: normal;
-}
-
-.torneo-card::before {
-    content: "♠";
-    position: absolute;
-    top: 8px;
-    left: 12px;
-    font-size: 52px;
-    line-height: 1;
-    font-weight: bold;
-    z-index: 1;
-}
-
-.torneo-card::after {
-    content: "♠";
-    position: absolute;
-    bottom: 8px;
-    right: 12px;
-    font-size: 52px;
-    line-height: 1;
-    font-weight: bold;
-    transform: rotate(180deg);
-    z-index: 1;
-}
-
-    .torneo-card.seme-1::before,
-.torneo-card.seme-1::after {
-    content: "♥";
+.torneo-card.carta-rossa .carta-angolo {
     color: #d40000;
 }
 
-.torneo-card.seme-2::before,
-.torneo-card.seme-2::after {
-    content: "♣";
-    color: #111;
-}
-
-.torneo-card.seme-3::before,
-.torneo-card.seme-3::after {
-    content: "♦";
+.torneo-card.carta-rossa .numero-torneo {
     color: #d40000;
 }
     
@@ -2418,37 +2415,76 @@ th[onclick]:hover {
 
     }
 
+const valoriCarte = [
+    ["A", "8", "K", "3", "J", "10", "5", "Q", "2", "9", "7", "4", "6"],
+    ["7", "Q", "2", "A", "10", "4", "K", "6", "J", "9", "3", "8", "5"],
+    ["Q", "5", "A", "9", "K", "2", "10", "6", "J", "4", "8", "3", "7"],
+    ["3", "J", "7", "K", "4", "A", "9", "Q", "5", "10", "2", "6", "8"]
+];
 
-    function generaTornei() {
+const semiCarte = ["♠", "♥", "♣", "♦"];
+    
+function generaTornei() {
 
-        const contenitore =
-            document.getElementById("tornei-lista");
+    const contenitore =
+        document.getElementById("tornei-lista");
 
-        if (!contenitore) {
-            return;
-        }
-
-        contenitore.innerHTML = datiTornei.map(function(torneo) {
-
-            const vincitore =
-                torneo.players.length > 0
-                    ? torneo.players[0].name
-                    : "Da disputare";
-
-            const data =
-                torneo.date
-                    ? torneo.date
-                    : "Data da definire";
-
-return `
-    <button class="torneo-card seme-${(torneo.n - 1) % 4}" onclick="mostraTorneo(${torneo.n})">
-        <strong>${torneo.n}</strong>
-    </button>
-`;
-
-        }).join("");
-
+    if (!contenitore) {
+        return;
     }
+
+    contenitore.innerHTML = datiTornei.map(function(torneo) {
+
+        const indice = torneo.n - 1;
+
+        const indiceSeme =
+            indice % 4;
+
+        const indiceValore =
+            Math.floor(indice / 4) % 13;
+
+        const seme =
+            semiCarte[indiceSeme];
+
+        const valore =
+            valoriCarte[indiceSeme][indiceValore];
+
+        const cartaRossa =
+            indiceSeme === 1 ||
+            indiceSeme === 3;
+
+        return `
+            <button
+                class="torneo-card ${cartaRossa ? "carta-rossa" : ""}"
+                onclick="mostraTorneo(${torneo.n})"
+            >
+
+                <div class="carta-angolo carta-angolo-alto">
+                    <span class="valore">${valore}</span>
+                    <span class="seme">${seme}</span>
+                </div>
+
+                <div class="carta-centro">
+                    <span class="etichetta-torneo">
+                        TORNEO
+                    </span>
+
+                    <span class="numero-torneo">
+                        ${torneo.n}
+                    </span>
+                </div>
+
+                <div class="carta-angolo carta-angolo-basso">
+                    <span class="valore">${valore}</span>
+                    <span class="seme">${seme}</span>
+                </div>
+
+            </button>
+        `;
+
+    }).join("");
+
+}
 
 
     function ordinaTabella(colonna, tipo) {
