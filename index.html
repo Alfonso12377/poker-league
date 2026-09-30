@@ -134,15 +134,25 @@
 }
 
 .torneo-card {
-    padding: 22px 15px;
-    border: 1px solid #3d3d3d;
-    border-radius: 12px;
-    background: linear-gradient(145deg, #292929, #202020);
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
+    position: relative;
+    min-height: 180px;
+    border-radius: 16px;
+    border: 2px solid #d8d8d8;
+    background: linear-gradient(145deg, #f8f8f8, #dcdcdc);
+    color: #111;
     cursor: pointer;
-    transition: 0.2s;
+    overflow: hidden;
+    box-shadow:
+        0 8px 18px rgba(0, 0, 0, 0.35),
+        inset 0 0 0 3px rgba(255, 255, 255, 0.7);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}    
+
+    .torneo-card:hover {
+    transform: translateY(-6px) rotate(-1deg);
+    box-shadow:
+        0 14px 28px rgba(0, 0, 0, 0.45),
+        inset 0 0 0 3px rgba(255, 255, 255, 0.8);
 }
 
 .torneo-card:hover {
