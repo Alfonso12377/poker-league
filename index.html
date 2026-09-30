@@ -99,6 +99,98 @@
     #palmares {
     display: none;
 }
+    .palmares-lista {
+    display: grid;
+    gap: 12px;
+    margin-top: 30px;
+}
+
+.palmares-riga {
+    display: grid;
+    grid-template-columns: 60px minmax(180px, 1fr) repeat(4, 100px);
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(145deg, #292929, #202020);
+    border: 1px solid #3d3d3d;
+    border-radius: 14px;
+    padding: 15px 18px;
+    color: white;
+    cursor: pointer;
+    text-align: left;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.22);
+    transition: 0.2s;
+}
+
+.palmares-riga:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(145deg, #333, #252525);
+}
+
+.palmares-posizione {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.palmares-nome {
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.palmares-medaglia {
+    text-align: center;
+    font-weight: bold;
+}
+
+.palmares-medaglia.oro {
+    color: #d4af37;
+}
+
+.palmares-medaglia.argento {
+    color: #c0c0c0;
+}
+
+.palmares-medaglia.bronzo {
+    color: #cd7f32;
+}
+
+.palmares-totale {
+    text-align: center;
+    font-weight: bold;
+}
+
+.palmares-intestazione {
+    display: grid;
+    grid-template-columns: 60px minmax(180px, 1fr) repeat(4, 100px);
+    gap: 12px;
+    padding: 0 18px 8px 18px;
+    color: #aaa;
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.palmares-intestazione div:nth-child(2) {
+    text-align: left;
+}
+
+@media (max-width: 700px) {
+    .palmares-riga,
+    .palmares-intestazione {
+        grid-template-columns: 40px minmax(130px, 1fr) repeat(4, 65px);
+        gap: 6px;
+    }
+
+    .palmares-nome {
+        font-size: 14px;
+    }
+
+    .palmares-medaglia,
+    .palmares-totale {
+        font-size: 12px;
+    }
+}
 
     #tornei {
     display: none;
@@ -794,27 +886,16 @@ th[onclick]:hover {
 
     <h2>Palmarès</h2>
 
-    <div class="palmares-contenuto">
-
-        <div class="palmares-card">
-            <div class="palmares-seme">♥</div>
-            <h3>Vittorie</h3>
-            <p>Qui raccoglieremo i vincitori della lega.</p>
-        </div>
-
-        <div class="palmares-card">
-            <div class="palmares-seme">♦</div>
-            <h3>Podi</h3>
-            <p>Qui raccoglieremo i migliori piazzamenti.</p>
-        </div>
-
-        <div class="palmares-card">
-            <div class="palmares-seme">♣</div>
-            <h3>Record</h3>
-            <p>Qui raccoglieremo i principali record della lega.</p>
-        </div>
-
+    <div class="palmares-intestazione">
+        <div>Pos.</div>
+        <div>Giocatore</div>
+        <div>🥇 Oro</div>
+        <div>🥈 Argento</div>
+        <div>🥉 Bronzo</div>
+        <div>Totale</div>
     </div>
+
+    <div class="palmares-lista" id="palmares-lista"></div>
 
 </div>
 
@@ -2690,6 +2771,131 @@ th[onclick]:hover {
         });
 
     }
+
+    function calcolaPalmares() {
+
+    const palmares = {};
+
+    datiTornei.forEach(function(torneo) {
+
+        torneo.players.forEach(function(giocatore) {
+
+            if (!palmares[giocatore.name]) {
+
+                palmares[giocatore.name] = {
+                    nome: giocatore.name,
+                    oro: 0,
+                    argento: 0,
+                    bronzo: 0
+                };
+
+            }
+
+            const stats = palmares[giocatore.name];
+            const posizione = parseInt(giocatore.pos, 10);
+
+            if (posizione === 1) {
+                stats.oro++;
+            }
+
+            if (posizione === 2) {
+                stats.argento++;
+            }
+
+            if (posizione === 3) {
+                stats.bronzo++;
+            }
+
+        });
+
+    });
+
+    return Object.values(palmares);
+
+}
+
+
+function generaPalmares() {
+
+    const lista = document.getElementById("palmares-lista");
+
+    if (!lista) {
+        return;
+    }
+
+    let palmares = calcolaPalmares();
+
+    palmares.sort(function(a, b) {
+
+        const medaglieA =
+            a.oro + a.argento + a.bronzo;
+
+        const medaglieB =
+            b.oro + b.argento + b.bronzo;
+
+        if (medaglieA !== medaglieB) {
+            return medaglieB - medaglieA;
+        }
+
+        if (a.oro !== b.oro) {
+            return b.oro - a.oro;
+        }
+
+        if (a.argento !== b.argento) {
+            return b.argento - a.argento;
+        }
+
+        if (a.bronzo !== b.bronzo) {
+            return b.bronzo - a.bronzo;
+        }
+
+        return a.nome.localeCompare(b.nome);
+
+    });
+
+    lista.innerHTML = palmares.map(function(giocatore, indice) {
+
+        const totale =
+            giocatore.oro +
+            giocatore.argento +
+            giocatore.bronzo;
+
+        return `
+            <button
+                class="palmares-riga"
+                onclick='apriPopupGiocatore(${nomePerOnclick(giocatore.nome)})'
+            >
+
+                <div class="palmares-posizione">
+                    ${indice + 1}°
+                </div>
+
+                <div class="palmares-nome">
+                    ${giocatore.nome}
+                </div>
+
+                <div class="palmares-medaglia oro">
+                    ${giocatore.oro}
+                </div>
+
+                <div class="palmares-medaglia argento">
+                    ${giocatore.argento}
+                </div>
+
+                <div class="palmares-medaglia bronzo">
+                    ${giocatore.bronzo}
+                </div>
+
+                <div class="palmares-totale">
+                    ${totale}
+                </div>
+
+            </button>
+        `;
+
+    }).join("");
+
+}
 
 
     function generaClassifica() {
