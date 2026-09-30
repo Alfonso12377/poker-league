@@ -721,6 +721,40 @@ td:nth-child(2) {
     #tabella-palmares .nome-giocatore-link {
     cursor: pointer;
 }
+    /* Grafica specifica Classifica */
+#tabella-classifica td:first-child {
+    font-size: 18px;
+}
+
+#tabella-classifica td:nth-child(3),
+#tabella-classifica td:nth-child(4),
+#tabella-classifica td:nth-child(5),
+#tabella-classifica td:nth-child(6) {
+    font-weight: bold;
+}
+
+#tabella-classifica td:nth-child(7) {
+    font-weight: bold;
+    border-left: 1px solid #555;
+}
+
+#tabella-classifica tbody tr {
+    transition: background 0.15s ease;
+}
+
+#tabella-classifica tbody tr:hover {
+    background: #383838;
+}
+    #tabella-classifica td:nth-child(3) {
+    border-left: 1px solid #555;
+}
+    #tabella-classifica td:nth-child(2) {
+    font-size: 15px;
+}
+    #tabella-classifica td:nth-child(7) {
+    font-size: 15px;
+}
+    
     
 th[onclick] {
     cursor: pointer;
