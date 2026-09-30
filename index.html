@@ -793,6 +793,46 @@ th[onclick]:hover {
 
 }
 
+    /* Grafica card Tornei */
+.tornei-lista {
+    display: grid;
+    gap: 12px;
+}
+
+.torneo-card {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 18px;
+    background: #222;
+    border: 1px solid #3a3a3a;
+    border-radius: 12px;
+    color: white;
+    cursor: pointer;
+    text-align: left;
+    transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+
+.torneo-card:hover {
+    background: #2d2d2d;
+    border-color: #555;
+    transform: translateY(-2px);
+}
+
+.torneo-card strong {
+    font-size: 16px;
+}
+
+.torneo-card span {
+    color: #aaa;
+    font-size: 14px;
+}
+
+.torneo-card:hover span {
+    color: #ddd;
+}
+
 .vincitore-torneo {
     text-align: center;
     font-size: 24px;
