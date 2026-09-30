@@ -159,6 +159,13 @@ box-shadow:
 
 
 .torneo-card strong {
+    .torneo-card.seme-1 strong,
+.torneo-card.seme-2 strong {
+    color: #d40000;
+}
+    .torneo-card::marker {
+    display: none;
+}
     position: absolute;
     top: 50%;
     left: 50%;
@@ -212,6 +219,24 @@ box-shadow:
     font-weight: bold;
     transform: rotate(180deg);
     z-index: 1;
+}
+
+    .torneo-card.seme-1::before,
+.torneo-card.seme-1::after {
+    content: "♥";
+    color: #d40000;
+}
+
+.torneo-card.seme-2::before,
+.torneo-card.seme-2::after {
+    content: "♦";
+    color: #d40000;
+}
+
+.torneo-card.seme-3::before,
+.torneo-card.seme-3::after {
+    content: "♣";
+    color: #111;
 }
     
     .menu {
@@ -2419,7 +2444,7 @@ th[onclick]:hover {
                     : "Data da definire";
 
 return `
-    <button class="torneo-card" onclick="mostraTorneo(${torneo.n})">
+    <button class="torneo-card seme-${(torneo.n - 1) % 4}" onclick="mostraTorneo(${torneo.n})">
         <strong>${torneo.n}</strong>
     </button>
 `;
