@@ -852,6 +852,10 @@
 #tornei-dettagli {
     transition: opacity 0.18s ease;
 } 
+    #giocatori-lista,
+#giocatore-dettaglio {
+    transition: opacity 0.18s ease;
+}
 
     .schermata-fade-out {
         opacity: 0 !important;
@@ -5165,11 +5169,20 @@ function mostraGiocatore(nome) {
     const g = classifica.find(function(x) { return x.nome === nome; });
     if (!g || !dettaglio) return;
 
-    const curiosita = curiositaGiocatori[nome] || [];
+const curiosita = curiositaGiocatori[nome] || [];
+
+if (lista) {
+    lista.classList.add("schermata-fade-out");
+}
+
+setTimeout(function() {
 
     if (lista) {
         lista.style.display = "none";
+        lista.classList.remove("schermata-fade-out");
     }
+
+    dettaglio.classList.add("schermata-fade-in");
 
     dettaglio.innerHTML = `
         <button class="torna-menu" onclick="tornaListaGiocatori()">← Torna ai giocatori</button>
@@ -5196,6 +5209,14 @@ function mostraGiocatore(nome) {
             ` : ""}
         </div>
     `;
+
+    requestAnimationFrame(function() {
+        requestAnimationFrame(function() {
+            dettaglio.classList.remove("schermata-fade-in");
+        });
+    });
+
+}, 180);
 }
 
 function tornaListaGiocatori() {
@@ -5521,8 +5542,15 @@ const elementi = [
             });
         }, 180);
     }
+function mostraTorneo(numero) {
+    preparaDissolvenza();
 
-    function mostraTorneo(numero) {
+    setTimeout(function() {
+        mostraTorneoDettaglio(numero);
+    }, 180);
+}
+    
+function mostraTorneoDettaglio(numero) {
 
         const torneo =
             datiTornei.find(function(t) {
@@ -5668,16 +5696,16 @@ const elementi = [
 
         // Mostra sempre la schermata del torneo e ripristina l'opacità
         // nel caso la dissolvenza precedente abbia lasciato uno stato visivo.
-        dettagli.classList.remove("schermata-fade-out", "schermata-fade-in");
-        dettagli.style.opacity = "1";
-        dettagli.style.display = "block";
+dettagli.classList.remove("schermata-fade-out", "schermata-fade-in");
+dettagli.style.opacity = "";
+dettagli.classList.add("schermata-fade-in");
+dettagli.style.display = "block";
 
-        requestAnimationFrame(function() {
-            dettagli.classList.add("schermata-fade-in");
-            requestAnimationFrame(function() {
-                dettagli.classList.remove("schermata-fade-in");
-            });
-        });
+requestAnimationFrame(function() {
+    requestAnimationFrame(function() {
+        dettagli.classList.remove("schermata-fade-in");
+    });
+});
 
     }
 
