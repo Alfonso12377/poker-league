@@ -633,6 +633,34 @@
         .torneo-info {
             grid-template-columns: 1fr;
         }
+            .tornei-lista {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .torneo-card {
+        min-width: 0;
+    }
+            .torneo-card .carta-angolo .copag-rank,
+    .torneo-card .carta-angolo .copag-suit {
+        height: 42px;
+        max-width: 42px;
+    }
+
+    .torneo-card .numero-torneo .copag-digit {
+        height: 58px;
+        max-width: 58px;
+    }
+
+    .torneo-card .carta-centro .etichetta-torneo {
+        font-size: 15px;
+        margin-bottom: 4px;
+    }
+
+    .torneo-card .numero-torneo {
+        min-height: 58px;
+        gap: 1px;
+    }
     }
 
     h1 {
@@ -917,6 +945,24 @@ th[onclick]:hover {
         overflow-x: auto;
     }
 
+    #tabella-classifica td:nth-child(2) {
+        font-size: 13px;
+        white-space: normal;
+        overflow-wrap: break-word;
+        word-break: normal;
+        line-height: 1.15;
+    }
+
+    #tabella-classifica th:nth-child(2) {
+        font-size: 10px;
+        white-space: normal;
+        line-height: 1.1;
+    }
+
+    #tabella-classifica td:nth-child(7) {
+        font-size: 10px;
+    }
+    
 }
 
 @media (max-width: 480px) {
