@@ -643,13 +643,13 @@
     }
 .torneo-card .carta-angolo .copag-rank,
 .torneo-card .carta-angolo .copag-suit {
-    height: 34px;
-    max-width: 34px;
+    height: 33px;
+    max-width: 33px;
 }
 
 .torneo-card .numero-torneo .copag-digit {
-    height: 46px;
-    max-width: 46px;
+    height: 45px;
+    max-width: 45px;
 }
 
     .torneo-card .numero-torneo {
@@ -1087,6 +1087,63 @@ th[onclick]:hover {
         height: 42px;
     }
 }
+}
+
+    @media (max-width: 1000px) and (orientation: landscape) {
+
+    #tabella-classifica {
+        table-layout: fixed;
+        width: 100%;
+        min-width: 700px;
+    }
+
+    #tabella-classifica th:nth-child(1),
+    #tabella-classifica td:nth-child(1) {
+        width: 8%;
+    }
+
+    #tabella-classifica th:nth-child(2),
+    #tabella-classifica td:nth-child(2) {
+        width: 28%;
+    }
+
+    #tabella-classifica th:nth-child(3),
+    #tabella-classifica td:nth-child(3) {
+        width: 13%;
+    }
+
+    #tabella-classifica th:nth-child(4),
+    #tabella-classifica td:nth-child(4) {
+        width: 10%;
+    }
+
+    #tabella-classifica th:nth-child(5),
+    #tabella-classifica td:nth-child(5) {
+        width: 13%;
+    }
+
+    #tabella-classifica th:nth-child(6),
+    #tabella-classifica td:nth-child(6) {
+        width: 13%;
+    }
+
+    #tabella-classifica th:nth-child(7),
+    #tabella-classifica td:nth-child(7) {
+        width: 15%;
+    }
+
+    #tabella-classifica td:nth-child(2) {
+        font-size: 13px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: clip;
+        line-height: 1;
+    }
+
+    #tabella-classifica th:nth-child(2) {
+        font-size: 10px;
+        white-space: nowrap;
+    }
 }
 
 @media (max-width: 480px) {
