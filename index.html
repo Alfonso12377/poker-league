@@ -3699,6 +3699,16 @@ th[onclick]:hover {
         return segno + numero.toFixed(2).replace(".", ",") + " €";
     }
 
+function formattaEuroInteroSenzaSegno(valore) {
+    if (valore === null || valore === undefined || valore === "") {
+        return "—";
+    }
+
+    const numero = Number(valore);
+
+    return numero.toFixed(0).replace(".", ",") + " €";
+}
+    
     function formattaEuroIntero(valore) {
         if (valore === null || valore === undefined || valore === "") {
             return "—";
@@ -4490,7 +4500,7 @@ const giocatoriMigliorIncassoSenzaVittorie =
                 </div>
 
                 <div class="record-detail">
-                    ${formattaEuroIntero(montepremiPiuAlto)}
+${formattaEuroInteroSenzaSegno(montepremiPiuAlto)}
                 </div>
 
             </div>
@@ -4782,7 +4792,7 @@ const giocatoriMigliorIncassoSenzaVittorie =
                 </span>
 
                 <span class="stat-value">
-                    ${formattaEuroIntero(montepremiTotale)}
+${formattaEuroInteroSenzaSegno(montepremiTotale)}
                 </span>
 
             </div>
