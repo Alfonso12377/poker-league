@@ -443,6 +443,76 @@
     transform: translateY(-4px);
     box-shadow: 0 10px 22px rgba(0, 0, 0, 0.35);
 }
+    /* ============================= */
+/* RECORD & STATISTICHE */
+/* ============================= */
+
+.menu-record {
+    grid-column: 1 / -1;
+    justify-self: center;
+
+    width: 520px;
+    max-width: 100%;
+
+    min-height: 205px;
+
+    padding: 18px 25px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 14px;
+
+    background: rgba(0, 0, 0, 0.22);
+    color: white;
+
+    cursor: pointer;
+
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(2px);
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.menu-record:hover {
+    background: rgba(0, 0, 0, 0.32);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.35);
+}
+
+.menu-record-fiche {
+    display: block;
+
+    width: 145px;
+    height: 145px;
+
+    object-fit: contain;
+
+    margin: 0 auto 10px auto;
+
+    filter: drop-shadow(0 5px 7px rgba(0, 0, 0, 0.35));
+}
+
+.menu-record span {
+    display: block;
+
+    margin-top: 0;
+
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    font-size: 17px;
+    font-weight: bold;
+
+    letter-spacing: 0.3px;
+    text-align: center;
+
+    color: white;
+}
 
 .menu-copag-suit {
     display: block;
@@ -503,8 +573,274 @@
         display: none;
     }
 
+    #record-statistiche {
+    display: none;
+}
+
+
+/* ============================= */
+/* RECORD & STATISTICHE */
+/* ============================= */
+
+.record-statistiche-contenitore {
+    width: 100%;
+    max-width: 1050px;
+
+    margin: 0 auto;
+}
+
+.record-statistiche-contenitore h3 {
+    margin: 28px 0 16px 0;
+
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    font-size: 21px;
+
+    color: #222;
+    text-align: left;
+}
+
+
+/* RECORD INDIVIDUALI */
+
+.record-grid {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 15px;
+}
+
+.record-box {
+    background: linear-gradient(145deg, #292929, #202020);
+
+    border: 1px solid #3d3d3d;
+    border-radius: 12px;
+
+    padding: 18px 14px;
+
+    min-height: 125px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.20);
+}
+
+.record-box .record-icon {
+    font-size: 28px;
+    margin-bottom: 7px;
+}
+
+.record-box .record-label {
+    font-size: 12px;
+    color: #bdbdbd;
+
+    margin-bottom: 5px;
+
+    font-weight: bold;
+
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.record-box .record-value {
+    font-family: "Trebuchet MS", Arial, sans-serif;
+
+    font-size: 17px;
+    font-weight: bold;
+
+    color: white;
+
+    line-height: 1.2;
+}
+
+.record-box .record-detail {
+    margin-top: 4px;
+
+    font-size: 12px;
+    color: #999;
+}
+
+
+/* STATISTICHE GENERALI */
+
+.statistiche-lega {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 15px;
+
+    margin-bottom: 35px;
+}
+
+.statistica-lega-box {
+    background: rgba(0, 0, 0, 0.10);
+
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 12px;
+
+    padding: 18px;
+
+    text-align: center;
+}
+
+.statistica-lega-box .stat-label {
+    display: block;
+
+    font-size: 12px;
+    font-weight: bold;
+
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+
+    color: #555;
+
+    margin-bottom: 7px;
+}
+
+.statistica-lega-box .stat-value {
+    display: block;
+
+    font-family: "Trebuchet MS", Arial, sans-serif;
+
+    font-size: 22px;
+    font-weight: bold;
+
+    color: #222;
+}
+
+
+/* TABLET */
+
+@media (max-width: 800px) {
+
+    .record-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .statistiche-lega {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+/* SMARTPHONE */
+
+@media (max-width: 480px) {
+
+    .record-statistiche-contenitore h3 {
+        font-size: 19px;
+        margin-top: 22px;
+    }
+
+    .record-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .record-box {
+        min-height: 115px;
+        padding: 14px 9px;
+    }
+
+    .record-box .record-icon {
+        font-size: 24px;
+    }
+
+    .record-box .record-label {
+        font-size: 10px;
+    }
+
+    .record-box .record-value {
+        font-size: 14px;
+    }
+
+    .record-box .record-detail {
+        font-size: 10px;
+    }
+
+    .statistiche-lega {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .statistica-lega-box {
+        padding: 14px 8px;
+    }
+
+    .statistica-lega-box .stat-label {
+        font-size: 10px;
+    }
+
+    .statistica-lega-box .stat-value {
+        font-size: 18px;
+    }
+}
+
+
+/* SMARTPHONE ORIZZONTALE */
+
+@media (orientation: landscape) and (max-height: 600px) {
+
+    .record-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+    }
+
+    .record-box {
+        min-height: 100px;
+        padding: 10px 7px;
+    }
+
+    .record-box .record-icon {
+        font-size: 21px;
+    }
+
+    .record-box .record-label {
+        font-size: 9px;
+    }
+
+    .record-box .record-value {
+        font-size: 13px;
+    }
+
+    .record-box .record-detail {
+        font-size: 9px;
+    }
+
+    .statistiche-lega {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+    }
+
+    .statistica-lega-box {
+        padding: 10px 6px;
+    }
+
+    .statistica-lega-box .stat-label {
+        font-size: 9px;
+    }
+
+    .statistica-lega-box .stat-value {
+        font-size: 15px;
+    }
+}
+
     /* Piccola dissolvenza tra le schermate */
-    #menu, #classifica, #palmares, #tornei, #giocatori, #tornei-dettagli {
+#menu,
+#classifica,
+#palmares,
+#tornei,
+#giocatori,
+#record-statistiche,
+#tornei-dettagli {
+    transition: opacity 0.18s ease;
+} {
         transition: opacity 0.18s ease;
     }
 
@@ -985,6 +1321,25 @@ th[onclick]:hover {
         width: 60px;
         height: 60px;
     }
+    .menu-record {
+    width: 100%;
+    max-width: 360px;
+
+    min-height: 175px;
+
+    padding: 14px 18px;
+}
+
+.menu-record-fiche {
+    width: 112px;
+    height: 112px;
+
+    margin-bottom: 7px;
+}
+
+.menu-record span {
+    font-size: 15px;
+}
 
     .torna-menu {
         min-height: 40px;
@@ -1264,7 +1619,24 @@ th[onclick]:hover {
         margin-top: 0;
         padding: 32px 20px 28px 20px;
     }
+.menu-record {
+    width: 100%;
+    max-width: 340px;
 
+    min-height: 165px;
+
+    padding: 12px 16px;
+}
+
+.menu-record-fiche {
+    width: 100px;
+    height: 100px;
+}
+
+.menu-record span {
+    font-size: 14px;
+}
+    
 }
 
 
@@ -1274,6 +1646,32 @@ th[onclick]:hover {
     font-size: 24px;
     font-weight: bold;
     margin: 15px 0 25px 0;
+}
+    /* ============================= */
+/* SMARTPHONE ORIZZONTALE */
+/* ============================= */
+
+@media (orientation: landscape) and (max-height: 600px) {
+
+    .menu-record {
+        width: 100%;
+        max-width: 500px;
+
+        min-height: 145px;
+
+        padding: 8px 18px;
+    }
+
+    .menu-record-fiche {
+        width: 92px;
+        height: 92px;
+
+        margin-bottom: 4px;
+    }
+
+    .menu-record span {
+        font-size: 14px;
+    }
 }
     
 </style>
@@ -1369,6 +1767,15 @@ th[onclick]:hover {
     <span>Giocatori</span>
 </button>
 
+<button class="menu-record" onclick="mostraSezione('record-statistiche')">
+    <img
+        class="menu-record-fiche"
+        src="fiche_record_simulazione_definitiva.png"
+        alt="Fiche Record e Statistiche"
+    >
+    <span>Record &amp; Statistiche</span>
+</button>
+
 </div>
 
     <div id="classifica">
@@ -1448,6 +1855,34 @@ th[onclick]:hover {
 
     <div class="giocatori-lista" id="giocatori-lista"></div>
     <div id="giocatore-dettaglio"></div>
+
+</div>
+
+    <div id="record-statistiche">
+
+    <button class="torna-menu" onclick="mostraMenu()">
+        ← Torna al menu
+    </button>
+
+    <h2>Record &amp; Statistiche</h2>
+
+    <div class="record-statistiche-contenitore">
+
+        <h3>🏆 Record individuali</h3>
+
+        <div
+            class="record-grid"
+            id="record-individuali"
+        ></div>
+
+        <h3>📊 Statistiche della Lega</h3>
+
+        <div
+            class="statistiche-lega"
+            id="statistiche-lega"
+        ></div>
+
+    </div>
 
 </div>
 
@@ -3430,6 +3865,511 @@ setTimeout(function() {
 
     }
 
+    function generaRecordStatistiche() {
+
+    const statistiche = calcolaStatistiche();
+
+    if (!statistiche.length || !datiTornei.length) {
+        return;
+    }
+
+
+    /* ============================= */
+    /* RECORD INDIVIDUALI */
+    /* ============================= */
+
+    const piuVittorie =
+        Math.max(...statistiche.map(function(g) {
+            return g.vittorie;
+        }));
+
+    const piuPartecipazioni =
+        Math.max(...statistiche.map(function(g) {
+            return g.partecipazioni;
+        }));
+
+    const profittoPiuAlto =
+        Math.max(...statistiche.map(function(g) {
+            return g.profitto;
+        }));
+
+    const migliorPosizioneMedia =
+        Math.min(...statistiche.map(function(g) {
+            return g.posizioneMedia;
+        }));
+
+    const migliorWinRate =
+        Math.max(...statistiche.map(function(g) {
+            return g.winRate;
+        }));
+
+
+    const giocatoriVittorie =
+        statistiche
+            .filter(function(g) {
+                return g.vittorie === piuVittorie;
+            })
+            .map(function(g) {
+                return g.nome;
+            });
+
+
+    const giocatoriPartecipazioni =
+        statistiche
+            .filter(function(g) {
+                return g.partecipazioni === piuPartecipazioni;
+            })
+            .map(function(g) {
+                return g.nome;
+            });
+
+
+    const giocatoriProfitto =
+        statistiche
+            .filter(function(g) {
+                return g.profitto === profittoPiuAlto;
+            })
+            .map(function(g) {
+                return g.nome;
+            });
+
+
+    const giocatoriPosizioneMedia =
+        statistiche
+            .filter(function(g) {
+                return g.posizioneMedia === migliorPosizioneMedia;
+            })
+            .map(function(g) {
+                return g.nome;
+            });
+
+
+    const giocatoriWinRate =
+        statistiche
+            .filter(function(g) {
+                return g.winRate === migliorWinRate;
+            })
+            .map(function(g) {
+                return g.nome;
+            });
+
+
+    /* ============================= */
+    /* PIÙ PODI */
+    /* ============================= */
+
+    const podi = {};
+
+    datiTornei.forEach(function(torneo) {
+
+        torneo.players.forEach(function(giocatore) {
+
+            const posizione =
+                parseInt(giocatore.pos, 10);
+
+            if (!podi[giocatore.name]) {
+                podi[giocatore.name] = 0;
+            }
+
+            if (posizione <= 3) {
+                podi[giocatore.name]++;
+            }
+
+        });
+
+    });
+
+
+    const piuPodi =
+        Math.max(...Object.values(podi));
+
+
+    const giocatoriPodi =
+        Object.keys(podi)
+            .filter(function(nome) {
+                return podi[nome] === piuPodi;
+            });
+
+
+    /* ============================= */
+    /* TORNEO PIÙ AFFOLLATO */
+    /* ============================= */
+
+    const massimoPartecipanti =
+        Math.max(...datiTornei.map(function(torneo) {
+            return torneo.players.length;
+        }));
+
+
+    const torneiPiuAffollati =
+        datiTornei.filter(function(torneo) {
+            return torneo.players.length === massimoPartecipanti;
+        });
+
+
+    /* ============================= */
+    /* MONTEPREMI PIÙ ALTO */
+    /* ============================= */
+
+    const torneiConMontepremi =
+        datiTornei.map(function(torneo) {
+
+            const montepremi =
+                torneo.players.reduce(function(totale, giocatore) {
+
+                    return totale +
+                        (Number(giocatore.prize) || 0);
+
+                }, 0);
+
+            return {
+                torneo: torneo,
+                montepremi: montepremi
+            };
+
+        });
+
+
+    const montepremiPiuAlto =
+        Math.max(...torneiConMontepremi.map(function(elemento) {
+            return elemento.montepremi;
+        }));
+
+
+    const torneiMontepremiRecord =
+        torneiConMontepremi.filter(function(elemento) {
+            return elemento.montepremi === montepremiPiuAlto;
+        });
+
+
+    /* ============================= */
+    /* RECORD INDIVIDUALI - HTML */
+    /* ============================= */
+
+    const recordContainer =
+        document.getElementById("record-individuali");
+
+
+    if (recordContainer) {
+
+        recordContainer.innerHTML = `
+
+            <div class="record-box">
+
+                <div class="record-icon">🥇</div>
+
+                <div class="record-label">
+                    Più vittorie
+                </div>
+
+                <div class="record-value">
+                    ${giocatoriVittorie.join(" · ")}
+                </div>
+
+                <div class="record-detail">
+                    ${piuVittorie} vittorie
+                </div>
+
+            </div>
+
+
+            <div class="record-box">
+
+                <div class="record-icon">💰</div>
+
+                <div class="record-label">
+                    Profitto totale più alto
+                </div>
+
+                <div class="record-value">
+                    ${giocatoriProfitto.join(" · ")}
+                </div>
+
+                <div class="record-detail">
+                    ${formattaEuroIntero(profittoPiuAlto)}
+                </div>
+
+            </div>
+
+
+            <div class="record-box">
+
+                <div class="record-icon">🎯</div>
+
+                <div class="record-label">
+                    Miglior posizione media
+                </div>
+
+                <div class="record-value">
+                    ${giocatoriPosizioneMedia.join(" · ")}
+                </div>
+
+                <div class="record-detail">
+                    ${formattaNumero(migliorPosizioneMedia)}
+                </div>
+
+            </div>
+
+
+            <div class="record-box">
+
+                <div class="record-icon">🔥</div>
+
+                <div class="record-label">
+                    Più partecipazioni
+                </div>
+
+                <div class="record-value">
+                    ${giocatoriPartecipazioni.join(" · ")}
+                </div>
+
+                <div class="record-detail">
+                    ${piuPartecipazioni} partecipazioni
+                </div>
+
+            </div>
+
+
+            <div class="record-box">
+
+                <div class="record-icon">🥉</div>
+
+                <div class="record-label">
+                    Più podi
+                </div>
+
+                <div class="record-value">
+                    ${giocatoriPodi.join(" · ")}
+                </div>
+
+                <div class="record-detail">
+                    ${piuPodi} podi
+                </div>
+
+            </div>
+
+
+            <div class="record-box">
+
+                <div class="record-icon">📈</div>
+
+                <div class="record-label">
+                    Win Rate più alto
+                </div>
+
+                <div class="record-value">
+                    ${giocatoriWinRate.join(" · ")}
+                </div>
+
+                <div class="record-detail">
+                    ${formattaPercentuale(migliorWinRate)}
+                </div>
+
+            </div>
+
+
+            <div class="record-box">
+
+                <div class="record-icon">👥</div>
+
+                <div class="record-label">
+                    Torneo più affollato
+                </div>
+
+                <div class="record-value">
+                    ${torneiPiuAffollati
+                        .map(function(torneo) {
+                            return "Torneo " + torneo.n;
+                        })
+                        .join(" · ")}
+                </div>
+
+                <div class="record-detail">
+                    ${massimoPartecipanti} partecipanti
+                </div>
+
+            </div>
+
+
+            <div class="record-box">
+
+                <div class="record-icon">💶</div>
+
+                <div class="record-label">
+                    Montepremi più alto
+                </div>
+
+                <div class="record-value">
+                    ${torneiMontepremiRecord
+                        .map(function(elemento) {
+                            return "Torneo " + elemento.torneo.n;
+                        })
+                        .join(" · ")}
+                </div>
+
+                <div class="record-detail">
+                    ${formattaEuroIntero(montepremiPiuAlto)}
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* ============================= */
+    /* STATISTICHE GENERALI DELLA LEGA */
+    /* ============================= */
+
+    const totalePartecipazioni =
+        datiTornei.reduce(function(totale, torneo) {
+
+            return totale + torneo.players.length;
+
+        }, 0);
+
+
+    const tuttiGiocatori =
+        new Set();
+
+
+    datiTornei.forEach(function(torneo) {
+
+        torneo.players.forEach(function(giocatore) {
+
+            tuttiGiocatori.add(giocatore.name);
+
+        });
+
+    });
+
+
+    const mediaPartecipanti =
+        datiTornei.length > 0
+            ? totalePartecipazioni / datiTornei.length
+            : 0;
+
+
+    const montepremiTotale =
+        datiTornei.reduce(function(totale, torneo) {
+
+            return totale +
+                torneo.players.reduce(function(somma, giocatore) {
+
+                    return somma +
+                        (Number(giocatore.prize) || 0);
+
+                }, 0);
+
+        }, 0);
+
+
+    const profittoTotale =
+        datiTornei.reduce(function(totale, torneo) {
+
+            return totale +
+                torneo.players.reduce(function(somma, giocatore) {
+
+                    return somma +
+                        (Number(giocatore.profit) || 0);
+
+                }, 0);
+
+        }, 0);
+
+
+    const statisticheLega =
+        document.getElementById("statistiche-lega");
+
+
+    if (statisticheLega) {
+
+        statisticheLega.innerHTML = `
+
+            <div class="statistica-lega-box">
+
+                <span class="stat-label">
+                    Tornei disputati
+                </span>
+
+                <span class="stat-value">
+                    ${datiTornei.length}
+                </span>
+
+            </div>
+
+
+            <div class="statistica-lega-box">
+
+                <span class="stat-label">
+                    Giocatori totali
+                </span>
+
+                <span class="stat-value">
+                    ${tuttiGiocatori.size}
+                </span>
+
+            </div>
+
+
+            <div class="statistica-lega-box">
+
+                <span class="stat-label">
+                    Partecipazioni totali
+                </span>
+
+                <span class="stat-value">
+                    ${totalePartecipazioni}
+                </span>
+
+            </div>
+
+
+            <div class="statistica-lega-box">
+
+                <span class="stat-label">
+                    Media partecipanti
+                </span>
+
+                <span class="stat-value">
+                    ${formattaNumero(mediaPartecipanti)}
+                </span>
+
+            </div>
+
+
+            <div class="statistica-lega-box">
+
+                <span class="stat-label">
+                    Montepremi complessivo
+                </span>
+
+                <span class="stat-value">
+                    ${formattaEuroIntero(montepremiTotale)}
+                </span>
+
+            </div>
+
+
+            <div class="statistica-lega-box">
+
+                <span class="stat-label">
+                    Profitto complessivo
+                </span>
+
+                <span class="stat-value">
+                    ${formattaEuroIntero(profittoTotale)}
+                </span>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
     function calcolaPalmares() {
 
     const palmares = {};
@@ -4037,14 +4977,15 @@ righe.forEach(function(riga, indice) {
 
 
     function preparaDissolvenza() {
-        const elementi = [
-            "menu",
-            "classifica",
-            "palmares",
-            "tornei",
-            "giocatori",
-            "tornei-dettagli"
-        ];
+const elementi = [
+    "menu",
+    "classifica",
+    "palmares",
+    "tornei",
+    "giocatori",
+    "record-statistiche",
+    "tornei-dettagli"
+];
 
         elementi.forEach(function(id) {
             const el = document.getElementById(id);
@@ -4063,6 +5004,7 @@ righe.forEach(function(riga, indice) {
             document.getElementById("palmares").style.display = "none";
             document.getElementById("tornei").style.display = "none";
             document.getElementById("giocatori").style.display = "none";
+            document.getElementById("record-statistiche").style.display = "none";
             document.getElementById("tornei-dettagli").style.display = "none";
 
             const destinazione = document.getElementById(sezione);
@@ -4091,6 +5033,9 @@ righe.forEach(function(riga, indice) {
             if (sezione === "giocatori") {
                 generaGiocatori();
             }
+            if (sezione === "record-statistiche") {
+    generaRecordStatistiche();
+}
         }, 180);
     }
 
@@ -4103,6 +5048,7 @@ righe.forEach(function(riga, indice) {
             document.getElementById("tornei").style.display = "none";
             document.getElementById("giocatori").style.display = "none";
             document.getElementById("tornei-dettagli").style.display = "none";
+            document.getElementById("record-statistiche").style.display = "none";
 
             const listaGiocatori = document.getElementById("giocatori-lista");
             const dettaglioGiocatore = document.getElementById("giocatore-dettaglio");
