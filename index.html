@@ -4262,6 +4262,51 @@ setTimeout(function() {
                 return luoghi[luogo] === massimoTorneiLuogo;
             });
 
+        /* PIÙ PARTECIPAZIONI SENZA VITTORIE */
+
+const partecipazioniSenzaVittorie = statistiche
+    .filter(function(giocatore) {
+        return giocatore.vittorie === 0;
+    });
+
+const massimoPartecipazioniSenzaVittorie =
+    partecipazioniSenzaVittorie.length > 0
+        ? Math.max(...partecipazioniSenzaVittorie.map(function(giocatore) {
+            return giocatore.partecipazioni;
+        }))
+        : 0;
+
+const giocatoriPiuPartecipazioniSenzaVittorie =
+    partecipazioniSenzaVittorie
+        .filter(function(giocatore) {
+            return giocatore.partecipazioni === massimoPartecipazioniSenzaVittorie;
+        })
+        .map(function(giocatore) {
+            return giocatore.nome;
+        });
+        /* MIGLIOR INCASSO SENZA VITTORIE */
+
+const incassoSenzaVittorie = statistiche
+    .filter(function(giocatore) {
+        return giocatore.vittorie === 0;
+    });
+
+const migliorIncassoSenzaVittorie =
+    incassoSenzaVittorie.length > 0
+        ? Math.max(...incassoSenzaVittorie.map(function(giocatore) {
+            return giocatore.profitto;
+        }))
+        : 0;
+
+const giocatoriMigliorIncassoSenzaVittorie =
+    incassoSenzaVittorie
+        .filter(function(giocatore) {
+            return giocatore.profitto === migliorIncassoSenzaVittorie;
+        })
+        .map(function(giocatore) {
+            return giocatore.nome;
+        });
+
 
     /* ============================= */
     /* RECORD INDIVIDUALI - HTML */
@@ -4560,6 +4605,43 @@ setTimeout(function() {
                 </div>
 
             </div>
+
+            <div class="record-box">
+
+    <div class="record-icon">🎰</div>
+
+    <div class="record-label">
+        Più partecipazioni senza vittorie
+    </div>
+
+    <div class="record-value">
+        ${giocatoriPiuPartecipazioniSenzaVittorie.join(" · ")}
+    </div>
+
+    <div class="record-detail">
+        ${massimoPartecipazioniSenzaVittorie} partecipazioni · 0 vittorie
+    </div>
+
+</div>
+
+
+<div class="record-box">
+
+    <div class="record-icon">💀</div>
+
+    <div class="record-label">
+        Miglior incasso senza vittorie
+    </div>
+
+    <div class="record-value">
+        ${giocatoriMigliorIncassoSenzaVittorie.join(" · ")}
+    </div>
+
+    <div class="record-detail">
+        ${formattaEuroIntero(migliorIncassoSenzaVittorie)} · 0 vittorie
+    </div>
+
+</div>
 
         `;
 
