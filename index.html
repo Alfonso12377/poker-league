@@ -5220,8 +5220,27 @@ setTimeout(function() {
 }
 
 function tornaListaGiocatori() {
-    document.getElementById("giocatori-lista").style.display = "grid";
-    document.getElementById("giocatore-dettaglio").innerHTML = "";
+
+    const lista = document.getElementById("giocatori-lista");
+    const dettaglio = document.getElementById("giocatore-dettaglio");
+
+    dettaglio.classList.add("schermata-fade-out");
+
+    setTimeout(function() {
+
+        dettaglio.innerHTML = "";
+        dettaglio.classList.remove("schermata-fade-out");
+
+        lista.classList.add("schermata-fade-in");
+        lista.style.display = "grid";
+
+        requestAnimationFrame(function() {
+            requestAnimationFrame(function() {
+                lista.classList.remove("schermata-fade-in");
+            });
+        });
+
+    }, 180);
 }
 
 function generaTornei() {
@@ -5710,18 +5729,34 @@ requestAnimationFrame(function() {
     }
 
 
-    function mostraTornei() {
+function mostraTornei() {
 
-        document.getElementById("tornei-dettagli").style.display = "none";
-        document.getElementById("classifica").style.display = "none";
-        document.getElementById("palmares").style.display = "none";
-        document.getElementById("menu").style.display = "none";
+    preparaDissolvenza();
 
-        document.getElementById("tornei").style.display = "block";
+    setTimeout(function() {
+
+        const dettagli = document.getElementById("tornei-dettagli");
+        const tornei = document.getElementById("tornei");
+
+        dettagli.style.display = "none";
+
+        tornei.classList.remove("schermata-fade-out", "schermata-fade-in");
+        tornei.style.opacity = "";
+
+        tornei.style.display = "block";
 
         generaTornei();
 
-    }
+        tornei.classList.add("schermata-fade-in");
+
+        requestAnimationFrame(function() {
+            requestAnimationFrame(function() {
+                tornei.classList.remove("schermata-fade-in");
+            });
+        });
+
+    }, 180);
+}
 
 </script>
 </body>
