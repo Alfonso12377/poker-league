@@ -5168,10 +5168,16 @@ function mostraGiocatore(nome) {
     const curiosita = curiositaGiocatori[nome] || [];
 
     if (lista) {
-        lista.style.display = "none";
+        lista.classList.add("schermata-fade-out");
     }
 
-    dettaglio.innerHTML = `
+    setTimeout(function() {
+
+        if (lista) {
+            lista.style.display = "none";
+        }
+
+        dettaglio.innerHTML = `
         <button class="torna-menu" onclick="tornaListaGiocatori()">← Torna ai giocatori</button>
         <div class="giocatore-dettaglio">
             <h3>${g.nome}</h3>
@@ -5195,7 +5201,18 @@ function mostraGiocatore(nome) {
                 </div>
             ` : ""}
         </div>
-    `;
+        `;
+
+        dettaglio.style.opacity = "0";
+
+        requestAnimationFrame(function() {
+            requestAnimationFrame(function() {
+                dettaglio.style.opacity = "1";
+            });
+        });
+
+    }, 180);
+}
 }
 
 function tornaListaGiocatori() {
@@ -5522,16 +5539,20 @@ const elementi = [
         }, 180);
     }
 
-    function mostraTorneo(numero) {
+function mostraTorneo(numero) {
 
-        const torneo =
-            datiTornei.find(function(t) {
-                return t.n === numero;
-            });
+    const torneo =
+        datiTornei.find(function(t) {
+            return t.n === numero;
+        });
 
-        if (!torneo) {
-            return;
-        }
+    if (!torneo) {
+        return;
+    }
+
+    preparaDissolvenza();
+
+    setTimeout(function() {
 
         const premiTotali = torneo.players.reduce(function(totale, giocatore) {
             return totale + (Number(giocatore.prize) || 0);
@@ -5617,32 +5638,33 @@ const elementi = [
                 <h2>Torneo ${torneo.n}</h2>
 
                 <div class="vincitore-torneo">
-    🏆 ${torneo.players[0].name}
-</div>
+                    🏆 ${torneo.players[0].name}
+                </div>
 
-<div class="torneo-info">
+                <div class="torneo-info">
 
-    <div>
-        <strong>👥</strong>
-        <span>${torneo.players.length}</span>
-    </div>
+                    <div>
+                        <strong>👥</strong>
+                        <span>${torneo.players.length}</span>
+                    </div>
 
-    <div>
-        <strong>📍</strong>
-        <span>${torneo.venue}</span>
-    </div>
+                    <div>
+                        <strong>📍</strong>
+                        <span>${torneo.venue}</span>
+                    </div>
 
-    <div>
-        <strong>📅</strong>
-        <span>${torneo.date}</span>
-    </div>
+                    <div>
+                        <strong>📅</strong>
+                        <span>${torneo.date}</span>
+                    </div>
 
-    <div>
-        <strong>💰</strong>
-        <span>${premiTotali} €</span>
-    </div>
+                    <div>
+                        <strong>💰</strong>
+                        <span>${premiTotali} €</span>
+                    </div>
 
-</div>
+                </div>
+
                 <h3>Classifica torneo</h3>
 
                 <table class="tabella-torneo">
@@ -5666,20 +5688,19 @@ const elementi = [
 
         }
 
-        // Mostra sempre la schermata del torneo e ripristina l'opacità
-        // nel caso la dissolvenza precedente abbia lasciato uno stato visivo.
         dettagli.classList.remove("schermata-fade-out", "schermata-fade-in");
-        dettagli.style.opacity = "1";
+        dettagli.style.opacity = "0";
         dettagli.style.display = "block";
 
         requestAnimationFrame(function() {
-            dettagli.classList.add("schermata-fade-in");
             requestAnimationFrame(function() {
-                dettagli.classList.remove("schermata-fade-in");
+                dettagli.style.opacity = "1";
             });
         });
 
-    }
+    }, 180);
+
+}
 
 
     function mostraTornei() {
