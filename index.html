@@ -641,15 +641,19 @@
     .torneo-card {
         min-width: 0;
     }
-            .torneo-card .carta-angolo .copag-rank,
+    .torneo-card .carta-angolo .copag-rank,
     .torneo-card .carta-angolo .copag-suit {
-        height: 42px;
-        max-width: 42px;
+        height: 38px;
+        max-width: 38px;
     }
 
     .torneo-card .numero-torneo .copag-digit {
-        height: 58px;
-        max-width: 58px;
+        height: 52px;
+        max-width: 52px;
+    }
+
+    .torneo-card .numero-torneo {
+        min-height: 52px;
     }
 
     .torneo-card .carta-centro .etichetta-torneo {
@@ -945,24 +949,89 @@ th[onclick]:hover {
         overflow-x: auto;
     }
 
+    /* CLASSIFICA - versione mobile */
+    #tabella-classifica th:nth-child(1),
+    #tabella-classifica td:nth-child(1) {
+        width: 8%;
+    }
+
+    #tabella-classifica th:nth-child(2),
+    #tabella-classifica td:nth-child(2) {
+        width: 28%;
+    }
+
+    #tabella-classifica th:nth-child(3),
+    #tabella-classifica td:nth-child(3) {
+        width: 13%;
+    }
+
+    #tabella-classifica th:nth-child(4),
+    #tabella-classifica td:nth-child(4) {
+        width: 10%;
+    }
+
+    #tabella-classifica th:nth-child(5),
+    #tabella-classifica td:nth-child(5) {
+        width: 13%;
+    }
+
+    #tabella-classifica th:nth-child(6),
+    #tabella-classifica td:nth-child(6) {
+        width: 13%;
+    }
+
+    #tabella-classifica th:nth-child(7),
+    #tabella-classifica td:nth-child(7) {
+        width: 15%;
+    }
+
     #tabella-classifica td:nth-child(2) {
         font-size: 13px;
-        white-space: normal;
-        overflow-wrap: break-word;
-        word-break: normal;
-        line-height: 1.15;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: clip;
+        line-height: 1;
     }
 
     #tabella-classifica th:nth-child(2) {
         font-size: 10px;
-        white-space: normal;
-        line-height: 1.1;
+        white-space: nowrap;
     }
 
-    #tabella-classifica td:nth-child(7) {
-        font-size: 10px;
+        /* PALMARÈS - versione mobile */
+    #tabella-palmares th:nth-child(1),
+    #tabella-palmares td:nth-child(1) {
+        width: 8%;
     }
-    
+
+    #tabella-palmares th:nth-child(2),
+    #tabella-palmares td:nth-child(2) {
+        width: 30%;
+    }
+
+    #tabella-palmares th:nth-child(3),
+    #tabella-palmares td:nth-child(3),
+    #tabella-palmares th:nth-child(4),
+    #tabella-palmares td:nth-child(4),
+    #tabella-palmares th:nth-child(5),
+    #tabella-palmares td:nth-child(5) {
+        width: 14%;
+    }
+
+    #tabella-palmares th:nth-child(6),
+    #tabella-palmares td:nth-child(6) {
+        width: 20%;
+    }
+
+    #tabella-palmares td:nth-child(2) {
+        font-size: 13px;
+        white-space: nowrap;
+    }
+
+    #tabella-palmares th:nth-child(2) {
+        font-size: 10px;
+        white-space: nowrap;
+    }
 }
 
 @media (max-width: 480px) {
