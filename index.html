@@ -4468,17 +4468,15 @@ setTimeout(function() {
                 <div class="record-value">
                     ${recordProfittoSingoloTorneo
                         .map(function(elemento) {
-                            return elemento.nome;
-                        })
-                        .filter(function(nome, indice, array) {
-                            return array.indexOf(nome) === indice;
+                            return elemento.nome +
+                                " — Torneo " +
+                                elemento.torneo;
                         })
                         .join(" · ")}
                 </div>
 
                 <div class="record-detail">
                     ${formattaEuroIntero(migliorProfittoSingoloTorneo)}
-                    · Torneo ${recordProfittoSingoloTorneo[0].torneo}
                 </div>
 
             </div>
