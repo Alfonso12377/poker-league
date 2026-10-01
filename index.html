@@ -289,6 +289,13 @@
         inset 0 0 0 2px rgba(255, 255, 255, 0.95),
         inset 0 0 0 4px #ededed;
 }
+    .torneo-card:active {
+    transform: translateY(-2px) scale(0.98);
+    box-shadow:
+        0 5px 12px rgba(0, 0, 0, 0.30),
+        inset 0 0 0 2px rgba(255, 255, 255, 0.95),
+        inset 0 0 0 4px #ededed;
+}
 
 /* Indice COPAG: valore + seme */
 .torneo-card .carta-angolo {
@@ -442,6 +449,10 @@
     background: rgba(0, 0, 0, 0.32);
     transform: translateY(-4px);
     box-shadow: 0 10px 22px rgba(0, 0, 0, 0.35);
+}
+    .menu button:active {
+    transform: translateY(-1px) scale(0.98);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
 }
     /* ============================= */
 /* RECORD & STATISTICHE */
@@ -1670,6 +1681,11 @@ th[onclick]:hover {
     .menu-record span {
         font-size: 14px;
     }
+}
+    button,
+.torneo-card {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
 }
     
 </style>
