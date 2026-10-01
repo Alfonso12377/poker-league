@@ -138,6 +138,62 @@
         font-weight: bold;
     }
 
+    /* =========================================================
+   SCHERMATA DI CARICAMENTO
+   ========================================================= */
+
+#loading-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: #202020;
+    color: white;
+    text-align: center;
+}
+
+.loading-semi {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 28px;
+    font-size: 34px;
+}
+
+.loading-semi span:nth-child(1),
+.loading-semi span:nth-child(4) {
+    color: white;
+}
+
+.loading-semi span:nth-child(2),
+.loading-semi span:nth-child(3) {
+    color: #e00000;
+}
+
+.loading-testo {
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 1.2px;
+}
+
+.loading-spinner {
+    width: 24px;
+    height: 24px;
+    margin: 20px auto 0 auto;
+    border: 3px solid rgba(255,255,255,0.2);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: gira-loading 0.8s linear infinite;
+}
+
+@keyframes gira-loading {
+    to {
+        transform: rotate(360deg);
+    }
+}
 #sito {
     max-width: 1200px;
     min-height: calc(100vh - 60px);
@@ -1261,6 +1317,23 @@ th[onclick]:hover {
 
 </div>
 
+    <!-- SCHERMATA DI CARICAMENTO -->
+
+<div id="loading-screen">
+
+    <div class="loading-semi">
+        <span>♠</span>
+        <span>♥</span>
+        <span>♦</span>
+        <span>♣</span>
+    </div>
+
+    <div class="loading-testo">
+        <div id="loading-messaggio">BENVENUTO AL TAVOLO</div>
+        <div class="loading-spinner"></div>
+    </div>
+
+</div>
 
     <!-- SITO -->
 
@@ -3143,8 +3216,15 @@ th[onclick]:hover {
 
         if (passwordInserita === "aura") {
 
-            document.getElementById("login-wrapper").style.display = "none";
-            document.getElementById("sito").style.display = "block";
+document.getElementById("login-wrapper").style.display = "none";
+document.getElementById("loading-screen").style.display = "flex";
+
+setTimeout(function() {
+
+    document.getElementById("loading-screen").style.display = "none";
+    document.getElementById("sito").style.display = "block";
+
+}, 2500);
 
             try {
                 aggiornaSemiMenu();
