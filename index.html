@@ -1866,7 +1866,7 @@ th[onclick]:hover {
 
     <div class="record-statistiche-contenitore">
 
-        <h3>🏆 Record individuali</h3>
+<h3>🏆 Record della Lega</h3>
 
         <div
             class="record-grid"
@@ -4039,6 +4039,229 @@ setTimeout(function() {
             return elemento.montepremi === montepremiPiuAlto;
         });
 
+            /* ============================= */
+    /* TORNEO MENO AFFOLLATO */
+    /* ============================= */
+
+    const minimoPartecipanti =
+        Math.min(...datiTornei.map(function(torneo) {
+            return torneo.players.length;
+        }));
+
+
+    const torneiMenoAffollati =
+        datiTornei.filter(function(torneo) {
+            return torneo.players.length === minimoPartecipanti;
+        });
+
+
+    /* ============================= */
+    /* MIGLIOR PROFITTO IN UN SINGOLO TORNEO */
+    /* ============================= */
+
+    const profittiSingoloTorneo = [];
+
+    datiTornei.forEach(function(torneo) {
+
+        torneo.players.forEach(function(giocatore) {
+
+            profittiSingoloTorneo.push({
+                nome: giocatore.name,
+                torneo: torneo.n,
+                profitto: Number(giocatore.profit) || 0
+            });
+
+        });
+
+    });
+
+
+    const migliorProfittoSingoloTorneo =
+        Math.max(...profittiSingoloTorneo.map(function(elemento) {
+            return elemento.profitto;
+        }));
+
+
+    const recordProfittoSingoloTorneo =
+        profittiSingoloTorneo.filter(function(elemento) {
+            return elemento.profitto === migliorProfittoSingoloTorneo;
+        });
+
+
+    /* ============================= */
+    /* PIÙ TORNEI CONSECUTIVI DISPUTATI */
+    /* ============================= */
+
+    const streakPartecipazioni = {};
+
+    statistiche.forEach(function(giocatore) {
+
+        let streakAttuale = 0;
+        let streakMassima = 0;
+
+        datiTornei.forEach(function(torneo) {
+
+            const haPartecipato =
+                torneo.players.some(function(p) {
+                    return p.name === giocatore.nome;
+                });
+
+            if (haPartecipato) {
+
+                streakAttuale++;
+
+                if (streakAttuale > streakMassima) {
+                    streakMassima = streakAttuale;
+                }
+
+            } else {
+
+                streakAttuale = 0;
+
+            }
+
+        });
+
+        streakPartecipazioni[giocatore.nome] = streakMassima;
+
+    });
+
+
+    const piuTorneiConsecutivi =
+        Math.max(...Object.values(streakPartecipazioni));
+
+
+    const giocatoriPiuTorneiConsecutivi =
+        Object.keys(streakPartecipazioni)
+            .filter(function(nome) {
+                return streakPartecipazioni[nome] === piuTorneiConsecutivi;
+            });
+
+
+    /* ============================= */
+    /* PIÙ VITTORIE CONSECUTIVE */
+    /* ============================= */
+
+    const streakVittorie = {};
+
+    statistiche.forEach(function(giocatore) {
+
+        let streakAttuale = 0;
+        let streakMassima = 0;
+
+        datiTornei.forEach(function(torneo) {
+
+            const haVinto =
+                torneo.players.some(function(p) {
+                    return p.name === giocatore.nome &&
+                        parseInt(p.pos, 10) === 1;
+                });
+
+            if (haVinto) {
+
+                streakAttuale++;
+
+                if (streakAttuale > streakMassima) {
+                    streakMassima = streakAttuale;
+                }
+
+            } else {
+
+                streakAttuale = 0;
+
+            }
+
+        });
+
+        streakVittorie[giocatore.nome] = streakMassima;
+
+    });
+
+
+    const piuVittorieConsecutive =
+        Math.max(...Object.values(streakVittorie));
+
+
+    const giocatoriPiuVittorieConsecutive =
+        Object.keys(streakVittorie)
+            .filter(function(nome) {
+                return streakVittorie[nome] === piuVittorieConsecutive;
+            });
+
+
+    /* ============================= */
+    /* TORNEO CON PIÙ REBUY E ADDON */
+    /* ============================= */
+
+    const torneiRebuyAddon =
+        datiTornei.map(function(torneo) {
+
+            let rebuy = 0;
+            let addon = 0;
+
+            torneo.players.forEach(function(giocatore) {
+
+                if (Number(giocatore.rebu) > 0) {
+                    rebuy++;
+                }
+
+                if (Number(giocatore.addon) > 0) {
+                    addon++;
+                }
+
+            });
+
+            return {
+                torneo: torneo,
+                rebuy: rebuy,
+                addon: addon,
+                totale: rebuy + addon
+            };
+
+        });
+
+
+    const massimoRebuyAddon =
+        Math.max(...torneiRebuyAddon.map(function(elemento) {
+            return elemento.totale;
+        }));
+
+
+    const torneiPiuRebuyAddon =
+        torneiRebuyAddon.filter(function(elemento) {
+            return elemento.totale === massimoRebuyAddon;
+        });
+
+
+    /* ============================= */
+    /* LUOGO CON PIÙ TORNEI OSPITATI */
+    /* ============================= */
+
+    const luoghi = {};
+
+    datiTornei.forEach(function(torneo) {
+
+        const luogo = torneo.venue || "Luogo non specificato";
+
+        if (!luoghi[luogo]) {
+            luoghi[luogo] = 0;
+        }
+
+        luoghi[luogo]++;
+
+    });
+
+
+    const massimoTorneiLuogo =
+        Math.max(...Object.values(luoghi));
+
+
+    const luoghiRecord =
+        Object.keys(luoghi)
+            .filter(function(luogo) {
+                return luoghi[luogo] === massimoTorneiLuogo;
+            });
+
 
     /* ============================= */
     /* RECORD INDIVIDUALI - HTML */
@@ -4211,6 +4434,135 @@ setTimeout(function() {
 
             </div>
 
+                        <div class="record-box">
+
+                <div class="record-icon">👤</div>
+
+                <div class="record-label">
+                    Torneo meno affollato
+                </div>
+
+                <div class="record-value">
+                    ${torneiMenoAffollati
+                        .map(function(torneo) {
+                            return "Torneo " + torneo.n;
+                        })
+                        .join(" · ")}
+                </div>
+
+                <div class="record-detail">
+                    ${minimoPartecipanti} partecipanti
+                </div>
+
+            </div>
+
+
+            <div class="record-box">
+
+                <div class="record-icon">💸</div>
+
+                <div class="record-label">
+                    Miglior profitto in un singolo torneo
+                </div>
+
+                <div class="record-value">
+                    ${recordProfittoSingoloTorneo
+                        .map(function(elemento) {
+                            return elemento.nome;
+                        })
+                        .filter(function(nome, indice, array) {
+                            return array.indexOf(nome) === indice;
+                        })
+                        .join(" · ")}
+                </div>
+
+                <div class="record-detail">
+                    ${formattaEuroIntero(migliorProfittoSingoloTorneo)}
+                    · Torneo ${recordProfittoSingoloTorneo[0].torneo}
+                </div>
+
+            </div>
+
+
+            <div class="record-box">
+
+                <div class="record-icon">🔄</div>
+
+                <div class="record-label">
+                    Più tornei consecutivi disputati
+                </div>
+
+                <div class="record-value">
+                    ${giocatoriPiuTorneiConsecutivi.join(" · ")}
+                </div>
+
+                <div class="record-detail">
+                    ${piuTorneiConsecutivi} tornei consecutivi
+                </div>
+
+            </div>
+
+
+            <div class="record-box">
+
+                <div class="record-icon">🔥</div>
+
+                <div class="record-label">
+                    Più vittorie consecutive
+                </div>
+
+                <div class="record-value">
+                    ${giocatoriPiuVittorieConsecutive.join(" · ")}
+                </div>
+
+                <div class="record-detail">
+                    ${piuVittorieConsecutive} vittorie consecutive
+                </div>
+
+            </div>
+
+
+            <div class="record-box">
+
+                <div class="record-icon">♻️</div>
+
+                <div class="record-label">
+                    Torneo con più rebuy e addon
+                </div>
+
+                <div class="record-value">
+                    ${torneiPiuRebuyAddon
+                        .map(function(elemento) {
+                            return "Torneo " + elemento.torneo.n;
+                        })
+                        .join(" · ")}
+                </div>
+
+                <div class="record-detail">
+                    ${massimoRebuyAddon} rebuy/addon
+                </div>
+
+            </div>
+
+
+            <div class="record-box">
+
+                <div class="record-icon">📍</div>
+
+                <div class="record-label">
+                    Luogo con più tornei ospitati
+                </div>
+
+                <div class="record-value">
+                    ${luoghiRecord.join(" · ")}
+                </div>
+
+                <div class="record-detail">
+                    ${massimoTorneiLuogo} tornei ospitati
+                </div>
+
+            </div>
+
         `;
 
     }
@@ -4261,22 +4613,12 @@ setTimeout(function() {
                 }, 0);
 
         }, 0);
+            const montepremiMedioPerTorneo =
+        datiTornei.length > 0
+            ? montepremiTotale / datiTornei.length
+            : 0;
 
-
-    const profittoTotale =
-        datiTornei.reduce(function(totale, torneo) {
-
-            return totale +
-                torneo.players.reduce(function(somma, giocatore) {
-
-                    return somma +
-                        (Number(giocatore.profit) || 0);
-
-                }, 0);
-
-        }, 0);
-
-
+        
     const statisticheLega =
         document.getElementById("statistiche-lega");
 
@@ -4349,18 +4691,20 @@ setTimeout(function() {
 
             </div>
 
-
-            <div class="statistica-lega-box">
+                        <div class="statistica-lega-box">
 
                 <span class="stat-label">
-                    Profitto complessivo
+                    Montepremi medio per torneo
                 </span>
 
                 <span class="stat-value">
-                    ${formattaEuroIntero(profittoTotale)}
+                    ${formattaEuroIntero(montepremiMedioPerTorneo)}
                 </span>
 
             </div>
+
+
+
 
         `;
 
