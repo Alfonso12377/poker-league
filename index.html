@@ -5530,13 +5530,30 @@ const elementi = [
     function mostraMenu() {
         preparaDissolvenza();
 
-        setTimeout(function() {
-            document.getElementById("classifica").style.display = "none";
-            document.getElementById("palmares").style.display = "none";
-            document.getElementById("tornei").style.display = "none";
-            document.getElementById("giocatori").style.display = "none";
-            document.getElementById("tornei-dettagli").style.display = "none";
-            document.getElementById("record-statistiche").style.display = "none";
+setTimeout(function() {
+
+    const schermate = [
+        "classifica",
+        "palmares",
+        "tornei",
+        "giocatori",
+        "record-statistiche",
+        "tornei-dettagli"
+    ];
+
+    schermate.forEach(function(id) {
+        const elemento = document.getElementById(id);
+
+        if (elemento) {
+            elemento.classList.remove(
+                "schermata-fade-out",
+                "schermata-fade-in"
+            );
+
+            elemento.style.opacity = "";
+            elemento.style.display = "none";
+        }
+    });
 
             const listaGiocatori = document.getElementById("giocatori-lista");
             const dettaglioGiocatore = document.getElementById("giocatore-dettaglio");
