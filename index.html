@@ -3529,7 +3529,7 @@ function generaNumeroCentrale(numero, rosso) {
     
 const curiositaGiocatori = {
     "Umberto Romano": [
-        "Veni, vidi, vici. È arrivato e ha dominato, riportando in alto il nome della famiglia Romano, che dopo le imprese di Errico sembrava ormai avviata verso la disgrazia."
+"👑 VENI, VIDI, VICI. È arrivato e ha dominato, riportando in alto il nome della famiglia Romano, che dopo le imprese di Errico sembrava ormai avviata verso la disgrazia."
     ],
     "Alfonso Annunziata": [
         function(g) {
@@ -3545,39 +3545,43 @@ const curiositaGiocatori = {
         function(g) {
             return `🔥 Ha vinto il ${formattaPercentuale(g.winRate)} dei tornei a cui ha partecipato.`;
         },
-        "👑 Detiene il record di cinque tornei consecutivi vinti."
+"👑 Detiene il record di cinque tornei consecutivi vinti.",
+"🃏 Non prende in mano una coppia di assi dal 2025."
     ],
     "Emanuele E.A./Arcangelo": [
         "I cosiddetti “Ragazzi”. Gli unici a giocare in coppia: una sola partecipazione è bastata per renderli difficili da scardinare, piazzandoli a quota 25,00 di posizionamento medio."
     ],
 "Emanuele Nicolo'": [
-    "🏆 È l'unico, oltre ad Alfonso, ad aver vinto più di un torneo.",
+    "🏆 È l'unico, oltre ad Alfonso e Diego, ad aver vinto più di un torneo.",
     "🃏 Prende 10 volte AA a partita, però, se parli con lui, è sempre sfortunato."
 ],
     "Diego Cavaliere": [
         function(g, classifica) {
             const massimo = Math.max.apply(null, classifica.map(function(x) { return x.partecipazioni; }));
             if (g.partecipazioni === massimo) {
-                return `🎩 Il Senatore. È il giocatore più presente della League, con ben ${g.partecipazioni} partecipazioni.`;
+                return `🎩 IL SENATORE. È il giocatore più presente della League, con ben ${g.partecipazioni} partecipazioni.`;
             }
-            return `🎩 Il Senatore. È già arrivato a quota ${g.partecipazioni} partecipazioni.`;
+            return `🎩 IL SENATORE. È già arrivato a quota ${g.partecipazioni} partecipazioni.`;
         },
-        function(g) {
-            const bilancio = formattaEuroIntero(g.profitto);
-            if (g.profitto < 0) {
-                return `🏅 Ha collezionato tantissime medaglie, ma nonostante questo il suo bilancio è ancora in negativo (${bilancio}). Questo, però, per lui non è un problema, anzi... ma non siete ancora pronti per questo discorso.`;
-            }
-            return `🏅 Ha collezionato tantissime medaglie e il suo bilancio attuale è ${bilancio}. Questo, però, per lui non è un problema, anzi... ma non siete ancora pronti per questo discorso.`;
-        }
+function(g) {
+    return `🏅 Praticamente sempre sul podio, ma nonostante questo appena poco in positivo. Ma tutto questo per lui non è un problema, anzi... ma non siete ancora pronti per questo discorso.`;
+},
+"🏆 È l'unico, oltre ad Alfonso ed Emanuele Nicolo', ad aver vinto più di un torneo."
     ],
-    "Fabrizio D'alessandro": [],
-    "Daniele Di Domenico": [],
-    "Domenico Correale": [
-        "⚔️ L'acerrimo nemico di Diego. Si gioca a casa sua e vorrebbe andare a dormire presto, ma non solo si finisce sempre tardi: è anche uno dei primi a uscire. E, dato che si gioca a casa sua, è costretto a rimanere lì a guardare gli altri giocare e finire: non può andarsene."
-    ],
+"Fabrizio D'alessandro": [
+    "o me o Prisco",
+    "o me o Diego"
+],
+"Daniele Di Domenico": [
+    "🍋 Limone"
+],
+"Domenico Correale": [
+    "⚔️ L'acerrimo nemico del Pitano. Si gioca da lui? Vuole finire presto? Vuole andare a dormire? Risultato base: uno dei primi ad uscire, a guardare il torneo fino alla fine e a soffrire.",
+    "🎓 Poteva essere il futuro campione di poker, ma ha tradito il suo maestro. E il tradimento si paga caro."
+],
     "Carlo Sepe": [
-        "🎓 L'allievo che supererà il maestro... forse. Il più giovane della League, è quello che dà filo da torcere a tutti, anche se deve ancora migliorare un po'.",
-        "⚠️ Ricordiamo a tutti che ha “solato” un poker per andare alla festa per i 25 anni di matrimonio degli zii della fidanzata con cui stava da appena un mese."
+"🎓 L'allievo che supererà il maestro?... forse. Il più giovane della Lega, da sempre filo da torcere.",
+"⚠️ Ricordiamo a tutti che ha solato un poker per andare alla festa per i 25 anni di matrimonio degli zii della fidanzata con cui stava da appena un mese."
     ],
     "Daniel Prisco": [
         "🎬 Non esiste mano che non valga la pena giocare. Daniel vuole esserci sempre: ogni mano può essere quella giusta."
@@ -3591,7 +3595,7 @@ const curiositaGiocatori = {
         function(g) {
             return `🎯 ${g.partecipazioni} partecipazioni senza ancora una vittoria.`;
         },
-        "🔥 THE CLUTCHER. È quello che arriva anche quando, in teoria, non dovrebbe esserci. Fa salti mortali pur di non mancare al tavolo, tra moglie, figlio e mille impegni.",
+"🔥 THE CLUTCHER. È quello che arriva anche quando non dovrebbe esserci. Fa salti mortali pur di non mancare. La sua classifica personale? 3° posto: moglie. 2° posto: figlio. 1° posto? POKER. AURA.",
         function(g, classifica) {
             const minimoProfitto = Math.min.apply(null, classifica.map(function(x) { return x.profitto; }));
             if (g.profitto === minimoProfitto) {
