@@ -3786,6 +3786,7 @@ document.getElementById("login-wrapper").style.display = "none";
 const loadingScreen = document.getElementById("loading-screen");
 
 loadingScreen.style.display = "flex";
+document.body.classList.add("sfondo-caricamento");
 
 requestAnimationFrame(function() {
     requestAnimationFrame(function() {
@@ -3800,6 +3801,7 @@ loadingScreen.classList.remove("loading-visible");
 setTimeout(function() {
     loadingScreen.style.display = "none";
     document.getElementById("sito").style.display = "block";
+    document.body.classList.remove("sfondo-caricamento");
 }, 500);
 
 }, 2000);
