@@ -4437,6 +4437,42 @@ stats.ultimaApparizione = torneo.n;
             .filter(function(luogo) {
                 return luoghi[luogo] === massimoTorneiLuogo;
             });
+        
+/* PIÙ ULTIMI POSTI */
+
+const ultimiPosti = {};
+
+datiTornei.forEach(function(torneo) {
+    const ultimaPosizione = torneo.players.length;
+
+    torneo.players.forEach(function(giocatore) {
+        if (parseInt(giocatore.pos, 10) === ultimaPosizione) {
+            ultimiPosti[giocatore.name] =
+                (ultimiPosti[giocatore.name] || 0) + 1;
+        }
+    });
+});
+
+const massimoUltimiPosti =
+    Math.max(...Object.values(ultimiPosti));
+
+const giocatoriPiuUltimiPosti =
+    Object.keys(ultimiPosti)
+        .filter(function(nome) {
+            return ultimiPosti[nome] === massimoUltimiPosti;
+        });
+
+/* PLURIVINCITORI */
+
+const plurivincitori = statistiche
+    .filter(function(giocatore) {
+        return giocatore.vittorie >= 2;
+    })
+    .sort(function(a, b) {
+        return b.vittorie - a.vittorie ||
+            a.nome.localeCompare(b.nome);
+    });
+
 
         /* PIÙ PARTECIPAZIONI SENZA VITTORIE */
 
@@ -4818,6 +4854,51 @@ Miglior profitto senza vittorie
     </div>
 
 </div>
+
+
+<div class="record-box">
+
+    <div class="record-icon">💀</div>
+
+    <div class="record-label">
+        Più ultimi posti
+    </div>
+
+    <div class="record-value">
+        ${giocatoriPiuUltimiPosti.join(" · ")}
+    </div>
+
+    <div class="record-detail">
+        ${massimoUltimiPosti} ultimi posti
+    </div>
+
+</div>
+
+<div class="record-box">
+
+    <div class="record-icon">🏆</div>
+
+    <div class="record-label">
+        Plurivincitori
+    </div>
+
+    <div class="record-value">
+        ${plurivincitori.length
+            ? plurivincitori.map(function(giocatore) {
+                return giocatore.nome;
+            }).join(" · ")
+            : "Nessuno"}
+    </div>
+
+    <div class="record-detail">
+        ${plurivincitori.map(function(giocatore) {
+            return giocatore.nome + ": " +
+                giocatore.vittorie + " vittorie";
+        }).join(" · ")}
+    </div>
+
+</div>
+
 
         `;
 
