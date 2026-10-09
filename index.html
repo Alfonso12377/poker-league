@@ -3965,8 +3965,10 @@ setTimeout(function() {
 
                     statistiche[giocatore.name] = {
                         nome: giocatore.name,
-                        partecipazioni: 0,
-                        vittorie: 0,
+esordio: torneo.n,
+ultimaApparizione: torneo.n,
+partecipazioni: 0,
+vittorie: 0,
                         posizioniNormalizzate: [],
                         profitto: 0
                     };
@@ -3974,6 +3976,9 @@ setTimeout(function() {
                 }
 
                 const stats = statistiche[giocatore.name];
+                
+stats.ultimaApparizione = torneo.n;
+
 
                 const posizione =
                     parseInt(giocatore.pos, 10);
@@ -5332,6 +5337,10 @@ setTimeout(function() {
             <h3>${g.nome}</h3>
             <div class="giocatore-statistiche">
                 <div><strong>Partecipazioni</strong><span>${g.partecipazioni}</span></div>
+                
+<div><strong>Esordio</strong><span>Torneo ${g.esordio}</span></div>
+<div><strong>Ultima apparizione</strong><span>Torneo ${g.ultimaApparizione}</span></div>
+
                 <div><strong>Vittorie</strong><span>${g.vittorie}</span></div>
                 <div><strong>Pos. media</strong><span>${formattaNumero(g.posizioneMedia)}</span></div>
                 <div><strong>Win rate</strong><span>${formattaPercentuale(g.winRate)}</span></div>
