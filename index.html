@@ -5246,54 +5246,62 @@ coloraColonnaClassifica(4);;
 
 
 
+
 function coloraColonnaClassifica(colonna) {
     const tabella = document.getElementById("tabella-classifica");
     if (!tabella) return;
 
     const righe = Array.from(tabella.querySelectorAll("tbody tr"));
 
-    // Rimuove le colorazioni precedenti senza eliminare i badge.
+    // Ripristina lo sfondo originale di tutte le celle.
+    // Non modifica i badge di Profitto/Perdita.
     righe.forEach(function(riga) {
         Array.from(riga.cells).forEach(function(cella) {
-            cella.style.backgroundColor = "";
-            cella.style.color = "";
+            cella.style.removeProperty("background-color");
+            cella.style.removeProperty("color");
         });
     });
 
-    // La colonna Giocatore non deve essere colorata.
+    // La colonna Giocatore non viene colorata.
     if (colonna === 1) return;
 
-    // Profitto/Perdita: conserva i riquadri minimal esistenti.
+    // Profitto/Perdita: mantiene i badge minimal già esistenti.
     if (colonna === 6) {
         righe.forEach(function(riga) {
             const cella = riga.cells[6];
             if (!cella) return;
 
-            const testo = cella.textContent.trim();
-            const valore = parseFloat(
-                testo.replace(/[€%+\s]/g, "").replace(",", ".")
-            );
+            let badge = cella.querySelector(".badge-profitto");
 
-            const badge = document.createElement("span");
-            badge.className = "badge-profitto";
+            if (!badge) {
+                const testo = cella.textContent.trim();
+                const valore = parseFloat(
+                    testo.replace(/[€%+\s]/g, "").replace(",", ".")
+                );
 
-            if (Number.isFinite(valore) && valore > 0) {
-                badge.classList.add("profitto-positivo");
-            } else if (Number.isFinite(valore) && valore < 0) {
-                badge.classList.add("profitto-negativo");
-            } else {
-                badge.classList.add("profitto-zero");
+                badge = document.createElement("span");
+                badge.className = "badge-profitto";
+
+                if (Number.isFinite(valore) && valore > 0) {
+                    badge.classList.add("profitto-positivo");
+                } else if (Number.isFinite(valore) && valore < 0) {
+                    badge.classList.add("profitto-negativo");
+                } else {
+                    badge.classList.add("profitto-zero");
+                }
+
+                badge.textContent = testo;
+                cella.replaceChildren(badge);
             }
-
-            badge.textContent = testo;
-            cella.replaceChildren(badge);
         });
+
         return;
     }
 
-    // Calcola i valori della colonna numerica selezionata.
+    // Legge i valori numerici della sola colonna selezionata.
     const valori = righe.map(function(riga) {
         const testo = riga.cells[colonna]?.textContent.trim() || "";
+
         return parseFloat(
             testo.replace(/[€%+\s]/g, "").replace(",", ".")
         );
@@ -5304,6 +5312,11 @@ function coloraColonnaClassifica(colonna) {
 
     const minimo = Math.min.apply(null, validi);
     const massimo = Math.max.apply(null, validi);
+
+    // Toni scuri e discreti, coerenti con i badge Profitto/Perdita.
+    const rosso = [64, 35, 35];
+    const giallo = [67, 58, 35];
+    const verde = [23, 60, 39];
 
     righe.forEach(function(riga) {
         const cella = riga.cells[colonna];
@@ -5320,15 +5333,10 @@ function coloraColonnaClassifica(colonna) {
             ? 0.5
             : (valore - minimo) / (massimo - minimo);
 
-        // In Posizione media, il valore più basso è il migliore.
+        // Per Posizione media, il valore più basso è il migliore.
         if (colonna === 4) {
             intensita = 1 - intensita;
         }
-
-        // Sfumatura più leggera e minimal.
-        const rosso = [250, 225, 225];
-        const giallo = [255, 249, 220];
-        const verde = [225, 242, 228];
 
         let da, a, t;
 
@@ -5348,9 +5356,10 @@ function coloraColonnaClassifica(colonna) {
 
         cella.style.backgroundColor =
             "rgb(" + rgb.join(", ") + ")";
-        cella.style.color = "#222";
+        cella.style.color = "#eeeeee";
     });
 }
+
 
 
 
