@@ -1789,6 +1789,118 @@ th[onclick]:hover {
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
 }
+
+    
+/* =========================================
+   RIFINITURA TABELLE SU SMARTPHONE
+   Classifica e Palmarès
+   ========================================= */
+
+@media (max-width: 800px) {
+
+    /* Classifica: uniforma dimensione e allineamento */
+    #tabella-classifica th,
+    #tabella-classifica td {
+        vertical-align: middle;
+        border-left: 1px solid #444 !important;
+    }
+
+    #tabella-classifica th:first-child,
+    #tabella-classifica td:first-child {
+        border-left: none !important;
+    }
+
+    #tabella-classifica td:first-child {
+        font-size: 12px;
+    }
+
+    #tabella-classifica td:nth-child(2) {
+        font-size: 12px;
+        line-height: 1.15;
+    }
+
+    #tabella-classifica td:nth-child(3),
+    #tabella-classifica td:nth-child(4),
+    #tabella-classifica td:nth-child(5),
+    #tabella-classifica td:nth-child(6) {
+        font-size: 11px;
+    }
+
+    /* Profitto medio e Profitto/Perdita */
+    #tabella-classifica td:nth-child(7),
+    #tabella-classifica td:nth-child(8) {
+        font-size: 11px;
+        padding: 5px 3px;
+    }
+
+    #tabella-classifica td:nth-child(7) .badge-profitto,
+    #tabella-classifica td:nth-child(8) .badge-profitto {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 6px 2px;
+        font-size: 11px;
+        line-height: 1.2;
+        white-space: nowrap;
+        border-radius: 8px;
+    }
+
+    /* Palmarès: caratteri proporzionati tra le colonne */
+    #tabella-palmares th,
+    #tabella-palmares td {
+        font-size: 11px;
+        vertical-align: middle;
+    }
+
+    #tabella-palmares td:first-child {
+        font-size: 11px;
+    }
+
+    #tabella-palmares td:nth-child(2) {
+        font-size: 12px;
+        line-height: 1.15;
+    }
+
+    #tabella-palmares td:nth-child(3),
+    #tabella-palmares td:nth-child(4),
+    #tabella-palmares td:nth-child(5) {
+        font-size: 13px;
+    }
+
+    #tabella-palmares td:nth-child(6) {
+        font-size: 12px;
+    }
+
+    /* Separatore uniforme prima dell'ultima colonna */
+    #tabella-palmares td:nth-child(6) {
+        border-left: 1px solid #444;
+    }
+}
+
+/* Smartphone in orizzontale: valori leggibili e uniformi */
+@media (max-width: 1000px) and (orientation: landscape) {
+
+    #tabella-classifica td:first-child {
+        font-size: 12px;
+    }
+
+    #tabella-classifica td:nth-child(7),
+    #tabella-classifica td:nth-child(8) {
+        font-size: 12px;
+    }
+
+    #tabella-classifica td:nth-child(7) .badge-profitto,
+    #tabella-classifica td:nth-child(8) .badge-profitto {
+        font-size: 12px;
+        padding: 6px 3px;
+    }
+
+    #tabella-palmares td:nth-child(3),
+    #tabella-palmares td:nth-child(4),
+    #tabella-palmares td:nth-child(5) {
+        font-size: 14px;
+    }
+}
+
     
 </style>
 </head>
