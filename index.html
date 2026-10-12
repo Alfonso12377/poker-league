@@ -1876,30 +1876,88 @@ th[onclick]:hover {
     }
 }
 
-/* Smartphone in orizzontale: valori leggibili e uniformi */
-@media (max-width: 1000px) and (orientation: landscape) {
 
-    #tabella-classifica td:first-child {
-        font-size: 12px;
+/* =========================================
+   RIFINITURA FINALE TABELLE
+   ========================================= */
+
+/* CLASSIFICA: solo nome giocatore e Profitto/Perdita separati */
+#tabella-classifica th,
+#tabella-classifica td {
+    border-left: none !important;
+    border-right: none !important;
+    border-top: 1px solid #444;
+    border-bottom: none;
+}
+
+/* Separatore dopo la posizione e prima del nome */
+#tabella-classifica th:nth-child(2),
+#tabella-classifica td:nth-child(2) {
+    border-left: 1px solid #555 !important;
+    text-align: left;
+}
+
+/* Separatore prima del Profitto/Perdita */
+#tabella-classifica th:nth-child(8),
+#tabella-classifica td:nth-child(8) {
+    border-left: 1px solid #555 !important;
+}
+
+/* PALMARÈS: righe separate solo orizzontalmente */
+#tabella-palmares th,
+#tabella-palmares td {
+    border-left: none !important;
+    border-right: none !important;
+    border-top: 1px solid #444;
+    border-bottom: none;
+}
+
+/* Nome giocatore: separatore verticale */
+#tabella-palmares th:nth-child(2),
+#tabella-palmares td:nth-child(2) {
+    border-left: 1px solid #555 !important;
+    text-align: left;
+}
+
+/* Totale medaglie: mantiene il separatore esistente */
+#tabella-palmares th:nth-child(6),
+#tabella-palmares td:nth-child(6) {
+    border-left: 1px solid #555 !important;
+}
+
+/* Intestazioni coerenti con l'allineamento dei dati */
+#tabella-palmares th:nth-child(2) {
+    text-align: left !important;
+    padding-left: 10px;
+}
+
+/* Evita che le regole mobile reintroducano la griglia */
+@media (max-width: 800px) {
+    #tabella-classifica th,
+    #tabella-classifica td,
+    #tabella-palmares th,
+    #tabella-palmares td {
+        border-right: none !important;
+        border-bottom: none;
     }
 
-    #tabella-classifica td:nth-child(7),
-    #tabella-classifica td:nth-child(8) {
-        font-size: 12px;
+    #tabella-classifica th:nth-child(2),
+    #tabella-classifica td:nth-child(2),
+    #tabella-classifica th:nth-child(8),
+    #tabella-classifica td:nth-child(8),
+    #tabella-palmares th:nth-child(2),
+    #tabella-palmares td:nth-child(2),
+    #tabella-palmares th:nth-child(6),
+    #tabella-palmares td:nth-child(6) {
+        border-left: 1px solid #555 !important;
     }
 
-    #tabella-classifica td:nth-child(7) .badge-profitto,
-    #tabella-classifica td:nth-child(8) .badge-profitto {
-        font-size: 12px;
-        padding: 6px 3px;
-    }
-
-    #tabella-palmares td:nth-child(3),
-    #tabella-palmares td:nth-child(4),
-    #tabella-palmares td:nth-child(5) {
-        font-size: 14px;
+    #tabella-palmares th:nth-child(2) {
+        text-align: left !important;
+        padding-left: 10px;
     }
 }
+
 
     
 </style>
