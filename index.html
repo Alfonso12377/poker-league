@@ -1878,7 +1878,8 @@ th[onclick]:hover {
                 <th onclick="ordinaTabella(3, 'numero')">Vittorie ↕</th>
                 <th onclick="ordinaTabella(4, 'numero')">Pos. medio ↕</th>
                 <th onclick="ordinaTabella(5, 'numero')">Win Rate ↕</th>
-                <th onclick="ordinaTabella(6, 'numero')">Profitto/Perdita ↕</th>
+                <th onclick="ordinaTabella(6, 'numero')">Profitto medio ↕</th>
+                <th onclick="ordinaTabella(7, 'numero')">Profitto/Perdita ↕</th>
             </tr>
         </thead>
 
@@ -4086,10 +4087,16 @@ stats.ultimaApparizione = torneo.n;
                     ? stats.vittorie / stats.partecipazioni
                     : 0;
 
+            const profittoMedio =
+                stats.partecipazioni > 0
+                    ? stats.profitto / stats.partecipazioni
+                    : 0;
+
             return {
                 ...stats,
                 posizioneMedia: posizioneMedia,
-                winRate: winRate
+                winRate: winRate,
+                profittoMedio: profittoMedio
             };
 
         });
@@ -5365,6 +5372,7 @@ if (valore === 0 && colonna !== 5) {
                     <td>${giocatore.vittorie}</td>
                     <td>${formattaNumero(giocatore.posizioneMedia)}</td>
                     <td>${formattaPercentuale(giocatore.winRate)}</td>
+                    <td>${formattaEuro(giocatore.profittoMedio)}</td>
                     <td>${formattaEuroIntero(giocatore.profitto)}</td>
                 </tr>
             `;
@@ -5458,7 +5466,7 @@ function coloraColonnaClassifica(colonna) {
 
         let colore;
 
-        if (colonna === 6) {
+        if (colonna === 6 || colonna === 7) {
             // Profitto/Perdita: verde, grigio o rosso.
             if (valore > 0) {
                 const intensita = massimoPositivo > 0
@@ -5524,7 +5532,7 @@ function coloraColonnaClassifica(colonna) {
 
 
         // Mantiene i riquadri minimal di Profitto/Perdita.
-        if (colonna === 6) {
+        if (colonna === 6 || colonna === 7) {
             const badge = document.createElement("span");
             badge.className = "badge-profitto";
             badge.textContent = cella.textContent.trim();
@@ -5769,6 +5777,7 @@ setTimeout(function() {
                 <div><strong>Vittorie</strong><span>${g.vittorie}</span></div>
                 <div><strong>Pos. media</strong><span>${formattaNumero(g.posizioneMedia)}</span></div>
                 <div><strong>Win rate</strong><span>${formattaPercentuale(g.winRate)}</span></div>
+                                <div><strong>Profitto medio</strong><span>${formattaEuro(g.profittoMedio)}</span></div>
                 <div><strong>Profitto/Perdita</strong><span>${formattaEuroIntero(g.profitto)}</span></div>
             </div>
 
