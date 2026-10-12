@@ -5263,6 +5263,7 @@ coloraColonnaClassifica(4);
 
 
 
+
 function coloraColonnaClassifica(colonna) {
     const tabella = document.getElementById("tabella-classifica");
     if (!tabella) return;
@@ -5270,16 +5271,20 @@ function coloraColonnaClassifica(colonna) {
     const righe = Array.from(tabella.querySelectorAll("tbody tr"));
     if (!righe.length) return;
 
-    // Ripristina tutte le celle prima di applicare la nuova sfumatura.
+    // Rimuove la colorazione precedente e ripristina
+    // il testo originale di tutte le celle.
     righe.forEach(function(riga) {
         Array.from(riga.cells).forEach(function(cella) {
-            cella.style.removeProperty("background-color");
-            cella.style.removeProperty("color");
+            const badge = cella.querySelector(
+                ".badge-statistica, .badge-profitto"
+            );
 
-            const badge = cella.querySelector(".badge-profitto");
             if (badge) {
                 cella.textContent = badge.textContent;
             }
+
+            cella.style.removeProperty("background-color");
+            cella.style.removeProperty("color");
         });
     });
 
@@ -5289,8 +5294,11 @@ function coloraColonnaClassifica(colonna) {
     // Legge i valori della colonna selezionata.
     const valori = righe.map(function(riga) {
         const testo = riga.cells[colonna]?.textContent.trim() || "";
+
         return parseFloat(
-            testo.replace(/[€%+\s]/g, "").replace(",", ".")
+            testo
+                .replace(/[€%+\s]/g, "")
+                .replace(",", ".")
         );
     });
 
@@ -5300,7 +5308,6 @@ function coloraColonnaClassifica(colonna) {
     const minimo = Math.min(...validi);
     const massimo = Math.max(...validi);
 
-    // Palette scura: rosso, giallo e verde.
     const rosso = [64, 35, 35];
     const giallo = [67, 58, 35];
     const verde = [23, 60, 39];
@@ -5316,7 +5323,7 @@ function coloraColonnaClassifica(colonna) {
             ? 1
             : (valore - minimo) / (massimo - minimo);
 
-        // Per la posizione media, un valore più basso è migliore.
+        // Nella posizione media, valori più bassi sono migliori.
         if (colonna === 4) {
             intensita = 1 - intensita;
         }
@@ -5325,11 +5332,13 @@ function coloraColonnaClassifica(colonna) {
 
         if (intensita < 0.5) {
             const t = intensita * 2;
+
             colore = rosso.map(function(c, i) {
                 return Math.round(c + (giallo[i] - c) * t);
             });
         } else {
             const t = (intensita - 0.5) * 2;
+
             colore = giallo.map(function(c, i) {
                 return Math.round(c + (verde[i] - c) * t);
             });
@@ -5337,31 +5346,29 @@ function coloraColonnaClassifica(colonna) {
 
         const sfondo = "rgb(" + colore.join(", ") + ")";
 
-        // Profitto/Perdita: mantiene i riquadri minimal,
-        // ma utilizza la stessa sfumatura graduale.
+        // Mantiene i riquadri minimal di Profitto/Perdita.
         if (colonna === 6) {
-            const testo = cella.textContent.trim();
             const badge = document.createElement("span");
             badge.className = "badge-profitto";
-            badge.textContent = testo;
+            badge.textContent = cella.textContent.trim();
             badge.style.backgroundColor = sfondo;
             badge.style.color = "#eeeeee";
+
             cella.replaceChildren(badge);
             return;
         }
 
-        // Le altre colonne usano riquadri minimal
-        // anziché colorare l'intera cella.
-        const testo = cella.textContent.trim();
+        // Crea il riquadro solo nella colonna selezionata.
         const badge = document.createElement("span");
         badge.className = "badge-statistica";
-        badge.textContent = testo;
+        badge.textContent = cella.textContent.trim();
         badge.style.backgroundColor = sfondo;
-        badge.style.color = "#ffffff";
+        badge.style.color = "#eeeeee";
 
         cella.replaceChildren(badge);
     });
 }
+
 
 
 
