@@ -1267,7 +1267,8 @@ td:nth-child(2) {
 }
 
 
-#tabella-classifica td:nth-child(7) {
+#tabella-classifica td:nth-child(7),
+#tabella-classifica td:nth-child(8) {
     font-weight: bold;
     border-left: 1px solid #555;
     background: transparent !important;
@@ -1275,7 +1276,8 @@ td:nth-child(2) {
     padding: 5px 12px;
 }
 
-#tabella-classifica td:nth-child(7) .badge-profitto {
+#tabella-classifica td:nth-child(7) .badge-profitto,
+#tabella-classifica td:nth-child(8) .badge-profitto {
     display: block;
     padding: 7px 10px;
     border-radius: 8px;
@@ -1285,17 +1287,20 @@ td:nth-child(2) {
     color: #eeeeee;
 }
 
-#tabella-classifica td:nth-child(7) .profitto-positivo {
+#tabella-classifica td:nth-child(7) .profitto-positivo,
+    #tabella-classifica td:nth-child(8) .profitto-positivo {
     background: #173c27;
     color: #58d68d;
 }
 
-#tabella-classifica td:nth-child(7) .profitto-negativo {
+#tabella-classifica td:nth-child(7) .profitto-negativo
+    #tabella-classifica td:nth-child(8) .profitto-negativo {
     background: #402323;
     color: #ff8585;
 }
 
-#tabella-classifica td:nth-child(7) .profitto-zero {
+#tabella-classifica td:nth-child(7) .profitto-zero
+    #tabella-classifica td:nth-child(8) .profitto-zero {
     background: #303030;
     color: #cccccc;
 }
@@ -1473,10 +1478,12 @@ th[onclick]:hover {
         width: 13%;
     }
 
-    #tabella-classifica th:nth-child(7),
-    #tabella-classifica td:nth-child(7) {
-        width: 15%;
-    }
+#tabella-classifica th:nth-child(7),
+#tabella-classifica td:nth-child(7),
+#tabella-classifica th:nth-child(8),
+#tabella-classifica td:nth-child(8) {
+    width: 12%;
+}
 
     #tabella-classifica td:nth-child(2) {
         font-size: 13px;
