@@ -2013,6 +2013,45 @@ th[onclick]:hover {
     }
 }
 
+
+/* CORREZIONE DEFINITIVA SEPARATORI TABELLE */
+
+/* CLASSIFICA: linea dopo Giocatore */
+#tabella-classifica th:nth-child(2),
+#tabella-classifica td:nth-child(2) {
+    border-left: none !important;
+    border-right: none !important;
+}
+
+#tabella-classifica th:nth-child(3),
+#tabella-classifica td:nth-child(3) {
+    border-left: 1px solid #555 !important;
+}
+
+/* CLASSIFICA: linea prima di Profitto/Perdita */
+#tabella-classifica th:nth-child(8),
+#tabella-classifica td:nth-child(8) {
+    border-left: 1px solid #555 !important;
+}
+
+/* PALMARÈS: linea dopo Giocatore */
+#tabella-palmares th:nth-child(2),
+#tabella-palmares td:nth-child(2) {
+    border-left: none !important;
+    border-right: none !important;
+}
+
+#tabella-palmares th:nth-child(3),
+#tabella-palmares td:nth-child(3) {
+    border-left: 1px solid #555 !important;
+}
+
+/* PALMARÈS: linea prima di Totale medaglie */
+#tabella-palmares th:nth-child(6),
+#tabella-palmares td:nth-child(6) {
+    border-left: 1px solid #555 !important;
+}
+
     
 </style>
 </head>
