@@ -1881,57 +1881,95 @@ th[onclick]:hover {
    RIFINITURA FINALE TABELLE
    ========================================= */
 
-/* CLASSIFICA: solo nome giocatore e Profitto/Perdita separati */
+
+/* CLASSIFICA: larghezze fisse e separatori coerenti */
+#tabella-classifica {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
 #tabella-classifica th,
 #tabella-classifica td {
     border-left: none !important;
     border-right: none !important;
     border-top: 1px solid #444;
     border-bottom: none;
+    box-sizing: border-box;
 }
 
-/* Separatore dopo la posizione e prima del nome */
+/* Unico separatore dopo la posizione: prima del nome */
 #tabella-classifica th:nth-child(2),
 #tabella-classifica td:nth-child(2) {
     border-left: 1px solid #555 !important;
     text-align: left;
 }
 
-/* Separatore prima del Profitto/Perdita */
+/* Unico altro separatore: prima di Profitto/Perdita */
 #tabella-classifica th:nth-child(8),
 #tabella-classifica td:nth-child(8) {
     border-left: 1px solid #555 !important;
 }
 
-/* PALMARÈS: righe separate solo orizzontalmente */
+/* Le celle mantengono sempre la larghezza della colonna */
+#tabella-classifica td:nth-child(7),
+#tabella-classifica td:nth-child(8) {
+    padding: 5px 6px;
+    background: transparent !important;
+    color: inherit !important;
+    overflow: hidden;
+}
+
+#tabella-classifica td:nth-child(7) .badge-profitto,
+#tabella-classifica td:nth-child(8) .badge-profitto {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    padding: 7px 3px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+/* PALMARÈS: separatori e allineamento */
+#tabella-palmares {
+    table-layout: fixed;
+    width: 100%;
+}
+
 #tabella-palmares th,
 #tabella-palmares td {
     border-left: none !important;
     border-right: none !important;
     border-top: 1px solid #444;
     border-bottom: none;
+    box-sizing: border-box;
 }
 
-/* Nome giocatore: separatore verticale */
 #tabella-palmares th:nth-child(2),
 #tabella-palmares td:nth-child(2) {
     border-left: 1px solid #555 !important;
-    text-align: left;
+    text-align: left !important;
+    padding-left: 10px;
 }
 
-/* Totale medaglie: mantiene il separatore esistente */
 #tabella-palmares th:nth-child(6),
 #tabella-palmares td:nth-child(6) {
     border-left: 1px solid #555 !important;
 }
 
-/* Intestazioni coerenti con l'allineamento dei dati */
-#tabella-palmares th:nth-child(2) {
+/* Allineamento del nome anche quando è un pulsante */
+#tabella-palmares .nome-giocatore-link {
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin: 0;
     text-align: left !important;
-    padding-left: 10px;
+    font: inherit;
 }
 
-/* Evita che le regole mobile reintroducano la griglia */
 @media (max-width: 800px) {
     #tabella-classifica th,
     #tabella-classifica td,
@@ -1940,6 +1978,42 @@ th[onclick]:hover {
         border-right: none !important;
         border-bottom: none;
     }
+
+    #tabella-classifica th:nth-child(2),
+    #tabella-classifica td:nth-child(2),
+    #tabella-classifica th:nth-child(8),
+    #tabella-classifica td:nth-child(8),
+    #tabella-palmares th:nth-child(2),
+    #tabella-palmares td:nth-child(2),
+    #tabella-palmares th:nth-child(6),
+    #tabella-palmares td:nth-child(6) {
+        border-left: 1px solid #555 !important;
+    }
+
+    #tabella-classifica td:nth-child(7),
+    #tabella-classifica td:nth-child(8) {
+        padding: 5px 2px;
+    }
+
+    #tabella-classifica td:nth-child(7) .badge-profitto,
+    #tabella-classifica td:nth-child(8) .badge-profitto {
+        padding: 6px 1px;
+        font-size: 11px;
+        line-height: 1.2;
+    }
+
+    #tabella-palmares th:nth-child(2) {
+        text-align: left !important;
+        padding-left: 10px;
+    }
+
+    #tabella-palmares .nome-giocatore-link {
+        display: block;
+        width: 100%;
+        text-align: left !important;
+    }
+}
+
 
     #tabella-classifica th:nth-child(2),
     #tabella-classifica td:nth-child(2),
