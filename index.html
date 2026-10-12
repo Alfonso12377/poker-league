@@ -5256,11 +5256,13 @@ function coloraColonnaPalmares(colonna) {
         coloreBase = [65, 43, 31];
         coloreIntenso = [119, 72, 42];
 
+
     } else {
-        // Totale: dal rosso scuro per i valori bassi al verde per quelli alti.
-        coloreBase = [82, 40, 40];
-        coloreIntenso = [34, 85, 55];
+        // Totale: gradiente ambrato, distinto dall'oro delle medaglie.
+        coloreBase = [58, 46, 30];
+        coloreIntenso = [116, 88, 38];
     }
+
 
 
     righe.forEach(function(riga, indice) {
@@ -5271,7 +5273,7 @@ function coloraColonnaPalmares(colonna) {
         if (!Number.isFinite(valore)) return;
 
         // Nessuna medaglia: grigio neutro.
-        if (valore === 0) {
+if (valore === 0 && colonna !== 5) {
             cella.style.backgroundColor = "rgb(48, 48, 48)";
             return;
         }
