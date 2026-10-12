@@ -5213,7 +5213,87 @@ function generaPalmares() {
 
         }).join("");
 
+        coloraColonnaPalmares(2);
+
 }
+
+    
+function coloraColonnaPalmares(colonna) {
+    const tabella = document.getElementById("tabella-palmares");
+    if (!tabella) return;
+
+    const righe = Array.from(tabella.querySelectorAll("tbody tr"));
+    if (!righe.length) return;
+
+    // Rimuove solo i colori applicati dalla selezione precedente.
+    righe.forEach(function(riga) {
+        Array.from(riga.cells).forEach(function(cella) {
+            cella.style.removeProperty("background-color");
+            cella.style.removeProperty("color");
+        });
+    });
+
+    // Giocatore e posizione non ricevono sfumature.
+    if (colonna === 0 || colonna === 1) return;
+
+    const valori = righe.map(function(riga) {
+        return parseInt(riga.cells[colonna]?.textContent.trim(), 10);
+    });
+
+    const validi = valori.filter(Number.isFinite);
+    if (!validi.length) return;
+
+    const massimo = Math.max.apply(null, validi);
+
+    // Palette metalliche scure.
+    let coloreBase;
+    let coloreIntenso;
+
+    if (colonna === 2) {
+        // Oro.
+        coloreBase = [61, 49, 24];
+        coloreIntenso = [112, 83, 25];
+    } else if (colonna === 3) {
+        // Argento.
+        coloreBase = [48, 49, 52];
+        coloreIntenso = [100, 105, 113];
+    } else if (colonna === 4) {
+        // Bronzo.
+        coloreBase = [65, 43, 31];
+        coloreIntenso = [119, 72, 42];
+    } else {
+        // Totale: scala neutra grigia.
+        coloreBase = [43, 43, 43];
+        coloreIntenso = [82, 82, 82];
+    }
+
+    righe.forEach(function(riga, indice) {
+        const cella = riga.cells[colonna];
+        if (!cella) return;
+
+        const valore = valori[indice];
+        if (!Number.isFinite(valore)) return;
+
+        // Nessuna medaglia: grigio neutro.
+        if (valore === 0) {
+            cella.style.backgroundColor = "rgb(48, 48, 48)";
+            return;
+        }
+
+        const intensita = massimo > 0 ? valore / massimo : 0;
+
+        const colore = coloreBase.map(function(c, i) {
+            return Math.round(
+                c + (coloreIntenso[i] - c) * intensita
+            );
+        });
+
+        cella.style.backgroundColor =
+            "rgb(" + colore.join(", ") + ")";
+        cella.style.color = "#eeeeee";
+    });
+}
+
 
 
     function generaClassifica() {
