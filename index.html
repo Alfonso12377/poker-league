@@ -5308,9 +5308,27 @@ function coloraColonnaClassifica(colonna) {
     const minimo = Math.min(...validi);
     const massimo = Math.max(...validi);
 
+
+    // Colori originali per le altre colonne della classifica.
     const rosso = [64, 35, 35];
     const giallo = [67, 58, 35];
     const verde = [23, 60, 39];
+
+    // Scale separate per Profitto/Perdita.
+    const positivi = validi.filter(function(v) {
+        return v > 0;
+    });
+    const negativi = validi.filter(function(v) {
+        return v < 0;
+    });
+
+    const massimoPositivo = positivi.length
+        ? Math.max.apply(null, positivi)
+        : 0;
+
+    const massimaPerdita = negativi.length
+        ? Math.max.apply(null, negativi.map(Math.abs))
+        : 0;
 
     righe.forEach(function(riga, indice) {
         const cella = riga.cells[colonna];
@@ -5319,32 +5337,72 @@ function coloraColonnaClassifica(colonna) {
         const valore = valori[indice];
         if (!Number.isFinite(valore)) return;
 
-        let intensita = massimo === minimo
-            ? 1
-            : (valore - minimo) / (massimo - minimo);
-
-        // Nella posizione media, valori più bassi sono migliori.
-        if (colonna === 4) {
-            intensita = 1 - intensita;
-        }
-
         let colore;
 
-        if (intensita < 0.5) {
-            const t = intensita * 2;
+        if (colonna === 6) {
+            // Profitto/Perdita: verde, grigio o rosso.
+            if (valore > 0) {
+                const intensita = massimoPositivo > 0
+                    ? valore / massimoPositivo
+                    : 0;
 
-            colore = rosso.map(function(c, i) {
-                return Math.round(c + (giallo[i] - c) * t);
-            });
+                const verdeScuro = [23, 60, 39];
+                const verdeIntenso = [30, 105, 60];
+
+                colore = verdeScuro.map(function(c, i) {
+                    return Math.round(
+                        c + (verdeIntenso[i] - c) * intensita
+                    );
+                });
+
+            } else if (valore < 0) {
+                const intensita = massimaPerdita > 0
+                    ? Math.abs(valore) / massimaPerdita
+                    : 0;
+
+                const rossoScuro = [64, 35, 35];
+                const rossoIntenso = [120, 42, 42];
+
+                colore = rossoScuro.map(function(c, i) {
+                    return Math.round(
+                        c + (rossoIntenso[i] - c) * intensita
+                    );
+                });
+
+            } else {
+                colore = [48, 48, 48];
+            }
+
         } else {
-            const t = (intensita - 0.5) * 2;
+            // Mantiene la sfumatura originale per le altre colonne.
+            let intensita = massimo === minimo
+                ? 1
+                : (valore - minimo) / (massimo - minimo);
 
-            colore = giallo.map(function(c, i) {
-                return Math.round(c + (verde[i] - c) * t);
-            });
+            // Per la posizione media, un valore più basso è migliore.
+            if (colonna === 4) {
+                intensita = 1 - intensita;
+            }
+
+            if (intensita < 0.5) {
+                const t = intensita * 2;
+                colore = rosso.map(function(c, i) {
+                    return Math.round(
+                        c + (giallo[i] - c) * t
+                    );
+                });
+            } else {
+                const t = (intensita - 0.5) * 2;
+                colore = giallo.map(function(c, i) {
+                    return Math.round(
+                        c + (verde[i] - c) * t
+                    );
+                });
+            }
         }
 
         const sfondo = "rgb(" + colore.join(", ") + ")";
+
 
         // Mantiene i riquadri minimal di Profitto/Perdita.
         if (colonna === 6) {
