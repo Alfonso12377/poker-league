@@ -5194,13 +5194,23 @@ function generaPalmares() {
                         </button>
                     </td>
 
-                    <td>${giocatore.oro}</td>
 
-                    <td>${giocatore.argento}</td>
+                    <td>
+                        <span class="badge-statistica">${giocatore.oro}</span>
+                    </td>
 
-                    <td>${giocatore.bronzo}</td>
+                    <td>
+                        <span class="badge-statistica">${giocatore.argento}</span>
+                    </td>
 
-                    <td>${totale}</td>
+                    <td>
+                        <span class="badge-statistica">${giocatore.bronzo}</span>
+                    </td>
+
+                    <td>
+                        <span class="badge-statistica">${totale}</span>
+                    </td>
+
 
                 </tr>
             `;
@@ -5220,12 +5230,21 @@ function coloraColonnaPalmares(colonna) {
     if (!righe.length) return;
 
     // Rimuove solo i colori applicati dalla selezione precedente.
+
     righe.forEach(function(riga) {
         Array.from(riga.cells).forEach(function(cella) {
+            const badge = cella.querySelector(".badge-statistica");
+
+            if (badge) {
+                badge.style.removeProperty("background-color");
+                badge.style.removeProperty("color");
+            }
+
             cella.style.removeProperty("background-color");
             cella.style.removeProperty("color");
         });
     });
+
 
     // Giocatore e posizione non ricevono sfumature.
     if (colonna === 0 || colonna === 1) return;
@@ -5286,9 +5305,13 @@ if (valore === 0 && colonna !== 5) {
             );
         });
 
-        cella.style.backgroundColor =
+        const badge = cella.querySelector(".badge-statistica");
+
+        if (!badge) return;
+
+        badge.style.backgroundColor =
             "rgb(" + colore.join(", ") + ")";
-        cella.style.color = "#eeeeee";
+        badge.style.color = "#eeeeee";
     });
 }
 
