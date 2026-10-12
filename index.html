@@ -5255,11 +5255,13 @@ function coloraColonnaPalmares(colonna) {
         // Bronzo.
         coloreBase = [65, 43, 31];
         coloreIntenso = [119, 72, 42];
+
     } else {
-        // Totale: scala neutra grigia.
-        coloreBase = [43, 43, 43];
-        coloreIntenso = [82, 82, 82];
+        // Totale: dal rosso scuro per i valori bassi al verde per quelli alti.
+        coloreBase = [82, 40, 40];
+        coloreIntenso = [34, 85, 55];
     }
+
 
     righe.forEach(function(riga, indice) {
         const cella = riga.cells[colonna];
