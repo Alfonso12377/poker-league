@@ -1888,6 +1888,17 @@ th[onclick]:hover {
     table-layout: fixed;
     border-collapse: collapse;
 }
+    
+/* Classifica: evita che i riquadri alterino le larghezze visive */
+#tabella-classifica td .badge-statistica,
+#tabella-classifica td .badge-profitto {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+}
+
 
 #tabella-classifica th,
 #tabella-classifica td {
