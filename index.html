@@ -5346,7 +5346,7 @@ function coloraColonnaClassifica(colonna) {
 
                 const indice = Math.min(
                     11,
-                    Math.max(0, Math.ceil(intensita * 11))
+                    Math.max(0, Math.round(intensita * 11))
                 );
 
                 colore = scalaPerdite[indice];
@@ -5358,7 +5358,7 @@ function coloraColonnaClassifica(colonna) {
 
                 const indice = Math.min(
                     11,
-                    Math.max(0, Math.ceil(intensita * 11))
+                    Math.max(0, Math.round(intensita * 11))
                 );
 
                 colore = scalaGuadagni[indice];
