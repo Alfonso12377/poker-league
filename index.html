@@ -5245,29 +5245,25 @@ coloraColonnaClassifica(4);;
     
 
 
+
 function coloraColonnaClassifica(colonna) {
     const tabella = document.getElementById("tabella-classifica");
     if (!tabella) return;
 
     const righe = Array.from(tabella.querySelectorAll("tbody tr"));
 
-    // Rimuove i colori precedenti e ripristina il testo dei badge.
+    // Rimuove le colorazioni precedenti senza eliminare i badge.
     righe.forEach(function(riga) {
         Array.from(riga.cells).forEach(function(cella) {
             cella.style.backgroundColor = "";
             cella.style.color = "";
-
-            const badge = cella.querySelector(".badge-profitto");
-            if (badge) {
-                cella.textContent = badge.textContent;
-            }
         });
     });
 
     // La colonna Giocatore non deve essere colorata.
     if (colonna === 1) return;
 
-    // Profitto/Perdita: mantiene i riquadri minimal.
+    // Profitto/Perdita: conserva i riquadri minimal esistenti.
     if (colonna === 6) {
         righe.forEach(function(riga) {
             const cella = riga.cells[6];
@@ -5295,7 +5291,7 @@ function coloraColonnaClassifica(colonna) {
         return;
     }
 
-    // Colora la colonna numerica selezionata.
+    // Calcola i valori della colonna numerica selezionata.
     const valori = righe.map(function(riga) {
         const testo = riga.cells[colonna]?.textContent.trim() || "";
         return parseFloat(
@@ -5317,18 +5313,22 @@ function coloraColonnaClassifica(colonna) {
         const valore = parseFloat(
             testo.replace(/[€%+\s]/g, "").replace(",", ".")
         );
+
         if (!Number.isFinite(valore)) return;
 
         let intensita = massimo === minimo
             ? 0.5
             : (valore - minimo) / (massimo - minimo);
 
-        // In Pos. medio, il numero più basso è il migliore.
-        if (colonna === 4) intensita = 1 - intensita;
+        // In Posizione media, il valore più basso è il migliore.
+        if (colonna === 4) {
+            intensita = 1 - intensita;
+        }
 
-        const rosso = [243, 160, 160];
-        const giallo = [255, 240, 166];
-        const verde = [155, 214, 168];
+        // Sfumatura più leggera e minimal.
+        const rosso = [250, 225, 225];
+        const giallo = [255, 249, 220];
+        const verde = [225, 242, 228];
 
         let da, a, t;
 
@@ -5346,10 +5346,12 @@ function coloraColonnaClassifica(colonna) {
             return Math.round(v + (a[i] - v) * t);
         });
 
-        cella.style.backgroundColor = "rgb(" + rgb.join(", ") + ")";
+        cella.style.backgroundColor =
+            "rgb(" + rgb.join(", ") + ")";
         cella.style.color = "#222";
     });
 }
+
 
 
 
