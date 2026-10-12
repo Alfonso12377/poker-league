@@ -1313,6 +1313,20 @@ td:nth-child(2) {
     transition: background-color 0.2s ease;
 }
 
+    
+/* Riquadri minimal per le medaglie del Palmarès */
+#tabella-palmares td .badge-statistica {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 7px 6px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 700;
+    line-height: 1.2;
+    transition: background-color 0.2s ease;
+}
+
 
 
 #tabella-classifica tbody tr {
@@ -5293,9 +5307,14 @@ function coloraColonnaPalmares(colonna) {
 
         // Nessuna medaglia: grigio neutro.
 if (valore === 0 && colonna !== 5) {
-            cella.style.backgroundColor = "rgb(48, 48, 48)";
-            return;
-        }
+    const badge = cella.querySelector(".badge-statistica");
+
+    if (badge) {
+        badge.style.backgroundColor = "rgb(48, 48, 48)";
+    }
+
+    return;
+}
 
         const intensita = massimo > 0 ? valore / massimo : 0;
 
