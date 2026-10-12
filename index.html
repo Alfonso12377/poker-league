@@ -5247,13 +5247,14 @@ coloraColonnaClassifica(4);
 
 
 
+
 function coloraColonnaClassifica(colonna) {
     const tabella = document.getElementById("tabella-classifica");
     if (!tabella) return;
 
     const righe = Array.from(tabella.querySelectorAll("tbody tr"));
 
-    // Rimuove tutti i colori precedenti e ripristina i valori originali.
+    // Rimuove i colori precedenti e ripristina i valori originali.
     righe.forEach(function(riga) {
         Array.from(riga.cells).forEach(function(cella) {
             cella.style.removeProperty("background-color");
@@ -5299,7 +5300,7 @@ function coloraColonnaClassifica(colonna) {
         return;
     }
 
-    // Calcola i valori della sola colonna selezionata.
+    // Legge esclusivamente i valori della colonna selezionata.
     const valori = righe.map(function(riga) {
         const testo = riga.cells[colonna]?.textContent.trim() || "";
 
@@ -5314,7 +5315,7 @@ function coloraColonnaClassifica(colonna) {
     const minimo = Math.min(...validi);
     const massimo = Math.max(...validi);
 
-    // Colori uniformi: rosso, giallo e verde scuri.
+    // Sfumature scure: rosso, giallo e verde.
     const rosso = [64, 35, 35];
     const giallo = [67, 58, 35];
     const verde = [23, 60, 39];
@@ -5334,7 +5335,7 @@ function coloraColonnaClassifica(colonna) {
             ? 0.5
             : (valore - minimo) / (massimo - minimo);
 
-        // Nella posizione media, il valore più basso è il migliore.
+        // Per la posizione media, il valore più basso è il migliore.
         if (colonna === 4) {
             intensita = 1 - intensita;
         }
@@ -5359,6 +5360,7 @@ function coloraColonnaClassifica(colonna) {
         cella.style.color = "#eeeeee";
     });
 }
+
 
 
 
