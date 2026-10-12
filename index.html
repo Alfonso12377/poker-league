@@ -5244,37 +5244,113 @@ function generaPalmares() {
 
     
 
+
 function coloraColonnaClassifica(colonna) {
     const tabella = document.getElementById("tabella-classifica");
     if (!tabella) return;
 
-    const righe = tabella.querySelectorAll("tbody tr");
+    const righe = Array.from(tabella.querySelectorAll("tbody tr"));
+
+    // Rimuove i colori precedenti e ripristina il testo dei badge.
+    righe.forEach(function(riga) {
+        Array.from(riga.cells).forEach(function(cella) {
+            cella.style.backgroundColor = "";
+            cella.style.color = "";
+
+            const badge = cella.querySelector(".badge-profitto");
+            if (badge) {
+                cella.textContent = badge.textContent;
+            }
+        });
+    });
+
+    // La colonna Giocatore non deve essere colorata.
+    if (colonna === 1) return;
+
+    // Profitto/Perdita: mantiene i riquadri minimal.
+    if (colonna === 6) {
+        righe.forEach(function(riga) {
+            const cella = riga.cells[6];
+            if (!cella) return;
+
+            const testo = cella.textContent.trim();
+            const valore = parseFloat(
+                testo.replace(/[€%+\s]/g, "").replace(",", ".")
+            );
+
+            const badge = document.createElement("span");
+            badge.className = "badge-profitto";
+
+            if (Number.isFinite(valore) && valore > 0) {
+                badge.classList.add("profitto-positivo");
+            } else if (Number.isFinite(valore) && valore < 0) {
+                badge.classList.add("profitto-negativo");
+            } else {
+                badge.classList.add("profitto-zero");
+            }
+
+            badge.textContent = testo;
+            cella.replaceChildren(badge);
+        });
+        return;
+    }
+
+    // Colora la colonna numerica selezionata.
+    const valori = righe.map(function(riga) {
+        const testo = riga.cells[colonna]?.textContent.trim() || "";
+        return parseFloat(
+            testo.replace(/[€%+\s]/g, "").replace(",", ".")
+        );
+    });
+
+    const validi = valori.filter(Number.isFinite);
+    if (!validi.length) return;
+
+    const minimo = Math.min.apply(null, validi);
+    const massimo = Math.max.apply(null, validi);
 
     righe.forEach(function(riga) {
-        const cella = riga.cells[6];
+        const cella = riga.cells[colonna];
         if (!cella) return;
 
-        // Recupera il valore originale, anche se già formattato.
         const testo = cella.textContent.trim();
         const valore = parseFloat(
             testo.replace(/[€%+\s]/g, "").replace(",", ".")
         );
+        if (!Number.isFinite(valore)) return;
 
-        const badge = document.createElement("span");
-        badge.className = "badge-profitto";
+        let intensita = massimo === minimo
+            ? 0.5
+            : (valore - minimo) / (massimo - minimo);
 
-        if (Number.isFinite(valore) && valore > 0) {
-            badge.classList.add("profitto-positivo");
-        } else if (Number.isFinite(valore) && valore < 0) {
-            badge.classList.add("profitto-negativo");
+        // In Pos. medio, il numero più basso è il migliore.
+        if (colonna === 4) intensita = 1 - intensita;
+
+        const rosso = [243, 160, 160];
+        const giallo = [255, 240, 166];
+        const verde = [155, 214, 168];
+
+        let da, a, t;
+
+        if (intensita <= 0.5) {
+            da = rosso;
+            a = giallo;
+            t = intensita * 2;
         } else {
-            badge.classList.add("profitto-zero");
+            da = giallo;
+            a = verde;
+            t = (intensita - 0.5) * 2;
         }
 
-        badge.textContent = testo;
-        cella.replaceChildren(badge);
+        const rgb = da.map(function(v, i) {
+            return Math.round(v + (a[i] - v) * t);
+        });
+
+        cella.style.backgroundColor = "rgb(" + rgb.join(", ") + ")";
+        cella.style.color = "#222";
     });
 }
+
 
 
 
