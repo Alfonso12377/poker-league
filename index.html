@@ -5150,28 +5150,22 @@ function generaPalmares() {
 
     palmares.sort(function(a, b) {
 
-        const totaleA =
-            a.oro + a.argento + a.bronzo;
-
-        const totaleB =
-            b.oro + b.argento + b.bronzo;
-
-        if (totaleA !== totaleB) {
-            return totaleB - totaleA;
-        }
-
+        // Prima vengono le medaglie d'oro.
         if (a.oro !== b.oro) {
             return b.oro - a.oro;
         }
 
+        // A parità di ori, contano gli argenti.
         if (a.argento !== b.argento) {
             return b.argento - a.argento;
         }
 
+        // A parità di ori e argenti, contano i bronzi.
         if (a.bronzo !== b.bronzo) {
             return b.bronzo - a.bronzo;
         }
 
+        // In caso di parità completa, ordine alfabetico.
         return a.nome.localeCompare(b.nome);
 
     });
