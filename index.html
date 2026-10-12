@@ -5292,13 +5292,15 @@ function coloraColonnaClassifica(colonna) {
     const scala = creaScala("#F3A0A0", "#FFF0A6", "#9BD6A8");
 
     // Per il profitto usa 12 rossi e 12 verdi.
+
     const scalaPerdite = creaScala(
-        "#F3A0A0", "#F3A0A0", "#F3A0A0"
-    ).slice(0, 12);
+        "#FBE5E5", "#D96B6B", "#B42323"
+    ).slice(12);
 
     const scalaGuadagni = creaScala(
-        "#9BD6A8", "#9BD6A8", "#9BD6A8"
+        "#E1F4E7", "#83C995", "#18743A"
     ).slice(12);
+
 
     // Applica la tonalità in base al valore, non alla posizione.
     righe.forEach(function(riga) {
