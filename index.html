@@ -1989,6 +1989,31 @@ th[onclick]:hover {
 }
 
     
+/* CORREZIONE NOMI GIOCATORI IPHONE ORIZZONTALE */
+@media (max-width: 1000px) and (orientation: landscape) {
+    #tabella-classifica colgroup col:nth-child(1) { width: 7% !important; }
+    #tabella-classifica colgroup col:nth-child(2) { width: 24% !important; }
+    #tabella-classifica colgroup col:nth-child(3) { width: 10% !important; }
+    #tabella-classifica colgroup col:nth-child(4) { width: 7% !important; }
+    #tabella-classifica colgroup col:nth-child(5) { width: 10% !important; }
+    #tabella-classifica colgroup col:nth-child(6) { width: 10% !important; }
+    #tabella-classifica colgroup col:nth-child(7) { width: 16% !important; }
+    #tabella-classifica colgroup col:nth-child(8) { width: 16% !important; }
+
+    #tabella-classifica td:nth-child(2) {
+        font-size: 11px !important;
+        white-space: nowrap !important;
+        overflow: visible !important;
+        text-overflow: clip !important;
+    }
+
+    #tabella-classifica td:nth-child(2) .nome-giocatore-link {
+        font-size: inherit !important;
+        white-space: nowrap !important;
+    }
+}
+
+    
 </style>
 </head>
 
