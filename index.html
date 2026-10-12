@@ -1652,6 +1652,20 @@ th[onclick]:hover {
 
 @media (max-width: 800px) {
 
+    
+    /* Intestazioni Classifica: evita sovrapposizioni su smartphone */
+    #tabella-classifica th:nth-child(3),
+    #tabella-classifica th:nth-child(4),
+    #tabella-classifica th:nth-child(5),
+    #tabella-classifica th:nth-child(6) {
+        font-size: 11px !important;
+        line-height: 1.15;
+        white-space: normal !important;
+        overflow-wrap: anywhere;
+        padding: 7px 2px !important;
+    }
+
+    
     /* Classifica: uniforma dimensione e allineamento */
     #tabella-classifica th,
     #tabella-classifica td {
