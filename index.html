@@ -1913,7 +1913,26 @@ th[onclick]:hover {
 }
 
 
+/* BLOCCO FISSO LARGHEZZE CLASSIFICA */
+#tabella-classifica {
+    width: 100% !important;
+    table-layout: fixed !important;
+}
 
+#tabella-classifica colgroup col:nth-child(1) { width: 7% !important; }
+#tabella-classifica colgroup col:nth-child(2) { width: 20% !important; }
+#tabella-classifica colgroup col:nth-child(3) { width: 11% !important; }
+#tabella-classifica colgroup col:nth-child(4) { width: 8% !important; }
+#tabella-classifica colgroup col:nth-child(5) { width: 11% !important; }
+#tabella-classifica colgroup col:nth-child(6) { width: 11% !important; }
+#tabella-classifica colgroup col:nth-child(7) { width: 16% !important; }
+#tabella-classifica colgroup col:nth-child(8) { width: 16% !important; }
+
+#tabella-classifica th,
+#tabella-classifica td {
+    box-sizing: border-box;
+    min-width: 0;
+}
 
     
 </style>
