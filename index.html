@@ -1935,6 +1935,36 @@ th[onclick]:hover {
 }
 
     
+/* CLASSIFICA: altezza uniforme delle righe e dei riquadri */
+#tabella-classifica tbody tr {
+    height: 49px;
+}
+
+#tabella-classifica tbody td {
+    height: 49px;
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+    vertical-align: middle;
+    box-sizing: border-box;
+}
+
+#tabella-classifica tbody td .badge-statistica,
+#tabella-classifica tbody td .badge-profitto {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    min-height: 30px;
+    max-height: 30px;
+    box-sizing: border-box;
+    padding: 0 4px !important;
+    margin: 0;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+
+    
 </style>
 </head>
 
