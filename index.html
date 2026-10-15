@@ -6163,7 +6163,8 @@ function generaGraficoAndamento(nome) {
             torneo: torneo,
             presente: true,
             posizione: parseInt(giocatore.pos, 10),
-            partecipanti: torneo.players.length
+            partecipanti: torneo.players.length,
+            premio: Number(giocatore.prize) || 0
         };
     });
 
@@ -6205,7 +6206,7 @@ function generaGraficoAndamento(nome) {
         if (posizione === 1) return "#E9B949";
         if (posizione === 2) return "#AEB8C2";
         if (posizione === 3) return "#B87945";
-        return "#4CAF70";
+        return "#D94A4A";
     };
 
     let elementi = "";
@@ -6252,29 +6253,37 @@ function generaGraficoAndamento(nome) {
 
     /* LINEE TRA TORNEI CONSECUTIVI */
 
-    for (let i = 1; i < partecipazioni.length; i++) {
-        const precedente = partecipazioni[i - 1];
-        const attuale = partecipazioni[i];
+    /* LINEE TRA LE PARTECIPAZIONI, ANCHE DOPO LE ASSENZE */
 
+    let precedentePresente = null;
+
+    partecipazioni.forEach(function(voce, indice) {
         if (
-            precedente.presente &&
-            attuale.presente &&
-            Number.isFinite(precedente.posizione) &&
-            Number.isFinite(attuale.posizione)
+            !voce.presente ||
+            !Number.isFinite(voce.posizione)
         ) {
+            return;
+        }
+
+        if (precedentePresente !== null) {
             elementi += `
                 <line
-                    x1="${xTorneo(i - 1)}"
-                    y1="${posizioneY(precedente.posizione)}"
-                    x2="${xTorneo(i)}"
-                    y2="${posizioneY(attuale.posizione)}"
+                    x1="${xTorneo(precedentePresente.indice)}"
+                    y1="${posizioneY(precedentePresente.voce.posizione)}"
+                    x2="${xTorneo(indice)}"
+                    y2="${posizioneY(voce.posizione)}"
                     stroke="#7b9fce"
                     stroke-width="2.5"
                     stroke-linecap="round"
                 />
             `;
         }
-    }
+
+        precedentePresente = {
+            indice: indice,
+            voce: voce
+        };
+    });
 
     /* PUNTI, ASSENZE E NUMERI DEI TORNEI */
 
@@ -6289,22 +6298,43 @@ function generaGraficoAndamento(nome) {
         ) {
             const y = posizioneY(voce.posizione);
             const colore = coloriPosizione(voce.posizione);
+                        const ultimoPosto =
+                voce.posizione === voce.partecipanti;
 
             elementi += `
-                <circle
-                    cx="${x}"
-                    cy="${y}"
-                    r="7"
-                    fill="${colore}"
-                    stroke="#181818"
-                    stroke-width="2"
-                    data-grafico="si"
-                    data-torneo="${torneo.n}"
-                    data-posizione="${voce.posizione}"
-                    data-partecipanti="${voce.partecipanti}"
-                    data-presente="si"
-                    style="cursor:pointer"
-                />
+                               ${
+                    ultimoPosto
+                        ? `
+                            <text
+                                x="${x}"
+                                y="${y + 7}"
+                                font-size="20"
+                                text-anchor="middle"
+                                data-grafico="si"
+                                data-torneo="${torneo.n}"
+                                data-posizione="${voce.posizione}"
+                                data-partecipanti="${voce.partecipanti}"
+                                data-presente="si"
+                                style="cursor:pointer"
+                            >💀</text>
+                        `
+                        : `
+                            <circle
+                                cx="${x}"
+                                cy="${y}"
+                                r="7"
+                                fill="${colore}"
+                                stroke="#181818"
+                                stroke-width="2"
+                                data-grafico="si"
+                                data-torneo="${torneo.n}"
+                                data-posizione="${voce.posizione}"
+                                data-partecipanti="${voce.partecipanti}"
+                                data-presente="si"
+                                style="cursor:pointer"
+                            />
+                        `
+                }
 
                 <text
                     x="${x}"
@@ -6366,11 +6396,20 @@ function generaGraficoAndamento(nome) {
                 const posizione = Number(punto.dataset.posizione);
                 const partecipanti = Number(punto.dataset.partecipanti);
 
+                const voceTorneo = partecipazioni.find(function(voce) {
+                    return voce.torneo.n === numeroTorneo;
+                });
+
+                const premio = voceTorneo ? voceTorneo.premio : 0;
+
                 tooltip.textContent =
                     "Torneo " + numeroTorneo +
                     " — " + nome +
                     ": " + posizione + "° posto su " +
-                    partecipanti + " partecipanti.";
+                    partecipanti + " partecipanti." +
+                    (premio > 0
+                        ? " Premio: " + formattaEuro(premio) + "."
+                        : "");
 
                 tooltip.classList.add("visibile");
             }
@@ -6483,11 +6522,11 @@ setTimeout(function() {
                     <span class="grafico-legenda-voce">
                         <span class="grafico-legenda-punto"
                               style="background:#B87945"></span>
-                        3° posto premiato
+                        3° posto
                     </span>
                     <span class="grafico-legenda-voce">
                         <span class="grafico-legenda-punto"
-                              style="background:#4CAF70"></span>
+                              style="background:#D94A4A"></span>
                         Altre posizioni
                     </span>
                     <span class="grafico-legenda-voce">
