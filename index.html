@@ -2130,6 +2130,90 @@ th[onclick]:hover {
     }
 }
 
+
+/* FILTRO PERIODO CLASSIFICA */
+
+.filtro-classifica {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    align-items: center;
+    gap: 18px;
+
+    margin: 0 0 18px 0;
+    padding: 12px 16px;
+
+    background: rgba(0, 0, 0, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+}
+
+.filtro-estremo {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.filtro-estremo label {
+    color: #ddd;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.filtro-estremo label strong {
+    color: white;
+    font-size: 14px;
+}
+
+.filtro-estremo input[type="range"] {
+    width: 100%;
+    min-width: 0;
+    accent-color: #d8b46a;
+    cursor: pointer;
+}
+
+.filtro-reset {
+    padding: 8px 13px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+
+    background: #303030;
+    color: white;
+
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.15s ease;
+}
+
+.filtro-reset:hover {
+    background: #454545;
+}
+
+@media (max-width: 600px) {
+    .filtro-classifica {
+        grid-template-columns: 1fr 1fr auto;
+        gap: 8px;
+        padding: 10px 8px;
+    }
+
+    .filtro-estremo label {
+        font-size: 10px;
+    }
+
+    .filtro-estremo label strong {
+        font-size: 12px;
+    }
+
+    .filtro-reset {
+        padding: 7px 8px;
+        font-size: 11px;
+    }
+}
+
     
 </style>
 </head>
@@ -2242,6 +2326,50 @@ th[onclick]:hover {
     </button>
 
     <h2>Classifica generale</h2>
+
+        
+    <div class="filtro-classifica">
+
+        <div class="filtro-estremo">
+            <label for="filtro-torneo-inizio">
+                Da <strong id="valore-torneo-inizio">1</strong>
+            </label>
+
+            <input
+                type="range"
+                id="filtro-torneo-inizio"
+                min="1"
+                max="19"
+                value="1"
+                oninput="modificaFiltroClassifica('inizio', this.value)"
+            >
+        </div>
+
+        <div class="filtro-estremo">
+            <label for="filtro-torneo-fine">
+                A <strong id="valore-torneo-fine">19</strong>
+            </label>
+
+            <input
+                type="range"
+                id="filtro-torneo-fine"
+                min="1"
+                max="19"
+                value="19"
+                oninput="modificaFiltroClassifica('fine', this.value)"
+            >
+        </div>
+
+        <button
+            type="button"
+            class="filtro-reset"
+            onclick="resetFiltroClassifica()"
+        >
+            Reset
+        </button>
+
+    </div>
+
 
 <table id="tabella-classifica">
     <colgroup>
@@ -4396,11 +4524,11 @@ setTimeout(function() {
     }
 
 
-    function calcolaStatistiche() {
+function calcolaStatistiche(torneiDaAnalizzare = datiTornei) {
 
         const statistiche = {};
 
-        datiTornei.forEach(function(torneo) {
+        torneiDaAnalizzare.forEach(function(torneo) {
 
             torneo.players.forEach(function(giocatore) {
 
@@ -5726,6 +5854,115 @@ if (valore === 0 && colonna !== 5) {
 }
 
 
+    
+let torneoInizioClassifica = 1;
+let torneoFineClassifica = null;
+
+function preparaFiltroClassifica() {
+    const ultimoTorneo = Math.max(
+        ...datiTornei.map(function(t) {
+            return t.n;
+        }),
+        1
+    );
+
+    const inizio = document.getElementById("filtro-torneo-inizio");
+    const fine = document.getElementById("filtro-torneo-fine");
+
+    if (!inizio || !fine) return;
+
+    inizio.max = ultimoTorneo;
+    fine.max = ultimoTorneo;
+
+    if (torneoFineClassifica === null) {
+        torneoFineClassifica = ultimoTorneo;
+    }
+
+    torneoInizioClassifica = Math.min(
+        torneoInizioClassifica,
+        ultimoTorneo
+    );
+
+    torneoFineClassifica = Math.min(
+        torneoFineClassifica,
+        ultimoTorneo
+    );
+
+    inizio.value = torneoInizioClassifica;
+    fine.value = torneoFineClassifica;
+
+    aggiornaEtichetteFiltroClassifica();
+}
+
+function aggiornaEtichetteFiltroClassifica() {
+    document.getElementById("valore-torneo-inizio").textContent =
+        torneoInizioClassifica;
+
+    document.getElementById("valore-torneo-fine").textContent =
+        torneoFineClassifica;
+}
+
+function modificaFiltroClassifica(estremo, valore) {
+    const ultimoTorneo = Math.max(
+        ...datiTornei.map(function(t) {
+            return t.n;
+        }),
+        1
+    );
+
+    valore = Number(valore);
+
+    if (estremo === "inizio") {
+        torneoInizioClassifica = Math.min(
+            valore,
+            torneoFineClassifica
+        );
+    } else {
+        torneoFineClassifica = Math.max(
+            valore,
+            torneoInizioClassifica
+        );
+    }
+
+    torneoInizioClassifica = Math.max(
+        1,
+        Math.min(torneoInizioClassifica, ultimoTorneo)
+    );
+
+    torneoFineClassifica = Math.max(
+        torneoInizioClassifica,
+        Math.min(torneoFineClassifica, ultimoTorneo)
+    );
+
+    document.getElementById("filtro-torneo-inizio").value =
+        torneoInizioClassifica;
+
+    document.getElementById("filtro-torneo-fine").value =
+        torneoFineClassifica;
+
+    aggiornaEtichetteFiltroClassifica();
+    generaClassifica();
+}
+
+function resetFiltroClassifica() {
+    torneoInizioClassifica = 1;
+    torneoFineClassifica = Math.max(
+        ...datiTornei.map(function(t) {
+            return t.n;
+        }),
+        1
+    );
+
+    document.getElementById("filtro-torneo-inizio").value =
+        torneoInizioClassifica;
+
+    document.getElementById("filtro-torneo-fine").value =
+        torneoFineClassifica;
+
+    aggiornaEtichetteFiltroClassifica();
+    generaClassifica();
+}
+
 
     function generaClassifica() {
 
@@ -5736,8 +5973,14 @@ if (valore === 0 && colonna !== 5) {
             return;
         }
 
-        let classifica =
-            calcolaStatistiche();
+        preparaFiltroClassifica();
+
+        const torneiSelezionati = datiTornei.filter(function(torneo) {
+            return torneo.n >= torneoInizioClassifica &&
+                   torneo.n <= torneoFineClassifica;
+        });
+
+        let classifica = calcolaStatistiche(torneiSelezionati);
 
         classifica.sort(function(a, b) {
             return a.posizioneMedia - b.posizioneMedia;
