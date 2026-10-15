@@ -2032,6 +2032,104 @@ th[onclick]:hover {
     border-left: 1px solid #555 !important;
 }
 
+
+/* GRAFICO ANDAMENTO TORNEI - SCHEDA GIOCATORE */
+
+.grafico-andamento {
+    margin-top: 25px;
+    padding: 18px;
+    background: #181818;
+    border: 1px solid #3d3d3d;
+    border-radius: 12px;
+    min-width: 0;
+}
+
+.grafico-andamento h4 {
+    margin: 0 0 6px;
+    font-size: 17px;
+}
+
+.grafico-andamento-descrizione {
+    margin: 0 0 14px;
+    color: #aaa;
+    font-size: 12px;
+}
+
+.grafico-andamento-scroll {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: #666 #242424;
+    border-radius: 8px;
+}
+
+.grafico-andamento-svg {
+    display: block;
+    height: 320px;
+    max-width: none;
+}
+
+.grafico-andamento-legenda {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px 16px;
+    margin-top: 14px;
+    color: #ccc;
+    font-size: 12px;
+}
+
+.grafico-legenda-voce {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.grafico-legenda-punto {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+.grafico-andamento-tooltip {
+    display: none;
+    margin-top: 12px;
+    padding: 10px 12px;
+    background: #242424;
+    border: 1px solid #555;
+    border-radius: 8px;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.grafico-andamento-tooltip.visibile {
+    display: block;
+}
+
+@media (max-width: 600px) {
+    .grafico-andamento {
+        padding: 12px;
+        margin-top: 22px;
+    }
+
+    .grafico-andamento h4 {
+        font-size: 16px;
+    }
+
+    .grafico-andamento-svg {
+        height: 290px;
+    }
+
+    .grafico-andamento-legenda {
+        gap: 8px 12px;
+        font-size: 11px;
+    }
+}
+
     
 </style>
 </head>
@@ -6029,6 +6127,282 @@ function generaGiocatori() {
     }).join("");
 }
 
+    
+function generaGraficoAndamento(nome) {
+    const contenitore = document.getElementById("grafico-andamento-contenuto");
+    const tooltip = document.getElementById("grafico-andamento-tooltip");
+
+    if (!contenitore || !tooltip) return;
+
+    const tornei = datiTornei
+        .slice()
+        .sort(function(a, b) {
+            return a.n - b.n;
+        });
+
+    if (tornei.length === 0) {
+        contenitore.textContent = "Nessun torneo disponibile.";
+        return;
+    }
+
+    const partecipazioni = tornei.map(function(torneo) {
+        const giocatore = torneo.players.find(function(p) {
+            return p.name === nome;
+        });
+
+        if (!giocatore) {
+            return {
+                torneo: torneo,
+                presente: false,
+                posizione: null,
+                partecipanti: torneo.players.length
+            };
+        }
+
+        return {
+            torneo: torneo,
+            presente: true,
+            posizione: parseInt(giocatore.pos, 10),
+            partecipanti: torneo.players.length
+        };
+    });
+
+    const massimoPartecipanti = Math.max.apply(
+        null,
+        tornei.map(function(torneo) {
+            return torneo.players.length;
+        }).concat([2])
+    );
+
+    const larghezzaPunto = 68;
+    const margineSinistro = 42;
+    const margineDestro = 25;
+    const margineAlto = 35;
+    const margineBasso = 48;
+    const altezzaGrafico = 320;
+
+    const larghezzaGrafico = Math.max(
+        600,
+        margineSinistro +
+        margineDestro +
+        (tornei.length - 1) * larghezzaPunto
+    );
+
+    const altezzaInterna =
+        altezzaGrafico - margineAlto - margineBasso;
+
+    const posizioneY = function(posizione) {
+        return margineAlto +
+            ((posizione - 1) / Math.max(1, massimoPartecipanti - 1)) *
+            altezzaInterna;
+    };
+
+    const xTorneo = function(indice) {
+        return margineSinistro + indice * larghezzaPunto;
+    };
+
+    const coloriPosizione = function(posizione) {
+        if (posizione === 1) return "#E9B949";
+        if (posizione === 2) return "#AEB8C2";
+        if (posizione === 3) return "#B87945";
+        return "#4CAF70";
+    };
+
+    let elementi = "";
+
+    elementi += `
+        <svg
+            class="grafico-andamento-svg"
+            xmlns="http://www.w3.org/2000/svg"
+            width="${larghezzaGrafico}"
+            viewBox="0 0 ${larghezzaGrafico} ${altezzaGrafico}"
+            role="img"
+            aria-label="Andamento di ${nome} nei tornei"
+        >
+    `;
+
+    /* GRIGLIA E NUMERI DELLE POSIZIONI */
+
+    for (let posizione = 1;
+         posizione <= massimoPartecipanti;
+         posizione++) {
+
+        const y = posizioneY(posizione);
+
+        elementi += `
+            <line
+                x1="${margineSinistro - 8}"
+                y1="${y}"
+                x2="${larghezzaGrafico - margineDestro + 5}"
+                y2="${y}"
+                stroke="#444"
+                stroke-width="1"
+                stroke-dasharray="3 5"
+            />
+
+            <text
+                x="${margineSinistro - 15}"
+                y="${y + 4}"
+                fill="#aaa"
+                font-size="11"
+                text-anchor="end"
+            >${posizione}°</text>
+        `;
+    }
+
+    /* LINEE TRA TORNEI CONSECUTIVI */
+
+    for (let i = 1; i < partecipazioni.length; i++) {
+        const precedente = partecipazioni[i - 1];
+        const attuale = partecipazioni[i];
+
+        if (
+            precedente.presente &&
+            attuale.presente &&
+            Number.isFinite(precedente.posizione) &&
+            Number.isFinite(attuale.posizione)
+        ) {
+            elementi += `
+                <line
+                    x1="${xTorneo(i - 1)}"
+                    y1="${posizioneY(precedente.posizione)}"
+                    x2="${xTorneo(i)}"
+                    y2="${posizioneY(attuale.posizione)}"
+                    stroke="#7b9fce"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                />
+            `;
+        }
+    }
+
+    /* PUNTI, ASSENZE E NUMERI DEI TORNEI */
+
+    partecipazioni.forEach(function(voce, indice) {
+        const x = xTorneo(indice);
+        const torneo = voce.torneo;
+
+        if (
+            voce.presente &&
+            Number.isFinite(voce.posizione) &&
+            voce.posizione >= 1
+        ) {
+            const y = posizioneY(voce.posizione);
+            const colore = coloriPosizione(voce.posizione);
+
+            elementi += `
+                <circle
+                    cx="${x}"
+                    cy="${y}"
+                    r="7"
+                    fill="${colore}"
+                    stroke="#181818"
+                    stroke-width="2"
+                    data-grafico="si"
+                    data-torneo="${torneo.n}"
+                    data-posizione="${voce.posizione}"
+                    data-partecipanti="${voce.partecipanti}"
+                    data-presente="si"
+                    style="cursor:pointer"
+                />
+
+                <text
+                    x="${x}"
+                    y="${altezzaGrafico - 24}"
+                    fill="#ddd"
+                    font-size="11"
+                    text-anchor="middle"
+                >T${torneo.n}</text>
+            `;
+        } else {
+            const yAssenza = altezzaGrafico - margineBasso + 2;
+
+            elementi += `
+                <circle
+                    cx="${x}"
+                    cy="${yAssenza}"
+                    r="6"
+                    fill="none"
+                    stroke="#888"
+                    stroke-width="2"
+                    data-grafico="si"
+                    data-torneo="${torneo.n}"
+                    data-presente="no"
+                    style="cursor:pointer"
+                />
+
+                <text
+                    x="${x}"
+                    y="${altezzaGrafico - 24}"
+                    fill="#ddd"
+                    font-size="11"
+                    text-anchor="middle"
+                >T${torneo.n}</text>
+            `;
+        }
+    });
+
+    elementi += "</svg>";
+
+    contenitore.innerHTML = elementi;
+
+    /* DETTAGLI DEL PUNTO SELEZIONATO */
+
+    contenitore.querySelectorAll("[data-grafico='si']").forEach(
+        function(punto) {
+
+            function mostraDettaglio() {
+                const numeroTorneo = Number(punto.dataset.torneo);
+
+                if (punto.dataset.presente === "no") {
+                    tooltip.textContent =
+                        "Torneo " + numeroTorneo +
+                        " — " + nome + " non ha partecipato.";
+
+                    tooltip.classList.add("visibile");
+                    return;
+                }
+
+                const posizione = Number(punto.dataset.posizione);
+                const partecipanti = Number(punto.dataset.partecipanti);
+
+                tooltip.textContent =
+                    "Torneo " + numeroTorneo +
+                    " — " + nome +
+                    ": " + posizione + "° posto su " +
+                    partecipanti + " partecipanti.";
+
+                tooltip.classList.add("visibile");
+            }
+
+            punto.addEventListener("click", mostraDettaglio);
+
+            punto.addEventListener("mouseenter", mostraDettaglio);
+
+            punto.addEventListener("focus", mostraDettaglio);
+
+            punto.setAttribute("tabindex", "0");
+            punto.setAttribute("role", "button");
+
+            punto.setAttribute(
+                "aria-label",
+                punto.dataset.presente === "no"
+                    ? "Torneo " + punto.dataset.torneo +
+                      ", non partecipato"
+                    : "Torneo " + punto.dataset.torneo +
+                      ", posizione " + punto.dataset.posizione
+            );
+
+            punto.addEventListener("keydown", function(evento) {
+                if (evento.key === "Enter" || evento.key === " ") {
+                    evento.preventDefault();
+                    mostraDettaglio();
+                }
+            });
+        }
+    );
+}
+
 function mostraGiocatore(nome) {
     const lista = document.getElementById("giocatori-lista");
     const dettaglio = document.getElementById("giocatore-dettaglio");
@@ -6078,11 +6452,56 @@ setTimeout(function() {
                         return `<div class="curiosita-item">${testo}</div>`;
                     }).join("")}
                 </div>
+
             ` : ""}
+
+            <div class="grafico-andamento">
+                <h4>📈 Andamento nei tornei</h4>
+                <p class="grafico-andamento-descrizione">
+                    Posizione finale in ogni torneo
+                </p>
+
+                <div class="grafico-andamento-scroll">
+                    <div id="grafico-andamento-contenuto"></div>
+                </div>
+
+                <div class="grafico-andamento-tooltip"
+                     id="grafico-andamento-tooltip"
+                     aria-live="polite"></div>
+
+                <div class="grafico-andamento-legenda">
+                    <span class="grafico-legenda-voce">
+                        <span class="grafico-legenda-punto"
+                              style="background:#E9B949"></span>
+                        1° posto
+                    </span>
+                    <span class="grafico-legenda-voce">
+                        <span class="grafico-legenda-punto"
+                              style="background:#AEB8C2"></span>
+                        2° posto
+                    </span>
+                    <span class="grafico-legenda-voce">
+                        <span class="grafico-legenda-punto"
+                              style="background:#B87945"></span>
+                        3° posto premiato
+                    </span>
+                    <span class="grafico-legenda-voce">
+                        <span class="grafico-legenda-punto"
+                              style="background:#4CAF70"></span>
+                        Altre posizioni
+                    </span>
+                    <span class="grafico-legenda-voce">
+                        ○ Non partecipato
+                    </span>
+                </div>
+            </div>
         </div>
     `;
 
+    generaGraficoAndamento(nome);
+
     requestAnimationFrame(function() {
+
         requestAnimationFrame(function() {
             dettaglio.classList.remove("schermata-fade-in");
         });
