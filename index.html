@@ -2216,6 +2216,136 @@ th[onclick]:hover {
     }
 }
 
+    /* =========================================
+   COLLEZIONE BADGE — visualizzazione diretta
+   ========================================= */
+.collezione-badge {
+    margin-top: 28px;
+    padding: 20px;
+    border: 1px solid rgba(226,190,105,.35);
+    border-radius: 14px;
+    background: linear-gradient(145deg,#171717,#24211b);
+}
+.collezione-badge h4 {
+    margin: 0 0 7px;
+    color: #f1d58b;
+    font-size: 20px;
+    text-align: left;
+}
+.badge-collezione-intro {
+    color: #bdb7a8;
+    font-size: 12px;
+    margin: 0 0 18px;
+}
+.badge-famiglia { margin-top: 20px; }
+.badge-famiglia h5 {
+    margin: 0 0 11px;
+    color: #e8e0ce;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: .7px;
+}
+.badge-griglia {
+    display: grid;
+    grid-template-columns: repeat(5,minmax(0,1fr));
+    gap: 10px;
+}
+.badge-carta {
+    min-width: 0;
+    min-height: 125px;
+    padding: 10px 5px 9px;
+    border: 1px solid #514a3c;
+    border-radius: 10px;
+    background: #292722;
+    color: #f5f0e5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 6px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: transform .15s ease, border-color .15s ease;
+}
+.badge-carta:hover { transform: translateY(-2px); border-color: #d8b65f; }
+.badge-carta.bloccato { filter: grayscale(1); opacity: .34; background: #191919; border-color:#333; box-shadow: inset 0 0 0 1px rgba(0,0,0,.45); }
+.badge-scudo {
+    width: 52px;
+    height: 59px;
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    clip-path: polygon(50% 0, 94% 15%, 88% 69%, 50% 100%, 12% 69%, 6% 15%);
+    background: linear-gradient(145deg,var(--badge-colore,#b18b42),#302719);
+    border: 1px solid rgba(255,255,255,.25);
+    color: #fff7dc;
+    font-size: 23px;
+    font-weight: 900;
+    text-shadow: 0 1px 3px #000;
+}
+.badge-carta[data-rarita="Ferro"] .badge-scudo { --badge-colore:#777b80; }
+.badge-carta[data-rarita="Bronzo"] .badge-scudo { --badge-colore:#a66a43; }
+.badge-carta[data-rarita="Argento"] .badge-scudo { --badge-colore:#aeb8c2; }
+.badge-carta[data-rarita="Oro"] .badge-scudo { --badge-colore:#d1a52f; }
+.badge-carta[data-rarita="Diamante"] .badge-scudo { --badge-colore:#42aeb6; }
+.badge-carta[data-rarita="Leggendario"] .badge-scudo { --badge-colore:#f3f0e6; background:linear-gradient(145deg,#fffef8,#a9b0bd 58%,#626b7a); color:#343846; text-shadow:0 1px 2px #fff; border-color:#fff; }
+.badge-carta[data-rarita="Speciale"] .badge-scudo { --badge-colore:#c7a1f5; background:linear-gradient(145deg,#eadbff,#8060b8 70%,#44315e); color:#fff; }
+.badge-carta.dark-ops .badge-scudo { --badge-colore:#4b1f28; background:linear-gradient(145deg,#612630,#111); }
+.badge-carta.onore-privato .badge-scudo { --badge-colore:#c6a64d; background:linear-gradient(145deg,#e0c16b,#59451b); }
+.badge-nome {
+    font-size: 11px;
+    line-height: 1.2;
+    font-weight: 800;
+    text-align: center;
+    overflow-wrap: anywhere;
+}
+.badge-rarita { color: #c9b982; font-size: 9px; text-align: center; }
+.badge-separatore { border-top: 1px solid #494236; margin-top: 16px; padding-top: 16px; }
+.badge-popup {
+    position: fixed; inset: 0; z-index: 10020;
+    display: none; align-items: center; justify-content: center;
+    padding: 18px; background: rgba(0,0,0,.78);
+}
+.badge-popup.aperto { display: flex; }
+.badge-popup-box {
+    position: relative; width: min(430px,100%); max-height: 85vh; overflow-y: auto;
+    padding: 25px 22px 22px; border-radius: 16px;
+    border: 1px solid #76633b; background: linear-gradient(145deg,#292720,#151515);
+    color: #f5f0e5; text-align: center; box-shadow: 0 20px 60px #0009;
+}
+.badge-popup-box .badge-scudo { margin: 0 auto 14px; width: 66px; height: 75px; }
+/* Il colore del badge nel popup rispecchia la rarità della carta originale. */
+.badge-popup-box[data-rarita="Ferro"] .badge-scudo { --badge-colore:#777b80; }
+.badge-popup-box[data-rarita="Bronzo"] .badge-scudo { --badge-colore:#a66a43; }
+.badge-popup-box[data-rarita="Argento"] .badge-scudo { --badge-colore:#aeb8c2; }
+.badge-popup-box[data-rarita="Oro"] .badge-scudo { --badge-colore:#d1a52f; }
+.badge-popup-box[data-rarita="Diamante"] .badge-scudo { --badge-colore:#42aeb6; }
+.badge-popup-box[data-rarita="Leggendario"] .badge-scudo { --badge-colore:#f3f0e6; background:linear-gradient(145deg,#fffef8,#a9b0bd 58%,#626b7a); color:#343846; text-shadow:0 1px 2px #fff; border-color:#fff; }
+.badge-popup-box[data-rarita="Speciale"] .badge-scudo { --badge-colore:#c7a1f5; background:linear-gradient(145deg,#eadbff,#8060b8 70%,#44315e); color:#fff; }
+.badge-popup-box[data-famiglia="DARK OPS"] .badge-scudo { --badge-colore:#4b1f28; background:linear-gradient(145deg,#612630,#111); }
+.badge-popup-box[data-famiglia="Onorificenze private"] .badge-scudo { --badge-colore:#c6a64d; background:linear-gradient(145deg,#e0c16b,#59451b); }
+.badge-popup-box.badge-popup-bloccato .badge-scudo { filter: grayscale(1); opacity:.34; background:linear-gradient(145deg,#686868,#252525) !important; color:#bdbdbd; text-shadow:none; border-color:#777; }
+.badge-popup-box.badge-popup-bloccato { border-color:#444; background:linear-gradient(145deg,#202020,#101010); }
+.badge-popup-box.badge-popup-bloccato h4 { color:#b8b8b8; }
+.badge-popup-box.badge-popup-bloccato .badge-rarita { color:#999; }
+.badge-popup-box h4 { margin: 0 28px 8px; font-size: 21px; color: #f1d58b; }
+.badge-popup-box p { line-height: 1.5; color: #d0cabb; }
+.badge-popup-chiudi {
+    position: absolute; top: 8px; right: 10px; width: 34px; height: 34px;
+    border: 0; border-radius: 50%; background: #38352e; color: white;
+    font-size: 22px; cursor: pointer;
+}
+@media (max-width: 700px) {
+    .badge-griglia { grid-template-columns: repeat(3,minmax(0,1fr)); gap: 8px; }
+    .badge-carta { min-height: 116px; }
+    .badge-scudo { width: 46px; height: 53px; }
+    .collezione-badge { padding: 14px; }
+}
+@media (max-width: 380px) {
+    .badge-griglia { grid-template-columns: repeat(2,minmax(0,1fr)); }
+}
+
     
 </style>
 </head>
@@ -2493,6 +2623,8 @@ th[onclick]:hover {
         <button class="popup-chiudi" onclick="chiudiPopupGiocatore()">Chiudi</button>
     </div>
 </div>
+
+    <div id="popup-collezione-badge" class="badge-popup" aria-hidden="true"></div>
 
 <script>
 
@@ -4536,10 +4668,398 @@ th[onclick]:hover {
                 "profit": -20
             }
         ]
+    },
+    {
+        "n": 21,
+        "date": "22/10/2026",
+        "venue": "VILLA ROMANO",
+        "players": [
+            {
+                "pos": "1°",
+                "name": "Raffaele Iervolino",
+                "entry": 10,
+                "rebu": 10,
+                "addon": 10,
+                "prize": 150,
+                "profit": 120
+            },
+            {
+                "pos": "2°",
+                "name": "Francesco Ambrosio",
+                "entry": 10,
+                "rebu": 10,
+                "addon": 10,
+                "prize": 150,
+                "profit": 120
+            },
+            {
+                "pos": "3°",
+                "name": "Emanuele Nicolo'",
+                "entry": 10,
+                "rebu": 10,
+                "addon": 10,
+                "prize": 50,
+                "profit": 20
+            },
+            {
+                "pos": "4°",
+                "name": "Alfonso Annunziata",
+                "entry": 10,
+                "rebu": null,
+                "addon": null,
+                "prize": 0,
+                "profit": -10
+            },
+            {
+                "pos": "5°",
+                "name": "Carlo Sepe",
+                "entry": 10,
+                "rebu": null,
+                "addon": null,
+                "prize": 0,
+                "profit": -10
+            },
+            {
+                "pos": "6°",
+                "name": "Matteo Annunziata",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "7°",
+                "name": "Umberto Romano",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "8°",
+                "name": "Diego Cavaliere",
+                "entry": 10,
+                "rebu": 10,
+                "addon": 10,
+                "prize": 0,
+                "profit": -30
+            },
+            {
+                "pos": "9°",
+                "name": "Michele Annunziata",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "10°",
+                "name": "Francesco Prisco (junior)",
+                "entry": 10,
+                "rebu": null,
+                "addon": null,
+                "prize": 0,
+                "profit": -10
+            },
+            {
+                "pos": "11°",
+                "name": "Daniele Di Domenico",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "12°",
+                "name": "Errico Romano",
+                "entry": 10,
+                "rebu": 20,
+                "addon": 10,
+                "prize": 0,
+                "profit": -40
+            },
+            {
+                "pos": "13°",
+                "name": "Domenico Correale",
+                "entry": 10,
+                "rebu": 10,
+                "addon": null,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "14°",
+                "name": "Felice Carbone",
+                "entry": 10,
+                "rebu": 10,
+                "addon": 10,
+                "prize": 0,
+                "profit": -30
+            },
+            {
+                "pos": "15°",
+                "name": "Daniel Prisco",
+                "entry": 10,
+                "rebu": 10,
+                "addon": 10,
+                "prize": 0,
+                "profit": -30
+            }
+        ]
     }
+
 ];
 
+/* =========================================
+   SISTEMA BADGE — calcolo retroattivo sui tornei
+   ========================================= */
+const catalogoBadge = [
+ {id:"pres_1",name:"Il Novizio",family:"Presenze e fedeltà",rarity:"Ferro",type:"count",metric:"presenze",target:1,desc:"Partecipa al tuo primo torneo."},
+ {id:"pres_5",name:"Il Frequentatore",family:"Presenze e fedeltà",rarity:"Bronzo",type:"count",metric:"presenze",target:5,desc:"Partecipa a 5 tornei."},
+ {id:"pres_10",name:"Il Veterano",family:"Presenze e fedeltà",rarity:"Argento",type:"count",metric:"presenze",target:10,desc:"Partecipa a 10 tornei."},
+ {id:"pres_15",name:"Il Decano",family:"Presenze e fedeltà",rarity:"Oro",type:"count",metric:"presenze",target:15,desc:"Partecipa a 15 tornei."},
+ {id:"pres_20",name:"La Vecchia Guardia",family:"Presenze e fedeltà",rarity:"Diamante",type:"count",metric:"presenze",target:20,desc:"Partecipa a 20 tornei."},
+ {id:"pres_35",name:"IL SENATORE",family:"Presenze e fedeltà",rarity:"Leggendario",type:"count",metric:"presenze",target:35,desc:"Partecipa a 35 tornei."},
+ {id:"win_1",name:"Il Primo Trionfo",family:"Vittorie e dominio",rarity:"Bronzo",type:"count",metric:"vittorie",target:1,desc:"Vinci il tuo primo torneo."},
+ {id:"win_2",name:"Il Vincente",family:"Vittorie e dominio",rarity:"Argento",type:"count",metric:"vittorie",target:2,desc:"Vinci 2 tornei."},
+ {id:"win_3",name:"Il Campione",family:"Vittorie e dominio",rarity:"Oro",type:"count",metric:"vittorie",target:3,desc:"Vinci 3 tornei."},
+ {id:"win_5",name:"Il Dominatore",family:"Vittorie e dominio",rarity:"Diamante",type:"count",metric:"vittorie",target:5,desc:"Vinci 5 tornei."},
+ {id:"win_10",name:"La Leggenda",family:"Vittorie e dominio",rarity:"Leggendario",type:"count",metric:"vittorie",target:10,desc:"Vinci 10 tornei."},
+ {id:"doppietta",name:"Doppietta",family:"Vittorie e dominio",rarity:"Speciale",type:"special",desc:"Vinci due tornei consecutivi."},
+ {id:"podio_1",name:"I Signori del Podio I",family:"Piazzamenti e costanza",rarity:"Ferro",type:"count",metric:"podi",target:1,desc:"Conquista 1 piazzamento sul podio."},
+ {id:"podio_2",name:"I Signori del Podio II",family:"Piazzamenti e costanza",rarity:"Bronzo",type:"count",metric:"podi",target:2,desc:"Conquista 2 piazzamenti sul podio."},
+ {id:"podio_3",name:"I Signori del Podio III",family:"Piazzamenti e costanza",rarity:"Argento",type:"count",metric:"podi",target:3,desc:"Conquista 3 piazzamenti sul podio."},
+ {id:"podio_5",name:"I Signori del Podio IV",family:"Piazzamenti e costanza",rarity:"Oro",type:"count",metric:"podi",target:5,desc:"Conquista 5 piazzamenti sul podio."},
+ {id:"podio_10",name:"I Signori del Podio V",family:"Piazzamenti e costanza",rarity:"Diamante",type:"count",metric:"podi",target:10,desc:"Conquista 10 piazzamenti sul podio."},
+ {id:"podio_20",name:"I Signori del Podio VI",family:"Piazzamenti e costanza",rarity:"Leggendario",type:"count",metric:"podi",target:20,desc:"Conquista 20 piazzamenti sul podio."},
+ {id:"podio_streak_3",name:"Inarrestabili I",family:"Piazzamenti e costanza",rarity:"Diamante",type:"streak",desc:"Conquista 3 podi consecutivi."},
+ {id:"podio_streak_5",name:"Inarrestabili II",family:"Piazzamenti e costanza",rarity:"Leggendario",type:"streak",desc:"Conquista 5 podi consecutivi."},
+ {id:"secondo_1",name:"Secondo a nessuno I",family:"Piazzamenti e costanza",rarity:"Argento",type:"count",metric:"secondi",target:1,desc:"Arriva secondo una volta."},
+ {id:"secondo_2",name:"Secondo a nessuno II",family:"Piazzamenti e costanza",rarity:"Oro",type:"count",metric:"secondi",target:2,desc:"Arriva secondo 2 volte."},
+ {id:"secondo_3",name:"Secondo a nessuno III",family:"Piazzamenti e costanza",rarity:"Diamante",type:"count",metric:"secondi",target:3,desc:"Arriva secondo 3 volte."},
+ {id:"secondo_5",name:"Secondo a nessuno IV",family:"Piazzamenti e costanza",rarity:"Leggendario",type:"count",metric:"secondi",target:5,desc:"Arriva secondo 5 volte."},
+ {id:"terzo_1",name:"Medaglia di bronzo I",family:"Piazzamenti e costanza",rarity:"Argento",type:"count",metric:"terzi",target:1,desc:"Arriva terzo una volta."},
+ {id:"terzo_2",name:"Medaglia di bronzo II",family:"Piazzamenti e costanza",rarity:"Oro",type:"count",metric:"terzi",target:2,desc:"Arriva terzo 2 volte."},
+ {id:"terzo_3",name:"Medaglia di bronzo III",family:"Piazzamenti e costanza",rarity:"Diamante",type:"count",metric:"terzi",target:3,desc:"Arriva terzo 3 volte."},
+ {id:"terzo_5",name:"Medaglia di bronzo IV",family:"Piazzamenti e costanza",rarity:"Leggendario",type:"count",metric:"terzi",target:5,desc:"Arriva terzo 5 volte."},
+ {id:"quarto_3",name:"A un passo dal successo",family:"Piazzamenti e costanza",rarity:"Speciale",type:"count",metric:"quarti",target:3,desc:"Arriva quarto in 3 tornei."},
+ {id:"profit_1",name:"In positivo",family:"Profitto e denaro",rarity:"Argento",type:"profit",target:0.01,desc:"Raggiungi un profitto cumulativo positivo."},
+ {id:"profit_50",name:"Cinquanta in tasca",family:"Profitto e denaro",rarity:"Oro",type:"profit",target:50,desc:"Raggiungi almeno €50 di profitto cumulativo."},
+ {id:"profit_100",name:"Centone",family:"Profitto e denaro",rarity:"Diamante",type:"profit",target:100,desc:"Raggiungi almeno €100 di profitto cumulativo."},
+ {id:"profit_200",name:"Il Re del profitto",family:"Profitto e denaro",rarity:"Leggendario",type:"profit",target:200,desc:"Raggiungi almeno €200 di profitto cumulativo."},
+ {id:"dark_1000",name:"Giacomino, hai preso le tue MILLE?",family:"DARK OPS",rarity:"DARK OPS",type:"darkprofit",target:1000,desc:"Raggiungi €1.000 di profitto cumulativo."},
+ {id:"dark_last5",name:"Ij a nott aggia rorm",family:"DARK OPS",rarity:"DARK OPS",type:"darkcount",metric:"ultimi",target:5,desc:"Arriva ultimo in 5 tornei complessivi."},
+ {id:"dark_poker_2",name:"2 volte dannato",family:"DARK OPS",rarity:"DARK OPS",type:"manual",desc:"Ottieni 2 punti Poker nello stesso torneo."},
+ {id:"dark_graal",name:"Il Graal",family:"DARK OPS",rarity:"DARK OPS",type:"manual",desc:"Ottieni una scala colore o una scala reale."},
+ {id:"dark_win5",name:"Il Regno Ininterrotto",family:"DARK OPS",rarity:"DARK OPS",type:"special",desc:"Vinci 5 tornei consecutivi."},
+ {id:"dark_last_win",name:"L’Inaspettato",family:"DARK OPS",rarity:"DARK OPS",type:"special",desc:"Arriva ultimo in un torneo e vince il torneo successivo."},
+ {id:"dark_win_last",name:"La Delusione",family:"DARK OPS",rarity:"DARK OPS",type:"special",desc:"Vinci un torneo e arrivi ultimo nel torneo successivo."},
+ {id:"dark_hunter",name:"Cacciatore di leggende",family:"DARK OPS",rarity:"DARK OPS",type:"special",desc:"Hai sconfitto in heads-up un giocatore con almeno 5 vittorie in carriera."},
+ {id:"priv_first_senator",name:"IL PRIMO SENATORE",family:"Onorificenze private",rarity:"Onore",type:"private",desc:"Il primo a raggiungere 35 presenze. Onorificenza non trasferibile."},
+ {id:"priv_founder",name:"IL FONDATORE",family:"Onorificenze private",rarity:"Onore",type:"private",desc:"Onorificenza assegnata al fondatore della lega."},
+ {id:"priv_first_winner",name:"Si aprono le danze",family:"Onorificenze private",rarity:"Onore",type:"private",desc:"Vincitore del primo torneo disputato."},
+ {id:"priv_first_ten",name:"I Primi Dieci",family:"Onorificenze private",rarity:"Onore",type:"private",desc:"Partecipato al primo torneo disputato."},
+ {id:"priv_home",name:"Casa dolce casa",family:"Onorificenze private",rarity:"Onore",type:"private",desc:"Onorificenza assegnata a Errico Romano per aver ospitato 10 tornei in Villa."}
+];
 
+const archivioBadgeManuali = {
+    "priv_founder": ["Diego Cavaliere"],
+    "priv_home": ["Errico Romano"],
+    "dark_poker_2": [],
+    "dark_graal": []
+};
+
+let popupBadgeAttivo = null;
+
+function parsePosizioneBadge(pos) {
+    const m = String(pos == null ? "" : pos).match(/\d+/);
+    return m ? Number(m[0]) : 0;
+}
+
+function creaStatoBadge(nome) {
+    return {
+        nome:nome, presenze:0, vittorie:0, podi:0, secondi:0, terzi:0, quarti:0, ultimi:0,
+        profitto:0, maxProfitto:0, streakPodio:0, maxStreakPodio:0, streakVittorie:0,
+        maxStreakVittorie:0, ultimaPosizione:null, ultimaPartecipazione:null, sbloccati:{}
+    };
+}
+
+function sbloccaBadge(stato,id,numeroTorneo) {
+    if (!stato || stato.sbloccati[id]) return;
+    stato.sbloccati[id] = {torneo:numeroTorneo || null};
+}
+
+function calcolaArchivioBadge() {
+    const stati = {};
+    const tornei = datiTornei.slice().sort((a,b)=>a.n-b.n);
+    function stato(nome) {
+        if (!stati[nome]) stati[nome] = creaStatoBadge(nome);
+        return stati[nome];
+    }
+    const manuali = new Set(["dark_poker_2","dark_graal"]);
+    tornei.forEach(function(torneo) {
+        const presenti = new Set((torneo.players || []).map(p=>p.name));
+        Object.keys(stati).forEach(function(nome) {
+            const p = stati[nome];
+            if (!presenti.has(nome)) {
+                p.streakPodio = 0;
+                p.streakVittorie = 0;
+                p.ultimaPosizione = null;
+                p.ultimaPartecipazione = torneo.n;
+            }
+        });
+        const posizioni = (torneo.players || []).map(p=>({player:p,pos:parsePosizioneBadge(p.pos)}));
+        posizioni.forEach(function(voce) {
+            const raw = voce.player, pos = voce.pos, p = stato(raw.name);
+            p.presenze++;
+            if (pos===1) p.vittorie++;
+            if (pos>=1 && pos<=3) { p.podi++; p.streakPodio++; p.maxStreakPodio=Math.max(p.maxStreakPodio,p.streakPodio); }
+            else p.streakPodio=0;
+            if (pos===2) p.secondi++;
+            if (pos===3) p.terzi++;
+            if (pos===4) p.quarti++;
+            const maxPos = Math.max(0,...posizioni.map(x=>x.pos));
+            if (pos===maxPos && maxPos>0) p.ultimi++;
+            p.profitto += Number(raw.profit)||0;
+            p.maxProfitto = Math.max(p.maxProfitto,p.profitto);
+            p.streakVittorie = pos===1 ? p.streakVittorie+1 : 0;
+            p.maxStreakVittorie = Math.max(p.maxStreakVittorie,p.streakVittorie);
+            p.ultimaPosizione = pos;
+            p.ultimaPartecipazione = torneo.n;
+        });
+        Object.values(stati).forEach(function(p) {
+            catalogoBadge.forEach(function(b) {
+                if (b.type==="count" && p[b.metric]>=b.target) sbloccaBadge(p,b.id,torneo.n);
+                if (b.type==="profit" && p.maxProfitto>=b.target) sbloccaBadge(p,b.id,torneo.n);
+                if (b.type==="darkprofit" && p.maxProfitto>=b.target) sbloccaBadge(p,b.id,torneo.n);
+                if (b.id==="podio_streak_3" && p.maxStreakPodio>=3) sbloccaBadge(p,b.id,torneo.n);
+                if (b.id==="podio_streak_5" && p.maxStreakPodio>=5) sbloccaBadge(p,b.id,torneo.n);
+                if (b.id==="doppietta" && p.maxStreakVittorie>=2) sbloccaBadge(p,b.id,torneo.n);
+                if (b.id==="dark_win5" && p.maxStreakVittorie>=5) sbloccaBadge(p,b.id,torneo.n);
+                if (b.id==="dark_last5" && p.ultimi>=5) sbloccaBadge(p,b.id,torneo.n);
+            });
+        });
+        // Eventi DARK OPS che dipendono da due tornei consecutivi.
+        const prec = tornei.find(t=>t.n===torneo.n-1);
+        if (prec) {
+            const prima = (prec.players||[]).find(x=>parsePosizioneBadge(x.pos)===1);
+            const ultimaPrec = (prec.players||[]).reduce((best,x)=>!best||parsePosizioneBadge(x.pos)>parsePosizioneBadge(best.pos)?x:best,null);
+            const vincitore = (torneo.players||[]).find(x=>parsePosizioneBadge(x.pos)===1);
+            const ultima = (torneo.players||[]).reduce((best,x)=>!best||parsePosizioneBadge(x.pos)>parsePosizioneBadge(best.pos)?x:best,null);
+            if (prima && vincitore && prima.name===vincitore.name) sbloccaBadge(stato(vincitore.name),"doppietta",torneo.n);
+            if (ultimaPrec && vincitore && ultimaPrec.name===vincitore.name) sbloccaBadge(stato(vincitore.name),"dark_last_win",torneo.n);
+            if (prima && ultima && prima.name===ultima.name) sbloccaBadge(stato(prima.name),"dark_win_last",torneo.n);
+            if (vincitore) {
+                const runnerUp=(torneo.players||[]).find(x=>parsePosizioneBadge(x.pos)===2);
+                if (runnerUp) {
+                    const vittoriePrecedenti=tornei.filter(t=>t.n<torneo.n).reduce((sum,t)=>sum+(t.players||[]).filter(x=>x.name===runnerUp.name&&parsePosizioneBadge(x.pos)===1).length,0);
+                    if (vittoriePrecedenti>=5) sbloccaBadge(stato(vincitore.name),"dark_hunter",torneo.n);
+                }
+            }
+        }
+        // Prima persona (o pari merito nello stesso torneo) a raggiungere 35 presenze.
+        const raggiunti=Object.values(stati).filter(p=>p.presenze===35);
+        raggiunti.forEach(p=>sbloccaBadge(p,"priv_first_senator",torneo.n));
+    });
+    // Onorificenze manuali separate dai dati dei tornei.
+    Object.entries(archivioBadgeManuali).forEach(function([id,nominativi]) {
+        nominativi.forEach(function(nome) {
+            if (id.startsWith("dark_")) sbloccaBadge(stato(nome),id,null);
+            else sbloccaBadge(stato(nome),id,null);
+        });
+    });
+    const torneoUno=tornei.find(t=>t.n===1);
+    if (torneoUno) {
+        const vincitore=(torneoUno.players||[]).find(x=>parsePosizioneBadge(x.pos)===1);
+        if (vincitore) sbloccaBadge(stato(vincitore.name),"priv_first_winner",1);
+        (torneoUno.players||[]).forEach(x=>sbloccaBadge(stato(x.name),"priv_first_ten",1));
+    }
+    return stati;
+}
+
+function escapeHtmlBadge(value) {
+    return String(value==null?"":value).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});
+}
+
+function iconaBadge(b) {
+    if (b.family==="DARK OPS") return "✦";
+    if (b.family==="Onorificenze private") return "♛";
+    if (b.id.includes("profit") || b.id==="dark_1000") return "€";
+    if (b.id.includes("win") || b.id==="doppietta" || b.id==="dark_hunter") return "♠";
+    if (b.id.includes("podio") || b.id.includes("secondo") || b.id.includes("terzo") || b.id.includes("quarto")) return "♜";
+    return "★";
+}
+
+function mostraDettaglioBadge(nomeGiocatore,id) {
+    const stato=calcolaArchivioBadge()[nomeGiocatore];
+    const b=catalogoBadge.find(x=>x.id===id);
+    if (!stato || !b) return;
+    const sblocco=stato.sbloccati[id];
+    const lockedDark=b.family==="DARK OPS"&&!sblocco;
+    const titolo=lockedDark ? b.name : b.name;
+    const descrizione=lockedDark ? "Il requisito è segreto." : (sblocco ? b.desc : b.desc);
+    const dataTorneo=b.family==="Onorificenze private" ? "" : (sblocco&&sblocco.torneo ? "Sbloccato al Torneo "+sblocco.torneo+"." : (sblocco ? "Onorificenza registrata." : ""));
+    const popup=document.getElementById("popup-collezione-badge");
+    if (!popup) return;
+    const famigliaPopup=b.family==="DARK OPS" ? "DARK OPS" : b.family;
+    popup.innerHTML=`<div class="badge-popup-box ${sblocco?"":"badge-popup-bloccato"}" data-rarita="${escapeHtmlBadge(b.rarity)}" data-famiglia="${escapeHtmlBadge(famigliaPopup)}" role="dialog" aria-modal="true">
+        <button class="badge-popup-chiudi" aria-label="Chiudi" onclick="chiudiDettaglioBadge()">×</button>
+        <div class="badge-scudo">${iconaBadge(b)}</div>
+        <h4>${escapeHtmlBadge(titolo)}</h4>
+        <div class="badge-rarita">${escapeHtmlBadge(b.rarity)}</div>
+        <p>${escapeHtmlBadge(descrizione)}</p>
+        ${!sblocco&&b.type==="count" ? `<p>Progressi: ${Math.min(stato[b.metric]||0,b.target)} / ${b.target}</p>` : ""}
+        ${dataTorneo ? `<p>${escapeHtmlBadge(dataTorneo)}</p>` : ""}
+    </div>`;
+    popup.classList.add("aperto");
+    popup.setAttribute("aria-hidden","false");
+    popup.onclick=function(e){if(e.target===popup)chiudiDettaglioBadge();};
+    popupBadgeAttivo=nomeGiocatore;
+}
+function chiudiDettaglioBadge() {
+    const popup=document.getElementById("popup-collezione-badge");
+    if(popup){popup.classList.remove("aperto");popup.setAttribute("aria-hidden","true");}
+    popupBadgeAttivo=null;
+}
+document.addEventListener("keydown",function(e){if(e.key==="Escape")chiudiDettaglioBadge();});
+
+function renderCollezioneBadge(nomeGiocatore) {
+    const stati=calcolaArchivioBadge();
+    const stato=stati[nomeGiocatore] || creaStatoBadge(nomeGiocatore);
+    const famiglie=["Presenze e fedeltà","Vittorie e dominio","Piazzamenti e costanza","Profitto e denaro","DARK OPS","Onorificenze private"];
+    const visibili=catalogoBadge.filter(b=>b.family!=="Onorificenze private" || !!stato.sbloccati[b.id]);
+    const ottenuti=visibili.filter(b=>!!stato.sbloccati[b.id]);
+    let html=`<section class="collezione-badge" aria-label="Collezione badge">
+        <h4>🏅 Collezione badge</h4>
+        <p class="badge-collezione-intro">${Object.values(stato.sbloccati).filter((x)=>x).length} badge sbloccati · i badge grigi sono ancora da conquistare</p>`;
+    famiglie.forEach(function(famiglia) {
+        let badges=visibili.filter(b=>b.family===famiglia);
+        if (!badges.length) return;
+        html+=`<div class="badge-famiglia ${famiglia==="DARK OPS"||famiglia==="Onorificenze private"?"badge-separatore":""}">
+            <h5>${escapeHtmlBadge(famiglia)}${famiglia==="DARK OPS"?" · "+badges.filter(b=>stato.sbloccati[b.id]).length+"/"+badges.length:""}</h5>
+            <div class="badge-griglia">`;
+        badges.forEach(function(b) {
+            const sbloccato=!!stato.sbloccati[b.id];
+            const dark=b.family==="DARK OPS"?"dark-ops":"";
+            const priv=b.family==="Onorificenze private"?"onore-privato":"";
+            const aria=(sbloccato?"Badge sbloccato: ":"Badge bloccato: ")+b.name;
+            html+=`<button type="button" class="badge-carta ${sbloccato?"":"bloccato"} ${dark} ${priv}" data-rarita="${escapeHtmlBadge(b.rarity)}" onclick='mostraDettaglioBadge(${nomePerOnclick(nomeGiocatore)}, "${b.id}")' aria-label="${escapeHtmlBadge(aria)}">
+                <span class="badge-scudo">${iconaBadge(b)}</span>
+                <span class="badge-nome">${escapeHtmlBadge(b.name)}</span>
+                <span class="badge-rarita">${sbloccato?escapeHtmlBadge(b.rarity):"Bloccato"}</span>
+            </button>`;
+        });
+        html+="</div></div>";
+    });
+    html+="</section>";
+    return html;
+}
+
+    
     function formattaEuro(valore) {
         if (valore === null || valore === undefined || valore === "") {
             return "—";
@@ -6860,6 +7380,8 @@ setTimeout(function() {
                                 <div><strong>Profitto medio</strong><span>${formattaEuro(g.profittoMedio)}</span></div>
                 <div><strong>Profitto/Perdita</strong><span>${formattaEuroIntero(g.profitto)}</span></div>
             </div>
+
+${renderCollezioneBadge(g.nome)}
 
             ${curiosita.length ? `
                 <div class="giocatore-curiosita">
