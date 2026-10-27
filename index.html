@@ -8106,6 +8106,64 @@ function mostraTorneoDettaglio(numero) {
                         ${righe}
                     </tbody>
                 </table>
+                
+                
+                ${torneo.n === 22 ? `
+                    <h3>♠ Kill Log</h3>
+                    <p style="color:#aaa; text-align:center;">
+                        Registro delle eliminazioni del Torneo 22
+                    </p>
+
+                    <table class="tabella-torneo">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Eliminatore</th>
+                                <th>Eliminato</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${killLogTorneo22.map(function(kill, indice) {
+                                return `
+                                    <tr>
+                                        <td>${indice + 1}</td>
+                                        <td>${kill.eliminatore}</td>
+                                        <td>${kill.eliminato}</td>
+                                    </tr>
+                                `;
+                            }).join("")}
+                        </tbody>
+                    </table>
+
+                    <div style="
+                        margin-top:15px;
+                        padding:14px;
+                        background:#222;
+                        border:1px solid #444;
+                        border-radius:10px;
+                        color:#ccc;
+                        text-align:center;
+                    ">
+                        <strong>Nota finale</strong>
+                        <p style="margin-bottom:0;">
+                            Premio finale diviso: i primi due giocatori
+                            hanno concordato la divisione del premio.
+                            Non è conteggiata come eliminazione.
+                        </p>
+                    </div>
+                ` : torneo.n > 22 ? `
+                    <h3>♠ Kill Log</h3>
+                    <p style="color:#aaa; text-align:center;">
+                        Dati delle eliminazioni non ancora inseriti
+                        per questo torneo.
+                    </p>
+                ` : torneo.n >= 22 ? "" : `
+                    <h3>♠ Kill Log</h3>
+                    <p style="color:#aaa; text-align:center;">
+                        Statistiche disponibili dal Torneo 22 in poi.
+                    </p>
+                `}
+
             `;
 
         }
