@@ -7947,6 +7947,32 @@ function mostraTorneoDettaglio(numero) {
                 return t.n === numero;
             });
 
+    
+        // KILL LOG — dati disponibili dal Torneo 22
+        const killLogTorneo22 = [
+            { eliminatore: "Paolo Giugliano", eliminato: "Diego Cavaliere" },
+            { eliminatore: "Raffaele Iervolino", eliminato: "Daniel Prisco" },
+            { eliminatore: "Felice Carbone", eliminato: "Francesco Ambrosio" },
+            { eliminatore: "Matteo Annunziata", eliminato: "Emanuele Nicolo'" },
+            { eliminatore: "Matteo Annunziata", eliminato: "Umberto Romano" },
+            { eliminatore: "Umberto Romano", eliminato: "Emanuele Nicolo'" },
+            { eliminatore: "Umberto Romano", eliminato: "Fabrizio D'alessandro" },
+            { eliminatore: "Diego Cavaliere", eliminato: "Daniel Prisco" },
+            { eliminatore: "Emanuele Nicolo'", eliminato: "Errico Romano" },
+            { eliminatore: "Paolo Giugliano", eliminato: "Felice Carbone" },
+            { eliminatore: "Daniel Prisco", eliminato: "Umberto Romano" },
+            { eliminatore: "Daniel Prisco", eliminato: "Matteo Annunziata" },
+            { eliminatore: "Daniel Prisco", eliminato: "Diego Cavaliere" },
+            { eliminatore: "Francesco Ambrosio", eliminato: "Daniel Prisco" },
+            { eliminatore: "Francesco Ambrosio", eliminato: "Emanuele Nicolo'" },
+            { eliminatore: "Paolo Giugliano", eliminato: "Raffaele Iervolino" },
+            { eliminatore: "Carlo Sepe", eliminato: "Fabrizio D'alessandro" },
+            { eliminatore: "Francesco Ambrosio", eliminato: "Carlo Sepe" }
+        ];
+
+        const notaKillTorneo22 = "Premio finale diviso";
+
+
         if (!torneo) {
             return;
         }
