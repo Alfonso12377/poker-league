@@ -8231,26 +8231,59 @@ function mostraTorneoDettaglio(numero) {
                 
                 
 
-<CodeBlock language="javascript" editable>
+
                 ${(() => {
                     const datiKillLog = killLogPerTorneo[torneo.n];
 
-
-if (torneo.n < 22) {
-return                             DIL1                        ;
-}
-
-if (!datiKillLog) {
+                    if (torneo.n < 22) {
                         return `
-
-`;
+                            <div class="kill-log">
+                                <h3>Kill Log</h3>
+                                <p class="kill-log-messaggio">
+                                    Statistiche disponibili dal Torneo 22
+                                </p>
+                            </div>
+                        `;
                     }
 
-return `
+                    if (!datiKillLog) {
+                        return `
+                            <div class="kill-log">
+                                <h3>Kill Log</h3>
+                                <p class="kill-log-messaggio">
+                                    Dati delle eliminazioni non ancora inseriti
+                                </p>
+                            </div>
+                        `;
+                    }
 
-`;
+                    return `
+                        <div class="kill-log">
+                            <h3>Kill Log</h3>
+
+                            <div class="kill-log-list">
+                                ${datiKillLog.eliminazioni.map(function(kill, indice) {
+                                    return `
+                                        <div class="kill-log-riga">
+                                            <span class="kill-log-numero">${String(indice + 1).padStart(2, "0")}</span>
+                                            <span class="kill-log-eliminatore">${kill.eliminatore}</span>
+                                            <span class="kill-log-freccia">⚔</span>
+                                            <span class="kill-log-eliminato">${kill.eliminato}</span>
+                                        </div>
+                                    `;
+                                }).join("")}
+                            </div>
+
+                            ${datiKillLog.nota ? `
+                                <div class="kill-log-premio">
+                                    <span class="kill-log-premio-icona">💰</span>
+                                    <span>${datiKillLog.nota}</span>
+                                </div>
+                            ` : ""}
+                        </div>
+                    `;
                 })()}
-</CodeBlock>
+
 
 
             `;
