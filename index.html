@@ -2347,37 +2347,38 @@ th[onclick]:hover {
 }
 
     
+
 /* KILL LOG */
 .kill-log {
-    margin-top: 30px;
+    margin-top: 22px;
     padding: 0;
     color: #eee;
 }
 
 .kill-log h3 {
-    margin: 0 0 16px 0;
+    margin: 0 0 10px 0;
     color: #eee;
     font-family: "Trebuchet MS", Arial, sans-serif;
-    font-size: 21px;
+    font-size: 19px;
     text-align: left;
 }
 
 .kill-log-list {
-    background: linear-gradient(145deg, #292929, #202020);
-    border: 1px solid #3d3d3d;
-    border-radius: 12px;
-    padding: 5px 14px;
+    background: #222;
+    border: 1px solid #383838;
+    border-radius: 9px;
+    padding: 3px 12px;
 }
 
 .kill-log-riga {
     display: grid;
-    grid-template-columns: 25px minmax(0, 1fr) 24px minmax(0, 1fr);
+    grid-template-columns: 22px minmax(0, 1fr) 20px minmax(0, 1fr);
     align-items: center;
-    gap: 8px;
-    padding: 10px 0;
-    border-bottom: 1px solid #383838;
-    font-size: 13px;
-    line-height: 1.3;
+    gap: 6px;
+    padding: 7px 0;
+    border-bottom: 1px solid #353535;
+    font-size: 12px;
+    line-height: 1.25;
 }
 
 .kill-log-riga:last-child {
@@ -2385,8 +2386,8 @@ th[onclick]:hover {
 }
 
 .kill-log-numero {
-    color: #777;
-    font-size: 11px;
+    color: #888;
+    font-size: 10px;
     text-align: center;
 }
 
@@ -2398,50 +2399,71 @@ th[onclick]:hover {
 }
 
 .kill-log-freccia {
-    color: #b9a16b;
-    font-size: 16px;
+    color: #c7ad70;
+    font-size: 14px;
     text-align: center;
 }
 
 .kill-log-eliminato {
-    color: #bdbdbd;
+    color: #c8c8c8;
     overflow-wrap: anywhere;
 }
 
-.kill-log-nota {
-    margin: 12px 0 0 0;
-    color: #999;
-    font-size: 12px;
-    text-align: left;
+/* Riga speciale: premio diviso */
+.kill-log-premio {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-top: 7px;
+    padding: 10px 12px;
+    background: #29271f;
+    border: 1px solid #6b5b35;
+    border-radius: 8px;
+    color: #f0d58b;
+    font-size: 13px;
+    font-weight: bold;
 }
 
+.kill-log-premio-icona {
+    font-size: 17px;
+    flex-shrink: 0;
+}
+
+/* Messaggi informativi */
 .kill-log-messaggio {
     margin: 0;
     padding: 12px 14px;
-    background: rgba(0, 0, 0, 0.12);
-    border: 1px solid rgba(0, 0, 0, 0.12);
-    border-radius: 10px;
-    color: #777;
-    font-size: 13px;
+    background: #222;
+    border: 1px solid #444;
+    border-radius: 9px;
+    color: #e0e0e0;
+    font-size: 14px;
+    line-height: 1.4;
     text-align: left;
 }
 
 @media (max-width: 600px) {
     .kill-log-riga {
-        grid-template-columns: 20px minmax(0, 1fr) 18px minmax(0, 1fr);
-        gap: 5px;
-        padding: 9px 0;
+        grid-template-columns: 19px minmax(0, 1fr) 17px minmax(0, 1fr);
+        gap: 4px;
+        padding: 7px 0;
         font-size: 11px;
     }
 
     .kill-log-freccia {
-        font-size: 14px;
+        font-size: 13px;
     }
 
     .kill-log-list {
-        padding: 4px 8px;
+        padding: 3px 7px;
+    }
+
+    .kill-log-premio {
+        padding: 9px 10px;
+        font-size: 12px;
     }
 }
+
 
     
 </style>
@@ -8223,9 +8245,10 @@ function mostraTorneoDettaglio(numero) {
                             }).join("")}
                         </div>
 
-                        <p class="kill-log-nota">
-                            Premio finale diviso
-                        </p>
+<div class="kill-log-premio">
+    <span class="kill-log-premio-icona">💰</span>
+    <span>Premio finale diviso</span>
+</div
                     </div>
                 ` : torneo.n > 22 ? `
                     <div class="kill-log">
