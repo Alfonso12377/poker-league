@@ -889,11 +889,56 @@
         box-shadow: 0 10px 22px rgba(0,0,0,0.35);
     }
 
+
+.giocatore-card {
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+    width: 100%;
+}
+
 .giocatore-card h3 {
     margin: 0;
     font-size: 20px;
     text-align: center;
+    overflow-wrap: anywhere;
 }
+
+.giocatore-badge-contatori {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    width: 100%;
+    margin-top: 2px;
+    font-size: 12px;
+    line-height: 1.35;
+    font-weight: 700;
+}
+
+.giocatore-badge-normali {
+    color: #e9c46a;
+}
+
+.giocatore-badge-darkops {
+    color: #c7a2ff;
+}
+
+@media (max-width: 600px) {
+    .giocatore-card {
+        padding: 18px 14px;
+        gap: 7px;
+    }
+
+    .giocatore-card h3 {
+        font-size: 18px;
+    }
+
+    .giocatore-badge-contatori {
+        font-size: 12px;
+    }
+}
+
 
     .giocatore-statistiche {
         display: grid;
