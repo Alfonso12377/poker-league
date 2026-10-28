@@ -5148,12 +5148,14 @@ const catalogoBadge = [
  {id:"priv_first_ten",name:"I Primi Dieci",family:"Onorificenze private",rarity:"Onore",type:"private",desc:"Partecipato al primo torneo disputato."},
  {id:"priv_home",name:"Casa dolce casa",family:"Onorificenze private",rarity:"Onore",type:"private",desc:"Onorificenza assegnata a Errico Romano per aver ospitato 10 tornei in Villa."},
 {id:"priv_clutcher",name:"THE CLUTCHER",family:"Onorificenze private",rarity:"Onore",type:"private",desc:"Ottenuta perché è IL CLUTCHER"},
+    {id:"priv_buyin_fantasma",name:"Pagare per (non) veder cammello",family:"Onorificenze private",rarity:"Onore",type:"private",desc:"Primo giocatore ad aver pagato il buy-in senza presentarsi al torneo. Torneo nel quale ha comunque vinto più mani di Errico"},
 ];
 
 const archivioBadgeManuali = {
     "priv_founder": ["Diego Cavaliere"],
     "priv_home": ["Errico Romano"],
     "priv_clutcher": ["Francesco Prisco (junior)"],
+    "priv_buyin_fantasma": ["Paolo Giugliano"],
     "dark_poker_2": [],
     "dark_graal": []
 };
@@ -6039,6 +6041,29 @@ const giocatoriMigliorIncassoSenzaVittorie =
             return giocatore.nome;
         });
 
+        /* PEGGIOR PROFITTO CON ALMENO UNA VITTORIA */
+
+const giocatoriConVittorie = statistiche
+    .filter(function(giocatore) {
+        return giocatore.vittorie >= 1;
+    });
+
+const peggiorProfittoConVittoria =
+    giocatoriConVittorie.length > 0
+        ? Math.min(...giocatoriConVittorie.map(function(giocatore) {
+            return giocatore.profitto;
+        }))
+        : 0;
+
+const giocatoriPeggiorProfittoConVittoria =
+    giocatoriConVittorie
+        .filter(function(giocatore) {
+            return giocatore.profitto === peggiorProfittoConVittoria;
+        })
+        .map(function(giocatore) {
+            return giocatore.nome;
+        });
+
 
     /* ============================= */
     /* RECORD INDIVIDUALI - HTML */
@@ -6375,6 +6400,27 @@ Miglior profitto senza vittorie
 
 </div>
 
+<div class="record-box">
+
+    <div class="record-icon">📉</div>
+
+    <div class="record-label">
+        Peggior profitto con vittorie
+    </div>
+
+    <div class="record-value">
+        ${giocatoriPeggiorProfittoConVittoria.length
+            ? giocatoriPeggiorProfittoConVittoria.join(" · ")
+            : "Nessuno"}
+    </div>
+
+    <div class="record-detail">
+        ${giocatoriConVittorie.length
+            ? formattaEuroIntero(peggiorProfittoConVittoria) + " · almeno 1 vittoria"
+            : "Nessun giocatore con vittorie"}
+    </div>
+
+</div>
 
 <div class="record-box">
 
