@@ -5147,11 +5147,13 @@ const catalogoBadge = [
  {id:"priv_first_winner",name:"Si aprono le danze",family:"Onorificenze private",rarity:"Onore",type:"private",desc:"Vincitore del primo torneo disputato."},
  {id:"priv_first_ten",name:"I Primi Dieci",family:"Onorificenze private",rarity:"Onore",type:"private",desc:"Partecipato al primo torneo disputato."},
  {id:"priv_home",name:"Casa dolce casa",family:"Onorificenze private",rarity:"Onore",type:"private",desc:"Onorificenza assegnata a Errico Romano per aver ospitato 10 tornei in Villa."}
+    {id:"priv_clutcher",name:"THE CLUTCHER",family:"Onorificenze private",rarity:"Onore",type:"private",desc:"Ottenuta perché è IL CLUTCHER"}
 ];
 
 const archivioBadgeManuali = {
     "priv_founder": ["Diego Cavaliere"],
     "priv_home": ["Errico Romano"],
+    "priv_clutcher": ["Francesco Prisco (junior)"],
     "dark_poker_2": [],
     "dark_graal": []
 };
@@ -7162,9 +7164,7 @@ const curiositaGiocatori = {
 "👑 VENI, VIDI, VICI. È arrivato e ha dominato, riportando in alto il nome della famiglia Romano, che dopo le imprese di Errico sembrava ormai avviata verso la disgrazia."
     ],
     "Alfonso Annunziata": [
-        function(g) {
-            return `🏆 ${g.vittorie} vittorie in ${g.partecipazioni} partecipazioni.`;
-        },
+
         function(g, classifica) {
             const massimoProfitto = Math.max.apply(null, classifica.map(function(x) { return x.profitto; }));
             if (g.profitto === massimoProfitto) {
@@ -7172,9 +7172,7 @@ const curiositaGiocatori = {
             }
             return `💰 Ha attualmente un profitto complessivo di ${formattaEuroIntero(g.profitto)}.`;
         },
-        function(g) {
-            return `🔥 Ha vinto il ${formattaPercentuale(g.winRate)} dei tornei a cui ha partecipato.`;
-        },
+
 "👑 Detiene il record di cinque tornei consecutivi vinti.",
 "🃏 Non prende in mano una coppia di assi dal 2025.(forse..)"
     ],
@@ -7182,7 +7180,6 @@ const curiositaGiocatori = {
         "I cosiddetti “Ragazzi”. Gli unici a giocare in coppia: una sola partecipazione è bastata per renderli difficili da scardinare, piazzandoli a quota 25,00 di posizionamento medio."
     ],
 "Emanuele Nicolo'": [
-    "🏆 È l'unico, oltre ad Alfonso e Diego, ad aver vinto più di un torneo.",
     "🃏 Prende 10 volte AA a partita, però, se parli con lui, è sempre sfortunato."
 ],
     "Diego Cavaliere": [
@@ -7194,9 +7191,12 @@ const curiositaGiocatori = {
             return `🎩 IL SENATORE. È già arrivato a quota ${g.partecipazioni} partecipazioni.`;
         },
 function(g) {
-    return `🏅 Praticamente sempre sul podio, ma nonostante questo appena poco in positivo. Ma tutto questo per lui non è un problema, anzi... ma non siete ancora pronti per questo discorso.`;
+    if (g.profitto < 0) {
+        return `🏅 Praticamente sempre sul podio, ma nonostante questo è in negativo. Ma tutto questo per lui non è un problema, anzi... ma non siete ancora pronti per questo discorso.`;
+    }
+
+    return `🏅 Praticamente sempre sul podio, ed è in positivo. Ma tutto questo a lui non interessa, può anche perdere sempre... ma non siete ancora pronti per questo discorso.`;
 },
-"🏆 È l'unico, oltre ad Alfonso ed Emanuele Nicolo', ad aver vinto più di un torneo."
     ],
 "Fabrizio D'alessandro": [
     "o me o Prisco",
@@ -7236,7 +7236,9 @@ function(g) {
         }
     ],
     "Vincenzo Correale": [],
-    "Michele Annunziata": [],
+"Michele Annunziata": [
+    "🃏 L'unico torneo che ha vinto si candida a essere il torneo più brutto del XXI secolo."
+],
     "Matteo Annunziata": [],
     "Francesco Prisco (senior)": [],
     "Paolo Giugliano": [],
