@@ -5273,7 +5273,8 @@ function renderCollezioneBadge(nomeGiocatore) {
     const ottenuti=visibili.filter(b=>!!stato.sbloccati[b.id]);
     let html=`<section class="collezione-badge" aria-label="Collezione badge">
         <h4>🏅 Collezione badge</h4>
-        <p class="badge-collezione-intro">${Object.values(stato.sbloccati).filter((x)=>x).length} badge sbloccati · i badge grigi sono ancora da conquistare</p>`;
+        
+<p class="badge-collezione-intro">${Object.keys(stato.sbloccati).filter(id => stato.sbloccati[id] && catalogoBadge.some(b => b.id === id && b.family !== "Onorificenze private")).length} badge sbloccati</p>`;
     famiglie.forEach(function(famiglia) {
         let badges=visibili.filter(b=>b.family===famiglia);
         if (!badges.length) return;
@@ -7243,27 +7244,60 @@ function chiudiPopupGiocatore(event) {
     }
 }
 
+
 function generaGiocatori() {
     const lista = document.getElementById("giocatori-lista");
     const dettaglio = document.getElementById("giocatore-dettaglio");
     if (!lista) return;
 
-    // Ogni ingresso nella sezione Giocatori ripristina sempre la lista.
-    // Evita che, tornando al menu dalla scheda di un giocatore, la lista
-    // resti nascosta al successivo ingresso.
     lista.style.display = "grid";
     if (dettaglio) dettaglio.innerHTML = "";
+
     const classifica = calcolaStatistiche();
-    classifica.sort(function(a, b) { return a.nome.localeCompare(b.nome); });
+    classifica.sort(function(a, b) {
+        return a.nome.localeCompare(b.nome);
+    });
+
+    // Badge conquistabili: esclude Dark Ops e onorificenze private.
+    const badgeNormali = catalogoBadge.filter(function(b) {
+        return b.family !== "DARK OPS" &&
+               b.family !== "Onorificenze private";
+    });
+
+    // Dark Ops: conteggio separato.
+    const badgeDarkOps = catalogoBadge.filter(function(b) {
+        return b.family === "DARK OPS";
+    });
+
+    const archivioBadge = calcolaArchivioBadge();
 
     lista.innerHTML = classifica.map(function(g) {
+        const statoBadge = archivioBadge[g.nome] || creaStatoBadge(g.nome);
+
+        const badgeNormaliSbloccati = badgeNormali.filter(function(b) {
+            return !!statoBadge.sbloccati[b.id];
+        }).length;
+
+        const darkOpsSbloccate = badgeDarkOps.filter(function(b) {
+            return !!statoBadge.sbloccati[b.id];
+        }).length;
+
         return `
             <button class="giocatore-card" onclick='mostraGiocatore(${nomePerOnclick(g.nome)})'>
                 <h3>${g.nome}</h3>
+                <div class="giocatore-badge-contatori">
+                    <span class="giocatore-badge-normali">
+                        Badge sbloccati: ${badgeNormaliSbloccati}/${badgeNormali.length}
+                    </span>
+                    <span class="giocatore-badge-darkops">
+                        Dark Ops sbloccate: ${darkOpsSbloccate}/${badgeDarkOps.length}
+                    </span>
+                </div>
             </button>
         `;
     }).join("");
 }
+
 
     
 function generaGraficoAndamento(nome) {
