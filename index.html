@@ -2635,7 +2635,7 @@ th[onclick]:hover {
                 type="range"
                 id="filtro-torneo-inizio"
                 min="1"
-                max="19"
+                max="23"
                 value="1"
                 oninput="modificaFiltroClassifica('inizio', this.value)"
             >
@@ -2643,15 +2643,15 @@ th[onclick]:hover {
 
         <div class="filtro-estremo">
             <label for="filtro-torneo-fine">
-                A <strong id="valore-torneo-fine">19</strong>
+                A <strong id="valore-torneo-fine">23</strong>
             </label>
 
             <input
                 type="range"
                 id="filtro-torneo-fine"
                 min="1"
-                max="19"
-                value="19"
+                max="23"
+                value="23"
                 oninput="modificaFiltroClassifica('fine', this.value)"
             >
         </div>
@@ -5091,10 +5091,154 @@ th[onclick]:hover {
                 "prize": 0,
                 "profit": -20
             }
+
+        ]
+    },
+    {
+        "n": 23,
+        "date": "29/10/2026",
+        "venue": "TAVERNA CORREALE",
+        "players": [
+            {
+                "pos": "1°",
+                "name": "Fabrizio D'alessandro",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 150,
+                "profit": 130
+            },
+            {
+                "pos": "2°",
+                "name": "Emanuele Nicolo'",
+                "entry": 10,
+                "rebu": 10,
+                "addon": 10,
+                "prize": 110,
+                "profit": 80
+            },
+            {
+                "pos": "3°",
+                "name": "Alfonso Annunziata",
+                "entry": 10,
+                "rebu": 10,
+                "addon": null,
+                "prize": 120,
+                "profit": 100
+            },
+            {
+                "pos": "4°",
+                "name": "Domenico Correale",
+                "entry": 10,
+                "rebu": 10,
+                "addon": 10,
+                "prize": 0,
+                "profit": -30
+            },
+            {
+                "pos": "5°",
+                "name": "Diego Cavaliere",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "6°",
+                "name": "Matteo Annunziata",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "7°",
+                "name": "Carlo Sepe",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "8°",
+                "name": "Sabato Tarantino",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "9°",
+                "name": "Francesco Prisco (junior)",
+                "entry": 10,
+                "rebu": 10,
+                "addon": 10,
+                "prize": 0,
+                "profit": -30
+            },
+            {
+                "pos": "10°",
+                "name": "Felice Carbone",
+                "entry": 10,
+                "rebu": null,
+                "addon": 10,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "11°",
+                "name": "Raffaele Iervolino",
+                "entry": 10,
+                "rebu": 10,
+                "addon": 10,
+                "prize": 0,
+                "profit": -30
+            },
+            {
+                "pos": "12°",
+                "name": "Daniel Prisco",
+                "entry": 10,
+                "rebu": 10,
+                "addon": 10,
+                "prize": 0,
+                "profit": -30
+            },
+            {
+                "pos": "13°",
+                "name": "Francesco Ambrosio",
+                "entry": 10,
+                "rebu": 20,
+                "addon": 10,
+                "prize": 0,
+                "profit": -40
+            },
+            {
+                "pos": "14°",
+                "name": "Emanuele Del Pesce",
+                "entry": 10,
+                "rebu": 10,
+                "addon": null,
+                "prize": 0,
+                "profit": -20
+            },
+            {
+                "pos": "15°",
+                "name": "Pasquale Incarnato",
+                "entry": 10,
+                "rebu": 20,
+                "addon": null,
+                "prize": 0,
+                "profit": -30
+            }
         ]
     }
 
 ];
+
 
 
 /* =========================================
@@ -8211,6 +8355,35 @@ function mostraTorneo(numero) {
                 { eliminatore: "Francesco Ambrosio", eliminato: "Carlo Sepe" }
             ],
             nota: "Premio finale diviso"
+
+        },
+        23: {
+            eliminazioni: [
+                { eliminatore: "Domenico Correale", eliminato: "Raffaele Iervolino" },
+                { eliminatore: "Pasquale Incarnato", eliminato: "Alfonso Annunziata" },
+                { eliminatore: "Alfonso Annunziata", eliminato: "Emanuele Nicolo'" },
+                { eliminatore: "Alfonso Annunziata", eliminato: "Francesco Prisco (junior)" },
+                { eliminatore: "Alfonso Annunziata", eliminato: "Francesco Ambrosio" },
+                { eliminatore: "Raffaele Iervolino", eliminato: "Daniel Prisco" },
+                { eliminatore: "Sabato Tarantino", eliminato: "Pasquale Incarnato" },
+                { eliminatore: "Sabato Tarantino", eliminato: "Francesco Ambrosio" },
+                { eliminatore: "Daniel Prisco", eliminato: "Domenico Correale" },
+                { eliminatore: "Daniel Prisco", eliminato: "Emanuele Del Pesce" },
+                { eliminatore: "Sabato Tarantino", eliminato: "Pasquale Incarnato" },
+                { eliminatore: "Emanuele Nicolo'", eliminato: "Pasquale Incarnato" },
+                { eliminatore: "Diego Cavaliere", eliminato: "Emanuele Del Pesce" },
+                { eliminatore: "Emanuele Nicolo'", eliminato: "Francesco Ambrosio" },
+                { eliminatore: "Diego Cavaliere", eliminato: "Daniel Prisco" },
+                { eliminatore: "Diego Cavaliere", eliminato: "Raffaele Iervolino" },
+                { eliminatore: "Emanuele Nicolo'", eliminato: "Felice Carbone" },
+                { eliminatore: "Fabrizio D'alessandro", eliminato: "Francesco Prisco (junior)" },
+                { eliminatore: "Alfonso Annunziata", eliminato: "Sabato Tarantino" },
+                { eliminatore: "Emanuele Nicolo'", eliminato: "Carlo Sepe" },
+                { eliminatore: "Emanuele Nicolo'", eliminato: "Matteo Annunziata" },
+                { eliminatore: "Alfonso Annunziata", eliminato: "Diego Cavaliere" },
+                { eliminatore: "Fabrizio D'alessandro", eliminato: "Domenico Correale" }
+            ],
+            nota: "Premio Finale Diviso"
         }
     };
 
