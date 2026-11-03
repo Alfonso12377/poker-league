@@ -2953,61 +2953,67 @@ th[onclick]:hover {
     color: #c7a2ff;
 }
 /* =========================================
-   BARRE COMPARATIVE — STILE MINIMAL
+/* =========================================
+   TESTA A TESTA — VALORI IN EVIDENZA
    ========================================= */
 
 .testa-a-testa-stat .valore {
-    transition: color 0.2s ease;
+    font-size: 16px;
+    font-weight: 600;
+    transition: color 0.2s ease, font-size 0.2s ease;
 }
 
-/* Vantaggio: oro tenue, senza introdurre altri colori */
+/* Giocatore in vantaggio */
 .testa-a-testa-stat .testa-a-testa-leader {
     color: #e9c46a !important;
+    font-size: 19px;
+    font-weight: 800;
+    text-shadow: 0 0 8px rgba(233, 196, 106, 0.15);
 }
 
-/* Parità */
+/* Statistiche in parità */
 .testa-a-testa-stat .testa-a-testa-parita {
     color: #d0d0d0 !important;
+    font-size: 16px;
+    font-weight: 600;
+}
+    /* =========================================
+   CARD TESTA A TESTA — ICONA MENU
+   ========================================= */
+
+.menu-testa-a-testa .menu-extra-icona {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 82px;
+    height: 82px;
+
+    margin: 0 0 14px 0;
+
+    font-size: 64px !important;
+    line-height: 1;
+
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.25));
 }
 
-/* Contenitore delle barre */
-.testa-a-testa-barra-contenitore {
-    grid-column: 1 / -1;
-
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-
-    margin-top: 2px;
-    padding: 0 2px;
+/* Titolo della card */
+.menu-testa-a-testa span:not(.menu-extra-icona) {
+    font-size: 18px;
+    letter-spacing: 0.6px;
 }
 
-/* Traccia neutra */
-.testa-a-testa-barra {
-    width: 100%;
-    height: 3px;
+/* Smartphone */
+@media (max-width: 600px) {
+    .menu-testa-a-testa .menu-extra-icona {
+        width: 68px;
+        height: 68px;
+        font-size: 54px !important;
+    }
 
-    background: #383838;
-    border-radius: 999px;
-    overflow: hidden;
-}
-
-/* Riempimento */
-.testa-a-testa-barra-riempimento {
-    height: 100%;
-    border-radius: 999px;
-
-    transition: width 0.35s ease;
-}
-
-/* Giocatore 1: oro discreto */
-.testa-a-testa-barra-1 {
-    background: #a58a43;
-}
-
-/* Giocatore 2: viola desaturato */
-.testa-a-testa-barra-2 {
-    background: #8974a8;
+    .menu-testa-a-testa span:not(.menu-extra-icona) {
+        font-size: 16px;
+    }
 }
     
 </style>
@@ -9567,14 +9573,6 @@ function riga(etichetta, valore1, valore2) {
     const numero1 = valoreNumerico(valore1);
     const numero2 = valoreNumerico(valore2);
 
-    const statisticheSenzaVantaggio = [
-        "Esordio",
-        "Ultima apparizione",
-        "Tornei giocati insieme"
-    ];
-
-const mostraBarre = !statisticheSenzaVantaggio.includes(etichetta);
-
 const statisticheNonComparabili = [
     "Esordio",
     "Ultima apparizione",
@@ -9615,20 +9613,6 @@ if (!statisticheNonComparabili.includes(etichetta)) {
     }
 }
 
-/* Barre comparative: gestione anche dei profitti negativi */
-
-const minimo = Math.min(numero1, numero2);
-const massimo = Math.max(numero1, numero2);
-const intervallo = massimo - minimo;
-
-const larghezza1 = intervallo === 0
-    ? 100
-    : ((numero1 - minimo) / intervallo) * 100;
-
-const larghezza2 = intervallo === 0
-    ? 100
-    : ((numero2 - minimo) / intervallo) * 100;
-
     return `
         <div class="testa-a-testa-stat">
 
@@ -9643,23 +9627,7 @@ const larghezza2 = intervallo === 0
             <div class="valore${classe2}">
                 ${valore2}
             </div>
-
-            ${mostraBarre ? `
-                <div class="testa-a-testa-barra-contenitore">
-                    <div class="testa-a-testa-barra">
-                        <div class="testa-a-testa-barra-riempimento testa-a-testa-barra-1"
-                             style="width: ${larghezza1}%;">
-                        </div>
-                    </div>
-
-                    <div class="testa-a-testa-barra">
-                        <div class="testa-a-testa-barra-riempimento testa-a-testa-barra-2"
-                             style="width: ${larghezza2}%;">
-                        </div>
-                    </div>
-                </div>
-            ` : ""}
-
+            
         </div>
     `;
 }
