@@ -5309,6 +5309,61 @@ const archivioBadgeManuali = {
     "dark_poker_2": [],
     "dark_graal": []
 };
+        // KILL LOG — dati organizzati per numero di torneo
+    const killLogPerTorneo = {
+        22: {
+            eliminazioni: [
+                { eliminatore: "Paolo Giugliano", eliminato: "Diego Cavaliere" },
+                { eliminatore: "Raffaele Iervolino", eliminato: "Daniel Prisco" },
+                { eliminatore: "Felice Carbone", eliminato: "Francesco Ambrosio" },
+                { eliminatore: "Matteo Annunziata", eliminato: "Emanuele Nicolo'" },
+                { eliminatore: "Matteo Annunziata", eliminato: "Umberto Romano" },
+                { eliminatore: "Umberto Romano", eliminato: "Emanuele Nicolo'" },
+                { eliminatore: "Umberto Romano", eliminato: "Fabrizio D'alessandro" },
+                { eliminatore: "Diego Cavaliere", eliminato: "Daniel Prisco" },
+                { eliminatore: "Emanuele Nicolo'", eliminato: "Errico Romano" },
+                { eliminatore: "Paolo Giugliano", eliminato: "Felice Carbone" },
+                { eliminatore: "Daniel Prisco", eliminato: "Umberto Romano" },
+                { eliminatore: "Daniel Prisco", eliminato: "Matteo Annunziata" },
+                { eliminatore: "Daniel Prisco", eliminato: "Diego Cavaliere" },
+                { eliminatore: "Francesco Ambrosio", eliminato: "Daniel Prisco" },
+                { eliminatore: "Francesco Ambrosio", eliminato: "Emanuele Nicolo'" },
+                { eliminatore: "Paolo Giugliano", eliminato: "Raffaele Iervolino" },
+                { eliminatore: "Carlo Sepe", eliminato: "Fabrizio D'alessandro" },
+                { eliminatore: "Francesco Ambrosio", eliminato: "Carlo Sepe" }
+            ],
+            nota: "Premio finale diviso"
+
+        },
+        23: {
+            eliminazioni: [
+                { eliminatore: "Domenico Correale", eliminato: "Raffaele Iervolino" },
+                { eliminatore: "Pasquale Incarnato", eliminato: "Alfonso Annunziata" },
+                { eliminatore: "Alfonso Annunziata", eliminato: "Emanuele Nicolo'" },
+                { eliminatore: "Alfonso Annunziata", eliminato: "Francesco Prisco (junior)" },
+                { eliminatore: "Alfonso Annunziata", eliminato: "Francesco Ambrosio" },
+                { eliminatore: "Raffaele Iervolino", eliminato: "Daniel Prisco" },
+                { eliminatore: "Sabato Tarantino", eliminato: "Pasquale Incarnato" },
+                { eliminatore: "Sabato Tarantino", eliminato: "Francesco Ambrosio" },
+                { eliminatore: "Daniel Prisco", eliminato: "Domenico Correale" },
+                { eliminatore: "Daniel Prisco", eliminato: "Emanuele Del Pesce" },
+                { eliminatore: "Sabato Tarantino", eliminato: "Pasquale Incarnato" },
+                { eliminatore: "Emanuele Nicolo'", eliminato: "Pasquale Incarnato" },
+                { eliminatore: "Diego Cavaliere", eliminato: "Emanuele Del Pesce" },
+                { eliminatore: "Emanuele Nicolo'", eliminato: "Francesco Ambrosio" },
+                { eliminatore: "Diego Cavaliere", eliminato: "Daniel Prisco" },
+                { eliminatore: "Diego Cavaliere", eliminato: "Raffaele Iervolino" },
+                { eliminatore: "Emanuele Nicolo'", eliminato: "Felice Carbone" },
+                { eliminatore: "Fabrizio D'alessandro", eliminato: "Francesco Prisco (junior)" },
+                { eliminatore: "Alfonso Annunziata", eliminato: "Sabato Tarantino" },
+                { eliminatore: "Emanuele Nicolo'", eliminato: "Carlo Sepe" },
+                { eliminatore: "Emanuele Nicolo'", eliminato: "Matteo Annunziata" },
+                { eliminatore: "Alfonso Annunziata", eliminato: "Diego Cavaliere" },
+                { eliminatore: "Fabrizio D'alessandro", eliminato: "Domenico Correale" }
+            ],
+            nota: "Premio Finale Diviso"
+        }
+    };
 
 let popupBadgeAttivo = null;
 
@@ -8429,61 +8484,7 @@ function mostraTorneo(numero) {
 }
 
     
-    // KILL LOG — dati organizzati per numero di torneo
-    const killLogPerTorneo = {
-        22: {
-            eliminazioni: [
-                { eliminatore: "Paolo Giugliano", eliminato: "Diego Cavaliere" },
-                { eliminatore: "Raffaele Iervolino", eliminato: "Daniel Prisco" },
-                { eliminatore: "Felice Carbone", eliminato: "Francesco Ambrosio" },
-                { eliminatore: "Matteo Annunziata", eliminato: "Emanuele Nicolo'" },
-                { eliminatore: "Matteo Annunziata", eliminato: "Umberto Romano" },
-                { eliminatore: "Umberto Romano", eliminato: "Emanuele Nicolo'" },
-                { eliminatore: "Umberto Romano", eliminato: "Fabrizio D'alessandro" },
-                { eliminatore: "Diego Cavaliere", eliminato: "Daniel Prisco" },
-                { eliminatore: "Emanuele Nicolo'", eliminato: "Errico Romano" },
-                { eliminatore: "Paolo Giugliano", eliminato: "Felice Carbone" },
-                { eliminatore: "Daniel Prisco", eliminato: "Umberto Romano" },
-                { eliminatore: "Daniel Prisco", eliminato: "Matteo Annunziata" },
-                { eliminatore: "Daniel Prisco", eliminato: "Diego Cavaliere" },
-                { eliminatore: "Francesco Ambrosio", eliminato: "Daniel Prisco" },
-                { eliminatore: "Francesco Ambrosio", eliminato: "Emanuele Nicolo'" },
-                { eliminatore: "Paolo Giugliano", eliminato: "Raffaele Iervolino" },
-                { eliminatore: "Carlo Sepe", eliminato: "Fabrizio D'alessandro" },
-                { eliminatore: "Francesco Ambrosio", eliminato: "Carlo Sepe" }
-            ],
-            nota: "Premio finale diviso"
 
-        },
-        23: {
-            eliminazioni: [
-                { eliminatore: "Domenico Correale", eliminato: "Raffaele Iervolino" },
-                { eliminatore: "Pasquale Incarnato", eliminato: "Alfonso Annunziata" },
-                { eliminatore: "Alfonso Annunziata", eliminato: "Emanuele Nicolo'" },
-                { eliminatore: "Alfonso Annunziata", eliminato: "Francesco Prisco (junior)" },
-                { eliminatore: "Alfonso Annunziata", eliminato: "Francesco Ambrosio" },
-                { eliminatore: "Raffaele Iervolino", eliminato: "Daniel Prisco" },
-                { eliminatore: "Sabato Tarantino", eliminato: "Pasquale Incarnato" },
-                { eliminatore: "Sabato Tarantino", eliminato: "Francesco Ambrosio" },
-                { eliminatore: "Daniel Prisco", eliminato: "Domenico Correale" },
-                { eliminatore: "Daniel Prisco", eliminato: "Emanuele Del Pesce" },
-                { eliminatore: "Sabato Tarantino", eliminato: "Pasquale Incarnato" },
-                { eliminatore: "Emanuele Nicolo'", eliminato: "Pasquale Incarnato" },
-                { eliminatore: "Diego Cavaliere", eliminato: "Emanuele Del Pesce" },
-                { eliminatore: "Emanuele Nicolo'", eliminato: "Francesco Ambrosio" },
-                { eliminatore: "Diego Cavaliere", eliminato: "Daniel Prisco" },
-                { eliminatore: "Diego Cavaliere", eliminato: "Raffaele Iervolino" },
-                { eliminatore: "Emanuele Nicolo'", eliminato: "Felice Carbone" },
-                { eliminatore: "Fabrizio D'alessandro", eliminato: "Francesco Prisco (junior)" },
-                { eliminatore: "Alfonso Annunziata", eliminato: "Sabato Tarantino" },
-                { eliminatore: "Emanuele Nicolo'", eliminato: "Carlo Sepe" },
-                { eliminatore: "Emanuele Nicolo'", eliminato: "Matteo Annunziata" },
-                { eliminatore: "Alfonso Annunziata", eliminato: "Diego Cavaliere" },
-                { eliminatore: "Fabrizio D'alessandro", eliminato: "Domenico Correale" }
-            ],
-            nota: "Premio Finale Diviso"
-        }
-    };
 
     
 function mostraTorneoDettaglio(numero) {
