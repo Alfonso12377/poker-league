@@ -2626,7 +2626,119 @@ th[onclick]:hover {
     }
 }
 
+/* =========================================
+   MENU EXTRA - SMARTPHONE
+   ========================================= */
 
+/* Smartphone e tablet in verticale */
+@media (max-width: 800px) and (orientation: portrait) {
+
+    .menu {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    /* Record al centro della seconda riga */
+    .menu-record {
+        grid-column: 1 / -1;
+        grid-row: 1;
+
+        width: 100%;
+        max-width: 520px;
+        min-height: 180px;
+    }
+
+    .menu-testa-a-testa {
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    .menu-regolamento {
+        grid-column: 2;
+        grid-row: 2;
+    }
+
+    .menu-extra {
+        min-height: 145px;
+        padding: 12px 8px;
+    }
+
+    .menu-extra-icona {
+        font-size: 36px;
+        margin-bottom: 8px;
+    }
+
+    .menu-extra span:not(.menu-extra-icona) {
+        font-size: 14px;
+    }
+
+    .menu-regolamento small {
+        font-size: 10px;
+    }
+}
+
+
+/* =========================================
+   SMARTPHONE IN ORIZZONTALE
+   ========================================= */
+
+@media (max-width: 1000px) and
+       (orientation: landscape) and
+       (max-height: 600px) {
+
+    .menu {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .menu-testa-a-testa {
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    .menu-record {
+        grid-column: 2 / 4;
+        grid-row: 2;
+
+        width: 100%;
+        max-width: none;
+        min-height: 145px;
+        padding: 10px;
+    }
+
+    .menu-regolamento {
+        grid-column: 4;
+        grid-row: 2;
+    }
+
+    .menu-extra {
+        min-height: 145px;
+        padding: 10px 5px;
+    }
+
+    .menu-extra-icona {
+        font-size: 32px;
+        margin-bottom: 6px;
+    }
+
+    .menu-extra span:not(.menu-extra-icona) {
+        font-size: 12px;
+    }
+
+    .menu-regolamento small {
+        font-size: 9px;
+    }
+
+    .menu-record-fiche {
+        width: 92px;
+        height: 92px;
+        margin-bottom: 6px;
+    }
+
+    .menu-record span {
+        font-size: 14px;
+    }
+}
     
 </style>
 </head>
