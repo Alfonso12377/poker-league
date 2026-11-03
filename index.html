@@ -9356,14 +9356,17 @@ function apriPopupTestaATesta() {
     selettore1.innerHTML = opzioni;
     selettore2.innerHTML = opzioni;
 
-    if (classifica.length > 1) {
-        selettore1.selectedIndex = 0;
-        selettore2.selectedIndex = 1;
-    }
+    selettore1.selectedIndex = -1;
+    selettore2.selectedIndex = -1;
 
     popup.style.display = "flex";
 
-    aggiornaTestaATesta();
+    document.getElementById("testa-a-testa-confronto").innerHTML = `
+        <div class="testa-a-testa-riepilogo">
+            <strong>Seleziona due giocatori</strong>
+            <p>Scegli un partecipante per ciascun menu per visualizzare il confronto.</p>
+        </div>
+    `;
 }
 
 
