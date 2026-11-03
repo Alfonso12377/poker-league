@@ -9620,20 +9620,29 @@ function riga(etichetta, valore1, valore2) {
         "Tornei giocati insieme"
     ];
 
-    const mostraBarre = !statisticheSenzaVantaggio.includes(etichetta);
+const mostraBarre = !statisticheSenzaVantaggio.includes(etichetta);
 
-    const statisticheValoreMinore = [
-        "Posizione media",
-        "Miglior piazzamento"
-    ];
+const statisticheNonComparabili = [
+    "Esordio",
+    "Ultima apparizione",
+    "Tornei giocati insieme"
+];
 
-    const valoreMinoreMigliore =
-        statisticheValoreMinore.includes(etichetta);
+const statisticheValoreMinore = [
+    "Posizione media",
+    "Miglior piazzamento"
+];
 
-    let classe1 = "";
-    let classe2 = "";
+const valoreMinoreMigliore =
+    statisticheValoreMinore.includes(etichetta);
+
+let classe1 = "";
+let classe2 = "";
+
+if (!statisticheNonComparabili.includes(etichetta)) {
 
     if (numero1 !== numero2) {
+
         const giocatore1InVantaggio = valoreMinoreMigliore
             ? numero1 < numero2
             : numero1 > numero2;
@@ -9645,15 +9654,27 @@ function riga(etichetta, valore1, valore2) {
         classe2 = giocatore1InVantaggio
             ? ""
             : " testa-a-testa-leader";
+
     } else {
+
         classe1 = " testa-a-testa-parita";
         classe2 = " testa-a-testa-parita";
     }
+}
 
-    const massimo = Math.max(numero1, numero2, 1);
+/* Barre comparative: gestione anche dei profitti negativi */
 
-    const larghezza1 = (numero1 / massimo) * 100;
-    const larghezza2 = (numero2 / massimo) * 100;
+const minimo = Math.min(numero1, numero2);
+const massimo = Math.max(numero1, numero2);
+const intervallo = massimo - minimo;
+
+const larghezza1 = intervallo === 0
+    ? 100
+    : ((numero1 - minimo) / intervallo) * 100;
+
+const larghezza2 = intervallo === 0
+    ? 100
+    : ((numero2 - minimo) / intervallo) * 100;
 
     return `
         <div class="testa-a-testa-stat">
