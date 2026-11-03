@@ -2945,12 +2945,10 @@ th[onclick]:hover {
     line-height: 1.3;
 }
 
-.testa-a-testa-stat .valore:first-child {
-    color: #e9c46a;
-}
-
+/* Valori neutri: bianco per entrambi i giocatori */
+.testa-a-testa-stat .valore:first-child,
 .testa-a-testa-stat .valore:last-child {
-    color: #c7a2ff;
+    color: #f2f2f2;
 }
 /* =========================================
 /* =========================================
@@ -2963,19 +2961,40 @@ th[onclick]:hover {
     transition: color 0.2s ease, font-size 0.2s ease;
 }
 
-/* Giocatore in vantaggio */
-.testa-a-testa-stat .testa-a-testa-leader {
-    color: #e9c46a !important;
-    font-size: 19px;
-    font-weight: 800;
-    text-shadow: 0 0 8px rgba(233, 196, 106, 0.15);
+/* =========================================
+   TESTA A TESTA — VANTAGGIO
+   ========================================= */
+
+.testa-a-testa-stat .valore.testa-a-testa-leader {
+    color: #58e69a !important;
+
+    font-size: 21px;
+    font-weight: 900;
+
+    display: inline-block;
+    justify-self: center;
+
+    padding: 4px 12px;
+
+    background: rgba(30, 120, 75, 0.20);
+    border: 1px solid rgba(88, 230, 154, 0.35);
+    border-radius: 8px;
+
+    text-shadow: 0 0 10px rgba(88, 230, 154, 0.25);
+
+    transition: all 0.2s ease;
 }
 
-/* Statistiche in parità */
-.testa-a-testa-stat .testa-a-testa-parita {
-    color: #d0d0d0 !important;
+/* Parità: entrambi bianchi e normali */
+.testa-a-testa-stat .valore.testa-a-testa-parita {
+    color: #f2f2f2 !important;
+
     font-size: 16px;
     font-weight: 600;
+
+    background: transparent;
+    border: none;
+    text-shadow: none;
 }
     /* =========================================
    CARD TESTA A TESTA — ICONA MENU
@@ -3013,6 +3032,34 @@ th[onclick]:hover {
 
     .menu-testa-a-testa span:not(.menu-extra-icona) {
         font-size: 16px;
+    }
+}
+/* =========================================
+   MENU — ICONA REGOLAMENTO
+   ========================================= */
+
+.menu-regolamento .menu-extra-icona {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 82px;
+    height: 82px;
+
+    font-size: 64px !important;
+    line-height: 1;
+
+    margin: 0 0 14px 0;
+
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.25));
+}
+
+/* Smartphone */
+@media (max-width: 600px) {
+    .menu-regolamento .menu-extra-icona {
+        width: 68px;
+        height: 68px;
+        font-size: 54px !important;
     }
 }
     
