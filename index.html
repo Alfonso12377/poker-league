@@ -2936,6 +2936,55 @@ th[onclick]:hover {
 .testa-a-testa-stat .valore:last-child {
     color: #c7a2ff;
 }
+    /* =========================================
+   BARRE COMPARATIVE — TESTA A TESTA
+   ========================================= */
+
+.testa-a-testa-stat .valore {
+    transition: color 0.2s ease;
+}
+
+.testa-a-testa-stat .testa-a-testa-leader {
+    color: #58d68d !important;
+}
+
+.testa-a-testa-stat .testa-a-testa-parita {
+    color: #d0d0d0 !important;
+}
+
+.testa-a-testa-barra-contenitore {
+    grid-column: 1 / -1;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+
+    margin-top: 3px;
+}
+
+.testa-a-testa-barra {
+    width: 100%;
+    height: 5px;
+
+    background: #333;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.testa-a-testa-barra-riempimento {
+    height: 100%;
+    border-radius: 999px;
+
+    transition: width 0.35s ease;
+}
+
+.testa-a-testa-barra-1 {
+    background: linear-gradient(90deg, #b88b22, #f1d477);
+}
+
+.testa-a-testa-barra-2 {
+    background: linear-gradient(90deg, #8052c7, #c7a2ff);
+}
 
 .testa-a-testa-riepilogo {
     padding: 18px;
@@ -9543,16 +9592,103 @@ function aggiornaTestaATesta() {
         });
     }
 
-    function riga(etichetta, valore1, valore2) {
+function riga(etichetta, valore1, valore2) {
 
-        return `
-            <div class="testa-a-testa-stat">
-                <div class="valore">${valore1}</div>
-                <div class="etichetta">${etichetta}</div>
-                <div class="valore">${valore2}</div>
-            </div>
-        `;
+    function valoreNumerico(valore) {
+        const testo = String(valore)
+            .replace(/[€%°]/g, "")
+            .trim();
+
+        const frazione = testo.match(/^(\d+)\s*\/\s*\d+/);
+        if (frazione) return Number(frazione[1]);
+
+        const pulito = testo
+            .replace(/\./g, "")
+            .replace(",", ".");
+
+        const numero = parseFloat(pulito);
+
+        return Number.isFinite(numero) ? numero : 0;
     }
+
+    const numero1 = valoreNumerico(valore1);
+    const numero2 = valoreNumerico(valore2);
+
+    const statisticheSenzaVantaggio = [
+        "Esordio",
+        "Ultima apparizione",
+        "Tornei giocati insieme"
+    ];
+
+    const mostraBarre = !statisticheSenzaVantaggio.includes(etichetta);
+
+    const statisticheValoreMinore = [
+        "Posizione media",
+        "Miglior piazzamento"
+    ];
+
+    const valoreMinoreMigliore =
+        statisticheValoreMinore.includes(etichetta);
+
+    let classe1 = "";
+    let classe2 = "";
+
+    if (numero1 !== numero2) {
+        const giocatore1InVantaggio = valoreMinoreMigliore
+            ? numero1 < numero2
+            : numero1 > numero2;
+
+        classe1 = giocatore1InVantaggio
+            ? " testa-a-testa-leader"
+            : "";
+
+        classe2 = giocatore1InVantaggio
+            ? ""
+            : " testa-a-testa-leader";
+    } else {
+        classe1 = " testa-a-testa-parita";
+        classe2 = " testa-a-testa-parita";
+    }
+
+    const massimo = Math.max(numero1, numero2, 1);
+
+    const larghezza1 = (numero1 / massimo) * 100;
+    const larghezza2 = (numero2 / massimo) * 100;
+
+    return `
+        <div class="testa-a-testa-stat">
+
+            <div class="valore${classe1}">
+                ${valore1}
+            </div>
+
+            <div class="etichetta">
+                ${etichetta}
+            </div>
+
+            <div class="valore${classe2}">
+                ${valore2}
+            </div>
+
+            ${mostraBarre ? `
+                <div class="testa-a-testa-barra-contenitore">
+                    <div class="testa-a-testa-barra">
+                        <div class="testa-a-testa-barra-riempimento testa-a-testa-barra-1"
+                             style="width: ${larghezza1}%;">
+                        </div>
+                    </div>
+
+                    <div class="testa-a-testa-barra">
+                        <div class="testa-a-testa-barra-riempimento testa-a-testa-barra-2"
+                             style="width: ${larghezza2}%;">
+                        </div>
+                    </div>
+                </div>
+            ` : ""}
+
+        </div>
+    `;
+}
 
 
     /* =====================================
