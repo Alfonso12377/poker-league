@@ -5782,8 +5782,9 @@ esordio: torneo.n,
 ultimaApparizione: torneo.n,
 partecipazioni: 0,
 vittorie: 0,
-                        posizioniNormalizzate: [],
-                        profitto: 0
+posizioniNormalizzate: [],
+torneiPartecipati: [],
+profitto: 0
                     };
 
                 }
@@ -5791,6 +5792,7 @@ vittorie: 0,
                 const stats = statistiche[giocatore.name];
                 
 stats.ultimaApparizione = torneo.n;
+                stats.torneiPartecipati.push(torneo.n);
 
 
                 const posizione =
@@ -5846,13 +5848,52 @@ stats.ultimaApparizione = torneo.n;
                 stats.partecipazioni > 0
                     ? stats.profitto / stats.partecipazioni
                     : 0;
+            const torneiGiocati = [...new Set(stats.torneiPartecipati)]
+    .sort((a, b) => a - b);
 
-            return {
-                ...stats,
-                posizioneMedia: posizioneMedia,
-                winRate: winRate,
-                profittoMedio: profittoMedio
-            };
+const ultimoTorneo = Math.max(...torneiDaAnalizzare.map(t => t.n));
+
+let strisciaAttuale = 0;
+let strisciaRecord = 0;
+let strisciaTemporanea = 0;
+
+// Striscia record storica
+torneiGiocati.forEach(function(numeroTorneo, indice) {
+    if (
+        indice > 0 &&
+        numeroTorneo === torneiGiocati[indice - 1] + 1
+    ) {
+        strisciaTemporanea++;
+    } else {
+        strisciaTemporanea = 1;
+    }
+
+    if (strisciaTemporanea > strisciaRecord) {
+        strisciaRecord = strisciaTemporanea;
+    }
+});
+
+// Striscia attuale: deve aver giocato l'ultimo torneo
+if (torneiGiocati.includes(ultimoTorneo)) {
+    strisciaAttuale = 1;
+
+    for (let numero = ultimoTorneo - 1; numero >= 1; numero--) {
+        if (torneiGiocati.includes(numero)) {
+            strisciaAttuale++;
+        } else {
+            break;
+        }
+    }
+}
+
+return {
+    ...stats,
+    posizioneMedia: posizioneMedia,
+    winRate: winRate,
+    profittoMedio: profittoMedio,
+    strisciaAttuale: strisciaAttuale,
+    strisciaRecord: strisciaRecord
+};
 
         });
 
@@ -8039,8 +8080,10 @@ setTimeout(function() {
                 <div><strong>Vittorie</strong><span>${g.vittorie}</span></div>
                 <div><strong>Pos. media</strong><span>${formattaNumero(g.posizioneMedia)}</span></div>
                 <div><strong>Win rate</strong><span>${formattaPercentuale(g.winRate)}</span></div>
-                                <div><strong>Profitto medio</strong><span>${formattaEuro(g.profittoMedio)}</span></div>
-                <div><strong>Profitto/Perdita</strong><span>${formattaEuroIntero(g.profitto)}</span></div>
+<div><strong>Profitto medio</strong><span>${formattaEuro(g.profittoMedio)}</span></div>
+<div><strong>Profitto/Perdita</strong><span>${formattaEuroIntero(g.profitto)}</span></div>
+<div><strong>Striscia attuale</strong><span>${g.strisciaAttuale}</span></div>
+<div><strong>Striscia record</strong><span>${g.strisciaRecord}</span></div>
             </div>
 
 ${renderCollezioneBadge(g.nome)}
