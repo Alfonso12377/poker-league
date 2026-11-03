@@ -5250,7 +5250,10 @@ const catalogoBadge = [
  {id:"pres_10",name:"Il Veterano",family:"Presenze e fedeltà",rarity:"Argento",type:"count",metric:"presenze",target:10,desc:"Partecipa a 10 tornei."},
  {id:"pres_15",name:"Il Decano",family:"Presenze e fedeltà",rarity:"Oro",type:"count",metric:"presenze",target:15,desc:"Partecipa a 15 tornei."},
  {id:"pres_20",name:"La Vecchia Guardia",family:"Presenze e fedeltà",rarity:"Diamante",type:"count",metric:"presenze",target:20,desc:"Partecipa a 20 tornei."},
- {id:"pres_35",name:"IL SENATORE",family:"Presenze e fedeltà",rarity:"Leggendario",type:"count",metric:"presenze",target:35,desc:"Partecipa a 35 tornei."},
+{id:"pres_35",name:"IL SENATORE",family:"Presenze e fedeltà",rarity:"Leggendario",type:"count",metric:"presenze",target:25,desc:"Partecipa a 25 tornei."},
+    {id:"pres_streak_2",name:"Due di fila",family:"Presenze e fedeltà",rarity:"Oro",type:"attendance_streak",target:2,desc:"Partecipa a 2 tornei consecutivamente."},
+{id:"pres_streak_5",name:"Sempre al tavolo",family:"Presenze e fedeltà",rarity:"Diamante",type:"attendance_streak",target:5,desc:"Partecipa a 5 tornei consecutivamente."},
+{id:"pres_streak_10",name:"La presenza costante",family:"Presenze e fedeltà",rarity:"Leggendario",type:"attendance_streak",target:10,desc:"Partecipa a 10 tornei consecutivamente."},
  {id:"win_1",name:"Il Primo Trionfo",family:"Vittorie e dominio",rarity:"Bronzo",type:"count",metric:"vittorie",target:1,desc:"Vinci il tuo primo torneo."},
  {id:"win_2",name:"Il Vincente",family:"Vittorie e dominio",rarity:"Argento",type:"count",metric:"vittorie",target:2,desc:"Vinci 2 tornei."},
  {id:"win_3",name:"Il Campione",family:"Vittorie e dominio",rarity:"Oro",type:"count",metric:"vittorie",target:3,desc:"Vinci 3 tornei."},
@@ -5274,19 +5277,22 @@ const catalogoBadge = [
  {id:"terzo_3",name:"Medaglia di bronzo III",family:"Piazzamenti e costanza",rarity:"Diamante",type:"count",metric:"terzi",target:3,desc:"Arriva terzo 3 volte."},
  {id:"terzo_5",name:"Medaglia di bronzo IV",family:"Piazzamenti e costanza",rarity:"Leggendario",type:"count",metric:"terzi",target:5,desc:"Arriva terzo 5 volte."},
  {id:"quarto_3",name:"A un passo dal successo",family:"Piazzamenti e costanza",rarity:"Speciale",type:"count",metric:"quarti",target:3,desc:"Arriva quarto in 3 tornei."},
- {id:"profit_1",name:"In positivo",family:"Profitto e denaro",rarity:"Argento",type:"profit",target:0.01,desc:"Raggiungi un profitto cumulativo positivo."},
+{id:"profit_1",name:"Comincio sempre con gli spiccioli",family:"Profitto e denaro",rarity:"Argento",type:"profit",target:0.01,desc:"Raggiungi un profitto cumulativo positivo."},
  {id:"profit_50",name:"Cinquanta in tasca",family:"Profitto e denaro",rarity:"Oro",type:"profit",target:50,desc:"Raggiungi almeno €50 di profitto cumulativo."},
- {id:"profit_100",name:"Centone",family:"Profitto e denaro",rarity:"Diamante",type:"profit",target:100,desc:"Raggiungi almeno €100 di profitto cumulativo."},
+{id:"profit_100",name:"Un Cippino",family:"Profitto e denaro",rarity:"Diamante",type:"profit",target:100,desc:"Raggiungi almeno €100 di profitto cumulativo."},
  {id:"profit_200",name:"Il Re del profitto",family:"Profitto e denaro",rarity:"Leggendario",type:"profit",target:200,desc:"Raggiungi almeno €200 di profitto cumulativo."},
  {id:"dark_1000",name:"Giacomino, hai preso le tue MILLE?",family:"DARK OPS",rarity:"DARK OPS",type:"darkprofit",target:1000,desc:"Raggiungi €1.000 di profitto cumulativo."},
  {id:"dark_last5",name:"Ij a nott aggia rorm",family:"DARK OPS",rarity:"DARK OPS",type:"darkcount",metric:"ultimi",target:5,desc:"Arriva ultimo in 5 tornei complessivi."},
  {id:"dark_poker_2",name:"2 volte dannato",family:"DARK OPS",rarity:"DARK OPS",type:"manual",desc:"Ottieni 2 punti Poker nello stesso torneo."},
  {id:"dark_graal",name:"Il Graal",family:"DARK OPS",rarity:"DARK OPS",type:"manual",desc:"Ottieni una scala colore o una scala reale."},
  {id:"dark_win5",name:"Il Regno Ininterrotto",family:"DARK OPS",rarity:"DARK OPS",type:"special",desc:"Vinci 5 tornei consecutivi."},
- {id:"dark_last_win",name:"L’Inaspettato",family:"DARK OPS",rarity:"DARK OPS",type:"special",desc:"Arriva ultimo in un torneo e vince il torneo successivo."},
- {id:"dark_win_last",name:"La Delusione",family:"DARK OPS",rarity:"DARK OPS",type:"special",desc:"Vinci un torneo e arrivi ultimo nel torneo successivo."},
+{id:"dark_last_win",name:"UNDER THE GUN",family:"DARK OPS",rarity:"DARK OPS",type:"special",desc:"Da «posizione scomoda» a «il migliore di tutti»! Arriva ultimo in un torneo e vinci il torneo successivo."},
+{id:"dark_win_last",name:"BLUFF",family:"DARK OPS",rarity:"DARK OPS",type:"special",desc:"Ma allora era tutto un bluff? Vinci un torneo e arriva ultimo nel torneo successivo."},
  {id:"dark_hunter",name:"Cacciatore di leggende",family:"DARK OPS",rarity:"DARK OPS",type:"special",desc:"Hai sconfitto in heads-up un giocatore con almeno 5 vittorie in carriera."},
- {id:"priv_first_senator",name:"IL PRIMO SENATORE",family:"Onorificenze private",rarity:"Onore",type:"private",desc:"Il primo a raggiungere 35 presenze. Onorificenza non trasferibile."},
+    {id:"dark_nuts",name:"NUTS!",family:"DARK OPS",rarity:"DARK OPS",type:"darkcount",metric:"presenze",target:50,desc:"Partecipa a 50 tornei."},
+{id:"dark_streak_20",name:"Rilancio di 3 miliardi e 8, non ho altro",family:"DARK OPS",rarity:"DARK OPS",type:"attendance_streak",target:20,desc:"Sei un vero giocatore, proprio come Asso. Partecipa a 20 tornei consecutivamente."},
+{id:"dark_drawing_dead",name:"DRAWING DEAD",family:"DARK OPS",rarity:"DARK OPS",type:"killlog",desc:"Drawing dead, sì, però loro: Elimina tutti gli avversari in un unico torneo."},
+{id:"dark_dealer",name:"DEALER",family:"DARK OPS",rarity:"DARK OPS",type:"killlog",desc:"Elimina 10 persone in un unico torneo."},
  {id:"priv_founder",name:"IL FONDATORE",family:"Onorificenze private",rarity:"Onore",type:"private",desc:"Onorificenza assegnata al fondatore della lega."},
  {id:"priv_first_winner",name:"Si aprono le danze",family:"Onorificenze private",rarity:"Onore",type:"private",desc:"Vincitore del primo torneo disputato."},
  {id:"priv_first_ten",name:"I Primi Dieci",family:"Onorificenze private",rarity:"Onore",type:"private",desc:"Partecipato al primo torneo disputato."},
@@ -5313,9 +5319,25 @@ function parsePosizioneBadge(pos) {
 
 function creaStatoBadge(nome) {
     return {
-        nome:nome, presenze:0, vittorie:0, podi:0, secondi:0, terzi:0, quarti:0, ultimi:0,
-        profitto:0, maxProfitto:0, streakPodio:0, maxStreakPodio:0, streakVittorie:0,
-        maxStreakVittorie:0, ultimaPosizione:null, ultimaPartecipazione:null, sbloccati:{}
+        nome:nome,
+        presenze:0,
+        vittorie:0,
+        podi:0,
+        secondi:0,
+        terzi:0,
+        quarti:0,
+        ultimi:0,
+        profitto:0,
+        maxProfitto:0,
+        streakPodio:0,
+        maxStreakPodio:0,
+        streakVittorie:0,
+        maxStreakVittorie:0,
+        streakPresenze:0,
+        maxStreakPresenze:0,
+        ultimaPosizione:null,
+        ultimaPartecipazione:null,
+        sbloccati:{}
     };
 }
 
@@ -5334,19 +5356,32 @@ function calcolaArchivioBadge() {
     const manuali = new Set(["dark_poker_2","dark_graal"]);
     tornei.forEach(function(torneo) {
         const presenti = new Set((torneo.players || []).map(p=>p.name));
-        Object.keys(stati).forEach(function(nome) {
-            const p = stati[nome];
-            if (!presenti.has(nome)) {
-                p.streakPodio = 0;
-                p.streakVittorie = 0;
-                p.ultimaPosizione = null;
-                p.ultimaPartecipazione = torneo.n;
-            }
-        });
+Object.keys(stati).forEach(function(nome) {
+    const p = stati[nome];
+
+    if (!presenti.has(nome)) {
+        p.streakPodio = 0;
+        p.streakVittorie = 0;
+        p.streakPresenze = 0;
+        p.ultimaPosizione = null;
+        p.ultimaPartecipazione = torneo.n;
+    }
+});
         const posizioni = (torneo.players || []).map(p=>({player:p,pos:parsePosizioneBadge(p.pos)}));
         posizioni.forEach(function(voce) {
             const raw = voce.player, pos = voce.pos, p = stato(raw.name);
-            p.presenze++;
+p.presenze++;
+
+if (p.ultimaPartecipazione === torneo.n - 1) {
+    p.streakPresenze++;
+} else {
+    p.streakPresenze = 1;
+}
+
+p.maxStreakPresenze = Math.max(
+    p.maxStreakPresenze,
+    p.streakPresenze
+);
             if (pos===1) p.vittorie++;
             if (pos>=1 && pos<=3) { p.podi++; p.streakPodio++; p.maxStreakPodio=Math.max(p.maxStreakPodio,p.streakPodio); }
             else p.streakPodio=0;
@@ -5372,8 +5407,73 @@ function calcolaArchivioBadge() {
                 if (b.id==="doppietta" && p.maxStreakVittorie>=2) sbloccaBadge(p,b.id,torneo.n);
                 if (b.id==="dark_win5" && p.maxStreakVittorie>=5) sbloccaBadge(p,b.id,torneo.n);
                 if (b.id==="dark_last5" && p.ultimi>=5) sbloccaBadge(p,b.id,torneo.n);
+                if (b.type==="attendance_streak" && p.maxStreakPresenze>=b.target) {
+    sbloccaBadge(p,b.id,torneo.n);
+}
+                if (b.id==="dark_nuts" && p.presenze>=b.target) {
+    sbloccaBadge(p,b.id,torneo.n);
+}
             });
         });
+        // DARK OPS basate sul KILL LOG.
+// La verifica parte dal primo torneo che possiede un registro eliminazioni.
+const killLog = killLogPerTorneo[torneo.n];
+
+if (killLog && Array.isArray(killLog.eliminazioni)) {
+
+    const partecipanti = new Set(
+        (torneo.players || []).map(p => p.name)
+    );
+
+    const eliminazioni = killLog.eliminazioni;
+
+    // DEALER: almeno 10 eliminazioni nello stesso torneo.
+    const eliminazioniPerGiocatore = {};
+
+    eliminazioni.forEach(function(e) {
+        if (!e.eliminatore) return;
+
+        eliminazioniPerGiocatore[e.eliminatore] =
+            (eliminazioniPerGiocatore[e.eliminatore] || 0) + 1;
+    });
+
+    Object.entries(eliminazioniPerGiocatore).forEach(function([nome, totale]) {
+        if (totale >= 10) {
+            sbloccaBadge(stato(nome), "dark_dealer", torneo.n);
+        }
+    });
+
+// DRAWING DEAD: il giocatore ha eliminato tutti gli altri partecipanti.
+const avversariEliminatiPerGiocatore = {};
+
+eliminazioni.forEach(function(e) {
+    if (!e.eliminatore || !e.eliminato) return;
+    if (e.eliminatore === e.eliminato) return;
+
+    if (!partecipanti.has(e.eliminatore)) return;
+    if (!partecipanti.has(e.eliminato)) return;
+
+    if (!avversariEliminatiPerGiocatore[e.eliminatore]) {
+        avversariEliminatiPerGiocatore[e.eliminatore] = new Set();
+    }
+
+    avversariEliminatiPerGiocatore[e.eliminatore].add(e.eliminato);
+});
+
+Object.keys(avversariEliminatiPerGiocatore).forEach(function(nome) {
+    const eliminati = avversariEliminatiPerGiocatore[nome];
+
+    const avversari = Array.from(partecipanti).filter(
+        altroNome => altroNome !== nome
+    );
+
+    if (avversari.length > 0 && avversari.every(
+        altroNome => eliminati.has(altroNome)
+    )) {
+        sbloccaBadge(stato(nome), "dark_drawing_dead", torneo.n);
+    }
+});
+}
         // Eventi DARK OPS che dipendono da due tornei consecutivi.
         const prec = tornei.find(t=>t.n===torneo.n-1);
         if (prec) {
@@ -5392,9 +5492,7 @@ function calcolaArchivioBadge() {
                 }
             }
         }
-        // Prima persona (o pari merito nello stesso torneo) a raggiungere 35 presenze.
-        const raggiunti=Object.values(stati).filter(p=>p.presenze===35);
-        raggiunti.forEach(p=>sbloccaBadge(p,"priv_first_senator",torneo.n));
+
     });
     // Onorificenze manuali separate dai dati dei tornei.
     Object.entries(archivioBadgeManuali).forEach(function([id,nominativi]) {
