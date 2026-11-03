@@ -9418,6 +9418,26 @@ function aggiornaTestaATesta() {
     });
 
     if (!g1 || !g2) return;
+        function migliorPiazzamento(nome) {
+        let migliore = Infinity;
+
+        datiTornei.forEach(function(torneo) {
+            torneo.players.forEach(function(giocatore) {
+                if (giocatore.name === nome) {
+                    const posizione = parseInt(giocatore.pos, 10);
+
+                    if (posizione < migliore) {
+                        migliore = posizione;
+                    }
+                }
+            });
+        });
+
+        return migliore === Infinity ? "—" : migliore + "°";
+    }
+
+    const migliorPiazzamento1 = migliorPiazzamento(nome1);
+    const migliorPiazzamento2 = migliorPiazzamento(nome2);
 
 
     /* =====================================
@@ -9618,6 +9638,35 @@ function aggiornaTestaATesta() {
                 "Posizione media",
                 numero(g1.posizioneMedia),
                 numero(g2.posizioneMedia)
+            )}
+                        ${riga(
+                "Miglior piazzamento",
+                migliorPiazzamento1,
+                migliorPiazzamento2
+            )}
+
+            ${riga(
+                "Esordio",
+                "Torneo " + g1.esordio,
+                "Torneo " + g2.esordio
+            )}
+
+            ${riga(
+                "Ultima apparizione",
+                "Torneo " + g1.ultimaApparizione,
+                "Torneo " + g2.ultimaApparizione
+            )}
+
+            ${riga(
+                "Striscia attuale",
+                g1.strisciaAttuale,
+                g2.strisciaAttuale
+            )}
+
+            ${riga(
+                "Striscia record",
+                g1.strisciaRecord,
+                g2.strisciaRecord
             )}
 
             ${riga(
