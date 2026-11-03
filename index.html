@@ -2762,6 +2762,251 @@ th[onclick]:hover {
         font-size: 14px;
     }
 }
+    /* =========================================
+   POPUP TESTA A TESTA
+   ========================================= */
+
+.popup-testa-a-testa {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    padding: 18px;
+
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(5px);
+}
+
+.popup-testa-a-testa-box {
+    width: min(900px, 100%);
+    max-height: 90vh;
+    overflow-y: auto;
+
+    padding: 28px;
+
+    background: linear-gradient(145deg, #292929, #202020);
+    border: 1px solid #4a4a4a;
+    border-radius: 18px;
+
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.65);
+}
+
+.popup-testa-a-testa-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.popup-testa-a-testa-header h2 {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 28px;
+    color: white;
+}
+
+.popup-testa-a-testa-chiudi {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 38px;
+    height: 38px;
+
+    border: 1px solid #555;
+    border-radius: 50%;
+
+    background: #181818;
+    color: #ccc;
+
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.popup-testa-a-testa-chiudi:hover {
+    background: #3a3a3a;
+    color: white;
+}
+
+.testa-a-testa-selettori {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: end;
+    gap: 18px;
+
+    margin-bottom: 28px;
+}
+
+.testa-a-testa-selettore {
+    min-width: 0;
+}
+
+.testa-a-testa-selettore label {
+    display: block;
+    margin-bottom: 8px;
+
+    color: #bdbdbd;
+    font-size: 13px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.testa-a-testa-selettore select {
+    width: 100%;
+    min-height: 48px;
+
+    padding: 10px 12px;
+
+    border: 1px solid #4a4a4a;
+    border-radius: 9px;
+
+    background: #181818;
+    color: white;
+
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    font-size: 15px;
+}
+
+.testa-a-testa-vs {
+    padding-bottom: 12px;
+
+    color: #e00016;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.testa-a-testa-sezione {
+    margin-bottom: 22px;
+}
+
+.testa-a-testa-sezione h3 {
+    margin: 0 0 12px 0;
+    padding-bottom: 8px;
+
+    border-bottom: 1px solid #444;
+
+    color: #e9c46a;
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.testa-a-testa-stat {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr 1fr;
+    align-items: center;
+    gap: 10px;
+
+    padding: 11px 10px;
+    margin-bottom: 5px;
+
+    background: #181818;
+    border-radius: 8px;
+}
+
+.testa-a-testa-stat .valore {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    overflow-wrap: anywhere;
+}
+
+.testa-a-testa-stat .etichetta {
+    color: #aaa;
+    font-size: 12px;
+    text-align: center;
+    text-transform: uppercase;
+    line-height: 1.3;
+}
+
+.testa-a-testa-stat .valore:first-child {
+    color: #e9c46a;
+}
+
+.testa-a-testa-stat .valore:last-child {
+    color: #c7a2ff;
+}
+
+.testa-a-testa-riepilogo {
+    padding: 18px;
+    margin-bottom: 22px;
+
+    background: linear-gradient(145deg, #242424, #181818);
+    border: 1px solid #444;
+    border-radius: 12px;
+
+    text-align: center;
+}
+
+.testa-a-testa-riepilogo strong {
+    display: block;
+    margin-bottom: 8px;
+
+    color: white;
+    font-size: 18px;
+}
+
+.testa-a-testa-riepilogo p {
+    margin: 0;
+    color: #bdbdbd;
+    line-height: 1.5;
+}
+
+@media (max-width: 600px) {
+
+    .popup-testa-a-testa {
+        padding: 8px;
+    }
+
+    .popup-testa-a-testa-box {
+        padding: 18px 12px;
+        max-height: 94vh;
+        border-radius: 14px;
+    }
+
+    .popup-testa-a-testa-header h2 {
+        font-size: 22px;
+    }
+
+    .testa-a-testa-selettori {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .testa-a-testa-vs {
+        padding: 0;
+        text-align: center;
+        font-size: 20px;
+    }
+
+    .testa-a-testa-selettore select {
+        font-size: 14px;
+    }
+
+    .testa-a-testa-stat {
+        grid-template-columns: 0.8fr 1.2fr 0.8fr;
+        gap: 5px;
+        padding: 10px 5px;
+    }
+
+    .testa-a-testa-stat .valore {
+        font-size: 14px;
+    }
+
+    .testa-a-testa-stat .etichetta {
+        font-size: 10px;
+    }
+}
     
 </style>
 </head>
@@ -3051,6 +3296,55 @@ th[onclick]:hover {
     </div>
 </div>
 
+    <!-- POPUP TESTA A TESTA -->
+<div id="popup-testa-a-testa"
+     class="popup-testa-a-testa"
+     onclick="chiudiPopupTestaATesta(event)">
+
+    <div class="popup-testa-a-testa-box"
+         onclick="event.stopPropagation()">
+
+        <div class="popup-testa-a-testa-header">
+            <h2>⚔️ Testa a testa</h2>
+
+            <button type="button"
+                    class="popup-testa-a-testa-chiudi"
+                    onclick="chiudiPopupTestaATesta()">
+                ✕
+            </button>
+        </div>
+
+        <div class="testa-a-testa-selettori">
+
+            <div class="testa-a-testa-selettore">
+                <label for="testa-a-testa-giocatore-1">
+                    Giocatore 1
+                </label>
+
+                <select id="testa-a-testa-giocatore-1"
+                        onchange="aggiornaTestaATesta()">
+                </select>
+            </div>
+
+            <div class="testa-a-testa-vs">VS</div>
+
+            <div class="testa-a-testa-selettore">
+                <label for="testa-a-testa-giocatore-2">
+                    Giocatore 2
+                </label>
+
+                <select id="testa-a-testa-giocatore-2"
+                        onchange="aggiornaTestaATesta()">
+                </select>
+            </div>
+
+        </div>
+
+        <div id="testa-a-testa-confronto"></div>
+
+    </div>
+</div>
+    
     <div id="popup-collezione-badge" class="badge-popup" aria-hidden="true"></div>
 
     </div>
@@ -9038,6 +9332,341 @@ function mostraTornei() {
         });
 
     }, 180);
+}
+    /* =========================================
+   TESTA A TESTA
+   ========================================= */
+
+function apriPopupTestaATesta() {
+
+    const popup = document.getElementById("popup-testa-a-testa");
+    const selettore1 = document.getElementById("testa-a-testa-giocatore-1");
+    const selettore2 = document.getElementById("testa-a-testa-giocatore-2");
+
+    if (!popup || !selettore1 || !selettore2) return;
+
+    const classifica = calcolaStatistiche().slice().sort(function(a, b) {
+        return a.nome.localeCompare(b.nome);
+    });
+
+    const opzioni = classifica.map(function(g) {
+        return `<option value="${g.nome.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;")}">${g.nome.replace(/&/g, "&amp;").replace(/</g, "&lt;")}</option>`;
+    }).join("");
+
+    selettore1.innerHTML = opzioni;
+    selettore2.innerHTML = opzioni;
+
+    if (classifica.length > 1) {
+        selettore1.selectedIndex = 0;
+        selettore2.selectedIndex = 1;
+    }
+
+    popup.style.display = "flex";
+
+    aggiornaTestaATesta();
+}
+
+
+function chiudiPopupTestaATesta(event) {
+
+    if (event && event.target !== event.currentTarget) {
+        return;
+    }
+
+    const popup = document.getElementById("popup-testa-a-testa");
+
+    if (popup) {
+        popup.style.display = "none";
+    }
+}
+
+
+function aggiornaTestaATesta() {
+
+    const selettore1 = document.getElementById("testa-a-testa-giocatore-1");
+    const selettore2 = document.getElementById("testa-a-testa-giocatore-2");
+    const contenitore = document.getElementById("testa-a-testa-confronto");
+
+    if (!selettore1 || !selettore2 || !contenitore) return;
+
+    const nome1 = selettore1.value;
+    const nome2 = selettore2.value;
+
+    if (!nome1 || !nome2) return;
+
+    if (nome1 === nome2) {
+        contenitore.innerHTML = `
+            <div class="testa-a-testa-riepilogo">
+                <strong>Seleziona due giocatori differenti</strong>
+                <p>Il confronto è possibile tra due partecipanti diversi.</p>
+            </div>
+        `;
+        return;
+    }
+
+    const statistiche = calcolaStatistiche();
+
+    const g1 = statistiche.find(function(g) {
+        return g.nome === nome1;
+    });
+
+    const g2 = statistiche.find(function(g) {
+        return g.nome === nome2;
+    });
+
+    if (!g1 || !g2) return;
+
+
+    /* =====================================
+       BADGE CONQUISTATI
+       ===================================== */
+
+    const archivioBadge = calcolaArchivioBadge();
+
+    const badgeNormali = catalogoBadge.filter(function(b) {
+        return b.family !== "DARK OPS" &&
+               b.family !== "Onorificenze private";
+    });
+
+    const badgeDarkOps = catalogoBadge.filter(function(b) {
+        return b.family === "DARK OPS";
+    });
+
+    function conteggioBadge(nome, elenco) {
+
+        const stato = archivioBadge[nome] || creaStatoBadge(nome);
+
+        return elenco.filter(function(b) {
+            return !!stato.sbloccati[b.id];
+        }).length;
+    }
+
+    const badge1 = conteggioBadge(nome1, badgeNormali);
+    const badge2 = conteggioBadge(nome2, badgeNormali);
+
+    const darkOps1 = conteggioBadge(nome1, badgeDarkOps);
+    const darkOps2 = conteggioBadge(nome2, badgeDarkOps);
+
+
+    /* =====================================
+       CONFRONTO TORNEI IN COMUNE
+       ===================================== */
+
+    const tornei1 = new Set(g1.torneiPartecipati);
+    const tornei2 = new Set(g2.torneiPartecipati);
+
+    const torneiInComune = datiTornei.filter(function(torneo) {
+
+        const presente1 = torneo.players.some(function(p) {
+            return p.name === nome1;
+        });
+
+        const presente2 = torneo.players.some(function(p) {
+            return p.name === nome2;
+        });
+
+        return presente1 && presente2;
+    });
+
+    let vittorie1 = 0;
+    let vittorie2 = 0;
+
+    torneiInComune.forEach(function(torneo) {
+
+        const giocatore1 = torneo.players.find(function(p) {
+            return p.name === nome1;
+        });
+
+        const giocatore2 = torneo.players.find(function(p) {
+            return p.name === nome2;
+        });
+
+        const posizione1 = parseInt(giocatore1.pos, 10);
+        const posizione2 = parseInt(giocatore2.pos, 10);
+
+        if (posizione1 < posizione2) {
+            vittorie1++;
+        } else if (posizione2 < posizione1) {
+            vittorie2++;
+        }
+    });
+
+    const totaleConfronti = vittorie1 + vittorie2;
+
+    const percentuale1 = totaleConfronti > 0
+        ? (vittorie1 / totaleConfronti) * 100
+        : 0;
+
+    const percentuale2 = totaleConfronti > 0
+        ? (vittorie2 / totaleConfronti) * 100
+        : 0;
+
+
+    /* =====================================
+       FORMATTAZIONE
+       ===================================== */
+
+    function percentuale(valore) {
+        return (valore * 100).toFixed(1) + "%";
+    }
+
+    function euro(valore) {
+        return formattaEuroIntero(valore);
+    }
+
+    function numero(valore) {
+        return Number(valore || 0).toLocaleString("it-IT", {
+            maximumFractionDigits: 2
+        });
+    }
+
+    function riga(etichetta, valore1, valore2) {
+
+        return `
+            <div class="testa-a-testa-stat">
+                <div class="valore">${valore1}</div>
+                <div class="etichetta">${etichetta}</div>
+                <div class="valore">${valore2}</div>
+            </div>
+        `;
+    }
+
+
+    /* =====================================
+       RIEPILOGO RIVALITÀ
+       ===================================== */
+
+    let riepilogo = "";
+
+    if (totaleConfronti === 0) {
+
+        riepilogo = `
+            <strong>Nessun confronto diretto disponibile</strong>
+            <p>I due giocatori non hanno ancora partecipato insieme a un torneo.</p>
+        `;
+
+    } else if (vittorie1 > vittorie2) {
+
+        riepilogo = `
+            <strong>${nome1} è in vantaggio</strong>
+            <p>
+                Ha concluso davanti a ${nome2} in ${vittorie1} tornei su
+                ${totaleConfronti}, con una percentuale di dominio del
+                ${percentuale1.toFixed(1)}%.
+            </p>
+        `;
+
+    } else if (vittorie2 > vittorie1) {
+
+        riepilogo = `
+            <strong>${nome2} è in vantaggio</strong>
+            <p>
+                Ha concluso davanti a ${nome1} in ${vittorie2} tornei su
+                ${totaleConfronti}, con una percentuale di dominio del
+                ${percentuale2.toFixed(1)}%.
+            </p>
+        `;
+
+    } else {
+
+        riepilogo = `
+            <strong>Perfetta parità</strong>
+            <p>
+                I due giocatori hanno concluso davanti l'uno all'altro
+                lo stesso numero di volte.
+            </p>
+        `;
+    }
+
+
+    /* =====================================
+       RENDER CONFRONTO
+       ===================================== */
+
+    contenitore.innerHTML = `
+
+        <div class="testa-a-testa-riepilogo">
+            ${riepilogo}
+        </div>
+
+        <div class="testa-a-testa-sezione">
+
+            <h3>Statistiche individuali</h3>
+
+            ${riga(
+                "Partecipazioni",
+                g1.partecipazioni,
+                g2.partecipazioni
+            )}
+
+            ${riga(
+                "Vittorie",
+                g1.vittorie,
+                g2.vittorie
+            )}
+
+            ${riga(
+                "Win rate",
+                percentuale(g1.winRate),
+                percentuale(g2.winRate)
+            )}
+
+            ${riga(
+                "Posizione media",
+                numero(g1.posizioneMedia),
+                numero(g2.posizioneMedia)
+            )}
+
+            ${riga(
+                "Profitto totale",
+                euro(g1.profitto),
+                euro(g2.profitto)
+            )}
+
+            ${riga(
+                "Profitto medio",
+                euro(g1.profittoMedio),
+                euro(g2.profittoMedio)
+            )}
+
+            ${riga(
+                "Badge conquistati",
+                badge1 + "/" + badgeNormali.length,
+                badge2 + "/" + badgeNormali.length
+            )}
+
+            ${riga(
+                "Dark Ops",
+                darkOps1 + "/" + badgeDarkOps.length,
+                darkOps2 + "/" + badgeDarkOps.length
+            )}
+
+        </div>
+
+        <div class="testa-a-testa-sezione">
+
+            <h3>Rivalità nei tornei</h3>
+
+            ${riga(
+                "Tornei giocati insieme",
+                torneiInComune.length,
+                torneiInComune.length
+            )}
+
+            ${riga(
+                "Tornei conclusi davanti",
+                vittorie1,
+                vittorie2
+            )}
+
+            ${riga(
+                "Percentuale di dominio",
+                percentuale1.toFixed(1) + "%",
+                percentuale2.toFixed(1) + "%"
+            )}
+
+        </div>
+    `;
 }
 
 </script>
