@@ -532,6 +532,123 @@
 
     color: white;
 }
+    /* =========================================
+   CARD EXTRA DEL MENU
+   Testa a testa e Regolamento
+   ========================================= */
+
+.menu-extra {
+    min-height: 205px;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding: 18px 15px;
+
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 14px;
+
+    background: rgba(0, 0, 0, 0.22);
+    color: white;
+
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(2px);
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+/* Icona delle card extra */
+
+.menu-extra-icona {
+    display: block;
+
+    font-size: 48px;
+    margin: 0 0 10px 0;
+}
+
+/* Testo delle card extra */
+
+.menu-extra span:not(.menu-extra-icona) {
+    display: block;
+
+    margin: 0;
+
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    font-size: 17px;
+    font-weight: bold;
+
+    letter-spacing: 0.3px;
+    text-align: center;
+
+    color: white;
+}
+
+/* Effetto hover */
+
+.menu-extra:not(:disabled):hover {
+    background: rgba(0, 0, 0, 0.32);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.35);
+}
+
+/* Regolamento: card disabilitata */
+
+.menu-regolamento:disabled {
+    cursor: default;
+    opacity: 0.65;
+    transform: none;
+}
+
+/* Scritta In arrivo */
+
+.menu-regolamento small {
+    display: block;
+
+    margin-top: 8px;
+
+    font-size: 11px;
+    font-weight: normal;
+    letter-spacing: 0.5px;
+
+    color: #bdbdbd;
+}
+
+/* =========================================
+   DISPOSIZIONE DESKTOP
+   ========================================= */
+
+@media (min-width: 801px) {
+
+    /* Testa a testa a sinistra */
+
+    .menu-testa-a-testa {
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    /* Record & Statistiche al centro */
+
+    .menu-record {
+        grid-column: 2 / 4;
+        grid-row: 2;
+
+        width: 100%;
+        max-width: 520px;
+    }
+
+    /* Regolamento a destra */
+
+    .menu-regolamento {
+        grid-column: 4;
+        grid-row: 2;
+    }
+}
 
 .menu-copag-suit {
     display: block;
