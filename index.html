@@ -2876,12 +2876,28 @@ th[onclick]:hover {
 }
 
 .testa-a-testa-vs {
-    padding-bottom: 12px;
+    align-self: center;
+    justify-self: center;
 
-    color: #e00016;
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 38px;
+    height: 38px;
+
+    margin: 0 4px;
+    padding: 0;
+
+    color: #d6bd78;
+    background: #242424;
+    border: 1px solid #48433a;
+    border-radius: 50%;
+
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    font-size: 12px;
     font-weight: bold;
+    letter-spacing: 0.5px;
 }
 
 .testa-a-testa-sezione {
@@ -2936,41 +2952,47 @@ th[onclick]:hover {
 .testa-a-testa-stat .valore:last-child {
     color: #c7a2ff;
 }
-    /* =========================================
-   BARRE COMPARATIVE — TESTA A TESTA
+/* =========================================
+   BARRE COMPARATIVE — STILE MINIMAL
    ========================================= */
 
 .testa-a-testa-stat .valore {
     transition: color 0.2s ease;
 }
 
+/* Vantaggio: oro tenue, senza introdurre altri colori */
 .testa-a-testa-stat .testa-a-testa-leader {
-    color: #58d68d !important;
+    color: #e9c46a !important;
 }
 
+/* Parità */
 .testa-a-testa-stat .testa-a-testa-parita {
     color: #d0d0d0 !important;
 }
 
+/* Contenitore delle barre */
 .testa-a-testa-barra-contenitore {
     grid-column: 1 / -1;
 
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10px;
+    gap: 12px;
 
-    margin-top: 3px;
+    margin-top: 2px;
+    padding: 0 2px;
 }
 
+/* Traccia neutra */
 .testa-a-testa-barra {
     width: 100%;
-    height: 5px;
+    height: 3px;
 
-    background: #333;
+    background: #383838;
     border-radius: 999px;
     overflow: hidden;
 }
 
+/* Riempimento */
 .testa-a-testa-barra-riempimento {
     height: 100%;
     border-radius: 999px;
@@ -2978,83 +3000,14 @@ th[onclick]:hover {
     transition: width 0.35s ease;
 }
 
+/* Giocatore 1: oro discreto */
 .testa-a-testa-barra-1 {
-    background: linear-gradient(90deg, #b88b22, #f1d477);
+    background: #a58a43;
 }
 
+/* Giocatore 2: viola desaturato */
 .testa-a-testa-barra-2 {
-    background: linear-gradient(90deg, #8052c7, #c7a2ff);
-}
-
-.testa-a-testa-riepilogo {
-    padding: 18px;
-    margin-bottom: 22px;
-
-    background: linear-gradient(145deg, #242424, #181818);
-    border: 1px solid #444;
-    border-radius: 12px;
-
-    text-align: center;
-}
-
-.testa-a-testa-riepilogo strong {
-    display: block;
-    margin-bottom: 8px;
-
-    color: white;
-    font-size: 18px;
-}
-
-.testa-a-testa-riepilogo p {
-    margin: 0;
-    color: #bdbdbd;
-    line-height: 1.5;
-}
-
-@media (max-width: 600px) {
-
-    .popup-testa-a-testa {
-        padding: 8px;
-    }
-
-    .popup-testa-a-testa-box {
-        padding: 18px 12px;
-        max-height: 94vh;
-        border-radius: 14px;
-    }
-
-    .popup-testa-a-testa-header h2 {
-        font-size: 22px;
-    }
-
-    .testa-a-testa-selettori {
-        grid-template-columns: 1fr;
-        gap: 12px;
-    }
-
-    .testa-a-testa-vs {
-        padding: 0;
-        text-align: center;
-        font-size: 20px;
-    }
-
-    .testa-a-testa-selettore select {
-        font-size: 14px;
-    }
-
-    .testa-a-testa-stat {
-        grid-template-columns: 0.8fr 1.2fr 0.8fr;
-        gap: 5px;
-        padding: 10px 5px;
-    }
-
-    .testa-a-testa-stat .valore {
-        font-size: 14px;
-    }
-
-    .testa-a-testa-stat .etichetta {
-        font-size: 10px;
-    }
+    background: #8974a8;
 }
     
 </style>
