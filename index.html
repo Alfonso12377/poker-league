@@ -6407,6 +6407,7 @@ const catalogoBadge = [
  {id:"terzo_3",name:"Medaglia di bronzo III",family:"Piazzamenti e costanza",rarity:"Diamante",type:"count",metric:"terzi",target:3,desc:"Arriva terzo 3 volte."},
  {id:"terzo_5",name:"Medaglia di bronzo IV",family:"Piazzamenti e costanza",rarity:"Leggendario",type:"count",metric:"terzi",target:5,desc:"Arriva terzo 5 volte."},
  {id:"quarto_3",name:"A un passo dal successo",family:"Piazzamenti e costanza",rarity:"Speciale",type:"count",metric:"quarti",target:3,desc:"Arriva quarto in 3 tornei."},
+    {id:"podio_senza_extra",name:"Il Braccino Vincente",family:"Piazzamenti e costanza",rarity:"Speciale",type:"special",desc:"Conquista il primo, il secondo o il terzo posto in un torneo utilizzando esclusivamente l'ingresso iniziale, senza effettuare rebuy né add-on."},
 {id:"profit_1",name:"Comincio sempre con gli spiccioli",family:"Profitto e denaro",rarity:"Argento",type:"profit",target:0.01,desc:"Raggiungi un profitto cumulativo positivo."},
  {id:"profit_50",name:"Cinquanta in tasca",family:"Profitto e denaro",rarity:"Oro",type:"profit",target:50,desc:"Raggiungi almeno €50 di profitto cumulativo."},
 {id:"profit_100",name:"Un Cippino",family:"Profitto e denaro",rarity:"Diamante",type:"profit",target:100,desc:"Raggiungi almeno €100 di profitto cumulativo."},
@@ -6585,6 +6586,31 @@ p.maxStreakPresenze = Math.max(
         Object.values(stati).forEach(function(p) {
             catalogoBadge.forEach(function(b) {
                 if (b.type==="count" && p[b.metric]>=b.target) sbloccaBadge(p,b.id,torneo.n);
+                if (b.id==="podio_senza_extra") {
+
+    const piazzamento = (torneo.players || []).find(
+        giocatore => giocatore.name === p.nome
+    );
+
+    if (piazzamento) {
+
+        const posizione = parsePosizioneBadge(piazzamento.pos);
+
+        const rebuy = Number(piazzamento.rebu) || 0;
+        const addon = Number(piazzamento.addon) || 0;
+
+        if (
+            posizione >= 1 &&
+            posizione <= 3 &&
+            rebuy === 0 &&
+            addon === 0
+        ) {
+            sbloccaBadge(p, b.id, torneo.n);
+        }
+
+    }
+
+}
                 if (b.type==="profit" && p.maxProfitto>=b.target) sbloccaBadge(p,b.id,torneo.n);
                 if (b.type==="darkprofit" && p.maxProfitto>=b.target) sbloccaBadge(p,b.id,torneo.n);
                 if (b.id==="podio_streak_3" && p.maxStreakPodio>=3) sbloccaBadge(p,b.id,torneo.n);
