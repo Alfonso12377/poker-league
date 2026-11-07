@@ -2495,7 +2495,7 @@ th[onclick]:hover {
 
 .filtro-classifica {
     display: grid;
-    grid-template-columns: 1fr 1fr auto;
+        grid-template-columns: 1fr 1fr auto auto;
     align-items: center;
     gap: 18px;
 
@@ -2553,12 +2553,54 @@ th[onclick]:hover {
     background: #454545;
 }
 
+    
+/* FLAG — FILTRO PRESENZE CLASSIFICA */
+
+.filtro-presenze {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    color: #ddd;
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+}
+
+.filtro-presenze input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+
+    accent-color: #d8b46a;
+    cursor: pointer;
+}
+
+.filtro-presenze:hover {
+    color: #ffffff;
+}
+
+
 @media (max-width: 600px) {
     .filtro-classifica {
         grid-template-columns: 1fr 1fr auto;
         gap: 8px;
         padding: 10px 8px;
     }
+
+    
+    .filtro-presenze {
+        grid-column: 1 / -1;
+        justify-content: flex-start;
+        white-space: normal;
+        font-size: 11px;
+    }
+
 
     .filtro-estremo label {
         font-size: 10px;
@@ -3737,6 +3779,17 @@ th[onclick]:hover {
             >
         </div>
 
+
+        <label class="filtro-presenze">
+            <input
+                type="checkbox"
+                id="filtro-presenze-minime"
+                onchange="generaClassifica()"
+                checked
+            >
+            Solo giocatori con almeno 4 presenze
+        </label>
+
         <button
             type="button"
             class="filtro-reset"
@@ -3744,6 +3797,7 @@ th[onclick]:hover {
         >
             Reset
         </button>
+
 
     </div>
 
@@ -8463,11 +8517,35 @@ function resetFiltroClassifica() {
                    torneo.n <= torneoFineClassifica;
         });
 
+
         let classifica = calcolaStatistiche(torneiSelezionati);
+
+        const filtroPresenzeMinime = document.getElementById(
+            "filtro-presenze-minime"
+        );
+
+        if (
+            filtroPresenzeMinime &&
+            filtroPresenzeMinime.checked
+        ) {
+            const statisticheStoriche = calcolaStatistiche(datiTornei);
+
+            const presenzeStoriche = {};
+
+            statisticheStoriche.forEach(function(giocatore) {
+                presenzeStoriche[giocatore.nome] =
+                    giocatore.partecipazioni;
+            });
+
+            classifica = classifica.filter(function(giocatore) {
+                return presenzeStoriche[giocatore.nome] >= 4;
+            });
+        }
 
         classifica.sort(function(a, b) {
             return a.posizioneMedia - b.posizioneMedia;
         });
+
 
         corpo.innerHTML = classifica.map(function(giocatore, indice) {
 
