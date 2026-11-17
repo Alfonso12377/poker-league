@@ -850,20 +850,6 @@ html {
         grid-column: 4;
         grid-row: 2;
     }
-
-        /* Calcolatore sotto Testa a testa */
-
-    .menu-calcolatore {
-        grid-column: 1;
-        grid-row: 3;
-    }
-
-    /* Timer Bui sotto Regolamento */
-
-    .menu-timer-bui {
-        grid-column: 4;
-        grid-row: 3;
-    }
 }
 
 .menu-copag-suit {
@@ -1179,7 +1165,6 @@ html {
 #tornei,
 #giocatori,
 #record-statistiche,
-    #calcolatore,
 #tornei-dettagli {
     transition: opacity 0.18s ease;
 } 
@@ -3319,73 +3304,6 @@ th[onclick]:hover {
         height: 68px;
         font-size: 54px !important;
     }
-
-    /* =========================================
-   MENU — CALCOLATORE
-   ========================================= */
-
-.menu-calcolatore .menu-extra-icona,
-.menu-timer-bui .menu-extra-icona {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 82px;
-    height: 82px;
-
-    font-size: 64px !important;
-    line-height: 1;
-
-    margin: 0 0 14px 0;
-
-    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.25));
-}
-
-/* Titolo Calcolatore */
-
-.menu-calcolatore span:not(.menu-extra-icona),
-.menu-timer-bui span:not(.menu-extra-icona) {
-    font-size: 18px;
-    letter-spacing: 0.6px;
-}
-
-/* Timer Bui disabilitato */
-
-.menu-timer-bui:disabled {
-    cursor: default;
-    opacity: 0.55;
-    background: rgba(0, 0, 0, 0.18);
-    transform: none;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.20);
-}
-
-/* Scritta Prossimamente */
-
-.menu-timer-bui small {
-    display: block;
-    margin-top: 8px;
-    font-size: 11px;
-    font-weight: normal;
-    letter-spacing: 0.5px;
-    color: #bdbdbd;
-}
-
-/* Smartphone */
-
-@media (max-width: 600px) {
-
-    .menu-calcolatore .menu-extra-icona,
-    .menu-timer-bui .menu-extra-icona {
-        width: 68px;
-        height: 68px;
-        font-size: 54px !important;
-    }
-
-    .menu-calcolatore span:not(.menu-extra-icona),
-    .menu-timer-bui span:not(.menu-extra-icona) {
-        font-size: 16px;
-    }
-
 }
 
     /* =========================================
@@ -3569,23 +3487,6 @@ th[onclick]:hover {
 <button class="menu-extra menu-regolamento" onclick="apriPopupRegolamento()">
     <span class="menu-extra-icona">📖</span>
     <span>Regolamento</span>
-</button>
-
-        <button class="menu-extra menu-calcolatore"
-        onclick="mostraSezione('calcolatore')">
-
-    <span class="menu-extra-icona">🃏</span>
-    <span>Calcolatore</span>
-
-</button>
-
-
-<button class="menu-extra menu-timer-bui" disabled>
-
-    <span class="menu-extra-icona">⏱️</span>
-    <span>Timer Bui</span>
-    <small>Prossimamente</small>
-
 </button>
 
 </div>
@@ -4017,28 +3918,6 @@ th[onclick]:hover {
             class="statistiche-lega"
             id="statistiche-lega"
         ></div>
-
-    </div>
-
-</div>
-
-    <!-- =========================================
-     SCHERMATA CALCOLATORE POKER
-     ========================================= -->
-
-<div id="calcolatore" style="display: none;">
-
-    <button class="torna-menu" onclick="mostraMenu()">
-        ← Torna al menu
-    </button>
-
-    <h2>🃏 Calcolatore Texas Hold'em</h2>
-
-    <div id="calcolatore-contenitore">
-
-        <!--
-        QUI INSERIREMO IL CALCOLATORE
-        -->
 
     </div>
 
@@ -10132,7 +10011,6 @@ const elementi = [
     "tornei",
     "giocatori",
     "record-statistiche",
-    "calcolatore",
     "tornei-dettagli"
 ];
 
@@ -10154,7 +10032,6 @@ const elementi = [
             document.getElementById("tornei").style.display = "none";
             document.getElementById("giocatori").style.display = "none";
             document.getElementById("record-statistiche").style.display = "none";
-            document.getElementById("calcolatore").style.display = "none";
             document.getElementById("tornei-dettagli").style.display = "none";
 
             const destinazione = document.getElementById(sezione);
@@ -10200,7 +10077,6 @@ setTimeout(function() {
         "tornei",
         "giocatori",
         "record-statistiche",
-        "calcolatore",
         "tornei-dettagli"
     ];
 
