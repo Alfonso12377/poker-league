@@ -850,6 +850,20 @@ html {
         grid-column: 4;
         grid-row: 2;
     }
+
+        /* Calcolatore sotto Testa a testa */
+
+    .menu-calcolatore {
+        grid-column: 1;
+        grid-row: 3;
+    }
+
+    /* Timer Bui sotto Regolamento */
+
+    .menu-timer-bui {
+        grid-column: 4;
+        grid-row: 3;
+    }
 }
 
 .menu-copag-suit {
@@ -1165,6 +1179,7 @@ html {
 #tornei,
 #giocatori,
 #record-statistiche,
+    #calcolatore,
 #tornei-dettagli {
     transition: opacity 0.18s ease;
 } 
@@ -3297,7 +3312,13 @@ th[onclick]:hover {
     filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.25));
 }
 
-/* Smartphone */
+
+/* =========================================
+   MENU EXTRA — CALCOLATORE E TIMER BUI
+   Stile comune a PC, tablet e smartphone
+   ========================================= */
+
+/* Regolamento: icona su smartphone */
 @media (max-width: 600px) {
     .menu-regolamento .menu-extra-icona {
         width: 68px;
@@ -3305,6 +3326,154 @@ th[onclick]:hover {
         font-size: 54px !important;
     }
 }
+
+/* Dimensioni generali delle due nuove card */
+.menu-calcolatore,
+.menu-timer-bui {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    min-height: 205px;
+    padding: 18px 12px;
+    font-size: 16px;
+    overflow: hidden;
+}
+
+/* Icone */
+.menu-calcolatore .menu-extra-icona,
+.menu-timer-bui .menu-extra-icona {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+
+    width: 82px;
+    height: 82px;
+
+    margin: 0 0 12px 0;
+
+    font-size: 64px !important;
+    line-height: 1;
+
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.25));
+}
+
+/* Titoli */
+.menu-calcolatore span:not(.menu-extra-icona),
+.menu-timer-bui span:not(.menu-extra-icona) {
+    display: block;
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.25;
+    font-weight: bold;
+    letter-spacing: 0.3px;
+    text-align: center;
+}
+
+/* Timer Bui disabilitato */
+.menu-timer-bui:disabled {
+    cursor: default;
+    opacity: 0.55;
+    background: rgba(0, 0, 0, 0.18);
+    transform: none;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.20);
+}
+
+/* Prossimamente: dimensione indipendente dal pulsante */
+.menu-timer-bui small {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 7px;
+
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    font-size: 11px !important;
+    line-height: 1.2;
+    font-weight: normal;
+    letter-spacing: 0.4px;
+    text-align: center;
+
+    color: #bdbdbd;
+    white-space: normal;
+    overflow-wrap: break-word;
+}
+
+/* Tablet e smartphone */
+@media (max-width: 800px) {
+    .menu-calcolatore,
+    .menu-timer-bui {
+        min-height: 145px;
+        padding: 12px 8px;
+    }
+
+    .menu-calcolatore .menu-extra-icona,
+    .menu-timer-bui .menu-extra-icona {
+        width: 72px;
+        height: 72px;
+        font-size: 58px !important;
+        margin-bottom: 9px;
+    }
+
+    .menu-calcolatore span:not(.menu-extra-icona),
+    .menu-timer-bui span:not(.menu-extra-icona) {
+        font-size: 15px;
+    }
+}
+
+/* Smartphone in verticale */
+@media (max-width: 600px) and (orientation: portrait) {
+    .menu-calcolatore,
+    .menu-timer-bui {
+        min-height: 135px;
+        padding: 12px 7px;
+    }
+
+    .menu-calcolatore .menu-extra-icona,
+    .menu-timer-bui .menu-extra-icona {
+        width: 68px;
+        height: 68px;
+        font-size: 54px !important;
+    }
+
+    .menu-calcolatore span:not(.menu-extra-icona),
+    .menu-timer-bui span:not(.menu-extra-icona) {
+        font-size: 14px;
+    }
+}
+
+/* Smartphone in orizzontale */
+@media (max-width: 1000px) and (orientation: landscape) and (max-height: 600px) {
+    .menu {
+        gap: 10px;
+        margin: 18px 0;
+    }
+
+    .menu-calcolatore,
+    .menu-timer-bui {
+        min-height: 118px;
+        padding: 8px 6px;
+    }
+
+    .menu-calcolatore .menu-extra-icona,
+    .menu-timer-bui .menu-extra-icona {
+        width: 54px;
+        height: 54px;
+        font-size: 43px !important;
+        margin-bottom: 5px;
+    }
+
+    .menu-calcolatore span:not(.menu-extra-icona),
+    .menu-timer-bui span:not(.menu-extra-icona) {
+        font-size: 13px;
+        line-height: 1.15;
+    }
+
+    .menu-timer-bui small {
+        margin-top: 4px;
+        font-size: 10px !important;
+    }
+}
+
 
     /* =========================================
    FIX DEFINITIVO TABELLA REGOLAMENTO MOBILE
@@ -3375,6 +3544,802 @@ th[onclick]:hover {
     /* CENTRATURA DEFINITIVA COLONNA BUI */
 .regolamento-tabella td:nth-child(2) {
     text-align: center !important;
+}
+
+    /* =========================================
+   CALCOLATORE TEXAS HOLD'EM
+   ========================================= */
+
+#calcolatore {
+    width: 100%;
+    max-width: 1050px;
+    margin: 0 auto;
+    padding-bottom: 35px;
+}
+
+#calcolatore-contenitore {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    color: white;
+    text-align: left;
+}
+
+.pc-intro {
+    margin: 0 auto 22px auto;
+    text-align: center;
+    font-size: 17px;
+    font-weight: bold;
+    color: #f0c674;
+}
+
+.pc-intro span {
+    display: block;
+    margin-top: 7px;
+    color: #bbb;
+    font-size: 13px;
+    font-weight: normal;
+}
+
+.pc-pannello {
+    background: linear-gradient(145deg, #292929, #1c1c1c);
+    border: 1px solid #444;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+}
+
+.pc-controlli {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+}
+
+.pc-controlli label {
+    font-weight: bold;
+    color: #ddd;
+}
+
+.pc-controlli select {
+    min-width: 150px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #555;
+    background: #111;
+    color: white;
+    font-size: 15px;
+}
+
+.pc-giocatore {
+    display: grid;
+    grid-template-columns: minmax(130px, 1fr) auto auto;
+    align-items: center;
+    gap: 12px;
+    padding: 13px;
+    margin-bottom: 10px;
+    border: 1px solid #414141;
+    border-radius: 10px;
+    background: #222;
+}
+
+.pc-giocatore select {
+    width: 100%;
+    min-width: 0;
+    padding: 10px;
+    border: 1px solid #555;
+    border-radius: 7px;
+    background: #111;
+    color: white;
+    font-size: 14px;
+}
+
+.pc-mano {
+    display: flex;
+    gap: 7px;
+}
+
+    /* CONTENITORE DELLE CARTE */
+
+.pc-slot-contenitore {
+    position: relative;
+    display: inline-flex;
+    flex: 0 0 auto;
+}
+
+/* PULSANTE PER RIMUOVERE UNA CARTA */
+
+.pc-rimuovi-carta {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    z-index: 5;
+    width: 21px;
+    height: 21px;
+    padding: 0;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    background: #b52b2b;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 18px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+}
+
+.pc-rimuovi-carta:hover {
+    background: #e04444;
+    transform: scale(1.08);
+}
+
+.pc-slot {
+    width: 48px;
+    height: 66px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #777;
+    border-radius: 7px;
+    background: #f8f8f5;
+    color: #222;
+    font-size: 23px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.pc-slot.vuoto {
+    background: #303030;
+    color: #aaa;
+    border: 1px dashed #777;
+    font-size: 20px;
+}
+
+.pc-slot.rosso {
+    color: #d71920;
+}
+
+.pc-fold {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    color: #bbb;
+    white-space: nowrap;
+}
+
+.pc-sezione-carte {
+    margin-top: 27px;
+    padding: 18px;
+    border: 1px solid #414141;
+    border-radius: 11px;
+    background: rgba(0,0,0,0.15);
+}
+
+.pc-sezione-carte h3 {
+    margin: 0 0 7px 0;
+    color: #f0c674;
+    font-size: 17px;
+}
+
+.pc-sezione-carte p {
+    margin: 0 0 15px 0;
+    color: #aaa;
+    font-size: 12px;
+}
+
+    .pc-sezione-foldate details {
+    width: 100%;
+}
+
+.pc-sezione-foldate summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    color: #f0c674;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+}
+
+.pc-sezione-foldate summary::-webkit-details-marker {
+    display: none;
+}
+
+.pc-foldate-freccia {
+    font-size: 22px;
+    transition: transform 0.2s ease;
+}
+
+.pc-sezione-foldate details[open] .pc-foldate-freccia {
+    transform: rotate(180deg);
+}
+
+.pc-sezione-foldate details > p {
+    margin: 12px 0 15px;
+    color: #aaa;
+    font-size: 12px;
+}
+
+.pc-carte-riga {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+}
+
+/* SELETTORE DEI SEMI */
+
+.pc-semi-selettore {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 9px;
+    margin-bottom: 18px;
+}
+
+.pc-seme-tab {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    min-height: 48px;
+    padding: 8px 5px;
+    border: 1px solid #555;
+    border-radius: 9px;
+    background: #292929;
+    color: #eee;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.18s ease;
+}
+
+.pc-seme-tab span {
+    font-size: 24px;
+}
+
+.pc-seme-tab.rosso {
+    color: #ff7777;
+}
+
+.pc-seme-tab:hover {
+    background: #3b3b3b;
+}
+
+.pc-seme-tab.attivo {
+    background: #394b3b;
+    border-color: #d5b66d;
+    box-shadow: 0 0 0 1px #d5b66d;
+}
+
+/* CARTE DEL SEME SELEZIONATO */
+
+.pc-mazzo-griglia {
+    display: grid;
+    grid-template-columns: repeat(13, minmax(0, 1fr));
+    gap: 7px;
+}
+
+.pc-carta-mazzo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1px;
+    min-width: 0;
+    min-height: 76px;
+    padding: 5px 2px;
+    border: 1px solid #d5d5d0;
+    border-radius: 7px;
+    background: linear-gradient(145deg, #ffffff, #e9e9e4);
+    color: #171717;
+    font-size: 19px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.25);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.pc-carta-mazzo:hover:not(:disabled) {
+    transform: translateY(-4px);
+    box-shadow: 0 7px 12px rgba(0,0,0,0.35);
+}
+
+.pc-carta-mazzo.rosso {
+    color: #d71920;
+}
+
+.pc-carta-valore {
+    font-size: 21px;
+    line-height: 1;
+}
+
+.pc-carta-seme {
+    font-size: 23px;
+    line-height: 1;
+}
+
+.pc-carta-mazzo:disabled {
+    opacity: 0.16;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+    
+.pc-selettore {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+    background: rgba(0, 0, 0, 0.78);
+    box-sizing: border-box;
+}
+
+.pc-selettore-box {
+    width: min(100%, 1050px);
+    max-height: min(90vh, 850px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 20px;
+    background: #151515;
+    border: 1px solid #666;
+    border-radius: 14px;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.65);
+    box-sizing: border-box;
+}
+
+.pc-selettore-testa {
+    position: sticky;
+    top: -20px;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin: -20px -20px 18px;
+    padding: 16px 20px;
+    background: #151515;
+    border-bottom: 1px solid #444;
+}
+
+.pc-selettore-testa strong {
+    color: #f0c674;
+    font-size: 17px;
+}
+
+.pc-selettore-testa button {
+    flex: 0 0 auto;
+    border: 0;
+    border-radius: 7px;
+    padding: 8px 12px;
+    background: #444;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.pc-selettore-testa button:hover {
+    background: #666;
+}
+
+
+.pc-azioni {
+    display: flex;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.pc-azioni button {
+    flex: 1;
+    min-height: 48px;
+    padding: 12px;
+    border: 1px solid #666;
+    border-radius: 9px;
+    background: #333;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#pc-calcola {
+    background: #245b38;
+    border-color: #36794e;
+}
+
+#pc-calcola:hover {
+    background: #30734a;
+}
+
+#pc-reset {
+    max-width: 140px;
+}
+
+#pc-messaggio {
+    margin-top: 17px;
+    color: #f0c674;
+    text-align: center;
+    font-size: 13px;
+}
+
+
+.pc-risultati {
+    width: 100%;
+    max-width: 100%;
+    margin-top: 25px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.pc-risultati h3 {
+    color: #f0c674;
+    text-align: center;
+}
+
+.pc-tabella {
+    width: 100%;
+    min-width: 560px;
+    table-layout: fixed;
+    border-collapse: collapse;
+    background: #202020;
+    font-size: 13px;
+}
+
+.pc-tabella th,
+.pc-tabella td {
+    height: 62px;
+    padding: 9px 7px;
+    border: 1px solid #444;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 1.2;
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+
+.pc-tabella th {
+    background: #333;
+    color: #f0c674;
+    font-weight: bold;
+}
+
+.pc-tabella th:nth-child(1),
+.pc-tabella td:nth-child(1) {
+    width: 25%;
+}
+
+.pc-tabella th:nth-child(n+2),
+.pc-tabella td:nth-child(n+2) {
+    width: 15%;
+}
+
+.pc-tabella td:first-child {
+    text-align: left;
+    font-weight: bold;
+}
+
+.pc-nome-stato {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 7px;
+    min-width: 0;
+}
+
+.pc-badge-stato {
+    display: inline-block;
+    max-width: 100%;
+    padding: 4px 7px;
+    border-radius: 6px;
+    font-size: 9px;
+    line-height: 1.2;
+    font-weight: 800;
+    letter-spacing: 0.35px;
+    text-align: center;
+    overflow-wrap: anywhere;
+}
+
+.pc-stato-verde {
+    background: rgba(46, 160, 92, 0.18);
+    color: #70d99b;
+    border: 1px solid rgba(80, 200, 120, 0.35);
+}
+
+.pc-stato-arancione {
+    background: rgba(224, 145, 40, 0.17);
+    color: #f0b45e;
+    border: 1px solid rgba(240, 170, 70, 0.35);
+}
+
+.pc-stato-rosso {
+    background: rgba(200, 55, 55, 0.18);
+    color: #ff8585;
+    border: 1px solid rgba(230, 75, 75, 0.4);
+}
+
+.pc-tabella tr.pc-riga-verde td:first-child {
+    border-left: 3px solid #45b978;
+}
+
+.pc-tabella tr.pc-riga-arancione td:first-child {
+    border-left: 3px solid #e5a044;
+}
+
+.pc-tabella tr.pc-riga-rosso td:first-child {
+    border-left: 3px solid #d95353;
+}
+
+.pc-outs-sezione {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 14px;
+    margin-top: 20px;
+}
+
+.pc-outs-card {
+    min-width: 0;
+    padding: 16px;
+    border: 1px solid #48413a;
+    border-radius: 12px;
+    background: linear-gradient(145deg, #292929, #202020);
+    box-shadow: 0 5px 14px rgba(0,0,0,0.2);
+}
+
+.pc-outs-intestazione {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+    color: #f0c674;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.pc-outs-contatore {
+    flex: 0 0 auto;
+    padding: 4px 8px;
+    border-radius: 20px;
+    background: rgba(224, 145, 40, 0.16);
+    color: #f0b45e;
+    font-size: 11px;
+}
+
+.pc-outs-carte {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(43px, 1fr));
+    gap: 7px;
+}
+
+.pc-outs-carta {
+    min-width: 43px;
+    height: 62px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1px;
+    border: 1px solid #d5d5d0;
+    border-radius: 7px;
+    background: linear-gradient(145deg, #ffffff, #e9e9e4);
+    color: #171717;
+    font-size: 19px;
+    font-weight: bold;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.25);
+}
+
+.pc-outs-carta.rosso {
+    color: #d71920;
+}
+
+.pc-outs-carta.nero {
+    color: #171717;
+}
+
+.pc-outs-carta .pc-carta-valore {
+    font-size: 21px;
+    line-height: 1;
+}
+
+.pc-outs-carta .pc-carta-seme {
+    font-size: 23px;
+    line-height: 1;
+}
+
+.pc-outs-nota {
+    margin: 12px 0 0;
+    color: #999;
+    font-size: 10px;
+    line-height: 1.45;
+}
+
+@media (max-width: 800px) {
+    .pc-tabella {
+        font-size: 12px;
+    }
+
+    .pc-tabella th,
+    .pc-tabella td {
+        height: 58px;
+        padding: 8px 5px;
+    }
+
+    .pc-badge-stato {
+        font-size: 8px;
+    }
+
+    .pc-outs-card {
+        padding: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .pc-tabella {
+        min-width: 560px;
+        font-size: 11px;
+    }
+
+    .pc-tabella th,
+    .pc-tabella td {
+        height: 55px;
+        padding: 7px 4px;
+    }
+
+    .pc-outs-sezione {
+        grid-template-columns: 1fr;
+    }
+
+    .pc-outs-carta {
+        height: 58px;
+        font-size: 19px;
+    }
+}
+
+@media (orientation: landscape) and (max-height: 600px) {
+    .pc-outs-sezione {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+}
+
+
+
+.pc-nota {
+    margin-top: 12px;
+    color: #999;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+@media (max-width: 800px) {
+    .pc-pannello {
+        padding: 16px 12px;
+    }
+
+    .pc-giocatore {
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 8px;
+    }
+
+    .pc-giocatore .pc-fold {
+        grid-column: 1 / -1;
+    }
+
+    .pc-slot {
+        width: 42px;
+        height: 59px;
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .pc-intro {
+        font-size: 15px;
+    }
+
+    .pc-pannello {
+        padding: 12px 8px;
+    }
+
+    .pc-sezione-carte {
+        padding: 13px 9px;
+    }
+
+    .pc-carte-riga {
+        gap: 6px;
+    }
+
+    .pc-slot {
+        width: 39px;
+        height: 55px;
+    }
+
+    .pc-azioni {
+        flex-direction: column;
+    }
+
+    #pc-reset {
+        max-width: none;
+    }
+
+    .pc-mazzo-griglia {
+        grid-template-columns: repeat(7, minmax(0, 1fr));
+    }
+}
+
+@media (orientation: landscape) and (max-height: 600px) {
+    #calcolatore {
+        max-width: 100%;
+    }
+
+    .pc-pannello {
+        padding: 14px;
+    }
+
+    .pc-giocatore {
+        padding: 9px;
+    }
+
+    .pc-slot {
+        width: 42px;
+        height: 55px;
+    }
+}
+
+    /* CALCOLATORE - ADATTAMENTO SMARTPHONE */
+
+@media (max-width: 600px) {
+
+    .pc-semi-selettore {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .pc-seme-tab {
+        min-height: 44px;
+        font-size: 12px;
+    }
+
+    .pc-mazzo-griglia {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 8px;
+    }
+
+    .pc-carta-mazzo {
+        min-height: 66px;
+    }
+
+    .pc-giocatore {
+        grid-template-columns: minmax(0, 1fr) auto;
+    }
+
+    .pc-giocatore select {
+        grid-column: 1 / -1;
+    }
+        .pc-selettore {
+        padding: 8px;
+    }
+
+    .pc-selettore-box {
+        width: 100%;
+        max-height: 94vh;
+        padding: 13px;
+        border-radius: 10px;
+    }
+
+    .pc-selettore-testa {
+        top: -13px;
+        margin: -13px -13px 14px;
+        padding: 12px 13px;
+    }
+
+    .pc-selettore-testa strong {
+        font-size: 15px;
+    }
 }
     
 </style>
@@ -3487,6 +4452,23 @@ th[onclick]:hover {
 <button class="menu-extra menu-regolamento" onclick="apriPopupRegolamento()">
     <span class="menu-extra-icona">📖</span>
     <span>Regolamento</span>
+</button>
+
+        <button class="menu-extra menu-calcolatore"
+        onclick="mostraSezione('calcolatore')">
+
+    <span class="menu-extra-icona">🃏</span>
+    <span>Calcolatore</span>
+
+</button>
+
+
+<button class="menu-extra menu-timer-bui" disabled>
+
+    <span class="menu-extra-icona">⏱️</span>
+    <span>Timer Bui</span>
+    <small>Prossimamente</small>
+
 </button>
 
 </div>
@@ -3918,6 +4900,85 @@ th[onclick]:hover {
             class="statistiche-lega"
             id="statistiche-lega"
         ></div>
+
+    </div>
+
+</div>
+
+    <!-- =========================================
+     SCHERMATA CALCOLATORE POKER
+     ========================================= -->
+
+<div id="calcolatore" style="display: none;">
+
+    <button class="torna-menu" onclick="mostraMenu()">
+        ← Torna al menu
+    </button>
+
+    <h2>🃏 Calcolatore Texas Hold'em</h2>
+
+    <div id="calcolatore-contenitore">
+
+        <div class="pc-intro">
+            Calcolatore Texas Hold'em
+            <span>Calcola le probabilità di vittoria, pareggio ed equity dei giocatori.</span>
+        </div>
+
+        <div class="pc-pannello">
+            <div class="pc-controlli">
+                <label for="pc-numero-giocatori">Numero di giocatori</label>
+                <select id="pc-numero-giocatori">
+                    <option value="2">2 giocatori</option>
+                    <option value="3">3 giocatori</option>
+                    <option value="4">4 giocatori</option>
+                    <option value="5">5 giocatori</option>
+                    <option value="6">6 giocatori</option>
+                    <option value="7">7 giocatori</option>
+                    <option value="8">8 giocatori</option>
+                    <option value="9">9 giocatori</option>
+                    <option value="10">10 giocatori</option>
+                </select>
+            </div>
+
+            <div id="pc-giocatori"></div>
+
+<div class="pc-sezione-carte">
+    <h3>Board</h3>
+    <p>Seleziona le carte del flop, del turn e del river, nell'ordine.</p>
+    <div id="pc-comuni" class="pc-carte-riga"></div>
+</div>
+
+<div class="pc-sezione-carte pc-sezione-foldate">
+    <details id="pc-foldate-dettagli">
+        <summary>
+            <span>Foldate</span>
+            <span class="pc-foldate-freccia">⌄</span>
+        </summary>
+
+        <p>Inserisci le carte conosciute che non partecipano alla mano.</p>
+        <div id="pc-morte" class="pc-carte-riga"></div>
+    </details>
+</div>
+
+<div id="pc-selettore" class="pc-selettore" style="display:none;" aria-hidden="true">
+    <div class="pc-selettore-box">
+        <div class="pc-selettore-testa">
+            <strong>Seleziona una carta</strong>
+            <button type="button" id="pc-chiudi-selettore">✕</button>
+        </div>
+
+        <div id="pc-mazzo"></div>
+    </div>
+</div>
+
+            <div class="pc-azioni">
+                <button type="button" id="pc-calcola">CALCOLA LE PROBABILITÀ</button>
+                <button type="button" id="pc-reset">AZZERA</button>
+            </div>
+
+            <div id="pc-messaggio" role="status"></div>
+            <div id="pc-risultati"></div>
+        </div>
 
     </div>
 
@@ -10011,6 +11072,7 @@ const elementi = [
     "tornei",
     "giocatori",
     "record-statistiche",
+    "calcolatore",
     "tornei-dettagli"
 ];
 
@@ -10032,6 +11094,7 @@ const elementi = [
             document.getElementById("tornei").style.display = "none";
             document.getElementById("giocatori").style.display = "none";
             document.getElementById("record-statistiche").style.display = "none";
+            document.getElementById("calcolatore").style.display = "none";
             document.getElementById("tornei-dettagli").style.display = "none";
 
             const destinazione = document.getElementById(sezione);
@@ -10077,6 +11140,7 @@ setTimeout(function() {
         "tornei",
         "giocatori",
         "record-statistiche",
+        "calcolatore",
         "tornei-dettagli"
     ];
 
@@ -10983,6 +12047,1119 @@ if (!statisticheNonComparabili.includes(etichetta)) {
     `;
 }
 
+    /* =========================================================
+   POKER LEAGUE - CALCOLATORE TEXAS HOLD'EM
+   Motore di valutazione e calcolo delle probabilità
+   ========================================================= */
+
+(function () {
+    "use strict";
+
+    const pcNomi = [...new Set(
+        datiTornei.flatMap(t =>
+            (t.players || [])
+                .map(p => p.name)
+                .filter(n => typeof n === "string" && n.trim() !== "")
+        )
+    )].sort((a, b) => a.localeCompare(b, "it"));
+
+    const pcSemi = [
+        { simbolo: "♠", nome: "Picche", rosso: false },
+        { simbolo: "♥", nome: "Cuori", rosso: true },
+        { simbolo: "♦", nome: "Quadri", rosso: true },
+        { simbolo: "♣", nome: "Fiori", rosso: false }
+    ];
+
+    const pcValori = [
+        { valore: 2, testo: "2" },
+        { valore: 3, testo: "3" },
+        { valore: 4, testo: "4" },
+        { valore: 5, testo: "5" },
+        { valore: 6, testo: "6" },
+        { valore: 7, testo: "7" },
+        { valore: 8, testo: "8" },
+        { valore: 9, testo: "9" },
+        { valore: 10, testo: "10" },
+        { valore: 11, testo: "J" },
+        { valore: 12, testo: "Q" },
+        { valore: 13, testo: "K" },
+        { valore: 14, testo: "A" }
+    ];
+
+    const pcMazzo = [];
+
+    pcSemi.forEach(seme => {
+        pcValori.forEach(valore => {
+            pcMazzo.push({
+                id: valore.valore + "-" + seme.simbolo,
+                valore: valore.valore,
+                testo: valore.testo,
+                seme: seme.simbolo,
+                rosso: seme.rosso
+            });
+        });
+    });
+
+const pc = {
+    giocatori: [],
+    comuni: [null, null, null, null, null],
+    morte: [],
+    destinazione: null,
+    semeSelezionato: "♠",
+    calcoloInCorso: false
+};
+
+    const pcEl = id => document.getElementById(id);
+
+    const pcNumero = pcEl("pc-numero-giocatori");
+    const pcGiocatori = pcEl("pc-giocatori");
+    const pcComuni = pcEl("pc-comuni");
+    const pcMorte = pcEl("pc-morte");
+    const pcSelettore = pcEl("pc-selettore");
+    const pcMazzoEl = pcEl("pc-mazzo");
+    const pcMessaggio = pcEl("pc-messaggio");
+    const pcRisultati = pcEl("pc-risultati");
+
+    if (
+        !pcNumero || !pcGiocatori || !pcComuni ||
+        !pcMorte || !pcSelettore || !pcMazzoEl ||
+        !pcMessaggio || !pcRisultati
+    ) {
+        console.error("Calcolatore Poker League: elementi HTML mancanti.");
+        return;
+    }
+
+    function pcCarta(id) {
+        return pcMazzo.find(c => c.id === id) || null;
+    }
+
+    function pcTestoCarta(carta) {
+        return carta ? carta.testo + carta.seme : "＋";
+    }
+
+    function pcClasseCarta(carta) {
+        if (!carta) return "pc-slot vuoto";
+        return carta.rosso ? "pc-slot rosso" : "pc-slot";
+    }
+
+function pcCreaSlot(tipo, indice, posizione, carta) {
+    const contenitore = document.createElement("div");
+    contenitore.className = "pc-slot-contenitore";
+
+    const bottone = document.createElement("button");
+
+    bottone.type = "button";
+    bottone.className = pcClasseCarta(carta);
+    bottone.textContent = pcTestoCarta(carta);
+    bottone.title = carta ? "Cambia carta" : "Seleziona carta";
+
+    bottone.addEventListener("click", () => {
+        pc.destinazione = { tipo, indice, posizione };
+        pcApriSelettore();
+    });
+
+    contenitore.appendChild(bottone);
+
+    if (carta) {
+        const rimuovi = document.createElement("button");
+
+        rimuovi.type = "button";
+        rimuovi.className = "pc-rimuovi-carta";
+        rimuovi.textContent = "×";
+        rimuovi.title = "Rimuovi questa carta";
+
+        rimuovi.addEventListener("click", event => {
+            event.stopPropagation();
+            pcRimuoviCarta(tipo, indice, posizione);
+        });
+
+        contenitore.appendChild(rimuovi);
+    }
+
+    return contenitore;
+}
+
+function pcRimuoviCarta(tipo, indice, posizione) {
+    if (tipo === "giocatore") {
+        pc.giocatori[indice].carte[posizione] = null;
+    } else if (tipo === "comuni") {
+        pc.comuni[posizione] = null;
+    } else if (tipo === "morte") {
+        pc.morte.splice(posizione, 1);
+    }
+
+    pcRenderGiocatori();
+    pcRenderCarte();
+
+    pcMessaggio.textContent = "";
+    pcRisultati.innerHTML = "";
+}
+
+    function pcCreaGiocatore(indice) {
+        return {
+            nome: "",
+            carte: [null, null],
+            fold: false
+        };
+    }
+
+    function pcRenderGiocatori() {
+        pcGiocatori.innerHTML = "";
+
+        pc.giocatori.forEach((giocatore, indice) => {
+            const riga = document.createElement("div");
+            riga.className = "pc-giocatore";
+
+            const select = document.createElement("select");
+            select.setAttribute("aria-label", "Giocatore " + (indice + 1));
+
+            const iniziale = document.createElement("option");
+            iniziale.value = "";
+            iniziale.textContent = "Seleziona giocatore";
+            select.appendChild(iniziale);
+
+const nomiGiaSelezionati = pc.giocatori
+    .filter((g, i) => i !== indice && g.nome)
+    .map(g => g.nome);
+
+pcNomi.forEach(nome => {
+    if (
+        !nomiGiaSelezionati.includes(nome) ||
+        nome === giocatore.nome
+    ) {
+        const option = document.createElement("option");
+        option.value = nome;
+        option.textContent = nome;
+        select.appendChild(option);
+    }
+});
+
+select.value = giocatore.nome;
+
+select.addEventListener("change", () => {
+    giocatore.nome = select.value;
+
+    pcRenderGiocatori();
+
+    pcMessaggio.textContent = "";
+    pcRisultati.innerHTML = "";
+});
+
+            const mano = document.createElement("div");
+            mano.className = "pc-mano";
+
+            giocatore.carte.forEach((carta, posizione) => {
+                mano.appendChild(
+                    pcCreaSlot("giocatore", indice, posizione, carta)
+                );
+            });
+
+            const foldLabel = document.createElement("label");
+            foldLabel.className = "pc-fold";
+
+            const foldCheck = document.createElement("input");
+            foldCheck.type = "checkbox";
+            foldCheck.checked = giocatore.fold;
+
+            foldCheck.addEventListener("change", () => {
+                giocatore.fold = foldCheck.checked;
+                pcMessaggio.textContent = "";
+                pcRisultati.innerHTML = "";
+            });
+
+            foldLabel.appendChild(foldCheck);
+            foldLabel.appendChild(document.createTextNode(" Fold"));
+
+            riga.appendChild(select);
+            riga.appendChild(mano);
+            riga.appendChild(foldLabel);
+
+            pcGiocatori.appendChild(riga);
+        });
+    }
+
+function pcRenderCarte() {
+    pcComuni.innerHTML = "";
+    pcMorte.innerHTML = "";
+
+    pc.comuni.forEach((carta, posizione) => {
+        pcComuni.appendChild(
+            pcCreaSlot("comuni", 0, posizione, carta)
+        );
+    });
+
+    pc.morte.forEach((carta, posizione) => {
+        pcMorte.appendChild(
+            pcCreaSlot("morte", 0, posizione, carta)
+        );
+    });
+
+    // Mostra sempre una casella vuota dopo l'ultima carta foldata.
+    pcMorte.appendChild(
+        pcCreaSlot("morte", 0, pc.morte.length, null)
+    );
+}
+
+    function pcCarteUtilizzate() {
+        const usate = new Set();
+
+        pc.giocatori.forEach(g => {
+            g.carte.forEach(c => {
+                if (c) usate.add(c.id);
+            });
+        });
+
+        pc.comuni.forEach(c => {
+            if (c) usate.add(c.id);
+        });
+
+        pc.morte.forEach(c => {
+            if (c) usate.add(c.id);
+        });
+
+        return usate;
+    }
+
+function pcApriSelettore() {
+    if (!pc.destinazione) return;
+
+    pcMazzoEl.innerHTML = "";
+
+    const usate = pcCarteUtilizzate();
+
+    // SELEZIONE DEI SEMI
+    const selettoreSemi = document.createElement("div");
+    selettoreSemi.className = "pc-semi-selettore";
+
+    pcSemi.forEach(seme => {
+        const bottone = document.createElement("button");
+
+        bottone.type = "button";
+        bottone.className = "pc-seme-tab";
+
+        if (pc.semeSelezionato === seme.simbolo) {
+            bottone.classList.add("attivo");
+        }
+
+        bottone.innerHTML =
+            `<span>${seme.simbolo}</span>${seme.nome}`;
+
+        if (seme.rosso) {
+            bottone.classList.add("rosso");
+        }
+
+        bottone.addEventListener("click", () => {
+            pc.semeSelezionato = seme.simbolo;
+            pcApriSelettore();
+        });
+
+        selettoreSemi.appendChild(bottone);
+    });
+
+    pcMazzoEl.appendChild(selettoreSemi);
+
+    // VISUALIZZAZIONE DELLE 13 CARTE DEL SEME
+    const griglia = document.createElement("div");
+    griglia.className = "pc-mazzo-griglia";
+
+    const carteDelSeme = pcMazzo.filter(
+        carta => carta.seme === pc.semeSelezionato
+    );
+
+    carteDelSeme.forEach(carta => {
+        const bottone = document.createElement("button");
+
+        bottone.type = "button";
+        bottone.className = carta.rosso
+            ? "pc-carta-mazzo rosso"
+            : "pc-carta-mazzo";
+
+        bottone.innerHTML = `
+            <span class="pc-carta-valore">${carta.testo}</span>
+            <span class="pc-carta-seme">${carta.seme}</span>
+        `;
+
+        bottone.disabled = usate.has(carta.id);
+
+        bottone.addEventListener("click", () => {
+            pcAssegnaCarta(carta);
+        });
+
+        griglia.appendChild(bottone);
+    });
+
+    pcMazzoEl.appendChild(griglia);
+
+pcSelettore.style.display = "flex";
+    pcSelettore.setAttribute("aria-hidden", "false");
+}
+
+    function pcChiudiSelettore() {
+        pc.destinazione = null;
+        pcSelettore.style.display = "none";
+        pcSelettore.setAttribute("aria-hidden", "true");
+    }
+
+function pcAssegnaCarta(carta) {
+    if (!pc.destinazione) return;
+
+    const d = pc.destinazione;
+
+    if (d.tipo === "giocatore") {
+        pc.giocatori[d.indice].carte[d.posizione] = carta;
+    } else if (d.tipo === "comuni") {
+        pc.comuni[d.posizione] = carta;
+    } else if (d.tipo === "morte") {
+        pc.morte[d.posizione] = carta;
+    }
+
+    pcChiudiSelettore();
+    pcRenderGiocatori();
+    pcRenderCarte();
+
+    pcMessaggio.textContent = "";
+    pcRisultati.innerHTML = "";
+}
+
+    function pcCambiaNumero() {
+        const nuovoNumero = Number(pcNumero.value);
+        const precedenti = pc.giocatori.slice();
+
+        pc.giocatori = [];
+
+        for (let i = 0; i < nuovoNumero; i++) {
+            pc.giocatori.push(precedenti[i] || pcCreaGiocatore(i));
+        }
+
+        pcRenderGiocatori();
+        pcMessaggio.textContent = "";
+        pcRisultati.innerHTML = "";
+    }
+
+    function pcReset() {
+        pc.giocatori = Array.from(
+            { length: Number(pcNumero.value) },
+            (_, i) => pcCreaGiocatore(i)
+        );
+
+        pc.comuni = [null, null, null, null, null];
+pc.morte = [];
+
+        pcChiudiSelettore();
+        pcRenderGiocatori();
+        pcRenderCarte();
+
+        pcMessaggio.textContent = "";
+        pcRisultati.innerHTML = "";
+    }
+
+    function pcValidaMano() {
+        const attivi = pc.giocatori.filter(g => !g.fold);
+
+        if (attivi.length < 2) {
+            return "Devi avere almeno due giocatori non eliminati.";
+        }
+const nomi = pc.giocatori
+    .filter(g => !g.fold)
+    .map(g => g.nome.trim());
+
+if (nomi.some(n => !n)) {
+    return "Seleziona il nome di tutti i giocatori ancora in mano.";
+}
+        
+
+        for (const g of pc.giocatori) {
+            const inserite = g.carte.filter(Boolean).length;
+
+            if (!g.fold && inserite !== 2) {
+                return "Assegna due carte a ogni giocatore ancora in mano.";
+            }
+
+            if (g.fold && inserite === 1) {
+                return "Per un giocatore che ha foldato inserisci entrambe le carte oppure nessuna.";
+            }
+        }
+
+        const numeroComuni = pc.comuni.filter(Boolean).length;
+
+        if (![0, 3, 4, 5].includes(numeroComuni)) {
+return "Il Board deve contenere 0, 3, 4 oppure 5 carte.";
+        }
+
+        const viste = [];
+
+        pc.giocatori.forEach(g => {
+            g.carte.forEach(c => {
+                if (c) viste.push(c.id);
+            });
+        });
+
+        pc.comuni.forEach(c => {
+            if (c) viste.push(c.id);
+        });
+
+        pc.morte.forEach(c => {
+            if (c) viste.push(c.id);
+        });
+
+        if (new Set(viste).size !== viste.length) {
+            return "Hai assegnato la stessa carta più di una volta.";
+        }
+
+        return null;
+    }
+
+    /* =========================================
+       VALUTAZIONE DELLE MANI
+       ========================================= */
+
+    function pcScalaAlta(valori) {
+        const unici = [...new Set(valori)].sort((a, b) => b - a);
+
+        if (unici.includes(14)) unici.push(1);
+
+        for (let i = 0; i <= unici.length - 5; i++) {
+            if (unici[i] - unici[i + 4] === 4) {
+                return unici[i];
+            }
+        }
+
+        return 0;
+    }
+
+    function pcValutaSette(carte) {
+        const gruppi = new Map();
+
+        carte.forEach(c => {
+            gruppi.set(c.valore, (gruppi.get(c.valore) || 0) + 1);
+        });
+
+        const ordinati = [...gruppi.entries()].sort(
+            (a, b) => b[1] - a[1] || b[0] - a[0]
+        );
+
+        const valori = carte.map(c => c.valore);
+        const scala = pcScalaAlta(valori);
+
+        const semi = new Map();
+
+        carte.forEach(c => {
+            if (!semi.has(c.seme)) semi.set(c.seme, []);
+            semi.get(c.seme).push(c.valore);
+        });
+
+        let scalaColore = 0;
+
+        for (const lista of semi.values()) {
+            if (lista.length >= 5) {
+                scalaColore = Math.max(
+                    scalaColore,
+                    pcScalaAlta(lista)
+                );
+            }
+        }
+
+        if (scalaColore) return [8, scalaColore];
+
+        if (ordinati[0][1] === 4) {
+            return [
+                7,
+                ordinati[0][0],
+                ordinati.find(g => g[0] !== ordinati[0][0])[0]
+            ];
+        }
+
+        if (
+            ordinati[0][1] === 3 &&
+            ordinati.some(g => g[1] >= 2 && g[0] !== ordinati[0][0])
+        ) {
+            const coppia = ordinati.find(
+                g => g[1] >= 2 && g[0] !== ordinati[0][0]
+            );
+
+            return [6, ordinati[0][0], coppia[0]];
+        }
+
+        for (const lista of semi.values()) {
+            if (lista.length >= 5) {
+                return [5, ...lista.sort((a, b) => b - a).slice(0, 5)];
+            }
+        }
+
+        if (scala) return [4, scala];
+
+        if (ordinati[0][1] === 3) {
+            const kicker = ordinati
+                .filter(g => g[0] !== ordinati[0][0])
+                .map(g => g[0])
+                .sort((a, b) => b - a)
+                .slice(0, 2);
+
+            return [3, ordinati[0][0], ...kicker];
+        }
+
+        const coppie = ordinati
+            .filter(g => g[1] >= 2)
+            .map(g => g[0])
+            .sort((a, b) => b - a);
+
+        if (coppie.length >= 2) {
+            const kicker = ordinati
+                .filter(g => g[0] !== coppie[0] && g[0] !== coppie[1])
+                .map(g => g[0])
+                .sort((a, b) => b - a)[0];
+
+            return [2, coppie[0], coppie[1], kicker];
+        }
+
+        if (coppie.length === 1) {
+            const kicker = ordinati
+                .filter(g => g[0] !== coppie[0])
+                .map(g => g[0])
+                .sort((a, b) => b - a)
+                .slice(0, 3);
+
+            return [1, coppie[0], ...kicker];
+        }
+
+        return [0, ...valori.sort((a, b) => b - a).slice(0, 5)];
+    }
+
+    function pcConfronta(a, b) {
+        for (let i = 0; i < Math.max(a.length, b.length); i++) {
+            const x = a[i] || 0;
+            const y = b[i] || 0;
+
+            if (x > y) return 1;
+            if (x < y) return -1;
+        }
+
+        return 0;
+    }
+
+    function pcNomeMano(valutazione) {
+        return [
+            "Carta alta",
+            "Una coppia",
+            "Doppia coppia",
+            "Tris",
+            "Scala",
+            "Colore",
+            "Full",
+            "Poker",
+            "Scala colore"
+        ][valutazione[0]];
+    }
+
+    /* =========================================
+       CALCOLO ESATTO E MONTE CARLO
+       ========================================= */
+
+    function pcMescolaParziale(mazzo, quanti) {
+        const copia = mazzo.slice();
+
+        for (let i = 0; i < quanti; i++) {
+            const j = i + Math.floor(Math.random() * (copia.length - i));
+            [copia[i], copia[j]] = [copia[j], copia[i]];
+        }
+
+        return copia.slice(0, quanti);
+    }
+
+    function pcValutaScenario(attivi, board) {
+        const valutazioni = attivi.map(g =>
+            pcValutaSette(g.carte.concat(board))
+        );
+
+        let migliore = valutazioni[0];
+
+        valutazioni.forEach(v => {
+            if (pcConfronta(v, migliore) > 0) migliore = v;
+        });
+
+        const vincitori = [];
+
+        valutazioni.forEach((v, i) => {
+            if (pcConfronta(v, migliore) === 0) {
+                vincitori.push(i);
+            }
+        });
+
+        return vincitori;
+    }
+
+    function pcAggiornaStatistiche(stat, vincitori) {
+        if (vincitori.length === 1) {
+            stat[vincitori[0]].vittorie++;
+        } else {
+            vincitori.forEach(i => stat[i].pareggi++);
+        }
+
+        vincitori.forEach(i => {
+            stat[i].equity += 1 / vincitori.length;
+        });
+    }
+
+            function pcAnalizzaPossibilita(attivi, board, disponibili, mancanti) {
+        const possibili = attivi.map(() => false);
+        const estratte = [];
+
+        function visita(inizio) {
+            // Se tutti hanno già almeno uno scenario favorevole,
+            // non serve continuare a esaminare le combinazioni.
+            if (possibili.every(Boolean)) return;
+
+            if (estratte.length === mancanti) {
+                const vincitori = pcValutaScenario(
+                    attivi,
+                    board.concat(estratte)
+                );
+
+                vincitori.forEach(i => {
+                    possibili[i] = true;
+                });
+
+                return;
+            }
+
+            const daEstrarre = mancanti - estratte.length;
+
+            for (
+                let i = inizio;
+                i <= disponibili.length - daEstrarre;
+                i++
+            ) {
+                estratte.push(disponibili[i]);
+                visita(i + 1);
+                estratte.pop();
+
+                if (possibili.every(Boolean)) return;
+            }
+        }
+
+        visita(0);
+
+        return possibili;
+    }
+
+    function pcCalcolaOuts(attivi, board, disponibili, indiceGiocatore) {
+        // Gli outs sono calcolabili soltanto al flop o al turn.
+        if (board.length !== 3 && board.length !== 4) {
+            return [];
+        }
+
+        const valutazioniAttuali = attivi.map(g =>
+            pcValutaSette(g.carte.concat(board))
+        );
+
+        let miglioreAttuale = valutazioniAttuali[0];
+
+        valutazioniAttuali.forEach(v => {
+            if (pcConfronta(v, miglioreAttuale) > 0) {
+                miglioreAttuale = v;
+            }
+        });
+
+        // Non mostriamo outs a chi è già primo o a pari merito.
+        if (
+            pcConfronta(
+                valutazioniAttuali[indiceGiocatore],
+                miglioreAttuale
+            ) >= 0
+        ) {
+            return [];
+        }
+
+        const outs = [];
+
+        disponibili.forEach(carta => {
+            const nuovoBoard = board.concat(carta);
+
+            const vincitori = pcValutaScenario(attivi, nuovoBoard);
+
+            if (vincitori.includes(indiceGiocatore)) {
+                outs.push(carta);
+            }
+        });
+
+        return outs;
+    }
+
+    function pcStatoGiocatore(attivi, board, possibili, indice) {
+        if (!possibili[indice]) {
+            return {
+                classe: "pc-stato-rosso",
+                riga: "pc-riga-rosso",
+                testo: "DRAWING DEAD"
+            };
+        }
+
+        const valutazioni = attivi.map(g =>
+            pcValutaSette(g.carte.concat(board))
+        );
+
+        let migliore = valutazioni[0];
+
+        valutazioni.forEach(v => {
+            if (pcConfronta(v, migliore) > 0) {
+                migliore = v;
+            }
+        });
+
+        if (pcConfronta(valutazioni[indice], migliore) === 0) {
+            return {
+                classe: "pc-stato-verde",
+                riga: "pc-riga-verde",
+                testo: "IN VANTAGGIO"
+            };
+        }
+
+        return {
+            classe: "pc-stato-arancione",
+            riga: "pc-riga-arancione",
+            testo: "ANCORA IN GIOCO"
+        };
+    }
+
+    function pcCalcoloEsatto(attivi, board, disponibili, stat, mancanti) {
+        let scenari = 0;
+        const estratte = [];
+
+        function visita(inizio) {
+            if (estratte.length === mancanti) {
+                const tavolo = board.concat(estratte);
+                const vincitori = pcValutaScenario(attivi, tavolo);
+
+                pcAggiornaStatistiche(stat, vincitori);
+                scenari++;
+                return;
+            }
+
+            const daEstrarre = mancanti - estratte.length;
+
+            for (
+                let i = inizio;
+                i <= disponibili.length - daEstrarre;
+                i++
+            ) {
+                estratte.push(disponibili[i]);
+                visita(i + 1);
+                estratte.pop();
+            }
+        }
+
+        visita(0);
+
+        return scenari;
+    }
+
+    function pcCalcoloMonteCarlo(attivi, board, disponibili, stat, mancanti) {
+        const totale = 100000;
+        const blocco = 2000;
+        let completati = 0;
+
+        return new Promise(resolve => {
+            function eseguiBlocco() {
+                const fine = Math.min(completati + blocco, totale);
+
+                for (; completati < fine; completati++) {
+                    const estratte = pcMescolaParziale(
+                        disponibili,
+                        mancanti
+                    );
+
+                    const vincitori = pcValutaScenario(
+                        attivi,
+                        board.concat(estratte)
+                    );
+
+                    pcAggiornaStatistiche(stat, vincitori);
+                }
+
+                pcMessaggio.textContent =
+                    "Simulazione in corso: " +
+                    Math.round(completati / totale * 100) + "%";
+
+                if (completati < totale) {
+                    setTimeout(eseguiBlocco, 0);
+                } else {
+                    resolve(totale);
+                }
+            }
+
+            eseguiBlocco();
+        });
+    }
+
+    function pcPercentuale(valore, totale) {
+        return (valore / totale * 100).toLocaleString("it-IT", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        }) + "%";
+    }
+
+    function pcMostraRisultati(
+        attivi,
+        stat,
+        totale,
+        metodo,
+        possibili,
+        outsPerGiocatore
+    ) {
+        const board = pc.comuni.filter(Boolean);
+
+        const righe = attivi.map((g, i) => {
+            const s = stat[i];
+            const sconfitte = totale - s.vittorie - s.pareggi;
+
+            const valutazione = pcValutaSette(
+                g.carte.concat(board)
+            );
+
+            const stato = pcStatoGiocatore(
+                attivi,
+                board,
+                possibili,
+                i
+            );
+
+            return `
+                <tr class="${stato.riga}">
+                    <td>
+                        <div class="pc-nome-stato">${g.nome}</div>
+                        <span class="pc-badge-stato ${stato.classe}">
+                            ${stato.testo}
+                        </span>
+                    </td>
+                    <td>${pcPercentuale(s.vittorie, totale)}</td>
+                    <td>${pcPercentuale(s.pareggi, totale)}</td>
+                    <td>${pcPercentuale(sconfitte, totale)}</td>
+                    <td>${pcPercentuale(s.equity, totale)}</td>
+                    <td>${pcNomeMano(valutazione)}</td>
+                </tr>
+            `;
+        }).join("");
+
+        let sezioneOuts = "";
+
+        if (board.length === 3 || board.length === 4) {
+            const giocatoriConOuts = attivi
+                .map((g, i) => ({
+                    giocatore: g,
+                    indice: i,
+                    stato: pcStatoGiocatore(
+                        attivi,
+                        board,
+                        possibili,
+                        i
+                    ),
+                    outs: outsPerGiocatore[i]
+                }))
+                .filter(elemento =>
+                    elemento.stato.testo === "ANCORA IN GIOCO"
+                );
+
+            if (giocatoriConOuts.length > 0) {
+                sezioneOuts = `
+                    <div class="pc-outs-sezione">
+                        <h3>Outs per la prossima carta</h3>
+
+                        ${giocatoriConOuts.map(elemento => `
+                            <div class="pc-outs-card">
+                                <div class="pc-outs-intestazione">
+                                    <strong>${elemento.giocatore.nome}</strong>
+                                    <span class="pc-outs-contatore">
+                                        ${elemento.outs.length} outs
+                                    </span>
+                                </div>
+
+                                <div class="pc-outs-carte">
+                                    ${
+                                        elemento.outs.length
+                                            ? elemento.outs.map(carta => `
+<span class="pc-outs-carta ${carta.rosso ? "rosso" : "nero"}">
+    <span class="pc-carta-valore">${carta.testo}</span>
+    <span class="pc-carta-seme">${carta.seme}</span>
+</span>
+                                            `).join("")
+                                            : "<span>Nessun out immediato</span>"
+                                    }
+                                </div>
+                            </div>
+                        `).join("")}
+
+                        <p class="pc-outs-nota">
+                            Gli outs indicano le carte che, alla prossima
+                            street, portano il giocatore almeno in parità
+                            con la migliore mano avversaria. Non garantiscono
+                            la vittoria allo showdown.
+                        </p>
+                    </div>
+                `;
+            }
+        }
+
+        pcRisultati.innerHTML = `
+            <h3>Risultati del calcolo</h3>
+
+            <table class="pc-tabella">
+                <thead>
+                    <tr>
+                        <th>Giocatore / Stato</th>
+                        <th>Vittoria</th>
+                        <th>Pareggio</th>
+                        <th>Sconfitta</th>
+                        <th>Equity</th>
+                        <th>Mano attuale</th>
+                    </tr>
+                </thead>
+                <tbody>${righe}</tbody>
+            </table>
+
+            ${sezioneOuts}
+
+            <p class="pc-nota">
+                Scenari analizzati: ${totale.toLocaleString("it-IT")}.
+                Metodo: ${metodo}.
+                L'equity rappresenta la quota media del piatto spettante
+                al giocatore, considerando anche gli eventuali pareggi.
+            </p>
+        `;
+    }
+
+    async function pcCalcola() {
+        if (pc.calcoloInCorso) return;
+
+        const errore = pcValidaMano();
+
+        if (errore) {
+            pcMessaggio.textContent = errore;
+            pcRisultati.innerHTML = "";
+            return;
+        }
+
+        const attivi = pc.giocatori.filter(g => !g.fold);
+        const board = pc.comuni.filter(Boolean);
+
+        const usate = pcCarteUtilizzate();
+        const disponibili = pcMazzo.filter(c => !usate.has(c.id));
+
+        const mancanti = 5 - board.length;
+
+        const combinazioni = mancanti === 0
+            ? 1
+            : (function () {
+                let n = 1;
+                for (let i = 1; i <= mancanti; i++) {
+                    n = n * (disponibili.length - mancanti + i) / i;
+                }
+                return Math.round(n);
+            })();
+
+        const stat = attivi.map(() => ({
+            vittorie: 0,
+            pareggi: 0,
+            equity: 0
+        }));
+
+        pc.calcoloInCorso = true;
+        pcMessaggio.textContent = "Calcolo in corso...";
+        pcRisultati.innerHTML = "";
+
+        try {
+            let totale;
+            let metodo;
+
+            if (combinazioni <= 120000) {
+                totale = pcCalcoloEsatto(
+                    attivi,
+                    board,
+                    disponibili,
+                    stat,
+                    mancanti
+                );
+
+                metodo = "Calcolo esatto";
+            } else {
+                totale = await pcCalcoloMonteCarlo(
+                    attivi,
+                    board,
+                    disponibili,
+                    stat,
+                    mancanti
+                );
+
+                metodo = "Simulazione Monte Carlo";
+            }
+
+            pcMessaggio.textContent =
+                "Analisi delle possibilità residue...";
+
+            // Verifica deterministica: non usa le percentuali
+            // della simulazione Monte Carlo.
+            const possibili = pcAnalizzaPossibilita(
+                attivi,
+                board,
+                disponibili,
+                mancanti
+            );
+
+            // Calcolo degli outs per la prossima street.
+            const outsPerGiocatore = attivi.map((g, i) =>
+                pcCalcolaOuts(
+                    attivi,
+                    board,
+                    disponibili,
+                    i
+                )
+            );
+
+            pcMostraRisultati(
+                attivi,
+                stat,
+                totale,
+                metodo,
+                possibili,
+                outsPerGiocatore
+            );
+
+            pcMessaggio.textContent = "Calcolo completato.";
+
+        } catch (erroreCalcolo) {
+            console.error("Errore nel calcolatore:", erroreCalcolo);
+
+            pcMessaggio.textContent =
+                "Si è verificato un errore durante il calcolo.";
+
+        } finally {
+            pc.calcoloInCorso = false;
+        }
+    }
+
+    /* =========================================
+       EVENTI E AVVIO
+       ========================================= */
+
+    pcNumero.addEventListener("change", pcCambiaNumero);
+
+    pcEl("pc-chiudi-selettore").addEventListener(
+        "click",
+        pcChiudiSelettore
+    );
+
+    pcSelettore.addEventListener("click", event => {
+    if (event.target === pcSelettore) {
+        pcChiudiSelettore();
+    }
+});
+
+    pcEl("pc-calcola").addEventListener("click", pcCalcola);
+    pcEl("pc-reset").addEventListener("click", pcReset);
+
+    pcReset();
+
+})();
+    
 </script>
 </body>
 
