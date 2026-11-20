@@ -8509,7 +8509,7 @@ function mostraDettaglioBadge(nomeGiocatore,id) {
     const lockedDark=b.family==="DARK OPS"&&!sblocco;
     const titolo=lockedDark ? b.name : b.name;
     const descrizione=lockedDark ? "Il requisito è segreto." : (sblocco ? b.desc : b.desc);
-    const dataTorneo=b.family==="Onorificenze private" ? "" : (sblocco&&sblocco.torneo ? "Sbloccato al Torneo "+sblocco.torneo+"." : (sblocco ? "Onorificenza registrata." : ""));
+const dataTorneo=(b.family==="Onorificenze private" || (b.family==="DARK OPS" && !sblocco?.torneo)) ? "" : (sblocco&&sblocco.torneo ? "Sbloccato al Torneo "+sblocco.torneo+"." : (sblocco ? "Onorificenza registrata." : ""));
     const popup=document.getElementById("popup-collezione-badge");
     if (!popup) return;
     const famigliaPopup=b.family==="DARK OPS" ? "DARK OPS" : b.family;
