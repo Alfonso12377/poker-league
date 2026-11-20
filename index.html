@@ -3930,6 +3930,101 @@ th[onclick]:hover {
 }
 
 
+/* =========================================
+   GENERATORE MANI CASUALI
+   ========================================= */
+
+.pc-mano-casuale {
+    margin: 18px 0 22px;
+    padding: 16px;
+    border: 1px solid rgba(240, 198, 116, 0.35);
+    border-radius: 12px;
+    background: linear-gradient(145deg, #292929, #202020);
+    text-align: center;
+}
+
+#pc-mano-casuale {
+    width: 100%;
+    min-height: 50px;
+    padding: 13px;
+    border: 1px solid #b58b42;
+    border-radius: 9px;
+    background: linear-gradient(145deg, #76551f, #4d3819);
+    color: #fff;
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: 0.7px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+#pc-mano-casuale:hover {
+    background: linear-gradient(145deg, #96702d, #654a20);
+    transform: translateY(-2px);
+}
+
+.pc-mano-casuale p {
+    margin: 9px 0 0;
+    color: #aaa;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.pc-board-casuale {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 9px;
+    margin: 12px 0 16px;
+}
+
+.pc-board-casuale button {
+    min-width: 0;
+    min-height: 42px;
+    padding: 9px 5px;
+    border: 1px solid #555;
+    border-radius: 8px;
+    background: #303030;
+    color: #eee;
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.pc-board-casuale button:hover {
+    background: #454545;
+    border-color: #b58b42;
+}
+
+@media (max-width: 480px) {
+    .pc-mano-casuale {
+        padding: 12px;
+    }
+
+    .pc-board-casuale {
+        gap: 6px;
+    }
+
+    .pc-board-casuale button {
+        font-size: 11px;
+        padding: 8px 3px;
+    }
+}
+
+@media (orientation: landscape) and (max-height: 600px) {
+    .pc-mano-casuale {
+        margin: 12px 0;
+        padding: 10px;
+    }
+
+    .pc-board-casuale button {
+        min-height: 38px;
+    }
+}
+
+    
 .pc-azioni {
     display: flex;
     gap: 12px;
@@ -4942,10 +5037,29 @@ th[onclick]:hover {
                 </select>
             </div>
 
-            <div id="pc-giocatori"></div>
+
+<div id="pc-giocatori"></div>
+
+<div class="pc-mano-casuale">
+    <button type="button" id="pc-mano-casuale">
+        🎲 MANO CASUALE
+    </button>
+    <p>Distribuisce due carte casuali a tutti i giocatori selezionati.</p>
+</div>
 
 <div class="pc-sezione-carte">
     <h3>Board</h3>
+    <p>Seleziona le carte del flop, del turn e del river, nell'ordine.</p>
+
+    <div class="pc-board-casuale">
+        <button type="button" id="pc-flop-casuale">🎲 Flop casuale</button>
+        <button type="button" id="pc-turn-casuale">🎲 Turn casuale</button>
+        <button type="button" id="pc-river-casuale">🎲 River casuale</button>
+    </div>
+
+    <div id="pc-comuni" class="pc-carte-riga"></div>
+</div>
+
     <p>Seleziona le carte del flop, del turn e del river, nell'ordine.</p>
     <div id="pc-comuni" class="pc-carte-riga"></div>
 </div>
@@ -13029,6 +13143,177 @@ return "Il Board deve contenere 0, 3, 4 oppure 5 carte.";
         `;
     }
 
+
+/* =========================================
+   GENERATORE DI MANI CASUALI
+   ========================================= */
+
+// Estrae una carta casuale tra quelle ancora disponibili.
+function pcPescaCasuale() {
+    const usate = pcCarteUtilizzate();
+
+    const disponibili = pcMazzo.filter(
+        carta => !usate.has(carta.id)
+    );
+
+    if (disponibili.length === 0) {
+        return null;
+    }
+
+    const indice = Math.floor(Math.random() * disponibili.length);
+
+    return disponibili[indice];
+}
+
+
+// Distribuisce due carte casuali a ogni giocatore selezionato.
+function pcGeneraManoCasuale() {
+    if (pc.calcoloInCorso) return;
+
+    const selezionati = pc.giocatori.filter(g => g.nome);
+
+    if (selezionati.length < 2) {
+        pcMessaggio.textContent =
+            "Seleziona almeno due giocatori prima di distribuire le carte.";
+
+        return;
+    }
+
+    // Pulisce le carte precedenti e le carte comuni.
+    pc.giocatori.forEach(giocatore => {
+        giocatore.carte = [null, null];
+        giocatore.fold = false;
+    });
+
+    pc.comuni = [null, null, null, null, null];
+    pc.morte = [];
+
+    // Distribuzione casuale senza duplicati.
+    for (const giocatore of selezionati) {
+        giocatore.carte[0] = pcPescaCasuale();
+        giocatore.carte[1] = pcPescaCasuale();
+
+        if (!giocatore.carte[0] || !giocatore.carte[1]) {
+            pcMessaggio.textContent =
+                "Non è stato possibile completare la distribuzione.";
+
+            return;
+        }
+    }
+
+    pcRenderGiocatori();
+    pcRenderCarte();
+
+    pcMessaggio.textContent =
+        "Mano casuale distribuita! Ora puoi generare il Board.";
+
+    pcRisultati.innerHTML = "";
+}
+
+
+// Genera casualmente il flop.
+function pcGeneraFlopCasuale() {
+    if (pc.calcoloInCorso) return;
+
+    const attivi = pc.giocatori.filter(
+        g => g.nome && !g.fold
+    );
+
+    if (attivi.length < 2) {
+        pcMessaggio.textContent =
+            "Seleziona almeno due giocatori e distribuisci le loro carte.";
+
+        return;
+    }
+
+    if (attivi.some(g => g.carte.some(carta => !carta))) {
+        pcMessaggio.textContent =
+            "Prima assegna due carte a ogni giocatore attivo.";
+
+        return;
+    }
+
+    // Un nuovo flop azzera anche eventuali turn e river precedenti.
+    pc.comuni = [null, null, null, null, null];
+
+    for (let i = 0; i < 3; i++) {
+        pc.comuni[i] = pcPescaCasuale();
+
+        if (!pc.comuni[i]) {
+            pcMessaggio.textContent =
+                "Carte disponibili insufficienti.";
+
+            return;
+        }
+    }
+
+    pcRenderCarte();
+
+    pcMessaggio.textContent = "Flop casuale generato!";
+    pcRisultati.innerHTML = "";
+}
+
+
+// Genera casualmente il turn.
+function pcGeneraTurnCasuale() {
+    if (pc.calcoloInCorso) return;
+
+    if (pc.comuni.slice(0, 3).some(carta => !carta)) {
+        pcMessaggio.textContent =
+            "Prima completa il flop con tre carte.";
+
+        return;
+    }
+
+    // Se esiste già un turn, lo sostituisce.
+    pc.comuni[3] = null;
+    pc.comuni[4] = null;
+
+    pc.comuni[3] = pcPescaCasuale();
+
+    if (!pc.comuni[3]) {
+        pcMessaggio.textContent =
+            "Non ci sono più carte disponibili.";
+
+        return;
+    }
+
+    pcRenderCarte();
+
+    pcMessaggio.textContent = "Turn casuale generato!";
+    pcRisultati.innerHTML = "";
+}
+
+
+// Genera casualmente il river.
+function pcGeneraRiverCasuale() {
+    if (pc.calcoloInCorso) return;
+
+    if (pc.comuni.slice(0, 4).some(carta => !carta)) {
+        pcMessaggio.textContent =
+            "Prima completa il flop e il turn.";
+
+        return;
+    }
+
+    // Se esiste già un river, lo sostituisce.
+    pc.comuni[4] = null;
+    pc.comuni[4] = pcPescaCasuale();
+
+    if (!pc.comuni[4]) {
+        pcMessaggio.textContent =
+            "Non ci sono più carte disponibili.";
+
+        return;
+    }
+
+    pcRenderCarte();
+
+    pcMessaggio.textContent = "River casuale generato!";
+    pcRisultati.innerHTML = "";
+}
+
+    
     async function pcCalcola() {
         if (pc.calcoloInCorso) return;
 
@@ -13155,10 +13440,32 @@ return "Il Board deve contenere 0, 3, 4 oppure 5 carte.";
     }
 });
 
-    pcEl("pc-calcola").addEventListener("click", pcCalcola);
-    pcEl("pc-reset").addEventListener("click", pcReset);
 
-    pcReset();
+pcEl("pc-calcola").addEventListener("click", pcCalcola);
+pcEl("pc-reset").addEventListener("click", pcReset);
+
+pcEl("pc-mano-casuale").addEventListener(
+    "click",
+    pcGeneraManoCasuale
+);
+
+pcEl("pc-flop-casuale").addEventListener(
+    "click",
+    pcGeneraFlopCasuale
+);
+
+pcEl("pc-turn-casuale").addEventListener(
+    "click",
+    pcGeneraTurnCasuale
+);
+
+pcEl("pc-river-casuale").addEventListener(
+    "click",
+    pcGeneraRiverCasuale
+);
+
+pcReset();
+
 
 })();
     
