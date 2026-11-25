@@ -4438,6 +4438,118 @@ th[onclick]:hover {
         font-size: 15px;
     }
 }
+
+    /* =========================================
+   NAVIGAZIONE DETTAGLIO TORNEO
+   ========================================= */
+
+.navigazione-tornei {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+    margin: 0 0 14px 0;
+}
+
+.navigazione-tornei button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    min-height: 44px;
+    padding: 11px 18px;
+
+    border: 1px solid rgba(240, 198, 116,  0.38);
+    border-radius: 10px;
+
+    background: linear-gradient(145deg, #292929, #202020);
+    color: #f0c674;
+
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 0.2px;
+
+    cursor: pointer;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.22);
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.navigazione-tornei button:hover:not(:disabled) {
+    background: linear-gradient(145deg, #383838, #292929);
+    border-color: #f0c674;
+    color: #ffe0a0;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.32);
+}
+
+.navigazione-tornei button:active:not(:disabled) {
+    transform: translateY(0) scale(0.98);
+}
+
+.navigazione-tornei button:disabled {
+    opacity: 0.35;
+    cursor: default;
+    box-shadow: none;
+}
+
+/* Pulsante per tornare all'elenco tornei */
+#tornei-dettagli .torna-menu {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    min-height: 42px;
+    margin: 0 0 18px 0;
+    padding: 10px 16px;
+
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 10px;
+
+    background: linear-gradient(145deg, #292929, #202020);
+    color: #ddd;
+
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.22);
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+#tornei-dettagli .torna-menu:hover {
+    background: linear-gradient(145deg, #383838, #292929);
+    border-color: rgba(240, 198, 116, 0.45);
+    color: #f0c674;
+    transform: translateY(-2px);
+}
+
+/* Adattamento smartphone */
+@media (max-width: 600px) {
+    .navigazione-tornei {
+        gap: 8px;
+    }
+
+    .navigazione-tornei button {
+        flex: 1;
+        min-width: 0;
+        min-height: 42px;
+        padding: 10px 8px;
+        font-size: 12px;
+    }
+}
     
 </style>
 </head>
