@@ -4986,12 +4986,19 @@ th[onclick]:hover {
 
 <h3>🏆 Record della Lega</h3>
 
-        <div
-            class="record-grid"
-            id="record-individuali"
-        ></div>
+<div
+    class="record-grid"
+    id="record-individuali"
+></div>
 
-        <h3>📊 Statistiche della Lega</h3>
+<h3>💀 Record del Kill Log</h3>
+
+<div
+    class="record-grid"
+    id="record-kill-log"
+></div>
+
+<h3>📊 Statistiche della Lega</h3>
 
         <div
             class="statistiche-lega"
@@ -8105,6 +8112,26 @@ const catalogoBadge = [
 {id:"dark_streak_20",name:"NUTS!",family:"DARK OPS",rarity:"DARK OPS",type:"attendance_streak",target:20,desc:"In-gio-ca-bi-le. Partecipa a 20 tornei consecutivi."},
 {id:"dark_drawing_dead",name:"DRAWING DEAD",family:"DARK OPS",rarity:"DARK OPS",type:"killlog",desc:"Drawing dead, sì, però loro: Elimina tutti gli avversari in un unico torneo."},
 {id:"dark_dealer",name:"DEALER",family:"DARK OPS",rarity:"DARK OPS",type:"killlog",desc:"Elimina 10 persone in un unico torneo."},
+    /* BADGE ELIMINAZIONI — cumulativi */
+{id:"kill_1",name:"Prima Eliminazione",family:"Eliminazioni",rarity:"Ferro",type:"kill_count",target:1,desc:"Elimina un giocatore"},
+{id:"kill_3",name:"Cacciatore",family:"Eliminazioni",rarity:"Bronzo",type:"kill_count",target:3,desc:"Raggiungi 3 eliminazioni complessive."},
+{id:"kill_5",name:"Predatore",family:"Eliminazioni",rarity:"Argento",type:"kill_count",target:5,desc:"Raggiungi 5 eliminazioni complessive."},
+{id:"kill_10",name:"Mietitore",family:"Eliminazioni",rarity:"Oro",type:"kill_count",target:10,desc:"Raggiungi 10 eliminazioni complessive."},
+{id:"kill_15",name:"Carnefice",family:"Eliminazioni",rarity:"Diamante",type:"kill_count",target:15,desc:"Raggiungi 15 eliminazioni complessive."},
+{id:"kill_25",name:"Re delle Eliminazioni",family:"Eliminazioni",rarity:"Leggendario",type:"kill_count",target:25,desc:"Raggiungi 25 eliminazioni complessive."},
+
+/* BADGE ELIMINAZIONI — singolo torneo */
+{id:"kill_single_2",name:"Doppietta",family:"Eliminazioni",rarity:"Oro",type:"kill_single",target:2,desc:"Effettua 2 eliminazioni in un singolo torneo."},
+{id:"kill_single_3",name:"Tripletta",family:"Eliminazioni",rarity:"Diamante",type:"kill_single",target:3,desc:"Effettua 3 eliminazioni in un singolo torneo."},
+{id:"kill_single_4",name:"Poker di Kill",family:"Eliminazioni",rarity:"Leggendario",type:"kill_single",target:4,desc:"Effettua 4 eliminazioni in un singolo torneo."},
+
+/* BADGE ELIMINAZIONI — speciali */
+{id:"kill_first_blood",name:"Primo Sangue",family:"Eliminazioni",rarity:"Speciale",type:"kill_special",desc:"Effettua la prima eliminazione del torneo."},
+{id:"kill_first_victim",name:"Prima Vittima",family:"Eliminazioni",rarity:"Speciale",type:"kill_special",desc:"Subisci la prima eliminazione del torneo."},
+{id:"kill_revenge",name:"Vendetta",family:"Eliminazioni",rarity:"Speciale",type:"kill_special",desc:"Elimina un giocatore che ti aveva eliminato in precedenza."},
+
+/* DARK OPS — eliminazioni cumulative */
+{id:"dark_charles_manson",name:"CHARLES¹ MANSON¹",family:"DARK OPS",rarity:"DARK OPS",type:"kill_count",target:99,desc:"Raggiungi 99 eliminazioni complessive."},
  {id:"priv_founder",name:"IL FONDATORE",family:"Onorificenze private",rarity:"Onore",type:"private",desc:"Onorificenza assegnata al fondatore della lega."},
  {id:"priv_first_winner",name:"Si aprono le danze",family:"Onorificenze private",rarity:"Onore",type:"private",desc:"Vincitore del primo torneo disputato."},
  {id:"priv_first_ten",name:"I Primi Dieci",family:"Onorificenze private",rarity:"Onore",type:"private",desc:"Partecipato al primo torneo disputato."},
@@ -8262,6 +8289,83 @@ const archivioBadgeManuali = {
         }
     };
 
+function calcolaStatisticheKill() {
+    const statistiche = {};
+
+    function crea(nome) {
+        if (!statistiche[nome]) {
+            statistiche[nome] = {
+                nome: nome,
+                kill: 0,
+                morti: 0,
+                uccisioniPerTorneo: {},
+                vittime: {},
+                eliminatori: {},
+                tornei: []
+            };
+        }
+        return statistiche[nome];
+    }
+
+    // Inizializza tutti i partecipanti dei tornei dal 22 in poi,
+    // anche se non hanno effettuato o subito eliminazioni.
+    const tornei = datiTornei
+        .filter(torneo => torneo.n >= 22)
+        .slice()
+        .sort((a, b) => a.n - b.n);
+
+    tornei.forEach(function(torneo) {
+        (torneo.players || []).forEach(function(giocatore) {
+            const p = crea(giocatore.name);
+
+            if (!p.tornei.includes(torneo.n)) {
+                p.tornei.push(torneo.n);
+            }
+        });
+
+        const log = killLogPerTorneo[torneo.n];
+        if (!log || !Array.isArray(log.eliminazioni)) return;
+
+        log.eliminazioni.forEach(function(e) {
+            if (!e.eliminatore || !e.eliminato) return;
+            if (e.eliminatore === e.eliminato) return;
+
+            const eliminatore = crea(e.eliminatore);
+            const eliminato = crea(e.eliminato);
+
+            eliminatore.kill++;
+            eliminatore.uccisioniPerTorneo[torneo.n] =
+                (eliminatore.uccisioniPerTorneo[torneo.n] || 0) + 1;
+
+            eliminatore.vittime[e.eliminato] =
+                (eliminatore.vittime[e.eliminato] || 0) + 1;
+
+            eliminato.morti++;
+            eliminato.eliminatori[e.eliminatore] =
+                (eliminato.eliminatori[e.eliminatore] || 0) + 1;
+        });
+    });
+
+    Object.values(statistiche).forEach(function(p) {
+        // K/D con denominatore minimo pari a 1.
+        p.kd = p.kill / Math.max(1, p.morti);
+
+        const vittime = Object.entries(p.vittime);
+        const maxVittime = vittime.length
+            ? Math.max(...vittime.map(v => v[1]))
+            : 0;
+
+        const vittimeAlPrimoPosto = vittime.filter(v => v[1] === maxVittime);
+
+        // Vittima preferita solo se è prima in solitaria.
+        p.vittimaPreferita =
+            maxVittime > 0 && vittimeAlPrimoPosto.length === 1
+                ? vittimeAlPrimoPosto[0][0]
+                : null;
+    });
+
+    return statistiche;
+}
 
 let popupBadgeAttivo = null;
 
@@ -8302,6 +8406,9 @@ function sbloccaBadge(stato,id,numeroTorneo) {
 function calcolaArchivioBadge() {
     const stati = {};
     const tornei = datiTornei.slice().sort((a,b)=>a.n-b.n);
+        // Statistiche cumulative del Kill Log, aggiornate torneo per torneo.
+    const killCumulative = {};
+    const eliminatoriPrecedenti = new Map();
     function stato(nome) {
         if (!stati[nome]) stati[nome] = creaStatoBadge(nome);
         return stati[nome];
@@ -8452,6 +8559,113 @@ Object.keys(avversariEliminatiPerGiocatore).forEach(function(nome) {
     }
 });
 }
+
+                // BADGE ELIMINAZIONI: cumulativi, singolo torneo e speciali.
+        const logKillBadge = killLogPerTorneo[torneo.n];
+
+        if (
+            torneo.n >= 22 &&
+            logKillBadge &&
+            Array.isArray(logKillBadge.eliminazioni)
+        ) {
+            const eliminazioni = logKillBadge.eliminazioni;
+
+            // Conta le eliminazioni effettuate da ciascun giocatore nel torneo.
+            const killNelTorneo = {};
+
+            eliminazioni.forEach(function(e) {
+                if (!e.eliminatore || !e.eliminato) return;
+                if (e.eliminatore === e.eliminato) return;
+
+                killNelTorneo[e.eliminatore] =
+                    (killNelTorneo[e.eliminatore] || 0) + 1;
+
+                killCumulative[e.eliminatore] =
+                    (killCumulative[e.eliminatore] || 0) + 1;
+            });
+
+            // Badge cumulativi e DARK OPS a 99 eliminazioni.
+            const soglieKill = [
+                { id: "kill_1", target: 1 },
+                { id: "kill_3", target: 3 },
+                { id: "kill_5", target: 5 },
+                { id: "kill_10", target: 10 },
+                { id: "kill_15", target: 15 },
+                { id: "kill_25", target: 25 },
+                { id: "dark_charles_manson", target: 99 }
+            ];
+
+            Object.entries(killCumulative).forEach(function([nome, totale]) {
+                soglieKill.forEach(function(soglia) {
+                    if (totale >= soglia.target) {
+                        sbloccaBadge(stato(nome), soglia.id, torneo.n);
+                    }
+                });
+            });
+
+            // Badge per 2, 3 o 4 eliminazioni nello stesso torneo.
+            Object.entries(killNelTorneo).forEach(function([nome, totale]) {
+                if (totale >= 2) {
+                    sbloccaBadge(stato(nome), "kill_single_2", torneo.n);
+                }
+                if (totale >= 3) {
+                    sbloccaBadge(stato(nome), "kill_single_3", torneo.n);
+                }
+                if (totale >= 4) {
+                    sbloccaBadge(stato(nome), "kill_single_4", torneo.n);
+                }
+            });
+
+            // Primo Sangue e Prima Vittima: si basano sulla prima
+            // eliminazione registrata nell'ordine del Kill Log.
+            const primaEliminazione = eliminazioni.find(function(e) {
+                return e.eliminatore &&
+                    e.eliminato &&
+                    e.eliminatore !== e.eliminato;
+            });
+
+            if (primaEliminazione) {
+                sbloccaBadge(
+                    stato(primaEliminazione.eliminatore),
+                    "kill_first_blood",
+                    torneo.n
+                );
+
+                sbloccaBadge(
+                    stato(primaEliminazione.eliminato),
+                    "kill_first_victim",
+                    torneo.n
+                );
+            }
+
+// VENDETTA: nello stesso torneo, un giocatore elimina
+// chi lo aveva già eliminato in precedenza nel Kill Log.
+const eliminazioniPrecedentiNelTorneo = new Set();
+
+eliminazioni.forEach(function(e) {
+    if (!e.eliminatore || !e.eliminato) return;
+    if (e.eliminatore === e.eliminato) return;
+
+    // Se il giocatore eliminato aveva già eliminato
+    // l'attuale eliminatore in questo torneo, è Vendetta.
+    const coppiaInversa = e.eliminato + "||" + e.eliminatore;
+
+    if (eliminazioniPrecedentiNelTorneo.has(coppiaInversa)) {
+        sbloccaBadge(
+            stato(e.eliminatore),
+            "kill_revenge",
+            torneo.n
+        );
+    }
+
+    // Memorizza l'eliminazione per gli eventi successivi
+    // dello stesso torneo. La Set viene azzerata al torneo dopo.
+    eliminazioniPrecedentiNelTorneo.add(
+        e.eliminatore + "||" + e.eliminato
+    );
+});
+        }
+        
         // Eventi DARK OPS che dipendono da due tornei consecutivi.
         const prec = tornei.find(t=>t.n===torneo.n-1);
         if (prec) {
@@ -9731,6 +9945,226 @@ Miglior profitto senza vittorie
 
     }
 
+            /* ============================= */
+    /* RECORD KILL LOG */
+    /* ============================= */
+
+    const recordKillLog = calcolaRecordKillLog();
+    const giocatoriKill = Object.entries(recordKillLog.giocatori);
+
+    function nomiRecordKill(valore, campo) {
+        return giocatoriKill
+            .filter(function(elemento) {
+                return elemento[1][campo] === valore;
+            })
+            .map(function(elemento) {
+                return elemento[0];
+            })
+            .join(" · ");
+    }
+
+    const massimoKill = Math.max(0, ...giocatoriKill.map(e => e[1].kill));
+    const massimoMorti = Math.max(0, ...giocatoriKill.map(e => e[1].morti));
+    const massimoKD = Math.max(
+        0,
+        ...giocatoriKill
+            .filter(e => e[1].kill > 0)
+            .map(e => e[1].kd)
+    );
+    const massimoEfficienza = Math.max(
+        0,
+        ...giocatoriKill.map(e => e[1].efficienza)
+    );
+    const massimaStrisciaKill = Math.max(
+        0,
+        ...giocatoriKill.map(e => e[1].strisciaKill)
+    );
+
+    const massimoKillSingoloTorneo = Math.max(
+        0,
+        ...Object.values(recordKillLog.uccisioniPerTorneo)
+            .flatMap(tornei => Object.values(tornei))
+    );
+
+    const massimoEliminazioniTorneo = Math.max(
+        0,
+        ...Object.values(recordKillLog.eliminazioniPerTorneo)
+    );
+
+    const coppieReciproche = Object.values(recordKillLog.coppie)
+        .map(coppia => {
+            const nomi = coppia.giocatori;
+            const a = coppia.conteggi[nomi[0]] || 0;
+            const b = coppia.conteggi[nomi[1]] || 0;
+            return {
+                nomi,
+                reciproche: Math.min(a, b),
+                totale: a + b
+            };
+        });
+
+    const massimoReciproche = Math.max(
+        0,
+        ...coppieReciproche.map(c => c.reciproche)
+    );
+
+        /* ============================= */
+/* VISUALIZZAZIONE RECORD KILL LOG */
+/* ============================= */
+
+const recordKillContainer =
+    document.getElementById("record-kill-log");
+
+if (recordKillContainer) {
+
+    /* KILL MASSIME IN UN SINGOLO TORNEO */
+
+    const recordKillSingoloTorneo = [];
+
+    Object.entries(recordKillLog.uccisioniPerTorneo).forEach(function(elemento) {
+
+        const nome = elemento[0];
+        const tornei = elemento[1];
+
+        Object.entries(tornei).forEach(function(voce) {
+
+            const numeroTorneo = voce[0];
+            const numeroKill = voce[1];
+
+            if (numeroKill === massimoKillSingoloTorneo) {
+                recordKillSingoloTorneo.push({
+                    nome: nome,
+                    torneo: numeroTorneo
+                });
+            }
+
+        });
+
+    });
+
+
+    /* TORNEI CON PIÙ ELIMINAZIONI COMPLESSIVE */
+
+    const torneiRecordEliminazioni =
+        Object.keys(recordKillLog.eliminazioniPerTorneo)
+            .filter(function(numero) {
+                return recordKillLog.eliminazioniPerTorneo[numero] === massimoEliminazioniTorneo;
+            });
+
+
+    /* COPPIE CON PIÙ ELIMINAZIONI RECIPROCHE */
+
+    const coppieRecordReciproche =
+        coppieReciproche.filter(function(coppia) {
+            return massimoReciproche > 0 &&
+                coppia.reciproche === massimoReciproche;
+        });
+
+
+    /* FUNZIONE PER CREARE LE SCHEDE */
+
+    function creaSchedaRecordKill(icona, titolo, valore, dettaglio) {
+
+        return `
+            <div class="record-box">
+
+                <div class="record-icon">${icona}</div>
+
+                <div class="record-label">
+                    ${titolo}
+                </div>
+
+                <div class="record-value">
+                    ${valore}
+                </div>
+
+                <div class="record-detail">
+                    ${dettaglio}
+                </div>
+
+            </div>
+        `;
+
+    }
+
+
+    /* GENERAZIONE HTML */
+
+    recordKillContainer.innerHTML = `
+
+        ${creaSchedaRecordKill(
+            "⚔️",
+            "Più eliminazioni effettuate",
+            nomiRecordKill(massimoKill, "kill") || "—",
+            massimoKill + " eliminazioni"
+        )}
+
+        ${creaSchedaRecordKill(
+            "💀",
+            "Più eliminazioni subite",
+            nomiRecordKill(massimoMorti, "morti") || "—",
+            massimoMorti + " eliminazioni subite"
+        )}
+
+        ${creaSchedaRecordKill(
+            "🎯",
+            "Miglior rapporto K/D",
+            nomiRecordKill(massimoKD, "kd") || "—",
+            "K/D " + formattaNumero(massimoKD)
+        )}
+
+        ${creaSchedaRecordKill(
+            "📈",
+            "Migliore efficienza",
+            nomiRecordKill(massimoEfficienza, "efficienza") || "—",
+            formattaNumero(massimoEfficienza) + " eliminazioni per torneo"
+        )}
+
+        ${creaSchedaRecordKill(
+            "🔥",
+            "Più tornei consecutivi con una kill",
+            nomiRecordKill(massimaStrisciaKill, "strisciaKill") || "—",
+            massimaStrisciaKill + " tornei consecutivi"
+        )}
+
+        ${creaSchedaRecordKill(
+            "🏹",
+            "Più kill in un singolo torneo",
+            recordKillSingoloTorneo.length
+                ? recordKillSingoloTorneo.map(function(elemento) {
+                    return elemento.nome + " — Torneo " + elemento.torneo;
+                }).join(" · ")
+                : "—",
+            massimoKillSingoloTorneo + " eliminazioni"
+        )}
+
+        ${creaSchedaRecordKill(
+            "🏆",
+            "Torneo con più eliminazioni",
+            torneiRecordEliminazioni.length
+                ? torneiRecordEliminazioni.map(function(numero) {
+                    return "Torneo " + numero;
+                }).join(" · ")
+                : "—",
+            massimoEliminazioniTorneo + " eliminazioni complessive"
+        )}
+
+        ${creaSchedaRecordKill(
+            "⚔️",
+            "Più eliminazioni reciproche",
+            coppieRecordReciproche.length
+                ? coppieRecordReciproche.map(function(coppia) {
+                    return coppia.nomi.join(" ↔ ");
+                }).join(" · ")
+                : "Nessuna coppia",
+            massimoReciproche > 0
+                ? massimoReciproche + " eliminazioni reciproche"
+                : "Nessuna eliminazione reciproca registrata"
+        )}
+
+    `;
+
+}
 
     /* ============================= */
     /* STATISTICHE GENERALI DELLA LEGA */
@@ -10992,6 +11426,188 @@ function generaGraficoAndamento(nome) {
     );
 }
 
+    function calcolaStatisticheKillGiocatore(nome) {
+    const risultato = {
+        kill: 0,
+        morti: 0,
+        kd: 0,
+        vittime: {},
+        eliminatori: {},
+        tornei: []
+    };
+
+    datiTornei
+        .filter(function(torneo) {
+            return torneo.n >= 22;
+        })
+        .sort(function(a, b) {
+            return a.n - b.n;
+        })
+        .forEach(function(torneo) {
+            const partecipante = (torneo.players || []).some(function(p) {
+                return p.name === nome;
+            });
+
+            if (!partecipante) return;
+
+            const log = killLogPerTorneo[torneo.n];
+            const eliminazioni = log && Array.isArray(log.eliminazioni)
+                ? log.eliminazioni
+                : [];
+
+            const killFatte = [];
+            const eliminazioniSubite = [];
+
+            eliminazioni.forEach(function(e) {
+                if (!e.eliminatore || !e.eliminato) return;
+                if (e.eliminatore === e.eliminato) return;
+
+                if (e.eliminatore === nome) {
+                    risultato.kill++;
+                    risultato.vittime[e.eliminato] =
+                        (risultato.vittime[e.eliminato] || 0) + 1;
+                    killFatte.push(e.eliminato);
+                }
+
+                if (e.eliminato === nome) {
+                    risultato.morti++;
+                    risultato.eliminatori[e.eliminatore] =
+                        (risultato.eliminatori[e.eliminatore] || 0) + 1;
+                    eliminazioniSubite.push(e.eliminatore);
+                }
+            });
+
+            risultato.tornei.push({
+                numero: torneo.n,
+                kill: killFatte,
+                morti: eliminazioniSubite
+            });
+        });
+
+    risultato.kd = risultato.kill / Math.max(1, risultato.morti);
+
+    const vittime = Object.entries(risultato.vittime);
+    const massimo = vittime.length
+        ? Math.max.apply(null, vittime.map(function(v) {
+            return v[1];
+        }))
+        : 0;
+
+    const prime = vittime.filter(function(v) {
+        return v[1] === massimo;
+    });
+
+    risultato.vittimaPreferita =
+        massimo > 0 && prime.length === 1 ? prime[0][0] : null;
+
+    return risultato;
+}
+
+    function calcolaRecordKillLog() {
+    const tornei = datiTornei
+        .filter(t => t.n >= 22)
+        .slice()
+        .sort((a, b) => a.n - b.n);
+
+    const giocatori = {};
+    const uccisioniPerTorneo = {};
+    const coppie = {};
+    const eliminazioniPerTorneo = {};
+
+    function inizializza(nome) {
+        if (!giocatori[nome]) {
+            giocatori[nome] = {
+                kill: 0,
+                morti: 0,
+                partecipazioni: 0,
+                torneiConKill: [],
+                killSingoloTorneo: 0
+            };
+        }
+        return giocatori[nome];
+    }
+
+    tornei.forEach(torneo => {
+        (torneo.players || []).forEach(p => {
+            const stats = inizializza(p.name);
+            stats.partecipazioni++;
+        });
+
+        const log = killLogPerTorneo[torneo.n];
+        const eliminazioni = log && Array.isArray(log.eliminazioni)
+            ? log.eliminazioni
+            : [];
+
+        eliminazioniPerTorneo[torneo.n] = 0;
+
+        eliminazioni.forEach(e => {
+            if (!e.eliminatore || !e.eliminato || e.eliminatore === e.eliminato) {
+                return;
+            }
+
+            const killer = inizializza(e.eliminatore);
+            const vittima = inizializza(e.eliminato);
+
+            killer.kill++;
+            vittima.morti++;
+
+            uccisioniPerTorneo[e.eliminatore] =
+                uccisioniPerTorneo[e.eliminatore] || {};
+
+            uccisioniPerTorneo[e.eliminatore][torneo.n] =
+                (uccisioniPerTorneo[e.eliminatore][torneo.n] || 0) + 1;
+
+            eliminazioniPerTorneo[torneo.n]++;
+
+            const coppia = [e.eliminatore, e.eliminato].sort().join("||");
+            coppie[coppia] = coppie[coppia] || {
+                giocatori: [e.eliminatore, e.eliminato],
+                conteggi: {}
+            };
+            coppie[coppia].conteggi[e.eliminatore] =
+                (coppie[coppia].conteggi[e.eliminatore] || 0) + 1;
+        });
+    });
+
+    Object.keys(giocatori).forEach(nome => {
+        const stats = giocatori[nome];
+        const killTorneo = uccisioniPerTorneo[nome] || {};
+
+        stats.kd = stats.kill / Math.max(1, stats.morti);
+        stats.efficienza = stats.kill / Math.max(1, stats.partecipazioni);
+
+        stats.torneiConKill = Object.keys(killTorneo)
+            .filter(n => killTorneo[n] > 0)
+            .map(Number)
+            .sort((a, b) => a - b);
+
+        let streak = 0;
+        let streakMassima = 0;
+
+        // La sequenza considera soltanto i tornei a cui il giocatore ha partecipato.
+        tornei.forEach(torneo => {
+            const haPartecipato = (torneo.players || []).some(p => p.name === nome);
+            if (!haPartecipato) return;
+
+            if ((killTorneo[torneo.n] || 0) > 0) {
+                streak++;
+                streakMassima = Math.max(streakMassima, streak);
+            } else {
+                streak = 0;
+            }
+        });
+
+        stats.strisciaKill = streakMassima;
+    });
+
+    return {
+        giocatori,
+        coppie,
+        eliminazioniPerTorneo,
+        uccisioniPerTorneo
+    };
+}
+
 function mostraGiocatore(nome) {
     const lista = document.getElementById("giocatori-lista");
     const dettaglio = document.getElementById("giocatore-dettaglio");
@@ -11000,6 +11616,8 @@ function mostraGiocatore(nome) {
     if (!g || !dettaglio) return;
 
 const curiosita = curiositaGiocatori[nome] || [];
+
+    const killStats = calcolaStatisticheKillGiocatore(nome);
 
 if (lista) {
     lista.classList.add("schermata-fade-out");
@@ -11034,6 +11652,45 @@ setTimeout(function() {
             </div>
 
 ${renderCollezioneBadge(g.nome)}
+
+<div class="giocatore-curiosita">
+    <h4>🎯 Statistiche eliminazioni</h4>
+    <div class="giocatore-statistiche">
+        <div><strong>Eliminazioni effettuate</strong><span>${killStats.kill}</span></div>
+        <div><strong>Eliminazioni subite</strong><span>${killStats.morti}</span></div>
+        <div><strong>Rapporto K/D</strong><span>${killStats.kd.toFixed(2).replace(".", ",")}</span></div>
+        <div><strong>Vittima preferita</strong><span>${killStats.vittimaPreferita || "—"}</span></div>
+    </div>
+</div>
+
+<div class="giocatore-curiosita">
+    <h4>📜 Cronologia eliminazioni</h4>
+    ${killStats.tornei.map(function(voce) {
+        const nomiKill = voce.kill.length
+            ? voce.kill.map(function(vittima) {
+                return `<button class="nome-giocatore-link" onclick='apriPopupGiocatore(${nomePerOnclick(vittima)})'>${vittima}</button>`;
+            }).join(", ")
+            : "Nessuna eliminazione";
+
+        const nomiMorti = voce.morti.length
+            ? voce.morti.map(function(eliminatore) {
+                return `<button class="nome-giocatore-link" onclick='apriPopupGiocatore(${nomePerOnclick(eliminatore)})'>${eliminatore}</button>`;
+            }).join(", ")
+            : "Nessuna eliminazione subita";
+
+        return `
+            <div class="curiosita-item">
+                <strong>
+                    <button class="nome-giocatore-link" onclick="mostraTorneoDettaglio(${voce.numero})">
+                        Torneo ${voce.numero}
+                    </button>
+                </strong>
+                <div><strong>Eliminazioni effettuate:</strong> ${nomiKill}</div>
+                <div><strong>Eliminazioni subite:</strong> ${nomiMorti}</div>
+            </div>
+        `;
+    }).join("")}
+</div>
 
             ${curiosita.length ? `
                 <div class="giocatore-curiosita">
