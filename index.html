@@ -8751,7 +8751,15 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape")chiudiDettag
 function renderCollezioneBadge(nomeGiocatore) {
     const stati=calcolaArchivioBadge();
     const stato=stati[nomeGiocatore] || creaStatoBadge(nomeGiocatore);
-    const famiglie=["Presenze e fedeltà","Vittorie e dominio","Piazzamenti e costanza","Profitto e denaro","DARK OPS","Onorificenze private"];
+const famiglie=[
+    "Presenze e fedeltà",
+    "Vittorie e dominio",
+    "Piazzamenti e costanza",
+    "Profitto e denaro",
+    "Eliminazioni",
+    "DARK OPS",
+    "Onorificenze private"
+];
     const visibili=catalogoBadge.filter(b=>b.family!=="Onorificenze private" || !!stato.sbloccati[b.id]);
     const ottenuti=visibili.filter(b=>!!stato.sbloccati[b.id]);
     let html=`<section class="collezione-badge" aria-label="Collezione badge">
@@ -11497,10 +11505,15 @@ function generaGraficoAndamento(nome) {
         return v[1] === massimo;
     });
 
-    risultato.vittimaPreferita =
-        massimo > 0 && prime.length === 1 ? prime[0][0] : null;
+risultato.vittimaPreferita =
+    massimo > 0 && prime.length === 1 ? prime[0][0] : null;
 
-    return risultato;
+risultato.vittimaPreferitaCount =
+    risultato.vittimaPreferita
+        ? risultato.vittime[risultato.vittimaPreferita]
+        : 0;
+
+return risultato;
 }
 
     function calcolaRecordKillLog() {
@@ -11651,7 +11664,7 @@ setTimeout(function() {
 <div><strong>Striscia record</strong><span>${g.strisciaRecord}</span></div>
             </div>
 
-${renderCollezioneBadge(g.nome)}
+
 
 <div class="giocatore-curiosita">
     <h4>🎯 Statistiche eliminazioni</h4>
@@ -11659,9 +11672,12 @@ ${renderCollezioneBadge(g.nome)}
         <div><strong>Eliminazioni effettuate</strong><span>${killStats.kill}</span></div>
         <div><strong>Eliminazioni subite</strong><span>${killStats.morti}</span></div>
         <div><strong>Rapporto K/D</strong><span>${killStats.kd.toFixed(2).replace(".", ",")}</span></div>
-        <div><strong>Vittima preferita</strong><span>${killStats.vittimaPreferita || "—"}</span></div>
+<div><strong>Vittima preferita</strong><span>${killStats.vittimaPreferita || "—"}</span></div>
+<div><strong>Eliminazioni ai danni della vittima preferita</strong><span>${killStats.vittimaPreferitaCount}</span></div>
     </div>
 </div>
+
+${renderCollezioneBadge(g.nome)}
 
             ${curiosita.length ? `
                 <div class="giocatore-curiosita">
@@ -12245,6 +12261,29 @@ document.addEventListener("keydown", function(event) {
     }
 
 });
+
+    function navigaTorneo(delta) {
+    const torneiOrdinati = datiTornei
+        .slice()
+        .sort(function(a, b) {
+            return a.n - b.n;
+        });
+
+    const indice = torneiOrdinati.findIndex(function(t) {
+        return t.n === torneoAttualmenteVisualizzato;
+    });
+
+    if (indice === -1) return;
+
+    const prossimoIndice = indice + delta;
+
+    if (prossimoIndice < 0 || prossimoIndice >= torneiOrdinati.length) {
+        return;
+    }
+
+    mostraTorneo(torneiOrdinati[prossimoIndice].n);
+}
+    let torneoAttualmenteVisualizzato = null;
     
 function mostraTorneo(numero) {
     preparaDissolvenza();
@@ -12259,6 +12298,7 @@ function mostraTorneo(numero) {
 
     
 function mostraTorneoDettaglio(numero) {
+    torneoAttualmenteVisualizzato = numero;
 
         const torneo =
             datiTornei.find(function(t) {
@@ -12459,6 +12499,38 @@ function mostraTorneoDettaglio(numero) {
             `;
 
         }
+
+    const torneiOrdinati = datiTornei
+    .slice()
+    .sort(function(a, b) {
+        return a.n - b.n;
+    });
+
+const indiceTorneo = torneiOrdinati.findIndex(function(t) {
+    return t.n === torneo.n;
+});
+
+const precedenteDisponibile = indiceTorneo > 0;
+const successivoDisponibile =
+    indiceTorneo >= 0 && indiceTorneo < torneiOrdinati.length - 1;
+
+dettagli.insertAdjacentHTML("afterbegin", `
+    <div class="navigazione-tornei">
+        <button
+            type="button"
+            onclick="navigaTorneo(-1)"
+            ${precedenteDisponibile ? "" : "disabled"}
+            aria-label="Torneo precedente"
+        >← Torneo precedente</button>
+
+        <button
+            type="button"
+            onclick="navigaTorneo(1)"
+            ${successivoDisponibile ? "" : "disabled"}
+            aria-label="Torneo successivo"
+        >Torneo successivo →</button>
+    </div>
+`);
 
         // Mostra sempre la schermata del torneo e ripristina l'opacità
         // nel caso la dissolvenza precedente abbia lasciato uno stato visivo.
