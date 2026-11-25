@@ -11664,33 +11664,7 @@ ${renderCollezioneBadge(g.nome)}
 </div>
 
 <div class="giocatore-curiosita">
-    <h4>📜 Cronologia eliminazioni</h4>
-    ${killStats.tornei.map(function(voce) {
-        const nomiKill = voce.kill.length
-            ? voce.kill.map(function(vittima) {
-                return `<button class="nome-giocatore-link" onclick='apriPopupGiocatore(${nomePerOnclick(vittima)})'>${vittima}</button>`;
-            }).join(", ")
-            : "Nessuna eliminazione";
 
-        const nomiMorti = voce.morti.length
-            ? voce.morti.map(function(eliminatore) {
-                return `<button class="nome-giocatore-link" onclick='apriPopupGiocatore(${nomePerOnclick(eliminatore)})'>${eliminatore}</button>`;
-            }).join(", ")
-            : "Nessuna eliminazione subita";
-
-        return `
-            <div class="curiosita-item">
-                <strong>
-                    <button class="nome-giocatore-link" onclick="mostraTorneoDettaglio(${voce.numero})">
-                        Torneo ${voce.numero}
-                    </button>
-                </strong>
-                <div><strong>Eliminazioni effettuate:</strong> ${nomiKill}</div>
-                <div><strong>Eliminazioni subite:</strong> ${nomiMorti}</div>
-            </div>
-        `;
-    }).join("")}
-</div>
 
             ${curiosita.length ? `
                 <div class="giocatore-curiosita">
