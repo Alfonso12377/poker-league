@@ -8587,6 +8587,7 @@ function creaStatoBadge(nome) {
         terzi:0,
         quarti:0,
         ultimi:0,
+        kill:0,
         profitto:0,
         maxProfitto:0,
         streakPodio:0,
@@ -8785,6 +8786,9 @@ Object.keys(avversariEliminatiPerGiocatore).forEach(function(nome) {
 
                 killCumulative[e.eliminatore] =
                     (killCumulative[e.eliminatore] || 0) + 1;
+
+                // Aggiorna il totale delle eliminazioni del giocatore.
+                stato(e.eliminatore).kill++;
             });
 
             // Badge cumulativi e DARK OPS a 99 eliminazioni.
@@ -8930,13 +8934,22 @@ const dataTorneo=(b.family==="Onorificenze private" || (b.family==="DARK OPS" &&
     const popup=document.getElementById("popup-collezione-badge");
     if (!popup) return;
     const famigliaPopup=b.family==="DARK OPS" ? "DARK OPS" : b.family;
+        // Progressi per i badge cumulativi.
+    const mostraProgressi = !sblocco && (
+        b.type === "count" ||
+        (b.type === "kill_count" && b.family === "Eliminazioni")
+    );
+
+    const valoreProgressi = b.type === "kill_count"
+        ? (stato.kill || 0)
+        : (stato[b.metric] || 0);
     popup.innerHTML=`<div class="badge-popup-box ${sblocco?"":"badge-popup-bloccato"}" data-rarita="${escapeHtmlBadge(b.rarity)}" data-famiglia="${escapeHtmlBadge(famigliaPopup)}" role="dialog" aria-modal="true">
         <button class="badge-popup-chiudi" aria-label="Chiudi" onclick="chiudiDettaglioBadge()">×</button>
         <div class="badge-scudo">${iconaBadge(b)}</div>
         <h4>${escapeHtmlBadge(titolo)}</h4>
         <div class="badge-rarita">${escapeHtmlBadge(b.rarity)}</div>
         <p>${escapeHtmlBadge(descrizione)}</p>
-        ${!sblocco&&b.type==="count" ? `<p>Progressi: ${Math.min(stato[b.metric]||0,b.target)} / ${b.target}</p>` : ""}
+        ${mostraProgressi ? `<p>Progressi: ${Math.min(valoreProgressi,b.target)} / ${b.target}</p>` : ""}
         ${dataTorneo ? `<p>${escapeHtmlBadge(dataTorneo)}</p>` : ""}
     </div>`;
     popup.classList.add("aperto");
