@@ -11864,6 +11864,16 @@ return risultato;
 function mostraGiocatore(nome) {
     const lista = document.getElementById("giocatori-lista");
     const dettaglio = document.getElementById("giocatore-dettaglio");
+        const barraRicerca = document.querySelector(".giocatori-ricerca");
+    const messaggioRicerca = document.getElementById("giocatori-nessun-risultato");
+
+    if (barraRicerca) {
+        barraRicerca.style.display = "none";
+    }
+
+    if (messaggioRicerca) {
+        messaggioRicerca.style.display = "none";
+    }
     const classifica = calcolaStatistiche();
     const g = classifica.find(function(x) { return x.nome === nome; });
     if (!g || !dettaglio) return;
@@ -11997,6 +12007,7 @@ function tornaListaGiocatori() {
 
     const lista = document.getElementById("giocatori-lista");
     const dettaglio = document.getElementById("giocatore-dettaglio");
+        const barraRicerca = document.querySelector(".giocatori-ricerca");
 
     dettaglio.classList.add("schermata-fade-out");
 
@@ -12005,8 +12016,16 @@ function tornaListaGiocatori() {
         dettaglio.innerHTML = "";
         dettaglio.classList.remove("schermata-fade-out");
 
+        // Ripristina barra di ricerca ed elenco giocatori.
+        if (barraRicerca) {
+            barraRicerca.style.display = "";
+        }
+
         lista.classList.add("schermata-fade-in");
         lista.style.display = "grid";
+
+        // Riapplica l'eventuale ricerca precedente.
+        filtraGiocatori();
 
         requestAnimationFrame(function() {
             requestAnimationFrame(function() {
