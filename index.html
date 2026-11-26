@@ -1203,6 +1203,63 @@ html {
         margin-top: 30px;
     }
 
+    /* =========================================
+   RICERCA GIOCATORI
+   ========================================= */
+
+.giocatori-ricerca {
+    width: 100%;
+    max-width: 520px;
+    margin: 20px auto 0 auto;
+    position: relative;
+}
+
+.giocatori-ricerca::before {
+    content: "🔎";
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 17px;
+    pointer-events: none;
+}
+
+#ricerca-giocatori {
+    width: 100%;
+    padding: 14px 16px 14px 45px;
+
+    border: 1px solid #3d3d3d;
+    border-radius: 10px;
+
+    background: linear-gradient(145deg, #292929, #202020);
+    color: white;
+
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    font-size: 15px;
+
+    outline: none;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.20);
+
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#ricerca-giocatori::placeholder {
+    color: #999;
+}
+
+#ricerca-giocatori:focus {
+    border-color: #f0c674;
+    box-shadow: 0 0 0 3px rgba(240, 198, 116, 0.12);
+}
+
+.giocatori-nessun-risultato {
+    display: none;
+    margin: 25px auto;
+    color: #ddd;
+    font-size: 15px;
+    text-align: center;
+}
+
 .giocatore-card {
     background: linear-gradient(145deg, #292929, #202020);
     border: 1px solid #3d3d3d;
@@ -5079,11 +5136,26 @@ th[onclick]:hover {
         ← Torna al menu
     </button>
 
-    <h2>Giocatori</h2>
+<h2>Giocatori</h2>
 
-    <div class="giocatori-lista" id="giocatori-lista"></div>
-    <div id="giocatore-dettaglio"></div>
+<div class="giocatori-ricerca">
+    <input
+        type="search"
+        id="ricerca-giocatori"
+        placeholder="Cerca un giocatore..."
+        autocomplete="off"
+        oninput="filtraGiocatori()"
+        aria-label="Cerca un giocatore"
+    >
+</div>
 
+<div class="giocatori-lista" id="giocatori-lista"></div>
+
+<p id="giocatori-nessun-risultato" class="giocatori-nessun-risultato">
+    Nessun giocatore trovato.
+</p>
+
+<div id="giocatore-dettaglio"></div>
 </div>
 
     <div id="record-statistiche">
@@ -11182,6 +11254,12 @@ function generaGiocatori() {
     const dettaglio = document.getElementById("giocatore-dettaglio");
     if (!lista) return;
 
+        const ricercaInput = document.getElementById("ricerca-giocatori");
+    const messaggioRicerca = document.getElementById("giocatori-nessun-risultato");
+
+    if (ricercaInput) ricercaInput.value = "";
+    if (messaggioRicerca) messaggioRicerca.style.display = "none";
+
     lista.style.display = "grid";
     if (dettaglio) dettaglio.innerHTML = "";
 
@@ -11230,7 +11308,55 @@ function generaGiocatori() {
     }).join("");
 }
 
+/* =========================================
+   RICERCA E FILTRO GIOCATORI
+   ========================================= */
 
+function filtraGiocatori() {
+
+    const ricercaInput = document.getElementById("ricerca-giocatori");
+    const lista = document.getElementById("giocatori-lista");
+    const messaggio = document.getElementById("giocatori-nessun-risultato");
+
+    if (!ricercaInput || !lista) return;
+
+    // Normalizza il testo: ignora maiuscole, minuscole e accenti.
+    function normalizza(testo) {
+        return String(testo || "")
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .toLocaleLowerCase("it")
+            .trim();
+    }
+
+    const ricerca = normalizza(ricercaInput.value);
+
+    const giocatori = lista.querySelectorAll(".giocatore-card");
+
+    let giocatoriVisibili = 0;
+
+    giocatori.forEach(function(card) {
+
+        const titolo = card.querySelector("h3");
+        const nome = normalizza(titolo ? titolo.textContent : "");
+
+        const corrisponde = nome.includes(ricerca);
+
+        card.style.display = corrisponde ? "" : "none";
+
+        if (corrisponde) {
+            giocatoriVisibili++;
+        }
+    });
+
+    // Mostra un messaggio quando non ci sono corrispondenze.
+    if (messaggio) {
+        messaggio.style.display =
+            ricerca !== "" && giocatoriVisibili === 0
+                ? "block"
+                : "none";
+    }
+}
     
 function generaGraficoAndamento(nome) {
     const contenitore = document.getElementById("grafico-andamento-contenuto");
