@@ -1404,6 +1404,160 @@ html {
         line-height: 1.5;
     }
 
+    /* =========================================
+   CRONOLOGIA KILL GIOCATORE
+   ========================================= */
+
+.cronologia-kill {
+    margin-top: 28px;
+    background: linear-gradient(145deg, #242424, #191919);
+    border: 1px solid #454545;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.20);
+}
+
+.cronologia-kill summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 17px 19px;
+    background: linear-gradient(145deg, #292929, #202020);
+    color: #f2f2f2;
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+}
+
+.cronologia-kill summary::-webkit-details-marker {
+    display: none;
+}
+
+.cronologia-kill summary:hover {
+    background: #303030;
+}
+
+.cronologia-kill-freccia {
+    color: #E9B949;
+    font-size: 23px;
+    line-height: 1;
+    transition: transform 0.2s ease;
+}
+
+.cronologia-kill[open] .cronologia-kill-freccia {
+    transform: rotate(180deg);
+}
+
+.cronologia-kill-elenco {
+    padding: 2px 16px 16px;
+}
+
+.cronologia-kill-torneo-box {
+    background: linear-gradient(145deg, #222222, #191919);
+    border: 1px solid #3d3d3d;
+    border-left: 3px solid #E9B949;
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-top: 12px;
+}
+
+.cronologia-kill-titolo-torneo {
+    margin-bottom: 11px;
+}
+
+.cronologia-kill-torneo-box p {
+    margin: 8px 0 0;
+    color: #dddddd;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.cronologia-kill-torneo-box strong {
+    color: #f2f2f2;
+}
+
+.cronologia-kill .cronologia-kill-link {
+    display: inline;
+    width: auto;
+    min-height: 0;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    color: #E9B949;
+    font: inherit;
+    font-weight: 700;
+    line-height: inherit;
+    text-align: left;
+    cursor: pointer;
+}
+
+.cronologia-kill .cronologia-kill-link:hover {
+    color: #F6D27A;
+    background: transparent;
+    text-decoration: underline;
+}
+
+.cronologia-kill .cronologia-kill-link-torneo {
+    font-size: 15px;
+}
+
+.cronologia-kill-nessuna {
+    color: #aaaaaa;
+}
+
+.cronologia-kill-flawless {
+    color: #E9B949;
+    font-weight: 700;
+}
+
+.cronologia-kill-non-disponibile,
+.cronologia-kill-vuota {
+    color: #999999;
+    font-size: 13px;
+    font-style: italic;
+}
+
+.cronologia-kill-non-disponibile {
+    margin: 0;
+}
+
+.cronologia-kill-vuota {
+    padding: 12px 4px;
+    margin: 0;
+}
+
+@media (max-width: 600px) {
+
+    .cronologia-kill {
+        margin-top: 22px;
+    }
+
+    .cronologia-kill summary {
+        padding: 15px;
+        font-size: 16px;
+    }
+
+    .cronologia-kill-elenco {
+        padding: 2px 11px 12px;
+    }
+
+    .cronologia-kill-torneo-box {
+        padding: 12px;
+    }
+
+    .cronologia-kill-torneo-box p {
+        font-size: 13px;
+    }
+
+}
+
     .popup-giocatore {
         position: fixed;
         inset: 0;
@@ -5313,6 +5467,22 @@ th[onclick]:hover {
         <h3 id="popup-giocatore-nome"></h3>
         <button id="popup-giocatore-scheda">Vai alla scheda giocatore</button>
         <button class="popup-chiudi" onclick="chiudiPopupGiocatore()">Chiudi</button>
+    </div>
+</div>
+
+    <div id="popup-torneo" class="popup-giocatore" onclick="chiudiPopupTorneo(event)">
+    <div class="popup-giocatore-box" onclick="event.stopPropagation()">
+
+        <h3 id="popup-torneo-nome"></h3>
+
+        <button id="popup-torneo-vai">
+            Vai al torneo
+        </button>
+
+        <button class="popup-chiudi" onclick="chiudiPopupTorneo()">
+            Annulla
+        </button>
+
     </div>
 </div>
 
@@ -11280,6 +11450,37 @@ function chiudiPopupGiocatore(event) {
     }
 }
 
+    function apriPopupTorneo(numero) {
+
+    const popup = document.getElementById("popup-torneo");
+    const titolo = document.getElementById("popup-torneo-nome");
+    const pulsante = document.getElementById("popup-torneo-vai");
+
+    if (!popup || !titolo || !pulsante) return;
+
+    titolo.textContent = "Torneo " + numero;
+
+    pulsante.onclick = function() {
+        chiudiPopupTorneo();
+        mostraTorneo(numero);
+    };
+
+    popup.style.display = "flex";
+}
+
+
+function chiudiPopupTorneo(event) {
+
+    if (event && event.target !== event.currentTarget) {
+        return;
+    }
+
+    const popup = document.getElementById("popup-torneo");
+
+    if (popup) {
+        popup.style.display = "none";
+    }
+}
 
 function generaGiocatori() {
     const lista = document.getElementById("giocatori-lista");
@@ -11729,7 +11930,12 @@ function generaGraficoAndamento(nome) {
             if (!partecipante) return;
 
             const log = killLogPerTorneo[torneo.n];
-            const eliminazioni = log && Array.isArray(log.eliminazioni)
+
+            const logDisponibile = !!(
+                log && Array.isArray(log.eliminazioni)
+            );
+
+            const eliminazioni = logDisponibile
                 ? log.eliminazioni
                 : [];
 
@@ -11758,7 +11964,8 @@ function generaGraficoAndamento(nome) {
             risultato.tornei.push({
                 numero: torneo.n,
                 kill: killFatte,
-                morti: eliminazioniSubite
+                morti: eliminazioniSubite,
+                logDisponibile: logDisponibile
             });
         });
 
@@ -11893,6 +12100,108 @@ return risultato;
     };
 }
 
+    function renderCronologiaKill(tornei) {
+
+    const torneiOrdinati = (tornei || []).slice().sort(function(a, b) {
+        return b.numero - a.numero;
+    });
+
+    return `
+        <details class="cronologia-kill">
+
+            <summary>
+                <span>⚔️ Cronologia Kill</span>
+                <span class="cronologia-kill-freccia" aria-hidden="true">⌄</span>
+            </summary>
+
+            <div class="cronologia-kill-elenco">
+
+                ${
+                    torneiOrdinati.length
+                        ? torneiOrdinati.map(function(torneo) {
+
+                            const linkTorneo = `
+                                <button
+                                    type="button"
+                                    class="cronologia-kill-link cronologia-kill-link-torneo"
+                                    onclick="apriPopupTorneo(${torneo.numero})"
+                                >Torneo ${torneo.numero}</button>
+                            `;
+
+                            if (!torneo.logDisponibile) {
+                                return `
+                                    <article class="cronologia-kill-torneo-box">
+
+                                        <div class="cronologia-kill-titolo-torneo">
+                                            ${linkTorneo}
+                                        </div>
+
+                                        <p class="cronologia-kill-non-disponibile">
+                                            Dati delle eliminazioni non ancora inseriti
+                                        </p>
+
+                                    </article>
+                                `;
+                            }
+
+                            const killHtml = torneo.kill.length
+                                ? torneo.kill.map(function(nome) {
+                                    return `
+                                        <button
+                                            type="button"
+                                            class="cronologia-kill-link"
+                                            onclick='apriPopupGiocatore(${nomePerOnclick(nome)})'
+                                        >${escapeHtmlBadge(nome)}</button>
+                                    `;
+                                }).join(", ")
+                                : `<span class="cronologia-kill-nessuna">Nessuna eliminazione</span>`;
+
+                            const mortiHtml = torneo.morti.length
+                                ? torneo.morti.map(function(nome) {
+                                    return `
+                                        <button
+                                            type="button"
+                                            class="cronologia-kill-link"
+                                            onclick='apriPopupGiocatore(${nomePerOnclick(nome)})'
+                                        >${escapeHtmlBadge(nome)}</button>
+                                    `;
+                                }).join(", ")
+                                : `<span class="cronologia-kill-flawless">Flawless</span>`;
+
+                            return `
+                                <article class="cronologia-kill-torneo-box">
+
+                                    <div class="cronologia-kill-titolo-torneo">
+                                        ${linkTorneo}
+                                    </div>
+
+                                    <p>
+                                        <strong>Eliminazioni effettuate:</strong>
+                                        ${killHtml}
+                                    </p>
+
+                                    <p>
+                                        <strong>Eliminazioni subite:</strong>
+                                        ${mortiHtml}
+                                    </p>
+
+                                </article>
+                            `;
+
+                        }).join("")
+                        : `
+                            <p class="cronologia-kill-vuota">
+                                Nessuna partecipazione registrata dal Torneo 22.
+                            </p>
+                        `
+                }
+
+            </div>
+
+        </details>
+    `;
+}
+
 function mostraGiocatore(nome) {
     const lista = document.getElementById("giocatori-lista");
     const dettaglio = document.getElementById("giocatore-dettaglio");
@@ -12024,6 +12333,7 @@ ${renderCollezioneBadge(g.nome)}
                     </span>
                 </div>
             </div>
+            ${renderCronologiaKill(killStats.tornei)}
         </div>
     `;
 
@@ -12618,6 +12928,9 @@ function mostraTorneoDettaglio(numero) {
         document.getElementById("tornei").style.display = "none";
         document.getElementById("classifica").style.display = "none";
         document.getElementById("palmares").style.display = "none";
+        document.getElementById("giocatori").style.display = "none";
+        document.getElementById("record-statistiche").style.display = "none";
+        document.getElementById("calcolatore").style.display = "none";
 
         const dettagli =
             document.getElementById("tornei-dettagli");
