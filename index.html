@@ -12339,6 +12339,8 @@ ${renderCollezioneBadge(g.nome)}
 
     generaGraficoAndamento(nome);
 
+    ripristinaScrollInAlto();
+
     requestAnimationFrame(function() {
 
         requestAnimationFrame(function() {
@@ -12602,6 +12604,32 @@ righe.forEach(function(riga, indice) {
     );
 
         coloraColonnaPalmares(colonna);
+
+}
+
+    function ripristinaScrollInAlto() {
+
+    function azzeraScroll() {
+
+        window.scrollTo(0, 0);
+
+        if (document.scrollingElement) {
+            document.scrollingElement.scrollTop = 0;
+        }
+
+    }
+
+    azzeraScroll();
+
+    requestAnimationFrame(function() {
+
+        azzeraScroll();
+
+        requestAnimationFrame(function() {
+            azzeraScroll();
+        });
+
+    });
 
 }
 
@@ -13158,6 +13186,8 @@ requestAnimationFrame(function() {
         dettagli.classList.remove("schermata-fade-in");
     });
 });
+
+    ripristinaScrollInAlto();
 
     }
 
