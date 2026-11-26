@@ -1006,6 +1006,21 @@ html {
     color: #999;
 }
 
+    /* Nota informativa sulle statistiche delle eliminazioni */
+
+.nota-kill-log {
+    margin: 10px 0 0;
+    color: #999;
+    font-size: 11px;
+    font-style: italic;
+    line-height: 1.4;
+}
+
+#record-statistiche .nota-kill-log {
+    margin-bottom: 24px;
+    color: #555;
+}
+
 
 /* STATISTICHE GENERALI */
 
@@ -5181,6 +5196,10 @@ th[onclick]:hover {
     class="record-grid"
     id="record-kill-log"
 ></div>
+
+<p class="nota-kill-log">
+    * I dati delle eliminazioni sono disponibili a partire dal Torneo 22.
+</p>
 
 <h3>📊 Statistiche della Lega</h3>
 
@@ -11931,6 +11950,10 @@ setTimeout(function() {
 
 <div><strong>Eliminazioni ai danni della vittima preferita</strong><span>${killStats.vittimaPreferitaCount}</span></div>
     </div>
+
+    <p class="nota-kill-log">
+        * I dati delle eliminazioni sono disponibili a partire dal Torneo 22.
+    </p>
 </div>
 
 ${renderCollezioneBadge(g.nome)}
@@ -13310,11 +13333,15 @@ if (!statisticheNonComparabili.includes(etichetta)) {
                 numero(killStats2.kd)
             )}
 
-            ${riga(
-                "Efficienza (kill per torneo)",
-                numero(killStats1.efficienza),
-                numero(killStats2.efficienza)
-            )}
+${riga(
+    "Efficienza (kill per torneo)",
+    numero(killStats1.efficienza),
+    numero(killStats2.efficienza)
+)}
+
+            <p class="nota-kill-log">
+                * I dati delle eliminazioni sono disponibili a partire dal Torneo 22.
+            </p>
 
         </div>
 
