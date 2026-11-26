@@ -11605,6 +11605,8 @@ function generaGraficoAndamento(nome) {
         });
 
     risultato.kd = risultato.kill / Math.max(1, risultato.morti);
+        risultato.efficienza =
+    risultato.kill / Math.max(1, risultato.tornei.length);
 
     const vittime = Object.entries(risultato.vittime);
     const massimo = vittime.length
@@ -11781,10 +11783,16 @@ setTimeout(function() {
 <div class="giocatore-curiosita">
     <h4>🎯 Statistiche eliminazioni</h4>
     <div class="giocatore-statistiche">
-        <div><strong>Eliminazioni effettuate</strong><span>${killStats.kill}</span></div>
-        <div><strong>Eliminazioni subite</strong><span>${killStats.morti}</span></div>
-        <div><strong>Rapporto K/D</strong><span>${killStats.kd.toFixed(2).replace(".", ",")}</span></div>
+<div><strong>Eliminazioni effettuate</strong><span>${killStats.kill}</span></div>
+
+<div><strong>Eliminazioni subite</strong><span>${killStats.morti}</span></div>
+
+<div><strong>Rapporto K/D</strong><span>${killStats.kd.toFixed(2).replace(".", ",")}</span></div>
+
+<div><strong>Efficienza (kill per torneo)</strong><span>${killStats.efficienza.toFixed(2).replace(".", ",")}</span></div>
+
 <div><strong>Vittima preferita</strong><span>${killStats.vittimaPreferita || "—"}</span></div>
+
 <div><strong>Eliminazioni ai danni della vittima preferita</strong><span>${killStats.vittimaPreferitaCount}</span></div>
     </div>
 </div>
@@ -12773,6 +12781,13 @@ function aggiornaTestaATesta() {
     });
 
     if (!g1 || !g2) return;
+    /* =====================================
+   STATISTICHE ELIMINAZIONI DEI DUE GIOCATORI
+   ===================================== */
+
+const killStats1 = calcolaStatisticheKillGiocatore(nome1);
+const killStats2 = calcolaStatisticheKillGiocatore(nome2);
+    
         function migliorPiazzamento(nome) {
         let migliore = Infinity;
 
@@ -12928,9 +12943,9 @@ const statisticheNonComparabili = [
 
 const statisticheValoreMinore = [
     "Posizione media",
-    "Miglior piazzamento"
+    "Miglior piazzamento",
+    "Eliminazioni subite"
 ];
-
 const valoreMinoreMigliore =
     statisticheValoreMinore.includes(etichetta);
 
@@ -13121,6 +13136,42 @@ if (!statisticheNonComparabili.includes(etichetta)) {
         </div>
 
         <div class="testa-a-testa-sezione">
+
+        <div class="testa-a-testa-sezione">
+
+            <h3>🎯 Statistiche eliminazioni</h3>
+
+            ${riga(
+                "Eliminazioni ai danni dell'avversario",
+                numero(killStats1.vittime[nome2] || 0),
+                numero(killStats2.vittime[nome1] || 0)
+            )}
+
+            ${riga(
+                "Eliminazioni effettuate",
+                numero(killStats1.kill),
+                numero(killStats2.kill)
+            )}
+
+            ${riga(
+                "Eliminazioni subite",
+                numero(killStats1.morti),
+                numero(killStats2.morti)
+            )}
+
+            ${riga(
+                "Rapporto K/D",
+                numero(killStats1.kd),
+                numero(killStats2.kd)
+            )}
+
+            ${riga(
+                "Efficienza (kill per torneo)",
+                numero(killStats1.efficienza),
+                numero(killStats2.efficienza)
+            )}
+
+        </div>
 
             <h3>Rivalità nei tornei</h3>
 
