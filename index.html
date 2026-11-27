@@ -14315,13 +14315,6 @@ pc.morte = [];
         if (attivi.length < 2) {
             return "Devi avere almeno due giocatori non eliminati.";
         }
-const nomi = pc.giocatori
-    .filter(g => !g.fold)
-    .map(g => g.nome.trim());
-
-if (nomi.some(n => !n)) {
-    return "Seleziona il nome di tutti i giocatori ancora in mano.";
-}
         
 
         for (const g of pc.giocatori) {
@@ -14764,6 +14757,12 @@ return "Il Board deve contenere 0, 3, 4 oppure 5 carte.";
     ) {
         const board = pc.comuni.filter(Boolean);
 
+        const nomeVisualizzato = function(giocatore) {
+    const nome = giocatore.nome ? giocatore.nome.trim() : "";
+
+    return nome || "Giocatore " + (pc.giocatori.indexOf(giocatore) + 1);
+};
+
         const righe = attivi.map((g, i) => {
             const s = stat[i];
             const sconfitte = totale - s.vittorie - s.pareggi;
@@ -14782,7 +14781,7 @@ return "Il Board deve contenere 0, 3, 4 oppure 5 carte.";
             return `
                 <tr class="${stato.riga}">
                     <td>
-                        <div class="pc-nome-stato">${g.nome}</div>
+<div class="pc-nome-stato">${nomeVisualizzato(g)}</div>
                         <span class="pc-badge-stato ${stato.classe}">
                             ${stato.testo}
                         </span>
@@ -14823,7 +14822,7 @@ return "Il Board deve contenere 0, 3, 4 oppure 5 carte.";
                         ${giocatoriConOuts.map(elemento => `
                             <div class="pc-outs-card">
                                 <div class="pc-outs-intestazione">
-                                    <strong>${elemento.giocatore.nome}</strong>
+<strong>${nomeVisualizzato(elemento.giocatore)}</strong>
                                     <span class="pc-outs-contatore">
                                         ${elemento.outs.length} outs
                                     </span>
